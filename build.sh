@@ -1,5 +1,16 @@
 #!/bin/bash
 set -e
-gopherjs build web/web.go -o build/soyuz.js
-gomobile bind -target ios -o build/Soyuz.framework
-GOOS=js GOARCH=wasm go build -o build/soyuz.wasm
+
+# Build iOS
+gomobile bind -target ios -o build/Soyuz.framework -prefix SZ
+ANDROID_HOME=$HOME/Library/Android/sdk gomobile bind -target android -o build/soyuz.aar
+
+# Build Web
+cd web
+gopherjs build -o ../build/soyuz.js
+cd ..
+
+# Build WASM
+cd wasm
+GOOS=js GOARCH=wasm go build -o ../build/soyuz.wasm
+cd ..
