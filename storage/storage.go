@@ -12,6 +12,10 @@ func (store *SoyuzStorage) WriteKey(key string, value string) {
 	store.values[key] = value
 }
 
+func (store *SoyuzStorage) ReadKey(key string) string {
+	return store.values[key]
+}
+
 func (store *SoyuzStorage) DeleteKey(key string) {
 	delete(store.values, key)
 }
