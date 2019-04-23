@@ -27,6 +27,12 @@ sealed class RecordValue {
             return other != null && other is RecordValue.Reference && other.key == key
         }
     }
+
+    class List(val items: kotlin.collections.List<RecordValue>) : RecordValue() {
+        override fun equals(other: Any?): kotlin.Boolean {
+            return other != null && other is RecordValue.List && other.items == items
+        }
+    }
 }
 
 class Record(val key: String, val fields: Map<String, RecordValue>) {
@@ -65,6 +71,7 @@ private fun serializeValue(value: RecordValue): JsonElement {
         is RecordValue.Boolean -> JsonLiteral(value.value)
         RecordValue.Null -> JsonNull
         is RecordValue.Reference -> JsonObject(mapOf("key" to JsonLiteral(value.key)))
+        is RecordValue.List -> JsonArray(value.items.map { serializeValue(it) })
     }
 }
 
@@ -75,28 +82,36 @@ fun serializeRecord(record: Record): String {
     )
 }
 
+fun parseValue(f: JsonElement): RecordValue {
+    if (f.isNull) {
+        return RecordValue.Null
+    } else if (f is JsonLiteral) {
+        val b = f.booleanOrNull
+        if (b != null) {
+            return RecordValue.Boolean(b)
+        } else {
+            val fl = f.floatOrNull
+            if (fl != null) {
+                return RecordValue.Number(fl)
+            } else {
+                return RecordValue.String(f.body as String)
+            }
+        }
+    } else if (f is JsonObject) {
+        return RecordValue.Reference((f["key"] as JsonLiteral).body as String)
+    } else if (f is JsonArray) {
+        return RecordValue.List(f.map { parseValue(it) })
+    } else {
+        throw Error()
+    }
+}
+
 fun parseRecord(key: String, src: String): Record {
     val field = Json.unquoted.parseJson(src).jsonObject
     val fields = mutableMapOf<String, RecordValue>()
     for (key in field.keys) {
         val f = field[key]!!
-        if (f.isNull) {
-            fields[key] = RecordValue.Null
-        } else if (f is JsonLiteral) {
-            val b = f.booleanOrNull
-            if (b != null) {
-                fields[key] = RecordValue.Boolean(b)
-            } else {
-                val fl = f.floatOrNull
-                if (fl != null) {
-                    fields[key] = RecordValue.Number(fl)
-                } else {
-                    fields[key] = RecordValue.String(f.body as String)
-                }
-            }
-        } else if (f is JsonObject) {
-            fields[key] = RecordValue.Reference((f["key"] as JsonLiteral).body as String)
-        }
+        fields[key] = parseValue(f)
     }
     return Record(key, fields)
 }

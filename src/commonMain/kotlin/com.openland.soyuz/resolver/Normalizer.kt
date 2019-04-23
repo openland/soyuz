@@ -3,8 +3,46 @@ package com.openland.soyuz.resolver
 import com.openland.soyuz.store.Record
 import com.openland.soyuz.store.RecordSet
 import com.openland.soyuz.store.RecordValue
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
+
+private fun normalizeValue(
+    key: String,
+    selection: SelectionField,
+    v: JsonElement?,
+    records: MutableMap<String, MutableMap<String, RecordValue>>
+): RecordValue {
+    if (v != null && !v.isNull) {
+        if (v is JsonObject) {
+            val ref = normalizeResponse(key, v, selection.fields, records)
+            return RecordValue.Reference(ref)
+        } else if (v is JsonLiteral) {
+            val b = v.booleanOrNull
+            if (b != null) {
+                return RecordValue.Boolean(b)
+            } else {
+                val fl = v.floatOrNull
+                if (fl != null) {
+                    return RecordValue.Number(fl)
+                } else {
+                    return RecordValue.String(v.body as String)
+                }
+            }
+        } else if (v is JsonArray) {
+            val res = mutableListOf<RecordValue>()
+            for (i in 0 until v.size) {
+                res.add(normalizeValue("$key.$i", selection, v[i], records))
+            }
+            return RecordValue.List(res)
+        } else {
+            throw Error("")
+        }
+    } else {
+        return RecordValue.Null
+    }
+}
 
 private fun normalizeResponse(
     root: String,
@@ -21,26 +59,7 @@ private fun normalizeResponse(
 
     for (s in selection) {
         val v = response[s.requestKey]
-        if (v != null && !v.isNull) {
-            if (v is JsonObject) {
-                val ref = normalizeResponse(cacheKey + "." + s.storeKey, v, s.fields, records)
-                res[s.storeKey] = RecordValue.Reference(ref)
-            } else if (v is JsonLiteral) {
-                val b = v.booleanOrNull
-                if (b != null) {
-                    res[s.storeKey] = RecordValue.Boolean(b)
-                } else {
-                    val fl = v.floatOrNull
-                    if (fl != null) {
-                        res[s.storeKey] = RecordValue.Number(fl)
-                    } else {
-                        res[s.storeKey] = RecordValue.String(v.body as String)
-                    }
-                }
-            }
-        } else {
-            res[s.storeKey] = RecordValue.Null
-        }
+        res[s.storeKey] = normalizeValue(cacheKey + "." + s.storeKey, s, v, records)
     }
     return cacheKey
 }
