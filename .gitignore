@@ -1,2 +1,4 @@
-soyuz
 build
+.gradle
+workspace.xml
+.idea
