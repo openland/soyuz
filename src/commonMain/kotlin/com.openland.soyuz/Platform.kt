@@ -9,4 +9,5 @@ enum class PlatformType {
 
 expect object Platform {
     val type: PlatformType
+    fun currentTimeMilliSeconds(): Long
 }
