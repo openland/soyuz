@@ -8,4 +8,9 @@ class SampleTests {
     fun testMe() {
         assertTrue(true)
     }
+
+    @Test
+    fun testMe2() {
+        assertTrue(true)
+    }
 }
