@@ -1,13 +1,16 @@
 import org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask
 
 plugins {
-    kotlin("multiplatform") version "1.3.30-eap-125"
+    kotlin("multiplatform") version "1.3.30"
+    id("kotlinx-serialization") version "1.3.30"
 }
 
 repositories {
     jcenter()
     maven { setUrl("https://dl.bintray.com/kotlin/kotlin-dev") }
 }
+
+
 
 kotlin {
     jvm()
@@ -18,6 +21,7 @@ kotlin {
     val iosSim = iosX64("iosSim")
     sourceSets["commonMain"].dependencies {
         implementation(kotlin("stdlib-common"))
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.0")
     }
     sourceSets["commonTest"].dependencies {
         implementation(kotlin("test-common"))
