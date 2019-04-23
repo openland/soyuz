@@ -19,27 +19,56 @@ class TokenReader(private val tokens: MutableList<String>) {
     }
 }
 
+private fun parseValue(tokens: TokenReader): DocumentValue {
+    val v = tokens.read()
+    if (v.startsWith("$")) {
+        return DocumentValue.Reference(v)
+    } else if (v == "[") {
+        val values = mutableListOf<DocumentValue>()
+        while (tokens.peek() != "]") {
+            values.add(parseValue(tokens))
+        }
+        tokens.assert("]")
+        return DocumentValue.List(values)
+    } else {
+        return DocumentValue.Constant(v)
+    }
+}
+
+private fun parseArguments(tokens: TokenReader): List<DocumentFieldArgument> {
+    val res = mutableListOf<DocumentFieldArgument>()
+    while (tokens.peek() != ")") {
+        val name = tokens.read()
+        tokens.assert(":")
+        val value = parseValue(tokens)
+        res.add(DocumentFieldArgument(name, value))
+    }
+    return res
+}
+
 private fun parseSelectionSet(tokens: TokenReader): DocumentSelection {
     val fields = mutableListOf<DocumentSelectionField>()
     while (tokens.peek() != "}") {
         var name = tokens.read()
         var alias: String? = null
+        var arguments: List<DocumentFieldArgument>? = null
         if (tokens.peek() == ":") {
             tokens.read()
             alias = name
             name = tokens.read()
         }
         if (tokens.peek() == "(") {
-            parseArguments(tokens)
+            tokens.read()
+            arguments = parseArguments(tokens)
             tokens.assert(")")
         }
         if (tokens.peek() == "{") {
             tokens.assert("{")
             val res = parseSelectionSet(tokens)
-            fields.add(DocumentSelectionField(name, alias, res, null))
+            fields.add(DocumentSelectionField(name, alias, res, arguments))
             tokens.assert("}")
         } else {
-            fields.add(DocumentSelectionField(name, alias, null, null))
+            fields.add(DocumentSelectionField(name, alias, null, arguments))
         }
     }
     return DocumentSelection(fields)
@@ -83,7 +112,7 @@ private fun parseArgumentValue(tokens: TokenReader) {
 
 }
 
-private fun parseArguments(tokens: TokenReader): List<DocumentArgument> {
+private fun parseDocumentArguments(tokens: TokenReader): List<DocumentArgument> {
     val arguments = mutableListOf<DocumentArgument>()
     while (tokens.peek() != ")") {
         val name = tokens.read()
@@ -109,7 +138,7 @@ private fun parseRoot(tokens: TokenReader): Document {
             else -> DocumentType.QUERY
         }
         val selection: DocumentSelection
-        var arguments: List<DocumentArgument>? = null
+        var arguments: List<DocumentArgument> = emptyList()
         t = tokens.read()
         var name: String? = null
         if (t != "{" && t != "(") {
@@ -120,7 +149,7 @@ private fun parseRoot(tokens: TokenReader): Document {
             selection = parseSelectionSet(tokens)
             tokens.assert("}")
         } else if (t == "(") {
-            arguments = parseArguments(tokens)
+            arguments = parseDocumentArguments(tokens)
             tokens.assert(")")
             tokens.assert("{")
             selection = parseSelectionSet(tokens)
@@ -132,7 +161,7 @@ private fun parseRoot(tokens: TokenReader): Document {
     } else if (t == "{") {
         val selection = parseSelectionSet(tokens)
         tokens.assert("}")
-        return Document(DocumentType.QUERY, null, null, selection)
+        return Document(DocumentType.QUERY, null, emptyList(), selection)
     } else {
         throw Error("Mailformed request")
     }

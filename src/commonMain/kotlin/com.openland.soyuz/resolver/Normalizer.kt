@@ -9,7 +9,7 @@ import kotlinx.serialization.json.JsonObject
 private fun normalizeResponse(
     root: String,
     response: JsonObject,
-    selection: Array<SelectionField>,
+    selection: List<SelectionField>,
     records: MutableMap<String, MutableMap<String, RecordValue>>
 ): String {
     val cacheKey = response["id"]?.primitive?.contentOrNull ?: root

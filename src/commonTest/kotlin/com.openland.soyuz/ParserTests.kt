@@ -2,6 +2,7 @@ package com.openland.soyuz
 
 import com.openland.soyuz.parser.DocumentArgumentType
 import com.openland.soyuz.parser.DocumentType
+import com.openland.soyuz.parser.DocumentValue
 import com.openland.soyuz.parser.parseDocument
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -35,7 +36,7 @@ class ParserTests {
     }
 
     @Test
-    fun testArguments() {
+    fun testDocumentArguments() {
         val doc = parseDocument(
             "query Name(" +
                     "\$id: String, \$ids: [String],\$input: [SomeInputType!]!, " +
@@ -65,5 +66,36 @@ class ParserTests {
         assertEquals(DocumentArgumentType.Int, doc.arguments!![4].type)
         assertEquals("\$boolean", doc.arguments!![5].name)
         assertEquals(DocumentArgumentType.Boolean, doc.arguments!![5].type)
+    }
+
+    @Test
+    fun testArguments() {
+        val doc = parseDocument(
+            "{ query(field: 1, field2: \"Something\", field3: 1.0, field4: 1e50, field5: 6.0221413e23, field6: \$arg, field7: [1,2,3]) }"
+        )
+        val query = doc.selection.fields[0]
+        val args = query.arguments!!
+        assertEquals("field", args[0].name)
+        assertEquals(DocumentValue.Constant("1"), args[0].value)
+        assertEquals("field2", args[1].name)
+        assertEquals(DocumentValue.Constant("\"Something\""), args[1].value)
+        assertEquals("field3", args[2].name)
+        assertEquals(DocumentValue.Constant("1.0"), args[2].value)
+        assertEquals("field4", args[3].name)
+        assertEquals(DocumentValue.Constant("1e50"), args[3].value)
+        assertEquals("field5", args[4].name)
+        assertEquals(DocumentValue.Constant("6.0221413e23"), args[4].value)
+        assertEquals("field6", args[5].name)
+        assertEquals(DocumentValue.Reference("\$arg"), args[5].value)
+        assertEquals("field7", args[6].name)
+        assertEquals(
+            DocumentValue.List(
+                listOf(
+                    DocumentValue.Constant("1"),
+                    DocumentValue.Constant("2"),
+                    DocumentValue.Constant("3")
+                )
+            ), args[6].value
+        )
     }
 }

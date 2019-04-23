@@ -9,16 +9,16 @@ class NormalizerTests {
     @Test
     fun testNormalizer() {
         val selection = Selection(
-            arrayOf(
+            listOf(
                 SelectionField(
-                    "query1", "ROOT_QUERY.query1", arrayOf(
-                        SelectionField("id", "id", emptyArray()),
-                        SelectionField("firstName", "firstName", emptyArray()),
-                        SelectionField("lastName", "lastName", emptyArray()),
-                        SelectionField("fullName", "name", emptyArray()),
+                    "query1", "ROOT_QUERY.query1", listOf(
+                        SelectionField("id", "id", emptyList()),
+                        SelectionField("firstName", "firstName", emptyList()),
+                        SelectionField("lastName", "lastName", emptyList()),
+                        SelectionField("fullName", "name", emptyList()),
                         SelectionField(
-                            "likes", "likes", arrayOf(
-                                SelectionField("key", "key", emptyArray())
+                            "likes", "likes", listOf(
+                                SelectionField("key", "key", emptyList())
                             )
                         )
                     )
