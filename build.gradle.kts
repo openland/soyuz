@@ -8,6 +8,7 @@ plugins {
 repositories {
     jcenter()
     maven { setUrl("https://dl.bintray.com/kotlin/kotlin-dev") }
+    maven { setUrl("https://dl.bintray.com/pgutkowski/Maven") }
 }
 
 
@@ -22,6 +23,7 @@ kotlin {
     sourceSets["commonMain"].dependencies {
         implementation(kotlin("stdlib-common"))
         implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.0")
+        implementation("com.github.pgutkowski:kgraphql:0.3.0")
     }
     sourceSets["commonTest"].dependencies {
         implementation(kotlin("test-common"))

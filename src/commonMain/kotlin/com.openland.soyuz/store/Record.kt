@@ -50,6 +50,10 @@ class Record(val key: String, val fields: Map<String, RecordValue>) {
     override fun hashCode(): Int {
         return key.hashCode()
     }
+
+    override fun toString(): String {
+        return "{$key}"
+    }
 }
 
 class RecordSet(val records: Map<String, Record>)
