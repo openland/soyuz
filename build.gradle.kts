@@ -16,13 +16,13 @@ repositories {
 kotlin {
     jvm()
     js()
-    wasm32("wasm")
+    // wasm32("wasm")
     val ios32 = iosArm32("ios32")
     val ios64 = iosArm64("ios64")
     val iosSim = iosX64("iosSim")
     sourceSets["commonMain"].dependencies {
         implementation(kotlin("stdlib-common"))
-        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.0")
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.11.0")
         implementation("com.github.pgutkowski:kgraphql:0.3.0")
     }
     sourceSets["commonTest"].dependencies {
@@ -31,6 +31,7 @@ kotlin {
     }
     sourceSets["jvmMain"].dependencies {
         implementation(kotlin("stdlib-jdk8"))
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.0")
     }
     sourceSets["jvmTest"].dependencies {
         implementation(kotlin("test"))
@@ -38,10 +39,21 @@ kotlin {
     }
     sourceSets["jsMain"].dependencies {
         implementation(kotlin("stdlib-js"))
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:0.11.0")
     }
     sourceSets["jsTest"].dependencies {
         implementation(kotlin("test-js"))
     }
+    sourceSets["ios32Main"].dependencies {
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.11.0")
+    }
+    sourceSets["ios64Main"].dependencies {
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.11.0")
+    }
+    sourceSets["iosSimMain"].dependencies {
+        implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:0.11.0")
+    }
+
 
     configure(listOf(ios32, ios64, iosSim)) {
         binaries.framework {
