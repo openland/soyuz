@@ -1,0 +1,3901 @@
+package com.openland.soyuz.gen
+
+import com.openland.soyuz.store.RecordSet
+import kotlinx.serialization.json.JsonObject
+
+fun normalizeAppChat(scope: Scope) {
+    val scope1 = scope
+    scope1.assertType("AppChat")
+    scope1.set("__typename", scope1.readString("__typename"))
+    scope1.assertObject("chat")
+    val scope2 = scope1.child("chat", "chat")
+    scope2.set("__typename", scope2.readString("__typename"))
+    if (scope2.isType("PrivateRoom")) {
+        scope2.set("id", scope2.readString("id"))
+    }
+    if (scope2.isType("SharedRoom")) {
+        scope2.set("id", scope2.readString("id"))
+    }
+    scope1.set("webhook", scope1.readString("webhook"))
+}
+fun normalizeAppFull(scope: Scope) {
+    val scope3 = scope
+    scope3.assertType("AppProfile")
+    scope3.set("__typename", scope3.readString("__typename"))
+    scope3.set("about", scope3.readStringOptional("about"))
+    scope3.set("id", scope3.readString("id"))
+    scope3.set("name", scope3.readString("name"))
+    if (scope3.hasKey("photoRef")) {
+        val scope4 = scope3.child("photoRef", "photoRef")
+        scope4.set("__typename", scope4.readString("__typename"))
+        if (scope4.hasKey("crop")) {
+            val scope5 = scope4.child("crop", "crop")
+            scope5.set("__typename", scope5.readString("__typename"))
+            scope5.set("h", scope5.readInt("h"))
+            scope5.set("w", scope5.readInt("w"))
+            scope5.set("x", scope5.readInt("x"))
+            scope5.set("y", scope5.readInt("y"))
+        } else {
+            scope4.setNull("crop")
+        }
+        scope4.set("uuid", scope4.readString("uuid"))
+    } else {
+        scope3.setNull("photoRef")
+    }
+    scope3.set("shortname", scope3.readStringOptional("shortname"))
+    scope3.assertObject("token")
+    val scope6 = scope3.child("token", "token")
+    scope6.set("__typename", scope6.readString("__typename"))
+    scope6.set("salt", scope6.readString("salt"))
+}
+fun normalizeOrganizationShort(scope: Scope) {
+    val scope7 = scope
+    scope7.assertType("Organization")
+    scope7.set("__typename", scope7.readString("__typename"))
+    scope7.set("alphaIsCommunity", scope7.readBoolean("isCommunity"))
+    scope7.set("id", scope7.readString("id"))
+    scope7.set("name", scope7.readString("name"))
+    scope7.set("photo", scope7.readStringOptional("photo"))
+}
+fun normalizeUserShort(scope: Scope) {
+    val scope8 = scope
+    scope8.assertType("User")
+    scope8.set("__typename", scope8.readString("__typename"))
+    scope8.set("email", scope8.readStringOptional("email"))
+    scope8.set("firstName", scope8.readString("firstName"))
+    scope8.set("id", scope8.readString("id"))
+    scope8.set("isBot", scope8.readBoolean("isBot"))
+    scope8.set("isYou", scope8.readBoolean("isYou"))
+    scope8.set("lastName", scope8.readStringOptional("lastName"))
+    scope8.set("lastSeen", scope8.readStringOptional("lastSeen"))
+    scope8.set("name", scope8.readString("name"))
+    scope8.set("online", scope8.readBoolean("online"))
+    scope8.set("photo", scope8.readStringOptional("photo"))
+    if (scope8.hasKey("primaryOrganization")) {
+        val scope9 = scope8.child("primaryOrganization", "primaryOrganization")
+        scope9.set("__typename", scope9.readString("__typename"))
+        normalizeOrganizationShort(scope9)
+    } else {
+        scope8.setNull("primaryOrganization")
+    }
+    scope8.set("shortname", scope8.readStringOptional("shortname"))
+}
+fun normalizeUserTiny(scope: Scope) {
+    val scope10 = scope
+    scope10.assertType("User")
+    scope10.set("__typename", scope10.readString("__typename"))
+    scope10.set("firstName", scope10.readString("firstName"))
+    scope10.set("id", scope10.readString("id"))
+    scope10.set("isYou", scope10.readBoolean("isYou"))
+    scope10.set("lastName", scope10.readStringOptional("lastName"))
+    scope10.set("name", scope10.readString("name"))
+    scope10.set("photo", scope10.readStringOptional("photo"))
+    if (scope10.hasKey("primaryOrganization")) {
+        val scope11 = scope10.child("primaryOrganization", "primaryOrganization")
+        scope11.set("__typename", scope11.readString("__typename"))
+        normalizeOrganizationShort(scope11)
+    } else {
+        scope10.setNull("primaryOrganization")
+    }
+    scope10.set("shortname", scope10.readStringOptional("shortname"))
+}
+fun normalizeFullMessage(scope: Scope) {
+    val scope12 = scope
+    scope12.assertType("ModernMessage")
+    scope12.set("__typename", scope12.readString("__typename"))
+    scope12.set("date", scope12.readString("date"))
+    scope12.set("fallback", scope12.readString("fallback"))
+    scope12.set("id", scope12.readString("id"))
+    scope12.set("message", scope12.readStringOptional("message"))
+    scope12.assertObject("sender")
+    val scope13 = scope12.child("sender", "sender")
+    scope13.set("__typename", scope13.readString("__typename"))
+    normalizeUserShort(scope13)
+    if (scope12.assertList("spans")) {
+        val scope14 = scope12.childList("spans", "spans")
+        for (i in 0 until scope14.size) {
+            scope14.assertObject(i)
+            val scope15 = scope14.child(i)
+            scope15.set("__typename", scope15.readString("__typename"))
+            scope15.set("length", scope15.readInt("length"))
+            scope15.set("offset", scope15.readInt("offset"))
+            if (scope15.isType("MessageSpanUserMention")) {
+                scope15.assertObject("user")
+                val scope16 = scope15.child("user", "user")
+                scope16.set("__typename", scope16.readString("__typename"))
+                normalizeUserTiny(scope16)
+            }
+            if (scope15.isType("MessageSpanMultiUserMention")) {
+                if (scope15.assertList("users")) {
+                    val scope17 = scope15.childList("users", "users")
+                    for (i in 0 until scope17.size) {
+                        scope17.assertObject(i)
+                        val scope18 = scope17.child(i)
+                        scope18.set("__typename", scope18.readString("__typename"))
+                        normalizeUserTiny(scope18)
+                    }
+                    scope15.set("users", scope17.completed())
+                }
+            }
+            if (scope15.isType("MessageSpanRoomMention")) {
+                scope15.assertObject("room")
+                val scope19 = scope15.child("room", "room")
+                scope19.set("__typename", scope19.readString("__typename"))
+                if (scope19.isType("PrivateRoom")) {
+                    scope19.set("id", scope19.readString("id"))
+                    scope19.assertObject("user")
+                    val scope20 = scope19.child("user", "user")
+                    scope20.set("__typename", scope20.readString("__typename"))
+                    scope20.set("id", scope20.readString("id"))
+                    scope20.set("name", scope20.readString("name"))
+                }
+                if (scope19.isType("SharedRoom")) {
+                    scope19.set("id", scope19.readString("id"))
+                    scope19.set("title", scope19.readString("title"))
+                }
+            }
+            if (scope15.isType("MessageSpanLink")) {
+                scope15.set("url", scope15.readString("url"))
+            }
+            if (scope15.isType("MessageSpanBold")) {
+                scope15.set("length", scope15.readInt("length"))
+                scope15.set("offset", scope15.readInt("offset"))
+            }
+        }
+        scope12.set("spans", scope14.completed())
+    }
+    if (scope12.isType("GeneralMessage")) {
+        if (scope12.assertList("attachments")) {
+            val scope21 = scope12.childList("attachments", "attachments")
+            for (i in 0 until scope21.size) {
+                scope21.assertObject(i)
+                val scope22 = scope21.child(i)
+                scope22.set("__typename", scope22.readString("__typename"))
+                scope22.set("fallback", scope22.readString("fallback"))
+                if (scope22.isType("MessageAttachmentFile")) {
+                    scope22.set("fileId", scope22.readString("fileId"))
+                    scope22.assertObject("fileMetadata")
+                    val scope23 = scope22.child("fileMetadata", "fileMetadata")
+                    scope23.set("__typename", scope23.readString("__typename"))
+                    scope23.set("imageFormat", scope23.readStringOptional("imageFormat"))
+                    scope23.set("imageHeight", scope23.readIntOptional("imageHeight"))
+                    scope23.set("imageWidth", scope23.readIntOptional("imageWidth"))
+                    scope23.set("isImage", scope23.readBoolean("isImage"))
+                    scope23.set("mimeType", scope23.readStringOptional("mimeType"))
+                    scope23.set("name", scope23.readString("name"))
+                    scope23.set("size", scope23.readInt("size"))
+                    scope22.set("filePreview", scope22.readStringOptional("filePreview"))
+                    scope22.set("id", scope22.readString("id"))
+                }
+                if (scope22.isType("MessageRichAttachment")) {
+                    scope22.set("fallback", scope22.readString("fallback"))
+                    if (scope22.hasKey("icon")) {
+                        val scope24 = scope22.child("icon", "icon")
+                        scope24.set("__typename", scope24.readString("__typename"))
+                        if (scope24.hasKey("metadata")) {
+                            val scope25 = scope24.child("metadata", "metadata")
+                            scope25.set("__typename", scope25.readString("__typename"))
+                            scope25.set("imageFormat", scope25.readStringOptional("imageFormat"))
+                            scope25.set("imageHeight", scope25.readIntOptional("imageHeight"))
+                            scope25.set("imageWidth", scope25.readIntOptional("imageWidth"))
+                            scope25.set("isImage", scope25.readBoolean("isImage"))
+                            scope25.set("mimeType", scope25.readStringOptional("mimeType"))
+                            scope25.set("name", scope25.readString("name"))
+                            scope25.set("size", scope25.readInt("size"))
+                        } else {
+                            scope24.setNull("metadata")
+                        }
+                        scope24.set("url", scope24.readString("url"))
+                    } else {
+                        scope22.setNull("icon")
+                    }
+                    if (scope22.hasKey("image")) {
+                        val scope26 = scope22.child("image", "image")
+                        scope26.set("__typename", scope26.readString("__typename"))
+                        if (scope26.hasKey("metadata")) {
+                            val scope27 = scope26.child("metadata", "metadata")
+                            scope27.set("__typename", scope27.readString("__typename"))
+                            scope27.set("imageFormat", scope27.readStringOptional("imageFormat"))
+                            scope27.set("imageHeight", scope27.readIntOptional("imageHeight"))
+                            scope27.set("imageWidth", scope27.readIntOptional("imageWidth"))
+                            scope27.set("isImage", scope27.readBoolean("isImage"))
+                            scope27.set("mimeType", scope27.readStringOptional("mimeType"))
+                            scope27.set("name", scope27.readString("name"))
+                            scope27.set("size", scope27.readInt("size"))
+                        } else {
+                            scope26.setNull("metadata")
+                        }
+                        scope26.set("url", scope26.readString("url"))
+                    } else {
+                        scope22.setNull("image")
+                    }
+                    if (scope22.hasKey("keyboard")) {
+                        val scope28 = scope22.child("keyboard", "keyboard")
+                        scope28.set("__typename", scope28.readString("__typename"))
+                        if (scope28.assertList("buttons")) {
+                            val scope29 = scope28.childList("buttons", "buttons")
+                            for (i in 0 until scope29.size) {
+                                if (scope29.isNotNull(i)) {
+                                    val scope30 = scope29.childList(i)
+                                    for (i in 0 until scope30.size) {
+                                        scope30.assertObject(i)
+                                        val scope31 = scope30.child(i)
+                                        scope31.set("__typename", scope31.readString("__typename"))
+                                        scope31.set("style", scope31.readString("style"))
+                                        scope31.set("title", scope31.readString("title"))
+                                        scope31.set("url", scope31.readStringOptional("url"))
+                                    }
+                                }
+                            }
+                            scope28.set("buttons", scope29.completed())
+                        }
+                    } else {
+                        scope22.setNull("keyboard")
+                    }
+                    scope22.set("subTitle", scope22.readStringOptional("subTitle"))
+                    scope22.set("text", scope22.readStringOptional("text"))
+                    scope22.set("title", scope22.readStringOptional("title"))
+                    scope22.set("titleLink", scope22.readStringOptional("titleLink"))
+                    scope22.set("titleLinkHostname", scope22.readStringOptional("titleLinkHostname"))
+                }
+            }
+            scope12.set("attachments", scope21.completed())
+        }
+        scope12.set("commentsCount", scope12.readInt("commentsCount"))
+        scope12.set("edited", scope12.readBoolean("edited"))
+        if (scope12.assertList("quotedMessages")) {
+            val scope32 = scope12.childList("quotedMessages", "quotedMessages")
+            for (i in 0 until scope32.size) {
+                scope32.assertObject(i)
+                val scope33 = scope32.child(i)
+                scope33.set("__typename", scope33.readString("__typename"))
+                scope33.set("date", scope33.readString("date"))
+                scope33.set("fallback", scope33.readString("fallback"))
+                scope33.set("id", scope33.readString("id"))
+                scope33.set("message", scope33.readStringOptional("message"))
+                scope33.set("message", scope33.readStringOptional("message"))
+                scope33.assertObject("sender")
+                val scope34 = scope33.child("sender", "sender")
+                scope34.set("__typename", scope34.readString("__typename"))
+                normalizeUserShort(scope34)
+                if (scope33.assertList("spans")) {
+                    val scope35 = scope33.childList("spans", "spans")
+                    for (i in 0 until scope35.size) {
+                        scope35.assertObject(i)
+                        val scope36 = scope35.child(i)
+                        scope36.set("__typename", scope36.readString("__typename"))
+                        scope36.set("length", scope36.readInt("length"))
+                        scope36.set("offset", scope36.readInt("offset"))
+                        if (scope36.isType("MessageSpanUserMention")) {
+                            scope36.assertObject("user")
+                            val scope37 = scope36.child("user", "user")
+                            scope37.set("__typename", scope37.readString("__typename"))
+                            normalizeUserShort(scope37)
+                        }
+                        if (scope36.isType("MessageSpanMultiUserMention")) {
+                            if (scope36.assertList("users")) {
+                                val scope38 = scope36.childList("users", "users")
+                                for (i in 0 until scope38.size) {
+                                    scope38.assertObject(i)
+                                    val scope39 = scope38.child(i)
+                                    scope39.set("__typename", scope39.readString("__typename"))
+                                    normalizeUserShort(scope39)
+                                }
+                                scope36.set("users", scope38.completed())
+                            }
+                        }
+                        if (scope36.isType("MessageSpanRoomMention")) {
+                            scope36.assertObject("room")
+                            val scope40 = scope36.child("room", "room")
+                            scope40.set("__typename", scope40.readString("__typename"))
+                            if (scope40.isType("PrivateRoom")) {
+                                scope40.set("id", scope40.readString("id"))
+                                scope40.assertObject("user")
+                                val scope41 = scope40.child("user", "user")
+                                scope41.set("__typename", scope41.readString("__typename"))
+                                scope41.set("id", scope41.readString("id"))
+                                scope41.set("name", scope41.readString("name"))
+                            }
+                            if (scope40.isType("SharedRoom")) {
+                                scope40.set("id", scope40.readString("id"))
+                                scope40.set("title", scope40.readString("title"))
+                            }
+                        }
+                        if (scope36.isType("MessageSpanLink")) {
+                            scope36.set("url", scope36.readString("url"))
+                        }
+                    }
+                    scope33.set("spans", scope35.completed())
+                }
+                if (scope33.isType("GeneralMessage")) {
+                    if (scope33.assertList("attachments")) {
+                        val scope42 = scope33.childList("attachments", "attachments")
+                        for (i in 0 until scope42.size) {
+                            scope42.assertObject(i)
+                            val scope43 = scope42.child(i)
+                            scope43.set("__typename", scope43.readString("__typename"))
+                            scope43.set("fallback", scope43.readString("fallback"))
+                            if (scope43.isType("MessageAttachmentFile")) {
+                                scope43.set("fileId", scope43.readString("fileId"))
+                                scope43.assertObject("fileMetadata")
+                                val scope44 = scope43.child("fileMetadata", "fileMetadata")
+                                scope44.set("__typename", scope44.readString("__typename"))
+                                scope44.set("imageFormat", scope44.readStringOptional("imageFormat"))
+                                scope44.set("imageHeight", scope44.readIntOptional("imageHeight"))
+                                scope44.set("imageWidth", scope44.readIntOptional("imageWidth"))
+                                scope44.set("isImage", scope44.readBoolean("isImage"))
+                                scope44.set("mimeType", scope44.readStringOptional("mimeType"))
+                                scope44.set("name", scope44.readString("name"))
+                                scope44.set("size", scope44.readInt("size"))
+                                scope43.set("filePreview", scope43.readStringOptional("filePreview"))
+                            }
+                            if (scope43.isType("MessageRichAttachment")) {
+                                scope43.set("fallback", scope43.readString("fallback"))
+                                if (scope43.hasKey("icon")) {
+                                    val scope45 = scope43.child("icon", "icon")
+                                    scope45.set("__typename", scope45.readString("__typename"))
+                                    if (scope45.hasKey("metadata")) {
+                                        val scope46 = scope45.child("metadata", "metadata")
+                                        scope46.set("__typename", scope46.readString("__typename"))
+                                        scope46.set("imageFormat", scope46.readStringOptional("imageFormat"))
+                                        scope46.set("imageHeight", scope46.readIntOptional("imageHeight"))
+                                        scope46.set("imageWidth", scope46.readIntOptional("imageWidth"))
+                                        scope46.set("isImage", scope46.readBoolean("isImage"))
+                                        scope46.set("mimeType", scope46.readStringOptional("mimeType"))
+                                        scope46.set("name", scope46.readString("name"))
+                                        scope46.set("size", scope46.readInt("size"))
+                                    } else {
+                                        scope45.setNull("metadata")
+                                    }
+                                    scope45.set("url", scope45.readString("url"))
+                                } else {
+                                    scope43.setNull("icon")
+                                }
+                                if (scope43.hasKey("image")) {
+                                    val scope47 = scope43.child("image", "image")
+                                    scope47.set("__typename", scope47.readString("__typename"))
+                                    if (scope47.hasKey("metadata")) {
+                                        val scope48 = scope47.child("metadata", "metadata")
+                                        scope48.set("__typename", scope48.readString("__typename"))
+                                        scope48.set("imageFormat", scope48.readStringOptional("imageFormat"))
+                                        scope48.set("imageHeight", scope48.readIntOptional("imageHeight"))
+                                        scope48.set("imageWidth", scope48.readIntOptional("imageWidth"))
+                                        scope48.set("isImage", scope48.readBoolean("isImage"))
+                                        scope48.set("mimeType", scope48.readStringOptional("mimeType"))
+                                        scope48.set("name", scope48.readString("name"))
+                                        scope48.set("size", scope48.readInt("size"))
+                                    } else {
+                                        scope47.setNull("metadata")
+                                    }
+                                    scope47.set("url", scope47.readString("url"))
+                                } else {
+                                    scope43.setNull("image")
+                                }
+                                scope43.set("subTitle", scope43.readStringOptional("subTitle"))
+                                scope43.set("text", scope43.readStringOptional("text"))
+                                scope43.set("title", scope43.readStringOptional("title"))
+                                scope43.set("titleLink", scope43.readStringOptional("titleLink"))
+                                scope43.set("titleLinkHostname", scope43.readStringOptional("titleLinkHostname"))
+                            }
+                        }
+                        scope33.set("attachments", scope42.completed())
+                    }
+                    scope33.set("commentsCount", scope33.readInt("commentsCount"))
+                    scope33.set("edited", scope33.readBoolean("edited"))
+                }
+            }
+            scope12.set("quotedMessages", scope32.completed())
+        }
+        if (scope12.assertList("reactions")) {
+            val scope49 = scope12.childList("reactions", "reactions")
+            for (i in 0 until scope49.size) {
+                scope49.assertObject(i)
+                val scope50 = scope49.child(i)
+                scope50.set("__typename", scope50.readString("__typename"))
+                scope50.set("reaction", scope50.readString("reaction"))
+                scope50.assertObject("user")
+                val scope51 = scope50.child("user", "user")
+                scope51.set("__typename", scope51.readString("__typename"))
+                normalizeUserShort(scope51)
+            }
+            scope12.set("reactions", scope49.completed())
+        }
+    }
+    if (scope12.isType("ServiceMessage")) {
+        if (scope12.hasKey("serviceMetadata")) {
+            val scope52 = scope12.child("serviceMetadata", "serviceMetadata")
+            scope52.set("__typename", scope52.readString("__typename"))
+            if (scope52.isType("InviteServiceMetadata")) {
+                scope52.assertObject("invitedBy")
+                val scope53 = scope52.child("invitedBy", "invitedBy")
+                scope53.set("__typename", scope53.readString("__typename"))
+                normalizeUserTiny(scope53)
+                if (scope52.hasKey("users")) {
+                    val scope54 = scope52.childList("users", "users")
+                    for (i in 0 until scope54.size) {
+                        scope54.assertObject(i)
+                        val scope55 = scope54.child(i)
+                        scope55.set("__typename", scope55.readString("__typename"))
+                        normalizeUserTiny(scope55)
+                    }
+                } else {
+                    scope52.setNull("users")
+                }
+            }
+            if (scope52.isType("KickServiceMetadata")) {
+                scope52.assertObject("kickedBy")
+                val scope56 = scope52.child("kickedBy", "kickedBy")
+                scope56.set("__typename", scope56.readString("__typename"))
+                normalizeUserTiny(scope56)
+                scope52.assertObject("user")
+                val scope57 = scope52.child("user", "user")
+                scope57.set("__typename", scope57.readString("__typename"))
+                normalizeUserTiny(scope57)
+            }
+            if (scope52.isType("TitleChangeServiceMetadata")) {
+                scope52.set("title", scope52.readString("title"))
+            }
+            if (scope52.isType("PhotoChangeServiceMetadata")) {
+                scope52.set("photo", scope52.readStringOptional("photo"))
+            }
+            if (scope52.isType("PostRespondServiceMetadata")) {
+                scope52.set("respondType", scope52.readString("respondType"))
+            }
+        } else {
+            scope12.setNull("serviceMetadata")
+        }
+    }
+}
+fun normalizeRoomShort(scope: Scope) {
+    val scope58 = scope
+    scope58.assertType("Room")
+    scope58.set("__typename", scope58.readString("__typename"))
+    if (scope58.isType("PrivateRoom")) {
+        scope58.set("id", scope58.readString("id"))
+        scope58.assertObject("settings")
+        val scope59 = scope58.child("settings", "settings")
+        scope59.set("__typename", scope59.readString("__typename"))
+        scope59.set("id", scope59.readString("id"))
+        scope59.set("mute", scope59.readBooleanOptional("mute"))
+        scope58.assertObject("user")
+        val scope60 = scope58.child("user", "user")
+        scope60.set("__typename", scope60.readString("__typename"))
+        normalizeUserShort(scope60)
+    }
+    if (scope58.isType("SharedRoom")) {
+        scope58.set("canEdit", scope58.readBoolean("canEdit"))
+        scope58.set("canSendMessage", scope58.readBoolean("canSendMessage"))
+        scope58.set("id", scope58.readString("id"))
+        scope58.set("isChannel", scope58.readBoolean("isChannel"))
+        scope58.set("kind", scope58.readString("kind"))
+        scope58.set("membersCount", scope58.readIntOptional("membersCount"))
+        scope58.set("membership", scope58.readString("membership"))
+        if (scope58.hasKey("organization")) {
+            val scope61 = scope58.child("organization", "organization")
+            scope61.set("__typename", scope61.readString("__typename"))
+            normalizeOrganizationShort(scope61)
+        } else {
+            scope58.setNull("organization")
+        }
+        scope58.set("photo", scope58.readString("photo"))
+        if (scope58.hasKey("pinnedMessage")) {
+            val scope62 = scope58.child("pinnedMessage", "pinnedMessage")
+            scope62.set("__typename", scope62.readString("__typename"))
+            normalizeFullMessage(scope62)
+        } else {
+            scope58.setNull("pinnedMessage")
+        }
+        scope58.set("role", scope58.readString("role"))
+        scope58.assertObject("settings")
+        val scope63 = scope58.child("settings", "settings")
+        scope63.set("__typename", scope63.readString("__typename"))
+        scope63.set("id", scope63.readString("id"))
+        scope63.set("mute", scope63.readBooleanOptional("mute"))
+        scope58.set("title", scope58.readString("title"))
+    }
+}
+fun normalizeChatUpdateFragment(scope: Scope) {
+    val scope64 = scope
+    scope64.assertType("ChatUpdate")
+    scope64.set("__typename", scope64.readString("__typename"))
+    if (scope64.isType("ChatMessageReceived")) {
+        scope64.assertObject("message")
+        val scope65 = scope64.child("message", "message")
+        scope65.set("__typename", scope65.readString("__typename"))
+        normalizeFullMessage(scope65)
+        scope64.set("repeatKey", scope64.readStringOptional("repeatKey"))
+    }
+    if (scope64.isType("ChatMessageUpdated")) {
+        scope64.assertObject("message")
+        val scope66 = scope64.child("message", "message")
+        scope66.set("__typename", scope66.readString("__typename"))
+        normalizeFullMessage(scope66)
+    }
+    if (scope64.isType("ChatMessageDeleted")) {
+        scope64.assertObject("message")
+        val scope67 = scope64.child("message", "message")
+        scope67.set("__typename", scope67.readString("__typename"))
+        scope67.set("id", scope67.readString("id"))
+    }
+    if (scope64.isType("ChatUpdated")) {
+        scope64.assertObject("chat")
+        val scope68 = scope64.child("chat", "chat")
+        scope68.set("__typename", scope68.readString("__typename"))
+        normalizeRoomShort(scope68)
+    }
+    if (scope64.isType("ChatLostAccess")) {
+        scope64.set("lostAccess", scope64.readBoolean("lostAccess"))
+    }
+}
+fun normalizeCommentEntryFragment(scope: Scope) {
+    val scope69 = scope
+    scope69.assertType("CommentEntry")
+    scope69.set("__typename", scope69.readString("__typename"))
+    if (scope69.assertList("childComments")) {
+        val scope70 = scope69.childList("childComments", "childComments")
+        for (i in 0 until scope70.size) {
+            scope70.assertObject(i)
+            val scope71 = scope70.child(i)
+            scope71.set("__typename", scope71.readString("__typename"))
+            scope71.set("id", scope71.readString("id"))
+        }
+        scope69.set("childComments", scope70.completed())
+    }
+    scope69.assertObject("comment")
+    val scope72 = scope69.child("comment", "comment")
+    scope72.set("__typename", scope72.readString("__typename"))
+    scope72.set("id", scope72.readString("id"))
+    normalizeFullMessage(scope72)
+    scope69.set("deleted", scope69.readBoolean("deleted"))
+    scope69.set("id", scope69.readString("id"))
+    if (scope69.hasKey("parentComment")) {
+        val scope73 = scope69.child("parentComment", "parentComment")
+        scope73.set("__typename", scope73.readString("__typename"))
+        scope73.set("id", scope73.readString("id"))
+    } else {
+        scope69.setNull("parentComment")
+    }
+}
+fun normalizeCommentUpdateFragment(scope: Scope) {
+    val scope74 = scope
+    scope74.assertType("CommentUpdate")
+    scope74.set("__typename", scope74.readString("__typename"))
+    if (scope74.isType("CommentReceived")) {
+        scope74.assertObject("comment")
+        val scope75 = scope74.child("comment", "comment")
+        scope75.set("__typename", scope75.readString("__typename"))
+        normalizeCommentEntryFragment(scope75)
+    }
+    if (scope74.isType("CommentUpdated")) {
+        scope74.assertObject("comment")
+        val scope76 = scope74.child("comment", "comment")
+        scope76.set("__typename", scope76.readString("__typename"))
+        normalizeCommentEntryFragment(scope76)
+    }
+}
+fun normalizeCommunitySearch(scope: Scope) {
+    val scope77 = scope
+    scope77.assertType("Organization")
+    scope77.set("__typename", scope77.readString("__typename"))
+    scope77.set("about", scope77.readStringOptional("about"))
+    scope77.set("alphaFeatured", scope77.readBoolean("featured"))
+    scope77.set("id", scope77.readString("id"))
+    scope77.set("isMine", scope77.readBoolean("isMine"))
+    scope77.set("membersCount", scope77.readInt("membersCount"))
+    scope77.set("name", scope77.readString("name"))
+    scope77.set("photo", scope77.readStringOptional("photo"))
+    scope77.set("status", scope77.readString("status"))
+    scope77.set("superAccountId", scope77.readString("superAccountId"))
+}
+fun normalizeConferenceFull(scope: Scope) {
+    val scope78 = scope
+    scope78.assertType("Conference")
+    scope78.set("__typename", scope78.readString("__typename"))
+    if (scope78.assertList("iceServers")) {
+        val scope79 = scope78.childList("iceServers", "iceServers")
+        for (i in 0 until scope79.size) {
+            scope79.assertObject(i)
+            val scope80 = scope79.child(i)
+            scope80.set("__typename", scope80.readString("__typename"))
+            scope80.set("credential", scope80.readStringOptional("credential"))
+            if (scope80.assertList("urls")) {
+                val scope81 = scope80.childList("urls", "urls")
+                for (i in 0 until scope81.size) {
+                    scope81.next(scope81.readString(i))
+                }
+                scope80.set("urls", scope81.completed())
+            }
+            scope80.set("username", scope80.readStringOptional("username"))
+        }
+        scope78.set("iceServers", scope79.completed())
+    }
+    scope78.set("id", scope78.readString("id"))
+    if (scope78.assertList("peers")) {
+        val scope82 = scope78.childList("peers", "peers")
+        for (i in 0 until scope82.size) {
+            scope82.assertObject(i)
+            val scope83 = scope82.child(i)
+            scope83.set("__typename", scope83.readString("__typename"))
+            if (scope83.hasKey("connection")) {
+                val scope84 = scope83.child("connection", "connection")
+                scope84.set("__typename", scope84.readString("__typename"))
+                if (scope84.assertList("ice")) {
+                    val scope85 = scope84.childList("ice", "ice")
+                    for (i in 0 until scope85.size) {
+                        scope85.next(scope85.readString(i))
+                    }
+                    scope84.set("ice", scope85.completed())
+                }
+                scope84.set("sdp", scope84.readStringOptional("sdp"))
+                scope84.set("state", scope84.readString("state"))
+            } else {
+                scope83.setNull("connection")
+            }
+            scope83.set("id", scope83.readString("id"))
+            scope83.assertObject("user")
+            val scope86 = scope83.child("user", "user")
+            scope86.set("__typename", scope86.readString("__typename"))
+            normalizeUserShort(scope86)
+        }
+        scope78.set("peers", scope82.completed())
+    }
+    scope78.set("startTime", scope78.readStringOptional("startTime"))
+}
+fun normalizeTinyMessage(scope: Scope) {
+    val scope87 = scope
+    scope87.assertType("ModernMessage")
+    scope87.set("__typename", scope87.readString("__typename"))
+    scope87.set("date", scope87.readString("date"))
+    scope87.set("fallback", scope87.readString("fallback"))
+    scope87.set("id", scope87.readString("id"))
+    scope87.set("message", scope87.readStringOptional("message"))
+    scope87.assertObject("sender")
+    val scope88 = scope87.child("sender", "sender")
+    scope88.set("__typename", scope88.readString("__typename"))
+    normalizeUserTiny(scope88)
+    if (scope87.isType("GeneralMessage")) {
+        if (scope87.assertList("attachments")) {
+            val scope89 = scope87.childList("attachments", "attachments")
+            for (i in 0 until scope89.size) {
+                scope89.assertObject(i)
+                val scope90 = scope89.child(i)
+                scope90.set("__typename", scope90.readString("__typename"))
+                scope90.set("fallback", scope90.readString("fallback"))
+                scope90.set("id", scope90.readString("id"))
+                if (scope90.isType("MessageAttachmentFile")) {
+                    scope90.set("fileId", scope90.readString("fileId"))
+                    scope90.assertObject("fileMetadata")
+                    val scope91 = scope90.child("fileMetadata", "fileMetadata")
+                    scope91.set("__typename", scope91.readString("__typename"))
+                    scope91.set("imageFormat", scope91.readStringOptional("imageFormat"))
+                    scope91.set("isImage", scope91.readBoolean("isImage"))
+                    scope90.set("filePreview", scope90.readStringOptional("filePreview"))
+                }
+            }
+            scope87.set("attachments", scope89.completed())
+        }
+        scope87.set("commentsCount", scope87.readInt("commentsCount"))
+        if (scope87.assertList("quotedMessages")) {
+            val scope92 = scope87.childList("quotedMessages", "quotedMessages")
+            for (i in 0 until scope92.size) {
+                scope92.assertObject(i)
+                val scope93 = scope92.child(i)
+                scope93.set("__typename", scope93.readString("__typename"))
+                scope93.set("id", scope93.readString("id"))
+            }
+            scope87.set("quotedMessages", scope92.completed())
+        }
+    }
+}
+fun normalizeDialogUpdateFragment(scope: Scope) {
+    val scope94 = scope
+    scope94.assertType("DialogUpdate")
+    scope94.set("__typename", scope94.readString("__typename"))
+    if (scope94.isType("DialogMessageReceived")) {
+        scope94.assertObject("message")
+        val scope95 = scope94.child("message", "alphaMessage")
+        scope95.set("__typename", scope95.readString("__typename"))
+        normalizeTinyMessage(scope95)
+        scope94.set("cid", scope94.readString("cid"))
+        scope94.set("globalUnread", scope94.readInt("globalUnread"))
+        scope94.set("unread", scope94.readInt("unread"))
+    }
+    if (scope94.isType("DialogMessageUpdated")) {
+        scope94.assertObject("message")
+        val scope96 = scope94.child("message", "alphaMessage")
+        scope96.set("__typename", scope96.readString("__typename"))
+        normalizeTinyMessage(scope96)
+        scope94.set("cid", scope94.readString("cid"))
+    }
+    if (scope94.isType("DialogMessageDeleted")) {
+        scope94.assertObject("message")
+        val scope97 = scope94.child("message", "alphaMessage")
+        scope97.set("__typename", scope97.readString("__typename"))
+        normalizeTinyMessage(scope97)
+        if (scope94.hasKey("prevMessage")) {
+            val scope98 = scope94.child("prevMessage", "alphaPrevMessage")
+            scope98.set("__typename", scope98.readString("__typename"))
+            normalizeTinyMessage(scope98)
+        } else {
+            scope94.setNull("alphaPrevMessage")
+        }
+        scope94.set("cid", scope94.readString("cid"))
+        scope94.set("globalUnread", scope94.readInt("globalUnread"))
+        scope94.set("unread", scope94.readInt("unread"))
+    }
+    if (scope94.isType("DialogMessageRead")) {
+        scope94.set("cid", scope94.readString("cid"))
+        scope94.set("globalUnread", scope94.readInt("globalUnread"))
+        scope94.set("unread", scope94.readInt("unread"))
+    }
+    if (scope94.isType("DialogMessageRead")) {
+        scope94.set("cid", scope94.readString("cid"))
+        scope94.set("globalUnread", scope94.readInt("globalUnread"))
+        scope94.set("unread", scope94.readInt("unread"))
+    }
+    if (scope94.isType("DialogTitleUpdated")) {
+        scope94.set("cid", scope94.readString("cid"))
+        scope94.set("title", scope94.readString("title"))
+    }
+    if (scope94.isType("DialogMuteChanged")) {
+        scope94.set("cid", scope94.readString("cid"))
+        scope94.set("mute", scope94.readBoolean("mute"))
+    }
+    if (scope94.isType("DialogMentionedChanged")) {
+        scope94.set("cid", scope94.readString("cid"))
+        scope94.set("haveMention", scope94.readBoolean("haveMention"))
+    }
+    if (scope94.isType("DialogPhotoUpdated")) {
+        scope94.set("cid", scope94.readString("cid"))
+        scope94.set("photo", scope94.readStringOptional("photo"))
+    }
+    if (scope94.isType("DialogDeleted")) {
+        scope94.set("cid", scope94.readString("cid"))
+        scope94.set("globalUnread", scope94.readInt("globalUnread"))
+    }
+    if (scope94.isType("DialogBump")) {
+        scope94.set("cid", scope94.readString("cid"))
+        scope94.set("globalUnread", scope94.readInt("globalUnread"))
+        if (scope94.hasKey("topMessage")) {
+            val scope99 = scope94.child("topMessage", "topMessage")
+            scope99.set("__typename", scope99.readString("__typename"))
+            normalizeTinyMessage(scope99)
+        } else {
+            scope94.setNull("topMessage")
+        }
+        scope94.set("unread", scope94.readInt("unread"))
+    }
+}
+fun normalizeUserFull(scope: Scope) {
+    val scope100 = scope
+    scope100.assertType("User")
+    scope100.set("__typename", scope100.readString("__typename"))
+    scope100.set("about", scope100.readStringOptional("about"))
+    scope100.set("email", scope100.readStringOptional("email"))
+    scope100.set("firstName", scope100.readString("firstName"))
+    scope100.set("id", scope100.readString("id"))
+    scope100.set("isBot", scope100.readBoolean("isBot"))
+    scope100.set("isYou", scope100.readBoolean("isYou"))
+    scope100.set("lastName", scope100.readStringOptional("lastName"))
+    scope100.set("lastSeen", scope100.readStringOptional("lastSeen"))
+    scope100.set("linkedin", scope100.readStringOptional("linkedin"))
+    scope100.set("location", scope100.readStringOptional("location"))
+    scope100.set("name", scope100.readString("name"))
+    scope100.set("online", scope100.readBoolean("online"))
+    scope100.set("phone", scope100.readStringOptional("phone"))
+    scope100.set("photo", scope100.readStringOptional("photo"))
+    if (scope100.hasKey("primaryOrganization")) {
+        val scope101 = scope100.child("primaryOrganization", "primaryOrganization")
+        scope101.set("__typename", scope101.readString("__typename"))
+        normalizeOrganizationShort(scope101)
+    } else {
+        scope100.setNull("primaryOrganization")
+    }
+    scope100.set("shortname", scope100.readStringOptional("shortname"))
+    scope100.set("twitter", scope100.readStringOptional("twitter"))
+    scope100.set("website", scope100.readStringOptional("website"))
+}
+fun normalizeOrganizationFull(scope: Scope) {
+    val scope102 = scope
+    scope102.assertType("Organization")
+    scope102.set("__typename", scope102.readString("__typename"))
+    scope102.set("about", scope102.readStringOptional("about"))
+    scope102.set("alphaFeatured", scope102.readBoolean("featured"))
+    scope102.set("alphaIsCommunity", scope102.readBoolean("isCommunity"))
+    if (scope102.assertList("requests")) {
+        val scope103 = scope102.childList("requests", "alphaOrganizationMemberRequests")
+        for (i in 0 until scope103.size) {
+            scope103.assertObject(i)
+            val scope104 = scope103.child(i)
+            scope104.set("__typename", scope104.readString("__typename"))
+            scope104.set("role", scope104.readString("role"))
+            scope104.assertObject("user")
+            val scope105 = scope104.child("user", "user")
+            scope105.set("__typename", scope105.readString("__typename"))
+            normalizeUserFull(scope105)
+        }
+        scope102.set("alphaOrganizationMemberRequests", scope103.completed())
+    }
+    if (scope102.assertList("members")) {
+        val scope106 = scope102.childList("members", "alphaOrganizationMembers")
+        for (i in 0 until scope106.size) {
+            scope106.assertObject(i)
+            val scope107 = scope106.child(i)
+            scope107.set("__typename", scope107.readString("__typename"))
+            scope107.set("role", scope107.readString("role"))
+            scope107.assertObject("user")
+            val scope108 = scope107.child("user", "user")
+            scope108.set("__typename", scope108.readString("__typename"))
+            normalizeUserFull(scope108)
+        }
+        scope102.set("alphaOrganizationMembers", scope106.completed())
+    }
+    scope102.set("betaIsAdmin", scope102.readBoolean("isAdmin"))
+    scope102.set("betaIsOwner", scope102.readBoolean("isOwner"))
+    if (scope102.assertList("rooms")) {
+        val scope109 = scope102.childList("rooms", "betaPublicRooms")
+        for (i in 0 until scope109.size) {
+            scope109.assertObject(i)
+            val scope110 = scope109.child(i)
+            scope110.set("__typename", scope110.readString("__typename"))
+            normalizeRoomShort(scope110)
+        }
+        scope102.set("betaPublicRooms", scope109.completed())
+    }
+    scope102.set("facebook", scope102.readStringOptional("facebook"))
+    scope102.set("id", scope102.readString("id"))
+    scope102.set("isMine", scope102.readBoolean("isMine"))
+    scope102.set("linkedin", scope102.readStringOptional("linkedin"))
+    scope102.set("membersCount", scope102.readInt("membersCount"))
+    scope102.set("name", scope102.readString("name"))
+    scope102.set("photo", scope102.readStringOptional("photo"))
+    scope102.set("shortname", scope102.readStringOptional("shortname"))
+    scope102.set("superAccountId", scope102.readString("superAccountId"))
+    scope102.set("twitter", scope102.readStringOptional("twitter"))
+    scope102.set("website", scope102.readStringOptional("website"))
+}
+fun normalizeOrganizationMedium(scope: Scope) {
+    val scope111 = scope
+    scope111.assertType("Organization")
+    scope111.set("__typename", scope111.readString("__typename"))
+    scope111.set("alphaIsCommunity", scope111.readBoolean("isCommunity"))
+    if (scope111.assertList("adminMembers")) {
+        val scope112 = scope111.childList("adminMembers", "alphaOrganizationAdminMembers")
+        for (i in 0 until scope112.size) {
+            scope112.assertObject(i)
+            val scope113 = scope112.child(i)
+            scope113.set("__typename", scope113.readString("__typename"))
+            scope113.set("role", scope113.readString("role"))
+            scope113.assertObject("user")
+            val scope114 = scope113.child("user", "user")
+            scope114.set("__typename", scope114.readString("__typename"))
+            normalizeUserFull(scope114)
+        }
+        scope111.set("alphaOrganizationAdminMembers", scope112.completed())
+    }
+    scope111.set("betaIsAdmin", scope111.readBoolean("isAdmin"))
+    scope111.set("betaIsOwner", scope111.readBoolean("isOwner"))
+    scope111.set("id", scope111.readString("id"))
+    scope111.set("isMine", scope111.readBoolean("isMine"))
+    scope111.set("membersCount", scope111.readInt("membersCount"))
+    scope111.set("name", scope111.readString("name"))
+    scope111.set("photo", scope111.readStringOptional("photo"))
+}
+fun normalizeOrganizationProfileFull(scope: Scope) {
+    val scope115 = scope
+    scope115.assertType("OrganizationProfile")
+    scope115.set("__typename", scope115.readString("__typename"))
+    scope115.set("about", scope115.readStringOptional("about"))
+    scope115.set("alphaFeatured", scope115.readBoolean("featured"))
+    scope115.set("facebook", scope115.readStringOptional("facebook"))
+    scope115.set("id", scope115.readString("id"))
+    scope115.set("linkedin", scope115.readStringOptional("linkedin"))
+    scope115.set("name", scope115.readString("name"))
+    if (scope115.hasKey("photoRef")) {
+        val scope116 = scope115.child("photoRef", "photoRef")
+        scope116.set("__typename", scope116.readString("__typename"))
+        if (scope116.hasKey("crop")) {
+            val scope117 = scope116.child("crop", "crop")
+            scope117.set("__typename", scope117.readString("__typename"))
+            scope117.set("h", scope117.readInt("h"))
+            scope117.set("w", scope117.readInt("w"))
+            scope117.set("x", scope117.readInt("x"))
+            scope117.set("y", scope117.readInt("y"))
+        } else {
+            scope116.setNull("crop")
+        }
+        scope116.set("uuid", scope116.readString("uuid"))
+    } else {
+        scope115.setNull("photoRef")
+    }
+    scope115.set("shortname", scope115.readStringOptional("shortname"))
+    scope115.set("twitter", scope115.readStringOptional("twitter"))
+    scope115.set("website", scope115.readStringOptional("website"))
+    scope115.set("websiteTitle", scope115.readStringOptional("websiteTitle"))
+}
+fun normalizeOrganizationSearch(scope: Scope) {
+    val scope118 = scope
+    scope118.assertType("Organization")
+    scope118.set("__typename", scope118.readString("__typename"))
+    scope118.set("about", scope118.readStringOptional("about"))
+    scope118.set("alphaFeatured", scope118.readBoolean("featured"))
+    if (scope118.assertList("members")) {
+        val scope119 = scope118.childList("members", "alphaOrganizationMembers")
+        for (i in 0 until scope119.size) {
+            scope119.assertObject(i)
+            val scope120 = scope119.child(i)
+            scope120.set("__typename", scope120.readString("__typename"))
+            scope120.assertObject("user")
+            val scope121 = scope120.child("user", "user")
+            scope121.set("__typename", scope121.readString("__typename"))
+            scope121.set("id", scope121.readString("id"))
+            scope121.set("name", scope121.readString("name"))
+            scope121.set("photo", scope121.readStringOptional("photo"))
+        }
+        scope118.set("alphaOrganizationMembers", scope119.completed())
+    }
+    scope118.set("id", scope118.readString("id"))
+    scope118.set("isMine", scope118.readBoolean("isMine"))
+    scope118.set("membersCount", scope118.readInt("membersCount"))
+    scope118.set("name", scope118.readString("name"))
+    scope118.set("photo", scope118.readStringOptional("photo"))
+    scope118.set("status", scope118.readString("status"))
+    scope118.set("superAccountId", scope118.readString("superAccountId"))
+}
+fun normalizeOrganizationWithoutMembersFragment(scope: Scope) {
+    val scope122 = scope
+    scope122.assertType("Organization")
+    scope122.set("__typename", scope122.readString("__typename"))
+    scope122.set("about", scope122.readStringOptional("about"))
+    scope122.set("alphaFeatured", scope122.readBoolean("featured"))
+    scope122.set("alphaIsCommunity", scope122.readBoolean("isCommunity"))
+    if (scope122.assertList("requests")) {
+        val scope123 = scope122.childList("requests", "alphaOrganizationMemberRequests")
+        for (i in 0 until scope123.size) {
+            scope123.assertObject(i)
+            val scope124 = scope123.child(i)
+            scope124.set("__typename", scope124.readString("__typename"))
+            scope124.set("role", scope124.readString("role"))
+            scope124.assertObject("user")
+            val scope125 = scope124.child("user", "user")
+            scope125.set("__typename", scope125.readString("__typename"))
+            normalizeUserFull(scope125)
+        }
+        scope122.set("alphaOrganizationMemberRequests", scope123.completed())
+    }
+    scope122.set("betaIsAdmin", scope122.readBoolean("isAdmin"))
+    scope122.set("betaIsOwner", scope122.readBoolean("isOwner"))
+    if (scope122.assertList("rooms")) {
+        val scope126 = scope122.childList("rooms", "betaPublicRooms")
+        for (i in 0 until scope126.size) {
+            scope126.assertObject(i)
+            val scope127 = scope126.child(i)
+            scope127.set("__typename", scope127.readString("__typename"))
+            normalizeRoomShort(scope127)
+        }
+        scope122.set("betaPublicRooms", scope126.completed())
+    }
+    scope122.set("facebook", scope122.readStringOptional("facebook"))
+    scope122.set("id", scope122.readString("id"))
+    scope122.set("isMine", scope122.readBoolean("isMine"))
+    scope122.set("linkedin", scope122.readStringOptional("linkedin"))
+    scope122.set("membersCount", scope122.readInt("membersCount"))
+    scope122.set("name", scope122.readString("name"))
+    scope122.set("photo", scope122.readStringOptional("photo"))
+    scope122.set("shortname", scope122.readStringOptional("shortname"))
+    scope122.set("superAccountId", scope122.readString("superAccountId"))
+    scope122.set("twitter", scope122.readStringOptional("twitter"))
+    scope122.set("website", scope122.readStringOptional("website"))
+}
+fun normalizeRoomFull(scope: Scope) {
+    val scope128 = scope
+    scope128.assertType("Room")
+    scope128.set("__typename", scope128.readString("__typename"))
+    if (scope128.isType("PrivateRoom")) {
+        scope128.set("id", scope128.readString("id"))
+        scope128.assertObject("settings")
+        val scope129 = scope128.child("settings", "settings")
+        scope129.set("__typename", scope129.readString("__typename"))
+        scope129.set("id", scope129.readString("id"))
+        scope129.set("mute", scope129.readBooleanOptional("mute"))
+        scope128.assertObject("user")
+        val scope130 = scope128.child("user", "user")
+        scope130.set("__typename", scope130.readString("__typename"))
+        normalizeUserShort(scope130)
+    }
+    if (scope128.isType("SharedRoom")) {
+        scope128.set("canEdit", scope128.readBoolean("canEdit"))
+        scope128.set("canSendMessage", scope128.readBoolean("canSendMessage"))
+        scope128.set("description", scope128.readStringOptional("description"))
+        scope128.set("id", scope128.readString("id"))
+        scope128.set("isChannel", scope128.readBoolean("isChannel"))
+        scope128.set("kind", scope128.readString("kind"))
+        if (scope128.assertList("members")) {
+            val scope131 = scope128.childList("members", "members")
+            for (i in 0 until scope131.size) {
+                scope131.assertObject(i)
+                val scope132 = scope131.child(i)
+                scope132.set("__typename", scope132.readString("__typename"))
+                scope132.set("canKick", scope132.readBoolean("canKick"))
+                scope132.set("membership", scope132.readString("membership"))
+                scope132.set("role", scope132.readString("role"))
+                scope132.assertObject("user")
+                val scope133 = scope132.child("user", "user")
+                scope133.set("__typename", scope133.readString("__typename"))
+                normalizeUserShort(scope133)
+            }
+            scope128.set("members", scope131.completed())
+        }
+        scope128.set("membersCount", scope128.readIntOptional("membersCount"))
+        scope128.set("membership", scope128.readString("membership"))
+        if (scope128.hasKey("organization")) {
+            val scope134 = scope128.child("organization", "organization")
+            scope134.set("__typename", scope134.readString("__typename"))
+            normalizeOrganizationMedium(scope134)
+        } else {
+            scope128.setNull("organization")
+        }
+        scope128.set("photo", scope128.readString("photo"))
+        if (scope128.hasKey("pinnedMessage")) {
+            val scope135 = scope128.child("pinnedMessage", "pinnedMessage")
+            scope135.set("__typename", scope135.readString("__typename"))
+            normalizeFullMessage(scope135)
+        } else {
+            scope128.setNull("pinnedMessage")
+        }
+        if (scope128.hasKey("requests")) {
+            val scope136 = scope128.childList("requests", "requests")
+            for (i in 0 until scope136.size) {
+                scope136.assertObject(i)
+                val scope137 = scope136.child(i)
+                scope137.set("__typename", scope137.readString("__typename"))
+                scope137.assertObject("user")
+                val scope138 = scope137.child("user", "user")
+                scope138.set("__typename", scope138.readString("__typename"))
+                normalizeUserShort(scope138)
+            }
+        } else {
+            scope128.setNull("requests")
+        }
+        scope128.set("role", scope128.readString("role"))
+        scope128.assertObject("settings")
+        val scope139 = scope128.child("settings", "settings")
+        scope139.set("__typename", scope139.readString("__typename"))
+        scope139.set("id", scope139.readString("id"))
+        scope139.set("mute", scope139.readBooleanOptional("mute"))
+        scope128.set("socialImage", scope128.readStringOptional("socialImage"))
+        scope128.set("title", scope128.readString("title"))
+        if (scope128.hasKey("welcomeMessage")) {
+            val scope140 = scope128.child("welcomeMessage", "welcomeMessage")
+            scope140.set("__typename", scope140.readString("__typename"))
+            scope140.set("isOn", scope140.readBoolean("isOn"))
+            scope140.set("message", scope140.readStringOptional("message"))
+            if (scope140.hasKey("sender")) {
+                val scope141 = scope140.child("sender", "sender")
+                scope141.set("__typename", scope141.readString("__typename"))
+                scope141.set("id", scope141.readString("id"))
+                scope141.set("name", scope141.readString("name"))
+            } else {
+                scope140.setNull("sender")
+            }
+        } else {
+            scope128.setNull("welcomeMessage")
+        }
+    }
+}
+fun normalizeRoomFullWithoutMembers(scope: Scope) {
+    val scope142 = scope
+    scope142.assertType("Room")
+    scope142.set("__typename", scope142.readString("__typename"))
+    if (scope142.isType("PrivateRoom")) {
+        scope142.set("id", scope142.readString("id"))
+        scope142.assertObject("settings")
+        val scope143 = scope142.child("settings", "settings")
+        scope143.set("__typename", scope143.readString("__typename"))
+        scope143.set("id", scope143.readString("id"))
+        scope143.set("mute", scope143.readBooleanOptional("mute"))
+        scope142.assertObject("user")
+        val scope144 = scope142.child("user", "user")
+        scope144.set("__typename", scope144.readString("__typename"))
+        normalizeUserShort(scope144)
+    }
+    if (scope142.isType("SharedRoom")) {
+        scope142.set("canEdit", scope142.readBoolean("canEdit"))
+        scope142.set("canSendMessage", scope142.readBoolean("canSendMessage"))
+        scope142.set("description", scope142.readStringOptional("description"))
+        scope142.set("id", scope142.readString("id"))
+        scope142.set("isChannel", scope142.readBoolean("isChannel"))
+        scope142.set("kind", scope142.readString("kind"))
+        scope142.set("membersCount", scope142.readIntOptional("membersCount"))
+        scope142.set("membership", scope142.readString("membership"))
+        if (scope142.hasKey("organization")) {
+            val scope145 = scope142.child("organization", "organization")
+            scope145.set("__typename", scope145.readString("__typename"))
+            normalizeOrganizationMedium(scope145)
+        } else {
+            scope142.setNull("organization")
+        }
+        scope142.set("photo", scope142.readString("photo"))
+        if (scope142.hasKey("pinnedMessage")) {
+            val scope146 = scope142.child("pinnedMessage", "pinnedMessage")
+            scope146.set("__typename", scope146.readString("__typename"))
+            normalizeFullMessage(scope146)
+        } else {
+            scope142.setNull("pinnedMessage")
+        }
+        scope142.set("role", scope142.readString("role"))
+        scope142.assertObject("settings")
+        val scope147 = scope142.child("settings", "settings")
+        scope147.set("__typename", scope147.readString("__typename"))
+        scope147.set("id", scope147.readString("id"))
+        scope147.set("mute", scope147.readBooleanOptional("mute"))
+        scope142.set("socialImage", scope142.readStringOptional("socialImage"))
+        scope142.set("title", scope142.readString("title"))
+        if (scope142.hasKey("welcomeMessage")) {
+            val scope148 = scope142.child("welcomeMessage", "welcomeMessage")
+            scope148.set("__typename", scope148.readString("__typename"))
+            scope148.set("isOn", scope148.readBoolean("isOn"))
+            scope148.set("message", scope148.readStringOptional("message"))
+            if (scope148.hasKey("sender")) {
+                val scope149 = scope148.child("sender", "sender")
+                scope149.set("__typename", scope149.readString("__typename"))
+                scope149.set("id", scope149.readString("id"))
+                scope149.set("name", scope149.readString("name"))
+            } else {
+                scope148.setNull("sender")
+            }
+        } else {
+            scope142.setNull("welcomeMessage")
+        }
+    }
+}
+fun normalizeSessionStateFull(scope: Scope) {
+    val scope150 = scope
+    scope150.assertType("SessionState")
+    scope150.set("__typename", scope150.readString("__typename"))
+    scope150.set("isAccountActivated", scope150.readBoolean("isAccountActivated"))
+    scope150.set("isAccountExists", scope150.readBoolean("isAccountExists"))
+    scope150.set("isAccountPicked", scope150.readBoolean("isAccountPicked"))
+    scope150.set("isBlocked", scope150.readBoolean("isBlocked"))
+    scope150.set("isCompleted", scope150.readBoolean("isCompleted"))
+    scope150.set("isLoggedIn", scope150.readBoolean("isLoggedIn"))
+    scope150.set("isProfileCreated", scope150.readBoolean("isProfileCreated"))
+}
+fun normalizeSettingsFull(scope: Scope) {
+    val scope151 = scope
+    scope151.assertType("Settings")
+    scope151.set("__typename", scope151.readString("__typename"))
+    scope151.set("desktopNotifications", scope151.readString("desktopNotifications"))
+    scope151.set("emailFrequency", scope151.readString("emailFrequency"))
+    scope151.set("id", scope151.readString("id"))
+    scope151.set("mobileAlert", scope151.readBoolean("mobileAlert"))
+    scope151.set("mobileIncludeText", scope151.readBoolean("mobileIncludeText"))
+    scope151.set("mobileNotifications", scope151.readString("mobileNotifications"))
+    scope151.set("primaryEmail", scope151.readString("primaryEmail"))
+}
+fun normalizeAccount(scope: Scope) {
+    val scope152 = scope
+    if (scope152.hasKey("me")) {
+        val scope153 = scope152.child("me", "me")
+        scope153.set("__typename", scope153.readString("__typename"))
+        normalizeUserShort(scope153)
+    } else {
+        scope152.setNull("me")
+    }
+    scope152.assertObject("myPermissions")
+    val scope154 = scope152.child("myPermissions", "myPermissions")
+    scope154.set("__typename", scope154.readString("__typename"))
+    if (scope154.assertList("roles")) {
+        val scope155 = scope154.childList("roles", "roles")
+        for (i in 0 until scope155.size) {
+            scope155.next(scope155.readString(i))
+        }
+        scope154.set("roles", scope155.completed())
+    }
+    scope152.assertObject("sessionState")
+    val scope156 = scope152.child("sessionState", "sessionState")
+    scope156.set("__typename", scope156.readString("__typename"))
+    normalizeSessionStateFull(scope156)
+}
+fun normalizeAccountAppInvite(scope: Scope) {
+    val scope157 = scope
+    scope157.set("appInvite", scope157.readString("invite"))
+}
+fun normalizeAccountAppInviteInfo(scope: Scope) {
+    val scope158 = scope
+    if (scope158.hasKey("invite")) {
+        val scope159 = scope158.child("invite", "alphaInviteInfo" + scope158.formatArguments("key" to scope158.argumentKey("inviteKey")))
+        scope159.set("__typename", scope159.readString("__typename"))
+        if (scope159.hasKey("creator")) {
+            val scope160 = scope159.child("creator", "creator")
+            scope160.set("__typename", scope160.readString("__typename"))
+            normalizeUserShort(scope160)
+        } else {
+            scope159.setNull("creator")
+        }
+    } else {
+        scope158.setNull("alphaInviteInfo" + scope158.formatArguments("key" to scope158.argumentKey("inviteKey")))
+    }
+    if (scope158.hasKey("appInvite")) {
+        val scope161 = scope158.child("appInvite", "appInviteInfo" + scope158.formatArguments("key" to scope158.argumentKey("inviteKey")))
+        scope161.set("__typename", scope161.readString("__typename"))
+        scope161.assertObject("inviter")
+        val scope162 = scope161.child("inviter", "inviter")
+        scope162.set("__typename", scope162.readString("__typename"))
+        normalizeUserShort(scope162)
+    } else {
+        scope158.setNull("appInviteInfo" + scope158.formatArguments("key" to scope158.argumentKey("inviteKey")))
+    }
+}
+fun normalizeAccountInviteInfo(scope: Scope) {
+    val scope163 = scope
+    if (scope163.hasKey("invite")) {
+        val scope164 = scope163.child("invite", "alphaInviteInfo" + scope163.formatArguments("key" to scope163.argumentKey("inviteKey")))
+        scope164.set("__typename", scope164.readString("__typename"))
+        if (scope164.hasKey("creator")) {
+            val scope165 = scope164.child("creator", "creator")
+            scope165.set("__typename", scope165.readString("__typename"))
+            normalizeUserShort(scope165)
+        } else {
+            scope164.setNull("creator")
+        }
+        scope164.set("forEmail", scope164.readStringOptional("forEmail"))
+        scope164.set("forName", scope164.readStringOptional("forName"))
+        scope164.set("id", scope164.readString("id"))
+        scope164.set("joined", scope164.readBoolean("joined"))
+        scope164.set("key", scope164.readString("key"))
+        scope164.set("membersCount", scope164.readIntOptional("membersCount"))
+        scope164.set("orgId", scope164.readString("orgId"))
+        if (scope164.hasKey("organization")) {
+            val scope166 = scope164.child("organization", "organization")
+            scope166.set("__typename", scope166.readString("__typename"))
+            scope166.set("about", scope166.readStringOptional("about"))
+            scope166.set("alphaIsCommunity", scope166.readBoolean("isCommunity"))
+        } else {
+            scope164.setNull("organization")
+        }
+        scope164.set("photo", scope164.readStringOptional("photo"))
+        scope164.set("title", scope164.readString("title"))
+    } else {
+        scope163.setNull("alphaInviteInfo" + scope163.formatArguments("key" to scope163.argumentKey("inviteKey")))
+    }
+}
+fun normalizeAccountInvites(scope: Scope) {
+    val scope167 = scope
+    if (scope167.hasKey("invites")) {
+        val scope168 = scope167.childList("invites", "alphaInvites")
+        for (i in 0 until scope168.size) {
+            scope168.assertObject(i)
+            val scope169 = scope168.child(i)
+            scope169.set("__typename", scope169.readString("__typename"))
+            scope169.set("id", scope169.readString("id"))
+            scope169.set("key", scope169.readString("key"))
+        }
+    } else {
+        scope167.setNull("alphaInvites")
+    }
+}
+fun normalizeAccountInvitesHistory(scope: Scope) {
+    val scope170 = scope
+    if (scope170.hasKey("invites")) {
+        val scope171 = scope170.childList("invites", "alphaInvitesHistory")
+        for (i in 0 until scope171.size) {
+            scope171.assertObject(i)
+            val scope172 = scope171.child(i)
+            scope172.set("__typename", scope172.readString("__typename"))
+            if (scope172.hasKey("acceptedBy")) {
+                val scope173 = scope172.child("acceptedBy", "acceptedBy")
+                scope173.set("__typename", scope173.readString("__typename"))
+                scope173.set("id", scope173.readString("id"))
+                scope173.set("name", scope173.readString("name"))
+                scope173.set("picture", scope173.readStringOptional("picture"))
+            } else {
+                scope172.setNull("acceptedBy")
+            }
+            scope172.set("forEmail", scope172.readString("forEmail"))
+            scope172.set("isGlobal", scope172.readBoolean("isGlobal"))
+        }
+    } else {
+        scope170.setNull("alphaInvitesHistory")
+    }
+}
+fun normalizeAccountSettings(scope: Scope) {
+    val scope174 = scope
+    if (scope174.hasKey("me")) {
+        val scope175 = scope174.child("me", "me")
+        scope175.set("__typename", scope175.readString("__typename"))
+        normalizeUserShort(scope175)
+    } else {
+        scope174.setNull("me")
+    }
+    if (scope174.assertList("organizations")) {
+        val scope176 = scope174.childList("organizations", "myOrganizations")
+        for (i in 0 until scope176.size) {
+            scope176.assertObject(i)
+            val scope177 = scope176.child(i)
+            scope177.set("__typename", scope177.readString("__typename"))
+            normalizeOrganizationShort(scope177)
+        }
+        scope174.set("myOrganizations", scope176.completed())
+    }
+}
+fun normalizeAvailableRooms(scope: Scope) {
+    val scope178 = scope
+    if (scope178.assertList("rooms")) {
+        val scope179 = scope178.childList("rooms", "betaAvailableRooms")
+        for (i in 0 until scope179.size) {
+            scope179.assertObject(i)
+            val scope180 = scope179.child(i)
+            scope180.set("__typename", scope180.readString("__typename"))
+            if (scope180.isType("SharedRoom")) {
+                scope180.set("id", scope180.readString("id"))
+                scope180.set("kind", scope180.readString("kind"))
+                scope180.set("membersCount", scope180.readIntOptional("membersCount"))
+                scope180.set("membership", scope180.readString("membership"))
+                if (scope180.hasKey("organization")) {
+                    val scope181 = scope180.child("organization", "organization")
+                    scope181.set("__typename", scope181.readString("__typename"))
+                    scope181.set("id", scope181.readString("id"))
+                    scope181.set("name", scope181.readString("name"))
+                    scope181.set("photo", scope181.readStringOptional("photo"))
+                } else {
+                    scope180.setNull("organization")
+                }
+                scope180.set("photo", scope180.readString("photo"))
+                scope180.set("title", scope180.readString("title"))
+            }
+        }
+        scope178.set("betaAvailableRooms", scope179.completed())
+    }
+}
+fun normalizeChatHistory(scope: Scope) {
+    val scope182 = scope
+    scope182.assertObject("state")
+    val scope183 = scope182.child("state", "conversationState" + scope182.formatArguments("id" to scope182.argumentKey("chatId")))
+    scope183.set("__typename", scope183.readString("__typename"))
+    scope183.set("state", scope183.readStringOptional("state"))
+    if (scope182.assertList("messages")) {
+        val scope184 = scope182.childList("messages", "messages" + scope182.formatArguments("before" to scope182.argumentKey("before"),"chatId" to scope182.argumentKey("chatId"),"first" to scope182.argumentKey("first")))
+        for (i in 0 until scope184.size) {
+            scope184.assertObject(i)
+            val scope185 = scope184.child(i)
+            scope185.set("__typename", scope185.readString("__typename"))
+            normalizeFullMessage(scope185)
+        }
+        scope182.set("messages" + scope182.formatArguments("before" to scope182.argumentKey("before"),"chatId" to scope182.argumentKey("chatId"),"first" to scope182.argumentKey("first")), scope184.completed())
+    }
+}
+fun normalizeChatInit(scope: Scope) {
+    val scope186 = scope
+    scope186.assertObject("state")
+    val scope187 = scope186.child("state", "conversationState" + scope186.formatArguments("id" to scope186.argumentKey("chatId")))
+    scope187.set("__typename", scope187.readString("__typename"))
+    scope187.set("state", scope187.readStringOptional("state"))
+    if (scope186.assertList("messages")) {
+        val scope188 = scope186.childList("messages", "messages" + scope186.formatArguments("before" to scope186.argumentKey("before"),"chatId" to scope186.argumentKey("chatId"),"first" to scope186.argumentKey("first")))
+        for (i in 0 until scope188.size) {
+            scope188.assertObject(i)
+            val scope189 = scope188.child(i)
+            scope189.set("__typename", scope189.readString("__typename"))
+            normalizeFullMessage(scope189)
+        }
+        scope186.set("messages" + scope186.formatArguments("before" to scope186.argumentKey("before"),"chatId" to scope186.argumentKey("chatId"),"first" to scope186.argumentKey("first")), scope188.completed())
+    }
+    if (scope186.hasKey("room")) {
+        val scope190 = scope186.child("room", "room" + scope186.formatArguments("id" to scope186.argumentKey("chatId")))
+        scope190.set("__typename", scope190.readString("__typename"))
+        normalizeRoomShort(scope190)
+    } else {
+        scope186.setNull("room" + scope186.formatArguments("id" to scope186.argumentKey("chatId")))
+    }
+}
+fun normalizeChatSearchGroup(scope: Scope) {
+    val scope191 = scope
+    if (scope191.hasKey("group")) {
+        val scope192 = scope191.child("group", "alphaChatSearch" + scope191.formatArguments("members" to scope191.argumentKey("members")))
+        scope192.set("__typename", scope192.readString("__typename"))
+        scope192.set("flexibleId", scope192.readString("flexibleId"))
+        scope192.set("id", scope192.readString("id"))
+    } else {
+        scope191.setNull("alphaChatSearch" + scope191.formatArguments("members" to scope191.argumentKey("members")))
+    }
+}
+fun normalizeConference(scope: Scope) {
+    val scope193 = scope
+    scope193.assertObject("conference")
+    val scope194 = scope193.child("conference", "conference" + scope193.formatArguments("id" to scope193.argumentKey("id")))
+    scope194.set("__typename", scope194.readString("__typename"))
+    normalizeConferenceFull(scope194)
+}
+fun normalizeConferenceMedia(scope: Scope) {
+    val scope195 = scope
+    scope195.assertObject("conferenceMedia")
+    val scope196 = scope195.child("conferenceMedia", "conferenceMedia" + scope195.formatArguments("id" to scope195.argumentKey("id"),"peerId" to scope195.argumentKey("peerId")))
+    scope196.set("__typename", scope196.readString("__typename"))
+    if (scope196.assertList("iceServers")) {
+        val scope197 = scope196.childList("iceServers", "iceServers")
+        for (i in 0 until scope197.size) {
+            scope197.assertObject(i)
+            val scope198 = scope197.child(i)
+            scope198.set("__typename", scope198.readString("__typename"))
+            scope198.set("credential", scope198.readStringOptional("credential"))
+            if (scope198.assertList("urls")) {
+                val scope199 = scope198.childList("urls", "urls")
+                for (i in 0 until scope199.size) {
+                    scope199.next(scope199.readString(i))
+                }
+                scope198.set("urls", scope199.completed())
+            }
+            scope198.set("username", scope198.readStringOptional("username"))
+        }
+        scope196.set("iceServers", scope197.completed())
+    }
+    scope196.set("id", scope196.readString("id"))
+    if (scope196.assertList("streams")) {
+        val scope200 = scope196.childList("streams", "streams")
+        for (i in 0 until scope200.size) {
+            scope200.assertObject(i)
+            val scope201 = scope200.child(i)
+            scope201.set("__typename", scope201.readString("__typename"))
+            if (scope201.assertList("ice")) {
+                val scope202 = scope201.childList("ice", "ice")
+                for (i in 0 until scope202.size) {
+                    scope202.next(scope202.readString(i))
+                }
+                scope201.set("ice", scope202.completed())
+            }
+            scope201.set("id", scope201.readString("id"))
+            scope201.set("sdp", scope201.readStringOptional("sdp"))
+            scope201.set("state", scope201.readString("state"))
+        }
+        scope196.set("streams", scope200.completed())
+    }
+}
+fun normalizeDialogs(scope: Scope) {
+    val scope203 = scope
+    scope203.assertObject("counter")
+    val scope204 = scope203.child("counter", "alphaNotificationCounter")
+    scope204.set("__typename", scope204.readString("__typename"))
+    scope204.set("id", scope204.readString("id"))
+    scope204.set("unreadCount", scope204.readInt("unreadCount"))
+    scope203.assertObject("dialogs")
+    val scope205 = scope203.child("dialogs", "dialogs" + scope203.formatArguments("after" to scope203.argumentKey("after"),"first" to "20"))
+    scope205.set("__typename", scope205.readString("__typename"))
+    scope205.set("cursor", scope205.readStringOptional("cursor"))
+    if (scope205.assertList("items")) {
+        val scope206 = scope205.childList("items", "items")
+        for (i in 0 until scope206.size) {
+            scope206.assertObject(i)
+            val scope207 = scope206.child(i)
+            scope207.set("__typename", scope207.readString("__typename"))
+            if (scope207.hasKey("topMessage")) {
+                val scope208 = scope207.child("topMessage", "alphaTopMessage")
+                scope208.set("__typename", scope208.readString("__typename"))
+                normalizeTinyMessage(scope208)
+            } else {
+                scope207.setNull("alphaTopMessage")
+            }
+            scope207.set("cid", scope207.readString("cid"))
+            scope207.set("fid", scope207.readString("fid"))
+            scope207.set("haveMention", scope207.readBoolean("haveMention"))
+            scope207.set("isChannel", scope207.readBoolean("isChannel"))
+            scope207.set("isMuted", scope207.readBoolean("isMuted"))
+            scope207.set("kind", scope207.readString("kind"))
+            scope207.set("photo", scope207.readString("photo"))
+            scope207.set("title", scope207.readString("title"))
+            scope207.set("unreadCount", scope207.readInt("unreadCount"))
+        }
+        scope205.set("items", scope206.completed())
+    }
+    scope203.assertObject("state")
+    val scope209 = scope203.child("state", "dialogsState")
+    scope209.set("__typename", scope209.readString("__typename"))
+    scope209.set("state", scope209.readStringOptional("state"))
+}
+fun normalizeExploreCommunity(scope: Scope) {
+    val scope210 = scope
+    scope210.assertObject("items")
+    val scope211 = scope210.child("items", "alphaComunityPrefixSearch" + scope210.formatArguments("first" to "25","page" to scope210.argumentKey("page"),"query" to scope210.argumentKey("query"),"sort" to scope210.argumentKey("sort")))
+    scope211.set("__typename", scope211.readString("__typename"))
+    if (scope211.assertList("edges")) {
+        val scope212 = scope211.childList("edges", "edges")
+        for (i in 0 until scope212.size) {
+            scope212.assertObject(i)
+            val scope213 = scope212.child(i)
+            scope213.set("__typename", scope213.readString("__typename"))
+            scope213.set("cursor", scope213.readString("cursor"))
+            scope213.assertObject("node")
+            val scope214 = scope213.child("node", "node")
+            scope214.set("__typename", scope214.readString("__typename"))
+            normalizeCommunitySearch(scope214)
+        }
+        scope211.set("edges", scope212.completed())
+    }
+    scope211.assertObject("pageInfo")
+    val scope215 = scope211.child("pageInfo", "pageInfo")
+    scope215.set("__typename", scope215.readString("__typename"))
+    scope215.set("currentPage", scope215.readInt("currentPage"))
+    scope215.set("hasNextPage", scope215.readBoolean("hasNextPage"))
+    scope215.set("hasPreviousPage", scope215.readBoolean("hasPreviousPage"))
+    scope215.set("itemsCount", scope215.readInt("itemsCount"))
+    scope215.set("openEnded", scope215.readBoolean("openEnded"))
+    scope215.set("pagesCount", scope215.readInt("pagesCount"))
+}
+fun normalizeExploreOrganizations(scope: Scope) {
+    val scope216 = scope
+    scope216.assertObject("items")
+    val scope217 = scope216.child("items", "alphaOrganizations" + scope216.formatArguments("after" to scope216.argumentKey("after"),"all" to scope216.argumentKey("all"),"first" to "25","page" to scope216.argumentKey("page"),"prefix" to scope216.argumentKey("prefix"),"query" to scope216.argumentKey("query"),"sort" to scope216.argumentKey("sort")))
+    scope217.set("__typename", scope217.readString("__typename"))
+    if (scope217.assertList("edges")) {
+        val scope218 = scope217.childList("edges", "edges")
+        for (i in 0 until scope218.size) {
+            scope218.assertObject(i)
+            val scope219 = scope218.child(i)
+            scope219.set("__typename", scope219.readString("__typename"))
+            scope219.set("cursor", scope219.readString("cursor"))
+            scope219.assertObject("node")
+            val scope220 = scope219.child("node", "node")
+            scope220.set("__typename", scope220.readString("__typename"))
+            normalizeOrganizationSearch(scope220)
+        }
+        scope217.set("edges", scope218.completed())
+    }
+    scope217.assertObject("pageInfo")
+    val scope221 = scope217.child("pageInfo", "pageInfo")
+    scope221.set("__typename", scope221.readString("__typename"))
+    scope221.set("currentPage", scope221.readInt("currentPage"))
+    scope221.set("hasNextPage", scope221.readBoolean("hasNextPage"))
+    scope221.set("hasPreviousPage", scope221.readBoolean("hasPreviousPage"))
+    scope221.set("itemsCount", scope221.readInt("itemsCount"))
+    scope221.set("openEnded", scope221.readBoolean("openEnded"))
+    scope221.set("pagesCount", scope221.readInt("pagesCount"))
+}
+fun normalizeExplorePeople(scope: Scope) {
+    val scope222 = scope
+    scope222.assertObject("items")
+    val scope223 = scope222.child("items", "userSearch" + scope222.formatArguments("after" to scope222.argumentKey("after"),"first" to "25","page" to scope222.argumentKey("page"),"query" to scope222.argumentKey("query"),"sort" to scope222.argumentKey("sort")))
+    scope223.set("__typename", scope223.readString("__typename"))
+    if (scope223.assertList("edges")) {
+        val scope224 = scope223.childList("edges", "edges")
+        for (i in 0 until scope224.size) {
+            scope224.assertObject(i)
+            val scope225 = scope224.child(i)
+            scope225.set("__typename", scope225.readString("__typename"))
+            scope225.set("cursor", scope225.readString("cursor"))
+            scope225.assertObject("node")
+            val scope226 = scope225.child("node", "node")
+            scope226.set("__typename", scope226.readString("__typename"))
+            scope226.set("isYou", scope226.readBoolean("isYou"))
+            normalizeUserShort(scope226)
+        }
+        scope223.set("edges", scope224.completed())
+    }
+    scope223.assertObject("pageInfo")
+    val scope227 = scope223.child("pageInfo", "pageInfo")
+    scope227.set("__typename", scope227.readString("__typename"))
+    scope227.set("currentPage", scope227.readInt("currentPage"))
+    scope227.set("hasNextPage", scope227.readBoolean("hasNextPage"))
+    scope227.set("hasPreviousPage", scope227.readBoolean("hasPreviousPage"))
+    scope227.set("itemsCount", scope227.readInt("itemsCount"))
+    scope227.set("openEnded", scope227.readBoolean("openEnded"))
+    scope227.set("pagesCount", scope227.readInt("pagesCount"))
+}
+fun normalizeFeatureFlags(scope: Scope) {
+    val scope228 = scope
+    if (scope228.assertList("featureFlags")) {
+        val scope229 = scope228.childList("featureFlags", "featureFlags")
+        for (i in 0 until scope229.size) {
+            scope229.assertObject(i)
+            val scope230 = scope229.child(i)
+            scope230.set("__typename", scope230.readString("__typename"))
+            scope230.set("id", scope230.readString("id"))
+            scope230.set("key", scope230.readString("key"))
+            scope230.set("title", scope230.readString("title"))
+        }
+        scope228.set("featureFlags", scope229.completed())
+    }
+}
+fun normalizeFeedHome(scope: Scope) {
+    val scope231 = scope
+    if (scope231.assertList("homeFeed")) {
+        val scope232 = scope231.childList("homeFeed", "alphaHomeFeed")
+        for (i in 0 until scope232.size) {
+            scope232.assertObject(i)
+            val scope233 = scope232.child(i)
+            scope233.set("__typename", scope233.readString("__typename"))
+            scope233.assertObject("by")
+            val scope234 = scope233.child("by", "alphaBy")
+            scope234.set("__typename", scope234.readString("__typename"))
+            normalizeUserShort(scope234)
+            scope233.set("date", scope233.readString("date"))
+            scope233.set("id", scope233.readString("id"))
+            scope233.set("text", scope233.readString("text"))
+        }
+        scope231.set("alphaHomeFeed", scope232.completed())
+    }
+}
+fun normalizeFetchPushSettings(scope: Scope) {
+    val scope235 = scope
+    scope235.assertObject("pushSettings")
+    val scope236 = scope235.child("pushSettings", "pushSettings")
+    scope236.set("__typename", scope236.readString("__typename"))
+    scope236.set("webPushKey", scope236.readStringOptional("webPushKey"))
+}
+fun normalizeGetDraftMessage(scope: Scope) {
+    val scope237 = scope
+    scope237.set("conversationDraft" + scope237.formatArguments("conversationId" to scope237.argumentKey("conversationId")), scope237.readStringOptional("message"))
+}
+fun normalizeGlobalCounter(scope: Scope) {
+    val scope238 = scope
+    scope238.assertObject("alphaNotificationCounter")
+    val scope239 = scope238.child("alphaNotificationCounter", "alphaNotificationCounter")
+    scope239.set("__typename", scope239.readString("__typename"))
+    scope239.set("id", scope239.readString("id"))
+    scope239.set("unreadCount", scope239.readInt("unreadCount"))
+}
+fun normalizeGlobalSearch(scope: Scope) {
+    val scope240 = scope
+    if (scope240.assertList("items")) {
+        val scope241 = scope240.childList("items", "alphaGlobalSearch" + scope240.formatArguments("query" to scope240.argumentKey("query")))
+        for (i in 0 until scope241.size) {
+            scope241.assertObject(i)
+            val scope242 = scope241.child(i)
+            scope242.set("__typename", scope242.readString("__typename"))
+            if (scope242.isType("Organization")) {
+                normalizeOrganizationShort(scope242)
+            }
+            if (scope242.isType("User")) {
+                normalizeUserShort(scope242)
+            }
+            if (scope242.isType("SharedRoom")) {
+                scope242.set("id", scope242.readString("id"))
+                scope242.set("kind", scope242.readString("kind"))
+                scope242.set("membersCount", scope242.readIntOptional("membersCount"))
+                scope242.set("membership", scope242.readString("membership"))
+                if (scope242.hasKey("organization")) {
+                    val scope243 = scope242.child("organization", "organization")
+                    scope243.set("__typename", scope243.readString("__typename"))
+                    scope243.set("id", scope243.readString("id"))
+                    scope243.set("name", scope243.readString("name"))
+                    scope243.set("photo", scope243.readStringOptional("photo"))
+                } else {
+                    scope242.setNull("organization")
+                }
+                scope242.set("photo", scope242.readString("roomPhoto"))
+                scope242.set("title", scope242.readString("title"))
+            }
+        }
+        scope240.set("alphaGlobalSearch" + scope240.formatArguments("query" to scope240.argumentKey("query")), scope241.completed())
+    }
+}
+fun normalizeMessage(scope: Scope) {
+    val scope244 = scope
+    if (scope244.hasKey("message")) {
+        val scope245 = scope244.child("message", "message" + scope244.formatArguments("messageId" to scope244.argumentKey("messageId")))
+        scope245.set("__typename", scope245.readString("__typename"))
+        normalizeFullMessage(scope245)
+    } else {
+        scope244.setNull("message" + scope244.formatArguments("messageId" to scope244.argumentKey("messageId")))
+    }
+}
+fun normalizeMessageComments(scope: Scope) {
+    val scope246 = scope
+    scope246.assertObject("messageComments")
+    val scope247 = scope246.child("messageComments", "messageComments" + scope246.formatArguments("messageId" to scope246.argumentKey("messageId")))
+    scope247.set("__typename", scope247.readString("__typename"))
+    if (scope247.assertList("comments")) {
+        val scope248 = scope247.childList("comments", "comments")
+        for (i in 0 until scope248.size) {
+            scope248.assertObject(i)
+            val scope249 = scope248.child(i)
+            scope249.set("__typename", scope249.readString("__typename"))
+            normalizeCommentEntryFragment(scope249)
+        }
+        scope247.set("comments", scope248.completed())
+    }
+    scope247.set("count", scope247.readInt("count"))
+    scope247.set("id", scope247.readString("id"))
+    scope247.assertObject("state")
+    val scope250 = scope247.child("state", "state")
+    scope250.set("__typename", scope250.readString("__typename"))
+    scope250.set("state", scope250.readStringOptional("state"))
+}
+fun normalizeMyApps(scope: Scope) {
+    val scope251 = scope
+    if (scope251.assertList("apps")) {
+        val scope252 = scope251.childList("apps", "myApps")
+        for (i in 0 until scope252.size) {
+            scope252.assertObject(i)
+            val scope253 = scope252.child(i)
+            scope253.set("__typename", scope253.readString("__typename"))
+            normalizeAppFull(scope253)
+        }
+        scope251.set("myApps", scope252.completed())
+    }
+}
+fun normalizeMyOrganizations(scope: Scope) {
+    val scope254 = scope
+    if (scope254.assertList("myOrganizations")) {
+        val scope255 = scope254.childList("myOrganizations", "myOrganizations")
+        for (i in 0 until scope255.size) {
+            scope255.assertObject(i)
+            val scope256 = scope255.child(i)
+            scope256.set("__typename", scope256.readString("__typename"))
+            scope256.set("betaIsPrimary", scope256.readBoolean("isPrimary"))
+            normalizeOrganizationShort(scope256)
+        }
+        scope254.set("myOrganizations", scope255.completed())
+    }
+}
+fun normalizeOnline(scope: Scope) {
+    val scope257 = scope
+    scope257.assertObject("user")
+    val scope258 = scope257.child("user", "user" + scope257.formatArguments("id" to scope257.argumentKey("userId")))
+    scope258.set("__typename", scope258.readString("__typename"))
+    scope258.set("id", scope258.readString("id"))
+    scope258.set("lastSeen", scope258.readStringOptional("lastSeen"))
+    scope258.set("online", scope258.readBoolean("online"))
+}
+fun normalizeOrganization(scope: Scope) {
+    val scope259 = scope
+    scope259.assertObject("organization")
+    val scope260 = scope259.child("organization", "organization" + scope259.formatArguments("id" to scope259.argumentKey("organizationId")))
+    scope260.set("__typename", scope260.readString("__typename"))
+    normalizeOrganizationFull(scope260)
+}
+fun normalizeOrganizationByPrefix(scope: Scope) {
+    val scope261 = scope
+    if (scope261.hasKey("organizationByPrefix")) {
+        val scope262 = scope261.child("organizationByPrefix", "alphaOrganizationByPrefix" + scope261.formatArguments("query" to scope261.argumentKey("query")))
+        scope262.set("__typename", scope262.readString("__typename"))
+        normalizeOrganizationSearch(scope262)
+    } else {
+        scope261.setNull("alphaOrganizationByPrefix" + scope261.formatArguments("query" to scope261.argumentKey("query")))
+    }
+}
+fun normalizeOrganizationMembersShort(scope: Scope) {
+    val scope263 = scope
+    scope263.assertObject("organization")
+    val scope264 = scope263.child("organization", "organization" + scope263.formatArguments("id" to scope263.argumentKey("organizationId")))
+    scope264.set("__typename", scope264.readString("__typename"))
+    if (scope264.assertList("members")) {
+        val scope265 = scope264.childList("members", "alphaOrganizationMembers")
+        for (i in 0 until scope265.size) {
+            scope265.assertObject(i)
+            val scope266 = scope265.child(i)
+            scope266.set("__typename", scope266.readString("__typename"))
+            scope266.assertObject("user")
+            val scope267 = scope266.child("user", "user")
+            scope267.set("__typename", scope267.readString("__typename"))
+            scope267.set("id", scope267.readString("id"))
+        }
+        scope264.set("alphaOrganizationMembers", scope265.completed())
+    }
+    normalizeOrganizationWithoutMembersFragment(scope264)
+}
+fun normalizeOrganizationMembersShortPaginated(scope: Scope) {
+    val scope268 = scope
+    scope268.assertObject("organization")
+    val scope269 = scope268.child("organization", "organization" + scope268.formatArguments("id" to scope268.argumentKey("organizationId")))
+    scope269.set("__typename", scope269.readString("__typename"))
+    if (scope269.assertList("members")) {
+        val scope270 = scope269.childList("members", "alphaOrganizationMembers" + scope269.formatArguments("after" to scope269.argumentKey("after"),"first" to scope269.argumentKey("first")))
+        for (i in 0 until scope270.size) {
+            scope270.assertObject(i)
+            val scope271 = scope270.child(i)
+            scope271.set("__typename", scope271.readString("__typename"))
+            scope271.set("role", scope271.readString("role"))
+            scope271.assertObject("user")
+            val scope272 = scope271.child("user", "user")
+            scope272.set("__typename", scope272.readString("__typename"))
+            normalizeUserFull(scope272)
+        }
+        scope269.set("alphaOrganizationMembers" + scope269.formatArguments("after" to scope269.argumentKey("after"),"first" to scope269.argumentKey("first")), scope270.completed())
+    }
+    normalizeOrganizationWithoutMembersFragment(scope269)
+}
+fun normalizeOrganizationProfile(scope: Scope) {
+    val scope273 = scope
+    scope273.assertObject("organizationProfile")
+    val scope274 = scope273.child("organizationProfile", "organizationProfile" + scope273.formatArguments("id" to scope273.argumentKey("organizationId")))
+    scope274.set("__typename", scope274.readString("__typename"))
+    normalizeOrganizationProfileFull(scope274)
+}
+fun normalizeOrganizationPublicInvite(scope: Scope) {
+    val scope275 = scope
+    if (scope275.hasKey("publicInvite")) {
+        val scope276 = scope275.child("publicInvite", "alphaOrganizationInviteLink" + scope275.formatArguments("organizationId" to scope275.argumentKey("organizationId")))
+        scope276.set("__typename", scope276.readString("__typename"))
+        scope276.set("id", scope276.readString("id"))
+        scope276.set("key", scope276.readString("key"))
+        scope276.set("ttl", scope276.readStringOptional("ttl"))
+    } else {
+        scope275.setNull("alphaOrganizationInviteLink" + scope275.formatArguments("organizationId" to scope275.argumentKey("organizationId")))
+    }
+}
+fun normalizeOrganizationWithoutMembers(scope: Scope) {
+    val scope277 = scope
+    scope277.assertObject("organization")
+    val scope278 = scope277.child("organization", "organization" + scope277.formatArguments("id" to scope277.argumentKey("organizationId")))
+    scope278.set("__typename", scope278.readString("__typename"))
+    normalizeOrganizationWithoutMembersFragment(scope278)
+}
+fun normalizePermissions(scope: Scope) {
+    val scope279 = scope
+    scope279.assertObject("myPermissions")
+    val scope280 = scope279.child("myPermissions", "myPermissions")
+    scope280.set("__typename", scope280.readString("__typename"))
+    if (scope280.assertList("roles")) {
+        val scope281 = scope280.childList("roles", "roles")
+        for (i in 0 until scope281.size) {
+            scope281.next(scope281.readString(i))
+        }
+        scope280.set("roles", scope281.completed())
+    }
+}
+fun normalizeProfile(scope: Scope) {
+    val scope282 = scope
+    if (scope282.hasKey("user")) {
+        val scope283 = scope282.child("user", "me")
+        scope283.set("__typename", scope283.readString("__typename"))
+        scope283.set("id", scope283.readString("id"))
+        scope283.set("shortname", scope283.readStringOptional("shortname"))
+    } else {
+        scope282.setNull("me")
+    }
+    if (scope282.hasKey("profile")) {
+        val scope284 = scope282.child("profile", "myProfile")
+        scope284.set("__typename", scope284.readString("__typename"))
+        scope284.set("about", scope284.readStringOptional("about"))
+        if (scope284.hasKey("invitedBy")) {
+            val scope285 = scope284.child("invitedBy", "alphaInvitedBy")
+            scope285.set("__typename", scope285.readString("__typename"))
+            scope285.set("name", scope285.readString("name"))
+        } else {
+            scope284.setNull("alphaInvitedBy")
+        }
+        scope284.set("alphaJoinedAt", scope284.readStringOptional("joinedAt"))
+        scope284.set("alphaLinkedin", scope284.readStringOptional("linkedin"))
+        scope284.set("alphaRole", scope284.readStringOptional("role"))
+        scope284.set("email", scope284.readStringOptional("email"))
+        scope284.set("firstName", scope284.readStringOptional("firstName"))
+        scope284.set("id", scope284.readString("id"))
+        scope284.set("lastName", scope284.readStringOptional("lastName"))
+        scope284.set("location", scope284.readStringOptional("location"))
+        scope284.set("phone", scope284.readStringOptional("phone"))
+        if (scope284.hasKey("photoRef")) {
+            val scope286 = scope284.child("photoRef", "photoRef")
+            scope286.set("__typename", scope286.readString("__typename"))
+            if (scope286.hasKey("crop")) {
+                val scope287 = scope286.child("crop", "crop")
+                scope287.set("__typename", scope287.readString("__typename"))
+                scope287.set("h", scope287.readInt("h"))
+                scope287.set("w", scope287.readInt("w"))
+                scope287.set("x", scope287.readInt("x"))
+                scope287.set("y", scope287.readInt("y"))
+            } else {
+                scope286.setNull("crop")
+            }
+            scope286.set("uuid", scope286.readString("uuid"))
+        } else {
+            scope284.setNull("photoRef")
+        }
+        if (scope284.hasKey("primaryOrganization")) {
+            val scope288 = scope284.child("primaryOrganization", "primaryOrganization")
+            scope288.set("__typename", scope288.readString("__typename"))
+            scope288.set("id", scope288.readString("id"))
+            scope288.set("name", scope288.readString("name"))
+        } else {
+            scope284.setNull("primaryOrganization")
+        }
+        scope284.set("website", scope284.readStringOptional("website"))
+    } else {
+        scope282.setNull("myProfile")
+    }
+}
+fun normalizeProfilePrefill(scope: Scope) {
+    val scope289 = scope
+    if (scope289.hasKey("prefill")) {
+        val scope290 = scope289.child("prefill", "myProfilePrefill")
+        scope290.set("__typename", scope290.readString("__typename"))
+        scope290.set("firstName", scope290.readStringOptional("firstName"))
+        scope290.set("lastName", scope290.readStringOptional("lastName"))
+        scope290.set("picture", scope290.readStringOptional("picture"))
+    } else {
+        scope289.setNull("myProfilePrefill")
+    }
+}
+fun normalizeResolveShortName(scope: Scope) {
+    val scope291 = scope
+    if (scope291.hasKey("item")) {
+        val scope292 = scope291.child("item", "alphaResolveShortName" + scope291.formatArguments("shortname" to scope291.argumentKey("shortname")))
+        scope292.set("__typename", scope292.readString("__typename"))
+        if (scope292.isType("User")) {
+            normalizeUserFull(scope292)
+        }
+        if (scope292.isType("Organization")) {
+            normalizeOrganizationFull(scope292)
+        }
+    } else {
+        scope291.setNull("alphaResolveShortName" + scope291.formatArguments("shortname" to scope291.argumentKey("shortname")))
+    }
+}
+fun normalizeResolvedInvite(scope: Scope) {
+    val scope293 = scope
+    if (scope293.hasKey("invite")) {
+        val scope294 = scope293.child("invite", "alphaResolveInvite" + scope293.formatArguments("key" to scope293.argumentKey("key")))
+        scope294.set("__typename", scope294.readString("__typename"))
+        if (scope294.isType("InviteInfo")) {
+            if (scope294.hasKey("creator")) {
+                val scope295 = scope294.child("creator", "creator")
+                scope295.set("__typename", scope295.readString("__typename"))
+                normalizeUserShort(scope295)
+            } else {
+                scope294.setNull("creator")
+            }
+            scope294.set("orgId", scope294.readString("orgId"))
+            scope294.set("title", scope294.readString("title"))
+        }
+        if (scope294.isType("AppInvite")) {
+            scope294.assertObject("inviter")
+            val scope296 = scope294.child("inviter", "inviter")
+            scope296.set("__typename", scope296.readString("__typename"))
+            normalizeUserShort(scope296)
+        }
+        if (scope294.isType("RoomInvite")) {
+            scope294.assertObject("invitedByUser")
+            val scope297 = scope294.child("invitedByUser", "invitedByUser")
+            scope297.set("__typename", scope297.readString("__typename"))
+            normalizeUserShort(scope297)
+            scope294.assertObject("room")
+            val scope298 = scope294.child("room", "room")
+            scope298.set("__typename", scope298.readString("__typename"))
+            if (scope298.isType("SharedRoom")) {
+                scope298.set("description", scope298.readStringOptional("description"))
+                scope298.set("id", scope298.readString("id"))
+                scope298.set("isChannel", scope298.readBoolean("isChannel"))
+                scope298.set("kind", scope298.readString("kind"))
+                scope298.set("membersCount", scope298.readIntOptional("membersCount"))
+                scope298.set("membership", scope298.readString("membership"))
+                scope298.set("photo", scope298.readString("photo"))
+                scope298.set("socialImage", scope298.readStringOptional("socialImage"))
+                scope298.set("title", scope298.readString("title"))
+            }
+        }
+    } else {
+        scope293.setNull("alphaResolveInvite" + scope293.formatArguments("key" to scope293.argumentKey("key")))
+    }
+}
+fun normalizeRoom(scope: Scope) {
+    val scope299 = scope
+    if (scope299.hasKey("room")) {
+        val scope300 = scope299.child("room", "room" + scope299.formatArguments("id" to scope299.argumentKey("id")))
+        scope300.set("__typename", scope300.readString("__typename"))
+        normalizeRoomFull(scope300)
+    } else {
+        scope299.setNull("room" + scope299.formatArguments("id" to scope299.argumentKey("id")))
+    }
+}
+fun normalizeRoomChat(scope: Scope) {
+    val scope301 = scope
+    if (scope301.hasKey("room")) {
+        val scope302 = scope301.child("room", "room" + scope301.formatArguments("id" to scope301.argumentKey("id")))
+        scope302.set("__typename", scope302.readString("__typename"))
+        if (scope302.isType("PrivateRoom")) {
+            scope302.set("id", scope302.readString("id"))
+            scope302.assertObject("user")
+            val scope303 = scope302.child("user", "user")
+            scope303.set("__typename", scope303.readString("__typename"))
+            scope303.set("id", scope303.readString("id"))
+            scope303.set("name", scope303.readString("name"))
+        }
+        if (scope302.isType("SharedRoom")) {
+            scope302.set("canEdit", scope302.readBoolean("canEdit"))
+            scope302.set("id", scope302.readString("id"))
+            scope302.set("isChannel", scope302.readBoolean("isChannel"))
+            scope302.set("kind", scope302.readString("kind"))
+            scope302.set("membership", scope302.readString("membership"))
+            if (scope302.hasKey("pinnedMessage")) {
+                val scope304 = scope302.child("pinnedMessage", "pinnedMessage")
+                scope304.set("__typename", scope304.readString("__typename"))
+                normalizeFullMessage(scope304)
+            } else {
+                scope302.setNull("pinnedMessage")
+            }
+            scope302.set("title", scope302.readString("title"))
+        }
+    } else {
+        scope301.setNull("room" + scope301.formatArguments("id" to scope301.argumentKey("id")))
+    }
+}
+fun normalizeRoomHeader(scope: Scope) {
+    val scope305 = scope
+    if (scope305.hasKey("room")) {
+        val scope306 = scope305.child("room", "room" + scope305.formatArguments("id" to scope305.argumentKey("id")))
+        scope306.set("__typename", scope306.readString("__typename"))
+        if (scope306.isType("PrivateRoom")) {
+            scope306.set("id", scope306.readString("id"))
+            scope306.assertObject("settings")
+            val scope307 = scope306.child("settings", "settings")
+            scope307.set("__typename", scope307.readString("__typename"))
+            scope307.set("id", scope307.readString("id"))
+            scope307.set("mute", scope307.readBooleanOptional("mute"))
+            scope306.assertObject("user")
+            val scope308 = scope306.child("user", "user")
+            scope308.set("__typename", scope308.readString("__typename"))
+            scope308.set("id", scope308.readString("id"))
+            scope308.set("name", scope308.readString("name"))
+            scope308.set("photo", scope308.readStringOptional("photo"))
+            if (scope308.hasKey("primaryOrganization")) {
+                val scope309 = scope308.child("primaryOrganization", "primaryOrganization")
+                scope309.set("__typename", scope309.readString("__typename"))
+                scope309.set("id", scope309.readString("id"))
+                scope309.set("name", scope309.readString("name"))
+            } else {
+                scope308.setNull("primaryOrganization")
+            }
+        }
+        if (scope306.isType("SharedRoom")) {
+            scope306.set("canEdit", scope306.readBoolean("canEdit"))
+            scope306.set("description", scope306.readStringOptional("description"))
+            scope306.set("id", scope306.readString("id"))
+            scope306.set("isChannel", scope306.readBoolean("isChannel"))
+            scope306.set("kind", scope306.readString("kind"))
+            scope306.set("membersCount", scope306.readIntOptional("membersCount"))
+            if (scope306.hasKey("organization")) {
+                val scope310 = scope306.child("organization", "organization")
+                scope310.set("__typename", scope310.readString("__typename"))
+                scope310.set("betaIsAdmin", scope310.readBoolean("isAdmin"))
+                scope310.set("betaIsOwner", scope310.readBoolean("isOwner"))
+                scope310.set("id", scope310.readString("id"))
+                scope310.set("name", scope310.readString("name"))
+            } else {
+                scope306.setNull("organization")
+            }
+            scope306.set("photo", scope306.readString("photo"))
+            scope306.set("role", scope306.readString("role"))
+            scope306.assertObject("settings")
+            val scope311 = scope306.child("settings", "settings")
+            scope311.set("__typename", scope311.readString("__typename"))
+            scope311.set("id", scope311.readString("id"))
+            scope311.set("mute", scope311.readBooleanOptional("mute"))
+            scope306.set("socialImage", scope306.readStringOptional("socialImage"))
+            scope306.set("title", scope306.readString("title"))
+            if (scope306.hasKey("welcomeMessage")) {
+                val scope312 = scope306.child("welcomeMessage", "welcomeMessage")
+                scope312.set("__typename", scope312.readString("__typename"))
+                scope312.set("isOn", scope312.readBoolean("isOn"))
+                scope312.set("message", scope312.readStringOptional("message"))
+                if (scope312.hasKey("sender")) {
+                    val scope313 = scope312.child("sender", "sender")
+                    scope313.set("__typename", scope313.readString("__typename"))
+                    scope313.set("id", scope313.readString("id"))
+                    scope313.set("name", scope313.readString("name"))
+                } else {
+                    scope312.setNull("sender")
+                }
+            } else {
+                scope306.setNull("welcomeMessage")
+            }
+        }
+    } else {
+        scope305.setNull("room" + scope305.formatArguments("id" to scope305.argumentKey("id")))
+    }
+}
+fun normalizeRoomInviteInfo(scope: Scope) {
+    val scope314 = scope
+    if (scope314.hasKey("invite")) {
+        val scope315 = scope314.child("invite", "betaRoomInviteInfo" + scope314.formatArguments("invite" to scope314.argumentKey("invite")))
+        scope315.set("__typename", scope315.readString("__typename"))
+        scope315.set("id", scope315.readString("id"))
+        scope315.assertObject("invitedByUser")
+        val scope316 = scope315.child("invitedByUser", "invitedByUser")
+        scope316.set("__typename", scope316.readString("__typename"))
+        normalizeUserShort(scope316)
+        scope315.assertObject("room")
+        val scope317 = scope315.child("room", "room")
+        scope317.set("__typename", scope317.readString("__typename"))
+        if (scope317.isType("SharedRoom")) {
+            scope317.set("description", scope317.readStringOptional("description"))
+            scope317.set("id", scope317.readString("id"))
+            scope317.set("isChannel", scope317.readBoolean("isChannel"))
+            scope317.set("kind", scope317.readString("kind"))
+            scope317.set("membersCount", scope317.readIntOptional("membersCount"))
+            scope317.set("membership", scope317.readString("membership"))
+            if (scope317.hasKey("organization")) {
+                val scope318 = scope317.child("organization", "organization")
+                scope318.set("__typename", scope318.readString("__typename"))
+                normalizeOrganizationShort(scope318)
+            } else {
+                scope317.setNull("organization")
+            }
+            scope317.set("photo", scope317.readString("photo"))
+            scope317.set("socialImage", scope317.readStringOptional("socialImage"))
+            scope317.set("title", scope317.readString("title"))
+        }
+    } else {
+        scope314.setNull("betaRoomInviteInfo" + scope314.formatArguments("invite" to scope314.argumentKey("invite")))
+    }
+}
+fun normalizeRoomInviteLink(scope: Scope) {
+    val scope319 = scope
+    scope319.set("betaRoomInviteLink" + scope319.formatArguments("roomId" to scope319.argumentKey("roomId")), scope319.readString("link"))
+}
+fun normalizeRoomMemberShort(scope: Scope) {
+    val scope320 = scope
+    if (scope320.hasKey("member")) {
+        val scope321 = scope320.child("member", "roomMember" + scope320.formatArguments("memberId" to scope320.argumentKey("memberId"),"roomId" to scope320.argumentKey("roomId")))
+        scope321.set("__typename", scope321.readString("__typename"))
+        scope321.assertObject("user")
+        val scope322 = scope321.child("user", "user")
+        scope322.set("__typename", scope322.readString("__typename"))
+        scope322.set("firstName", scope322.readString("firstName"))
+        scope322.set("id", scope322.readString("id"))
+        scope322.set("name", scope322.readString("name"))
+    } else {
+        scope320.setNull("roomMember" + scope320.formatArguments("memberId" to scope320.argumentKey("memberId"),"roomId" to scope320.argumentKey("roomId")))
+    }
+}
+fun normalizeRoomMembers(scope: Scope) {
+    val scope323 = scope
+    if (scope323.assertList("members")) {
+        val scope324 = scope323.childList("members", "roomMembers" + scope323.formatArguments("roomId" to scope323.argumentKey("roomId")))
+        for (i in 0 until scope324.size) {
+            scope324.assertObject(i)
+            val scope325 = scope324.child(i)
+            scope325.set("__typename", scope325.readString("__typename"))
+            scope325.set("canKick", scope325.readBoolean("canKick"))
+            scope325.set("membership", scope325.readString("membership"))
+            scope325.set("role", scope325.readString("role"))
+            scope325.assertObject("user")
+            val scope326 = scope325.child("user", "user")
+            scope326.set("__typename", scope326.readString("__typename"))
+            normalizeUserShort(scope326)
+        }
+        scope323.set("roomMembers" + scope323.formatArguments("roomId" to scope323.argumentKey("roomId")), scope324.completed())
+    }
+}
+fun normalizeRoomMembersPaginated(scope: Scope) {
+    val scope327 = scope
+    if (scope327.assertList("members")) {
+        val scope328 = scope327.childList("members", "roomMembers" + scope327.formatArguments("after" to scope327.argumentKey("after"),"first" to scope327.argumentKey("first"),"roomId" to scope327.argumentKey("roomId")))
+        for (i in 0 until scope328.size) {
+            scope328.assertObject(i)
+            val scope329 = scope328.child(i)
+            scope329.set("__typename", scope329.readString("__typename"))
+            scope329.set("canKick", scope329.readBoolean("canKick"))
+            scope329.set("membership", scope329.readString("membership"))
+            scope329.set("role", scope329.readString("role"))
+            scope329.assertObject("user")
+            val scope330 = scope329.child("user", "user")
+            scope330.set("__typename", scope330.readString("__typename"))
+            normalizeUserShort(scope330)
+        }
+        scope327.set("roomMembers" + scope327.formatArguments("after" to scope327.argumentKey("after"),"first" to scope327.argumentKey("first"),"roomId" to scope327.argumentKey("roomId")), scope328.completed())
+    }
+}
+fun normalizeRoomMembersShort(scope: Scope) {
+    val scope331 = scope
+    if (scope331.assertList("members")) {
+        val scope332 = scope331.childList("members", "roomMembers" + scope331.formatArguments("roomId" to scope331.argumentKey("roomId")))
+        for (i in 0 until scope332.size) {
+            scope332.assertObject(i)
+            val scope333 = scope332.child(i)
+            scope333.set("__typename", scope333.readString("__typename"))
+            scope333.assertObject("user")
+            val scope334 = scope333.child("user", "user")
+            scope334.set("__typename", scope334.readString("__typename"))
+            scope334.set("id", scope334.readString("id"))
+        }
+        scope331.set("roomMembers" + scope331.formatArguments("roomId" to scope331.argumentKey("roomId")), scope332.completed())
+    }
+}
+fun normalizeRoomSearch(scope: Scope) {
+    val scope335 = scope
+    scope335.assertObject("items")
+    val scope336 = scope335.child("items", "betaRoomSearch" + scope335.formatArguments("first" to "150"))
+    scope336.set("__typename", scope336.readString("__typename"))
+    if (scope336.assertList("edges")) {
+        val scope337 = scope336.childList("edges", "edges")
+        for (i in 0 until scope337.size) {
+            scope337.assertObject(i)
+            val scope338 = scope337.child(i)
+            scope338.set("__typename", scope338.readString("__typename"))
+            scope338.set("cursor", scope338.readString("cursor"))
+            scope338.assertObject("node")
+            val scope339 = scope338.child("node", "node")
+            scope339.set("__typename", scope339.readString("__typename"))
+            scope339.set("id", scope339.readString("id"))
+            scope339.set("isChannel", scope339.readBoolean("isChannel"))
+            scope339.set("kind", scope339.readString("kind"))
+            scope339.set("membersCount", scope339.readIntOptional("membersCount"))
+            scope339.set("membership", scope339.readString("membership"))
+            if (scope339.hasKey("organization")) {
+                val scope340 = scope339.child("organization", "organization")
+                scope340.set("__typename", scope340.readString("__typename"))
+                scope340.set("name", scope340.readString("name"))
+                scope340.set("photo", scope340.readStringOptional("photo"))
+            } else {
+                scope339.setNull("organization")
+            }
+            scope339.set("photo", scope339.readString("photo"))
+            scope339.set("title", scope339.readString("title"))
+        }
+        scope336.set("edges", scope337.completed())
+    }
+    scope336.assertObject("pageInfo")
+    val scope341 = scope336.child("pageInfo", "pageInfo")
+    scope341.set("__typename", scope341.readString("__typename"))
+    scope341.set("currentPage", scope341.readInt("currentPage"))
+    scope341.set("hasNextPage", scope341.readBoolean("hasNextPage"))
+    scope341.set("hasPreviousPage", scope341.readBoolean("hasPreviousPage"))
+    scope341.set("itemsCount", scope341.readInt("itemsCount"))
+    scope341.set("openEnded", scope341.readBoolean("openEnded"))
+    scope341.set("pagesCount", scope341.readInt("pagesCount"))
+}
+fun normalizeRoomSearchText(scope: Scope) {
+    val scope342 = scope
+    if (scope342.assertList("items")) {
+        val scope343 = scope342.childList("items", "betaDialogTextSearch" + scope342.formatArguments("query" to scope342.argumentKey("query")))
+        for (i in 0 until scope343.size) {
+            scope343.assertObject(i)
+            val scope344 = scope343.child(i)
+            scope344.set("__typename", scope344.readString("__typename"))
+            scope344.set("cid", scope344.readString("id"))
+            scope344.set("fid", scope344.readString("flexibleId"))
+            scope344.set("kind", scope344.readString("kind"))
+            scope344.set("photo", scope344.readString("photo"))
+            scope344.set("title", scope344.readString("title"))
+        }
+        scope342.set("betaDialogTextSearch" + scope342.formatArguments("query" to scope342.argumentKey("query")), scope343.completed())
+    }
+}
+fun normalizeRoomSuper(scope: Scope) {
+    val scope345 = scope
+    if (scope345.hasKey("roomSuper")) {
+        val scope346 = scope345.child("roomSuper", "roomSuper" + scope345.formatArguments("id" to scope345.argumentKey("id")))
+        scope346.set("__typename", scope346.readString("__typename"))
+        scope346.set("featured", scope346.readBoolean("featured"))
+        scope346.set("id", scope346.readString("id"))
+        scope346.set("listed", scope346.readBoolean("listed"))
+    } else {
+        scope345.setNull("roomSuper" + scope345.formatArguments("id" to scope345.argumentKey("id")))
+    }
+}
+fun normalizeRoomTiny(scope: Scope) {
+    val scope347 = scope
+    if (scope347.hasKey("room")) {
+        val scope348 = scope347.child("room", "room" + scope347.formatArguments("id" to scope347.argumentKey("id")))
+        scope348.set("__typename", scope348.readString("__typename"))
+        normalizeRoomShort(scope348)
+    } else {
+        scope347.setNull("room" + scope347.formatArguments("id" to scope347.argumentKey("id")))
+    }
+}
+fun normalizeRoomWithoutMembers(scope: Scope) {
+    val scope349 = scope
+    if (scope349.hasKey("room")) {
+        val scope350 = scope349.child("room", "room" + scope349.formatArguments("id" to scope349.argumentKey("id")))
+        scope350.set("__typename", scope350.readString("__typename"))
+        normalizeRoomFullWithoutMembers(scope350)
+    } else {
+        scope349.setNull("room" + scope349.formatArguments("id" to scope349.argumentKey("id")))
+    }
+}
+fun normalizeSettings(scope: Scope) {
+    val scope351 = scope
+    scope351.assertObject("settings")
+    val scope352 = scope351.child("settings", "settings")
+    scope352.set("__typename", scope352.readString("__typename"))
+    normalizeSettingsFull(scope352)
+}
+fun normalizeSuperAccount(scope: Scope) {
+    val scope353 = scope
+    scope353.assertObject("superAccount")
+    val scope354 = scope353.child("superAccount", "superAccount" + scope353.formatArguments("id" to scope353.argumentKey("accountId"),"viaOrgId" to scope353.argumentKey("viaOrgId")))
+    scope354.set("__typename", scope354.readString("__typename"))
+    scope354.set("alphaPublished", scope354.readBoolean("published"))
+    scope354.set("createdAt", scope354.readStringOptional("createdAt"))
+    if (scope354.hasKey("createdBy")) {
+        val scope355 = scope354.child("createdBy", "createdBy")
+        scope355.set("__typename", scope355.readString("__typename"))
+        scope355.set("name", scope355.readString("name"))
+    } else {
+        scope354.setNull("createdBy")
+    }
+    if (scope354.assertList("features")) {
+        val scope356 = scope354.childList("features", "features")
+        for (i in 0 until scope356.size) {
+            scope356.assertObject(i)
+            val scope357 = scope356.child(i)
+            scope357.set("__typename", scope357.readString("__typename"))
+            scope357.set("id", scope357.readString("id"))
+            scope357.set("key", scope357.readString("key"))
+            scope357.set("title", scope357.readString("title"))
+        }
+        scope354.set("features", scope356.completed())
+    }
+    scope354.set("id", scope354.readString("id"))
+    if (scope354.assertList("members")) {
+        val scope358 = scope354.childList("members", "members")
+        for (i in 0 until scope358.size) {
+            scope358.assertObject(i)
+            val scope359 = scope358.child(i)
+            scope359.set("__typename", scope359.readString("__typename"))
+            normalizeUserShort(scope359)
+        }
+        scope354.set("members", scope358.completed())
+    }
+    scope354.set("orgId", scope354.readString("orgId"))
+    scope354.set("state", scope354.readString("state"))
+    scope354.set("title", scope354.readString("title"))
+}
+fun normalizeSuperAccounts(scope: Scope) {
+    val scope360 = scope
+    if (scope360.assertList("superAccounts")) {
+        val scope361 = scope360.childList("superAccounts", "superAccounts")
+        for (i in 0 until scope361.size) {
+            scope361.assertObject(i)
+            val scope362 = scope361.child(i)
+            scope362.set("__typename", scope362.readString("__typename"))
+            scope362.set("id", scope362.readString("id"))
+            scope362.set("orgId", scope362.readString("orgId"))
+            scope362.set("state", scope362.readString("state"))
+            scope362.set("title", scope362.readString("title"))
+        }
+        scope360.set("superAccounts", scope361.completed())
+    }
+}
+fun normalizeSuperAdmins(scope: Scope) {
+    val scope363 = scope
+    if (scope363.assertList("superAdmins")) {
+        val scope364 = scope363.childList("superAdmins", "superAdmins")
+        for (i in 0 until scope364.size) {
+            scope364.assertObject(i)
+            val scope365 = scope364.child(i)
+            scope365.set("__typename", scope365.readString("__typename"))
+            scope365.set("email", scope365.readStringOptional("email"))
+            scope365.set("role", scope365.readString("role"))
+            scope365.assertObject("user")
+            val scope366 = scope365.child("user", "user")
+            scope366.set("__typename", scope366.readString("__typename"))
+            normalizeUserShort(scope366)
+        }
+        scope363.set("superAdmins", scope364.completed())
+    }
+}
+fun normalizeUser(scope: Scope) {
+    val scope367 = scope
+    if (scope367.hasKey("conversation")) {
+        val scope368 = scope367.child("conversation", "room" + scope367.formatArguments("id" to scope367.argumentKey("userId")))
+        scope368.set("__typename", scope368.readString("__typename"))
+        if (scope368.isType("PrivateRoom")) {
+            scope368.set("id", scope368.readString("id"))
+            scope368.assertObject("settings")
+            val scope369 = scope368.child("settings", "settings")
+            scope369.set("__typename", scope369.readString("__typename"))
+            scope369.set("id", scope369.readString("id"))
+            scope369.set("mute", scope369.readBooleanOptional("mute"))
+        }
+    } else {
+        scope367.setNull("room" + scope367.formatArguments("id" to scope367.argumentKey("userId")))
+    }
+    scope367.assertObject("user")
+    val scope370 = scope367.child("user", "user" + scope367.formatArguments("id" to scope367.argumentKey("userId")))
+    scope370.set("__typename", scope370.readString("__typename"))
+    normalizeUserFull(scope370)
+}
+fun normalizeUserStorage(scope: Scope) {
+    val scope371 = scope
+    if (scope371.assertList("userStorage")) {
+        val scope372 = scope371.childList("userStorage", "userStorage" + scope371.formatArguments("keys" to scope371.argumentKey("keys"),"namespace" to scope371.argumentKey("namespace")))
+        for (i in 0 until scope372.size) {
+            scope372.assertObject(i)
+            val scope373 = scope372.child(i)
+            scope373.set("__typename", scope373.readString("__typename"))
+            scope373.set("id", scope373.readString("id"))
+            scope373.set("key", scope373.readString("key"))
+            scope373.set("value", scope373.readStringOptional("value"))
+        }
+        scope371.set("userStorage" + scope371.formatArguments("keys" to scope371.argumentKey("keys"),"namespace" to scope371.argumentKey("namespace")), scope372.completed())
+    }
+}
+fun normalizeUsers(scope: Scope) {
+    val scope374 = scope
+    if (scope374.assertList("items")) {
+        val scope375 = scope374.childList("items", "users" + scope374.formatArguments("query" to scope374.argumentKey("query")))
+        for (i in 0 until scope375.size) {
+            scope375.assertObject(i)
+            val scope376 = scope375.child(i)
+            scope376.set("__typename", scope376.readString("__typename"))
+            scope376.set("email", scope376.readStringOptional("subtitle"))
+            scope376.set("id", scope376.readString("id"))
+            scope376.set("name", scope376.readString("title"))
+        }
+        scope374.set("users" + scope374.formatArguments("query" to scope374.argumentKey("query")), scope375.completed())
+    }
+}
+fun normalizeAccountCreateInvite(scope: Scope) {
+    val scope377 = scope
+    scope377.assertObject("alphaCreateInvite")
+    val scope378 = scope377.child("alphaCreateInvite", "alphaCreateInvite")
+    scope378.set("__typename", scope378.readString("__typename"))
+    scope378.set("id", scope378.readString("id"))
+    scope378.set("key", scope378.readString("key"))
+}
+fun normalizeAccountDestroyInvite(scope: Scope) {
+    val scope379 = scope
+    scope379.set("alphaDeleteInvite" + scope379.formatArguments("id" to scope379.argumentKey("id")), scope379.readString("alphaDeleteInvite"))
+}
+fun normalizeAccountInviteJoin(scope: Scope) {
+    val scope380 = scope
+    scope380.set("alphaJoinInvite" + scope380.formatArguments("key" to scope380.argumentKey("inviteKey")), scope380.readString("alphaJoinInvite"))
+}
+fun normalizeAddAppToChat(scope: Scope) {
+    val scope381 = scope
+    scope381.assertObject("addAppToChat")
+    val scope382 = scope381.child("addAppToChat", "addAppToChat" + scope381.formatArguments("appId" to scope381.argumentKey("appId"),"chatId" to scope381.argumentKey("chatId")))
+    scope382.set("__typename", scope382.readString("__typename"))
+    normalizeAppChat(scope382)
+}
+fun normalizeAddMessageComment(scope: Scope) {
+    val scope383 = scope
+    scope383.set("addMessageComment" + scope383.formatArguments("fileAttachments" to scope383.argumentKey("fileAttachments"),"mentions" to scope383.argumentKey("mentions"),"message" to scope383.argumentKey("message"),"messageId" to scope383.argumentKey("messageId"),"replyComment" to scope383.argumentKey("replyComment")), scope383.readBoolean("addMessageComment"))
+}
+fun normalizeCancelTyping(scope: Scope) {
+    val scope384 = scope
+    scope384.set("typingCancel" + scope384.formatArguments("conversationId" to scope384.argumentKey("conversationId")), scope384.readString("typingCancel"))
+}
+fun normalizeCommentSetReaction(scope: Scope) {
+    val scope385 = scope
+    scope385.set("commentReactionAdd" + scope385.formatArguments("commentId" to scope385.argumentKey("commentId"),"reaction" to scope385.argumentKey("reaction")), scope385.readBoolean("commentReactionAdd"))
+}
+fun normalizeCommentUnsetReaction(scope: Scope) {
+    val scope386 = scope
+    scope386.set("commentReactionRemove" + scope386.formatArguments("commentId" to scope386.argumentKey("commentId"),"reaction" to scope386.argumentKey("reaction")), scope386.readBoolean("commentReactionRemove"))
+}
+fun normalizeConferenceAnswer(scope: Scope) {
+    val scope387 = scope
+    scope387.assertObject("peerConnectionAnswer")
+    val scope388 = scope387.child("peerConnectionAnswer", "peerConnectionAnswer" + scope387.formatArguments("answer" to scope387.argumentKey("answer"),"id" to scope387.argumentKey("id"),"ownPeerId" to scope387.argumentKey("ownPeerId"),"peerId" to scope387.argumentKey("peerId")))
+    scope388.set("__typename", scope388.readString("__typename"))
+    normalizeConferenceFull(scope388)
+}
+fun normalizeConferenceCandidate(scope: Scope) {
+    val scope389 = scope
+    scope389.assertObject("peerConnectionCandidate")
+    val scope390 = scope389.child("peerConnectionCandidate", "peerConnectionCandidate" + scope389.formatArguments("candidate" to scope389.argumentKey("candidate"),"id" to scope389.argumentKey("id"),"ownPeerId" to scope389.argumentKey("ownPeerId"),"peerId" to scope389.argumentKey("peerId")))
+    scope390.set("__typename", scope390.readString("__typename"))
+    normalizeConferenceFull(scope390)
+}
+fun normalizeConferenceJoin(scope: Scope) {
+    val scope391 = scope
+    scope391.assertObject("conferenceJoin")
+    val scope392 = scope391.child("conferenceJoin", "conferenceJoin" + scope391.formatArguments("id" to scope391.argumentKey("id")))
+    scope392.set("__typename", scope392.readString("__typename"))
+    scope392.assertObject("conference")
+    val scope393 = scope392.child("conference", "conference")
+    scope393.set("__typename", scope393.readString("__typename"))
+    normalizeConferenceFull(scope393)
+    scope392.set("peerId", scope392.readString("peerId"))
+}
+fun normalizeConferenceKeepAlive(scope: Scope) {
+    val scope394 = scope
+    scope394.assertObject("conferenceKeepAlive")
+    val scope395 = scope394.child("conferenceKeepAlive", "conferenceKeepAlive" + scope394.formatArguments("id" to scope394.argumentKey("id"),"peerId" to scope394.argumentKey("peerId")))
+    scope395.set("__typename", scope395.readString("__typename"))
+    normalizeConferenceFull(scope395)
+}
+fun normalizeConferenceLeave(scope: Scope) {
+    val scope396 = scope
+    scope396.assertObject("conferenceLeave")
+    val scope397 = scope396.child("conferenceLeave", "conferenceLeave" + scope396.formatArguments("id" to scope396.argumentKey("id"),"peerId" to scope396.argumentKey("peerId")))
+    scope397.set("__typename", scope397.readString("__typename"))
+    normalizeConferenceFull(scope397)
+}
+fun normalizeConferenceOffer(scope: Scope) {
+    val scope398 = scope
+    scope398.assertObject("peerConnectionOffer")
+    val scope399 = scope398.child("peerConnectionOffer", "peerConnectionOffer" + scope398.formatArguments("id" to scope398.argumentKey("id"),"offer" to scope398.argumentKey("offer"),"ownPeerId" to scope398.argumentKey("ownPeerId"),"peerId" to scope398.argumentKey("peerId")))
+    scope399.set("__typename", scope399.readString("__typename"))
+    normalizeConferenceFull(scope399)
+}
+fun normalizeCreateApp(scope: Scope) {
+    val scope400 = scope
+    scope400.assertObject("createApp")
+    val scope401 = scope400.child("createApp", "createApp" + scope400.formatArguments("about" to scope400.argumentKey("about"),"name" to scope400.argumentKey("name"),"photoRef" to scope400.argumentKey("photoRef"),"shortname" to scope400.argumentKey("shortname")))
+    scope401.set("__typename", scope401.readString("__typename"))
+    normalizeAppFull(scope401)
+}
+fun normalizeCreateOrganization(scope: Scope) {
+    val scope402 = scope
+    scope402.assertObject("organization")
+    val scope403 = scope402.child("organization", "createOrganization" + scope402.formatArguments("input" to scope402.argumentKey("input")))
+    scope403.set("__typename", scope403.readString("__typename"))
+    scope403.set("id", scope403.readString("id"))
+    scope403.set("name", scope403.readString("name"))
+}
+fun normalizeCreateUserProfileAndOrganization(scope: Scope) {
+    val scope404 = scope
+    scope404.assertObject("alphaCreateUserProfileAndOrganization")
+    val scope405 = scope404.child("alphaCreateUserProfileAndOrganization", "alphaCreateUserProfileAndOrganization" + scope404.formatArguments("organization" to scope404.argumentKey("organization"),"user" to scope404.argumentKey("user")))
+    scope405.set("__typename", scope405.readString("__typename"))
+    if (scope405.hasKey("organization")) {
+        val scope406 = scope405.child("organization", "organization")
+        scope406.set("__typename", scope406.readString("__typename"))
+        scope406.set("id", scope406.readString("id"))
+        scope406.set("name", scope406.readString("name"))
+    } else {
+        scope405.setNull("organization")
+    }
+    if (scope405.hasKey("user")) {
+        val scope407 = scope405.child("user", "user")
+        scope407.set("__typename", scope407.readString("__typename"))
+        normalizeUserFull(scope407)
+    } else {
+        scope405.setNull("user")
+    }
+}
+fun normalizeDebugMails(scope: Scope) {
+    val scope408 = scope
+    scope408.set("debugSendEmail" + scope408.formatArguments("type" to scope408.argumentKey("type")), scope408.readBooleanOptional("debugSendEmail"))
+}
+fun normalizeDeleteComment(scope: Scope) {
+    val scope409 = scope
+    scope409.set("deleteComment" + scope409.formatArguments("id" to scope409.argumentKey("id")), scope409.readBoolean("deleteComment"))
+}
+fun normalizeDeleteOrganization(scope: Scope) {
+    val scope410 = scope
+    scope410.set("deleteOrganization" + scope410.formatArguments("id" to scope410.argumentKey("organizationId")), scope410.readBoolean("deleteOrganization"))
+}
+fun normalizeDeleteUser(scope: Scope) {
+    val scope411 = scope
+    scope411.set("superDeleteUser" + scope411.formatArguments("id" to scope411.argumentKey("id")), scope411.readBoolean("superDeleteUser"))
+}
+fun normalizeEditComment(scope: Scope) {
+    val scope412 = scope
+    scope412.set("editComment" + scope412.formatArguments("id" to scope412.argumentKey("id"),"message" to scope412.argumentKey("message")), scope412.readBoolean("editComment"))
+}
+fun normalizeEditPostMessage(scope: Scope) {
+    val scope413 = scope
+    scope413.assertObject("editPostMessage")
+    val scope414 = scope413.child("editPostMessage", "alphaEditPostMessage" + scope413.formatArguments("attachments" to scope413.argumentKey("attachments"),"messageId" to scope413.argumentKey("messageId"),"postType" to scope413.argumentKey("postType"),"text" to scope413.argumentKey("text"),"title" to scope413.argumentKey("title")))
+    scope414.set("__typename", scope414.readString("__typename"))
+    scope414.set("seq", scope414.readInt("seq"))
+}
+fun normalizeFeatureFlagAdd(scope: Scope) {
+    val scope415 = scope
+    scope415.assertObject("featureFlagAdd")
+    val scope416 = scope415.child("featureFlagAdd", "featureFlagAdd" + scope415.formatArguments("key" to scope415.argumentKey("key"),"title" to scope415.argumentKey("title")))
+    scope416.set("__typename", scope416.readString("__typename"))
+    scope416.set("id", scope416.readString("id"))
+    scope416.set("key", scope416.readString("key"))
+    scope416.set("title", scope416.readString("title"))
+}
+fun normalizeFeatureFlagDisable(scope: Scope) {
+    val scope417 = scope
+    scope417.assertObject("superAccountFeatureRemove")
+    val scope418 = scope417.child("superAccountFeatureRemove", "superAccountFeatureRemove" + scope417.formatArguments("featureId" to scope417.argumentKey("featureId"),"id" to scope417.argumentKey("accountId")))
+    scope418.set("__typename", scope418.readString("__typename"))
+    if (scope418.assertList("features")) {
+        val scope419 = scope418.childList("features", "features")
+        for (i in 0 until scope419.size) {
+            scope419.assertObject(i)
+            val scope420 = scope419.child(i)
+            scope420.set("__typename", scope420.readString("__typename"))
+            scope420.set("id", scope420.readString("id"))
+            scope420.set("key", scope420.readString("key"))
+            scope420.set("title", scope420.readString("title"))
+        }
+        scope418.set("features", scope419.completed())
+    }
+    scope418.set("id", scope418.readString("id"))
+}
+fun normalizeFeatureFlagEnable(scope: Scope) {
+    val scope421 = scope
+    scope421.assertObject("superAccountFeatureAdd")
+    val scope422 = scope421.child("superAccountFeatureAdd", "superAccountFeatureAdd" + scope421.formatArguments("featureId" to scope421.argumentKey("featureId"),"id" to scope421.argumentKey("accountId")))
+    scope422.set("__typename", scope422.readString("__typename"))
+    if (scope422.assertList("features")) {
+        val scope423 = scope422.childList("features", "features")
+        for (i in 0 until scope423.size) {
+            scope423.assertObject(i)
+            val scope424 = scope423.child(i)
+            scope424.set("__typename", scope424.readString("__typename"))
+            scope424.set("id", scope424.readString("id"))
+            scope424.set("key", scope424.readString("key"))
+            scope424.set("title", scope424.readString("title"))
+        }
+        scope422.set("features", scope423.completed())
+    }
+    scope422.set("id", scope422.readString("id"))
+}
+fun normalizeFeedPost(scope: Scope) {
+    val scope425 = scope
+    scope425.assertObject("alphaCreateFeedPost")
+    val scope426 = scope425.child("alphaCreateFeedPost", "alphaCreateFeedPost" + scope425.formatArguments("message" to scope425.argumentKey("message")))
+    scope426.set("__typename", scope426.readString("__typename"))
+    scope426.set("id", scope426.readString("id"))
+}
+fun normalizeMarkSequenceRead(scope: Scope) {
+    val scope427 = scope
+    scope427.set("alphaGlobalRead" + scope427.formatArguments("toSeq" to scope427.argumentKey("seq")), scope427.readString("alphaGlobalRead"))
+}
+fun normalizeMediaAnswer(scope: Scope) {
+    val scope428 = scope
+    scope428.assertObject("mediaStreamAnswer")
+    val scope429 = scope428.child("mediaStreamAnswer", "mediaStreamAnswer" + scope428.formatArguments("answer" to scope428.argumentKey("answer"),"id" to scope428.argumentKey("id"),"peerId" to scope428.argumentKey("peerId")))
+    scope429.set("__typename", scope429.readString("__typename"))
+    scope429.set("id", scope429.readString("id"))
+    if (scope429.assertList("streams")) {
+        val scope430 = scope429.childList("streams", "streams")
+        for (i in 0 until scope430.size) {
+            scope430.assertObject(i)
+            val scope431 = scope430.child(i)
+            scope431.set("__typename", scope431.readString("__typename"))
+            if (scope431.assertList("ice")) {
+                val scope432 = scope431.childList("ice", "ice")
+                for (i in 0 until scope432.size) {
+                    scope432.next(scope432.readString(i))
+                }
+                scope431.set("ice", scope432.completed())
+            }
+            scope431.set("id", scope431.readString("id"))
+            scope431.set("sdp", scope431.readStringOptional("sdp"))
+            scope431.set("state", scope431.readString("state"))
+        }
+        scope429.set("streams", scope430.completed())
+    }
+}
+fun normalizeMediaCandidate(scope: Scope) {
+    val scope433 = scope
+    scope433.assertObject("mediaStreamCandidate")
+    val scope434 = scope433.child("mediaStreamCandidate", "mediaStreamCandidate" + scope433.formatArguments("candidate" to scope433.argumentKey("candidate"),"id" to scope433.argumentKey("id"),"peerId" to scope433.argumentKey("peerId")))
+    scope434.set("__typename", scope434.readString("__typename"))
+    scope434.set("id", scope434.readString("id"))
+    if (scope434.assertList("streams")) {
+        val scope435 = scope434.childList("streams", "streams")
+        for (i in 0 until scope435.size) {
+            scope435.assertObject(i)
+            val scope436 = scope435.child(i)
+            scope436.set("__typename", scope436.readString("__typename"))
+            if (scope436.assertList("ice")) {
+                val scope437 = scope436.childList("ice", "ice")
+                for (i in 0 until scope437.size) {
+                    scope437.next(scope437.readString(i))
+                }
+                scope436.set("ice", scope437.completed())
+            }
+            scope436.set("id", scope436.readString("id"))
+            scope436.set("sdp", scope436.readStringOptional("sdp"))
+            scope436.set("state", scope436.readString("state"))
+        }
+        scope434.set("streams", scope435.completed())
+    }
+}
+fun normalizeMediaOffer(scope: Scope) {
+    val scope438 = scope
+    scope438.assertObject("mediaStreamOffer")
+    val scope439 = scope438.child("mediaStreamOffer", "mediaStreamOffer" + scope438.formatArguments("id" to scope438.argumentKey("id"),"offer" to scope438.argumentKey("offer"),"peerId" to scope438.argumentKey("peerId")))
+    scope439.set("__typename", scope439.readString("__typename"))
+    scope439.set("id", scope439.readString("id"))
+    if (scope439.assertList("streams")) {
+        val scope440 = scope439.childList("streams", "streams")
+        for (i in 0 until scope440.size) {
+            scope440.assertObject(i)
+            val scope441 = scope440.child(i)
+            scope441.set("__typename", scope441.readString("__typename"))
+            if (scope441.assertList("ice")) {
+                val scope442 = scope441.childList("ice", "ice")
+                for (i in 0 until scope442.size) {
+                    scope442.next(scope442.readString(i))
+                }
+                scope441.set("ice", scope442.completed())
+            }
+            scope441.set("id", scope441.readString("id"))
+            scope441.set("sdp", scope441.readStringOptional("sdp"))
+            scope441.set("state", scope441.readString("state"))
+        }
+        scope439.set("streams", scope440.completed())
+    }
+}
+fun normalizeMessageSetReaction(scope: Scope) {
+    val scope443 = scope
+    scope443.set("betaReactionSet" + scope443.formatArguments("mid" to scope443.argumentKey("messageId"),"reaction" to scope443.argumentKey("reaction")), scope443.readBoolean("betaReactionSet"))
+}
+fun normalizeMessageUnsetReaction(scope: Scope) {
+    val scope444 = scope
+    scope444.set("betaReactionRemove" + scope444.formatArguments("mid" to scope444.argumentKey("messageId"),"reaction" to scope444.argumentKey("reaction")), scope444.readBoolean("betaReactionRemove"))
+}
+fun normalizeOrganizationActivateByInvite(scope: Scope) {
+    val scope445 = scope
+    scope445.set("joinAppInvite" + scope445.formatArguments("key" to scope445.argumentKey("inviteKey")), scope445.readString("joinAppInvite"))
+}
+fun normalizeOrganizationAddMember(scope: Scope) {
+    val scope446 = scope
+    scope446.assertObject("betaOrganizationMemberAdd")
+    val scope447 = scope446.child("betaOrganizationMemberAdd", "betaOrganizationMemberAdd" + scope446.formatArguments("organizationId" to scope446.argumentKey("organizationId"),"userIds" to scope446.argumentKey("userIds")))
+    scope447.set("__typename", scope447.readString("__typename"))
+    normalizeOrganizationFull(scope447)
+}
+fun normalizeOrganizationAlterPublished(scope: Scope) {
+    val scope448 = scope
+    scope448.assertObject("alphaAlterPublished")
+    val scope449 = scope448.child("alphaAlterPublished", "alphaAlterPublished" + scope448.formatArguments("id" to scope448.argumentKey("organizationId"),"published" to scope448.argumentKey("published")))
+    scope449.set("__typename", scope449.readString("__typename"))
+    normalizeOrganizationSearch(scope449)
+}
+fun normalizeOrganizationChangeMemberRole(scope: Scope) {
+    val scope450 = scope
+    scope450.set("alphaOrganizationChangeMemberRole" + scope450.formatArguments("memberId" to scope450.argumentKey("memberId"),"newRole" to scope450.argumentKey("newRole"),"organizationId" to scope450.argumentKey("organizationId")), scope450.readString("alphaOrganizationChangeMemberRole"))
+}
+fun normalizeOrganizationCreatePublicInvite(scope: Scope) {
+    val scope451 = scope
+    scope451.assertObject("alphaOrganizationRefreshInviteLink")
+    val scope452 = scope451.child("alphaOrganizationRefreshInviteLink", "alphaOrganizationRefreshInviteLink" + scope451.formatArguments("expirationDays" to scope451.argumentKey("expirationDays"),"organizationId" to scope451.argumentKey("organizationId")))
+    scope452.set("__typename", scope452.readString("__typename"))
+    scope452.set("id", scope452.readString("id"))
+    scope452.set("key", scope452.readString("key"))
+    scope452.set("ttl", scope452.readStringOptional("ttl"))
+}
+fun normalizeOrganizationInviteMembers(scope: Scope) {
+    val scope453 = scope
+    scope453.set("alphaOrganizationInviteMembers" + scope453.formatArguments("inviteRequests" to scope453.argumentKey("inviteRequests"),"organizationId" to scope453.argumentKey("organizationId")), scope453.readString("alphaOrganizationInviteMembers"))
+}
+fun normalizeOrganizationMemberRemove(scope: Scope) {
+    val scope454 = scope
+    scope454.assertObject("betaOrganizationMemberRemove")
+    val scope455 = scope454.child("betaOrganizationMemberRemove", "betaOrganizationMemberRemove" + scope454.formatArguments("organizationId" to scope454.argumentKey("organizationId"),"userId" to scope454.argumentKey("userId")))
+    scope455.set("__typename", scope455.readString("__typename"))
+    scope455.set("id", scope455.readString("id"))
+}
+fun normalizeOrganizationRemoveMember(scope: Scope) {
+    val scope456 = scope
+    scope456.set("alphaOrganizationRemoveMember" + scope456.formatArguments("memberId" to scope456.argumentKey("memberId"),"organizationId" to scope456.argumentKey("organizationId")), scope456.readString("alphaOrganizationRemoveMember"))
+}
+fun normalizePersistEvents(scope: Scope) {
+    val scope457 = scope
+    scope457.set("track" + scope457.formatArguments("did" to scope457.argumentKey("did"),"events" to scope457.argumentKey("events"),"isProd" to scope457.argumentKey("isProd"),"platform" to scope457.argumentKey("platform")), scope457.readString("track"))
+}
+fun normalizePinMessage(scope: Scope) {
+    val scope458 = scope
+    scope458.assertObject("pinMessage")
+    val scope459 = scope458.child("pinMessage", "betaPinMessage" + scope458.formatArguments("chatId" to scope458.argumentKey("chatId"),"messageId" to scope458.argumentKey("messageId")))
+    scope459.set("__typename", scope459.readString("__typename"))
+    normalizeRoomShort(scope459)
+}
+fun normalizeProfileCreate(scope: Scope) {
+    val scope460 = scope
+    scope460.assertObject("createProfile")
+    val scope461 = scope460.child("createProfile", "createProfile" + scope460.formatArguments("input" to scope460.argumentKey("input")))
+    scope461.set("__typename", scope461.readString("__typename"))
+    scope461.set("about", scope461.readStringOptional("about"))
+    scope461.set("email", scope461.readStringOptional("email"))
+    scope461.set("firstName", scope461.readStringOptional("firstName"))
+    scope461.set("id", scope461.readString("id"))
+    scope461.set("lastName", scope461.readStringOptional("lastName"))
+    scope461.set("location", scope461.readStringOptional("location"))
+    scope461.set("phone", scope461.readStringOptional("phone"))
+    if (scope461.hasKey("photoRef")) {
+        val scope462 = scope461.child("photoRef", "photoRef")
+        scope462.set("__typename", scope462.readString("__typename"))
+        if (scope462.hasKey("crop")) {
+            val scope463 = scope462.child("crop", "crop")
+            scope463.set("__typename", scope463.readString("__typename"))
+            scope463.set("h", scope463.readInt("h"))
+            scope463.set("w", scope463.readInt("w"))
+            scope463.set("x", scope463.readInt("x"))
+            scope463.set("y", scope463.readInt("y"))
+        } else {
+            scope462.setNull("crop")
+        }
+        scope462.set("uuid", scope462.readString("uuid"))
+    } else {
+        scope461.setNull("photoRef")
+    }
+    scope461.set("website", scope461.readStringOptional("website"))
+}
+fun normalizeProfileUpdate(scope: Scope) {
+    val scope464 = scope
+    scope464.assertObject("updateProfile")
+    val scope465 = scope464.child("updateProfile", "updateProfile" + scope464.formatArguments("input" to scope464.argumentKey("input"),"uid" to scope464.argumentKey("uid")))
+    scope465.set("__typename", scope465.readString("__typename"))
+    scope465.set("about", scope465.readStringOptional("about"))
+    if (scope465.hasKey("invitedBy")) {
+        val scope466 = scope465.child("invitedBy", "alphaInvitedBy")
+        scope466.set("__typename", scope466.readString("__typename"))
+        scope466.set("name", scope466.readString("name"))
+    } else {
+        scope465.setNull("alphaInvitedBy")
+    }
+    scope465.set("alphaJoinedAt", scope465.readStringOptional("joinedAt"))
+    scope465.set("alphaLinkedin", scope465.readStringOptional("linkedin"))
+    scope465.set("alphaPrimaryOrganizationId", scope465.readStringOptional("primaryOrganizationId"))
+    scope465.set("alphaRole", scope465.readStringOptional("role"))
+    scope465.set("email", scope465.readStringOptional("email"))
+    scope465.set("firstName", scope465.readStringOptional("firstName"))
+    scope465.set("id", scope465.readString("id"))
+    scope465.set("lastName", scope465.readStringOptional("lastName"))
+    scope465.set("location", scope465.readStringOptional("location"))
+    scope465.set("phone", scope465.readStringOptional("phone"))
+    if (scope465.hasKey("photoRef")) {
+        val scope467 = scope465.child("photoRef", "photoRef")
+        scope467.set("__typename", scope467.readString("__typename"))
+        if (scope467.hasKey("crop")) {
+            val scope468 = scope467.child("crop", "crop")
+            scope468.set("__typename", scope468.readString("__typename"))
+            scope468.set("h", scope468.readInt("h"))
+            scope468.set("w", scope468.readInt("w"))
+            scope468.set("x", scope468.readInt("x"))
+            scope468.set("y", scope468.readInt("y"))
+        } else {
+            scope467.setNull("crop")
+        }
+        scope467.set("uuid", scope467.readString("uuid"))
+    } else {
+        scope465.setNull("photoRef")
+    }
+    scope465.set("website", scope465.readStringOptional("website"))
+}
+fun normalizeRefreshAppToken(scope: Scope) {
+    val scope469 = scope
+    scope469.assertObject("refreshAppToken")
+    val scope470 = scope469.child("refreshAppToken", "refreshAppToken" + scope469.formatArguments("appId" to scope469.argumentKey("appId")))
+    scope470.set("__typename", scope470.readString("__typename"))
+    normalizeAppFull(scope470)
+}
+fun normalizeRegisterPush(scope: Scope) {
+    val scope471 = scope
+    scope471.set("registerPush" + scope471.formatArguments("endpoint" to scope471.argumentKey("endpoint"),"type" to scope471.argumentKey("type")), scope471.readString("registerPush"))
+}
+fun normalizeRegisterWebPush(scope: Scope) {
+    val scope472 = scope
+    scope472.set("registerWebPush" + scope472.formatArguments("endpoint" to scope472.argumentKey("endpoint")), scope472.readString("registerWebPush"))
+}
+fun normalizeReplyMessage(scope: Scope) {
+    val scope473 = scope
+    scope473.set("betaMessageSend" + scope473.formatArguments("mentions" to scope473.argumentKey("mentions"),"message" to scope473.argumentKey("message"),"replyMessages" to scope473.argumentKey("replyMessages"),"room" to scope473.argumentKey("roomId")), scope473.readBoolean("replyMessage"))
+}
+fun normalizeReportOnline(scope: Scope) {
+    val scope474 = scope
+    scope474.set("presenceReportOnline" + scope474.formatArguments("active" to scope474.argumentKey("active"),"platform" to scope474.argumentKey("platform"),"timeout" to "5000"), scope474.readString("presenceReportOnline"))
+}
+fun normalizeRespondPostMessage(scope: Scope) {
+    val scope475 = scope
+    scope475.set("alphaRespondPostMessage" + scope475.formatArguments("buttonId" to scope475.argumentKey("buttonId"),"messageId" to scope475.argumentKey("messageId")), scope475.readBooleanOptional("alphaRespondPostMessage"))
+    scope475.set("betaReactionSet" + scope475.formatArguments("mid" to scope475.argumentKey("messageId"),"reaction" to scope475.argumentKey("reaction")), scope475.readBoolean("betaReactionSet"))
+}
+fun normalizeRoomAddMember(scope: Scope) {
+    val scope476 = scope
+    scope476.assertObject("betaRoomInvite")
+    val scope477 = scope476.child("betaRoomInvite", "betaRoomInvite" + scope476.formatArguments("invites" to "["+scope476.formatObjectKey("userId" to scope476.argumentKey("userId"),"role" to "MEMBER")+"]","roomId" to scope476.argumentKey("roomId")))
+    scope477.set("__typename", scope477.readString("__typename"))
+    normalizeRoomFull(scope477)
+}
+fun normalizeRoomAddMembers(scope: Scope) {
+    val scope478 = scope
+    scope478.assertObject("betaRoomInvite")
+    val scope479 = scope478.child("betaRoomInvite", "betaRoomInvite" + scope478.formatArguments("invites" to scope478.argumentKey("invites"),"roomId" to scope478.argumentKey("roomId")))
+    scope479.set("__typename", scope479.readString("__typename"))
+    normalizeRoomFull(scope479)
+}
+fun normalizeRoomAlterFeatured(scope: Scope) {
+    val scope480 = scope
+    scope480.assertObject("betaRoomAlterFeatured")
+    val scope481 = scope480.child("betaRoomAlterFeatured", "betaRoomAlterFeatured" + scope480.formatArguments("featured" to scope480.argumentKey("featured"),"roomId" to scope480.argumentKey("roomId")))
+    scope481.set("__typename", scope481.readString("__typename"))
+    scope481.set("featured", scope481.readBoolean("featured"))
+    scope481.set("id", scope481.readString("id"))
+    scope481.set("listed", scope481.readBoolean("listed"))
+}
+fun normalizeRoomAlterHidden(scope: Scope) {
+    val scope482 = scope
+    scope482.assertObject("betaRoomAlterListed")
+    val scope483 = scope482.child("betaRoomAlterListed", "betaRoomAlterListed" + scope482.formatArguments("listed" to scope482.argumentKey("listed"),"roomId" to scope482.argumentKey("roomId")))
+    scope483.set("__typename", scope483.readString("__typename"))
+    scope483.set("featured", scope483.readBoolean("featured"))
+    scope483.set("id", scope483.readString("id"))
+    scope483.set("listed", scope483.readBoolean("listed"))
+}
+fun normalizeRoomChangeRole(scope: Scope) {
+    val scope484 = scope
+    scope484.assertObject("betaRoomChangeRole")
+    val scope485 = scope484.child("betaRoomChangeRole", "betaRoomChangeRole" + scope484.formatArguments("newRole" to scope484.argumentKey("newRole"),"roomId" to scope484.argumentKey("roomId"),"userId" to scope484.argumentKey("userId")))
+    scope485.set("__typename", scope485.readString("__typename"))
+    normalizeRoomFull(scope485)
+}
+fun normalizeRoomCreate(scope: Scope) {
+    val scope486 = scope
+    scope486.assertObject("room")
+    val scope487 = scope486.child("room", "betaRoomCreate" + scope486.formatArguments("channel" to scope486.argumentKey("channel"),"description" to scope486.argumentKey("description"),"kind" to scope486.argumentKey("kind"),"members" to scope486.argumentKey("members"),"message" to scope486.argumentKey("message"),"organizationId" to scope486.argumentKey("organizationId"),"photoRef" to scope486.argumentKey("photoRef"),"title" to scope486.argumentKey("title")))
+    scope487.set("__typename", scope487.readString("__typename"))
+    scope487.set("id", scope487.readString("id"))
+}
+fun normalizeRoomCreateIntro(scope: Scope) {
+    val scope488 = scope
+    scope488.set("betaIntroSend" + scope488.formatArguments("about" to scope488.argumentKey("about"),"file" to scope488.argumentKey("file"),"message" to scope488.argumentKey("about"),"room" to scope488.argumentKey("roomId"),"uid" to scope488.argumentKey("uid")), scope488.readBoolean("intro"))
+}
+fun normalizeRoomDeclineJoinReuest(scope: Scope) {
+    val scope489 = scope
+    scope489.assertObject("betaRoomDeclineJoinRequest")
+    val scope490 = scope489.child("betaRoomDeclineJoinRequest", "betaRoomDeclineJoinRequest" + scope489.formatArguments("roomId" to scope489.argumentKey("roomId"),"userId" to scope489.argumentKey("userId")))
+    scope490.set("__typename", scope490.readString("__typename"))
+    normalizeRoomFull(scope490)
+}
+fun normalizeRoomDeleteMessage(scope: Scope) {
+    val scope491 = scope
+    scope491.set("betaMessageDelete" + scope491.formatArguments("mid" to scope491.argumentKey("messageId")), scope491.readBoolean("betaMessageDelete"))
+}
+fun normalizeRoomDeleteMessages(scope: Scope) {
+    val scope492 = scope
+    scope492.set("betaMessageDelete" + scope492.formatArguments("mids" to scope492.argumentKey("mids")), scope492.readBoolean("betaMessageDelete"))
+}
+fun normalizeRoomDeleteUrlAugmentation(scope: Scope) {
+    val scope493 = scope
+    scope493.set("betaMessageDeleteAugmentation" + scope493.formatArguments("mid" to scope493.argumentKey("messageId")), scope493.readBoolean("betaMessageDeleteAugmentation"))
+}
+fun normalizeRoomEditIntro(scope: Scope) {
+    val scope494 = scope
+    scope494.set("betaIntroEdit" + scope494.formatArguments("about" to scope494.argumentKey("about"),"file" to scope494.argumentKey("file"),"message" to scope494.argumentKey("about"),"mid" to scope494.argumentKey("messageId"),"uid" to scope494.argumentKey("uid")), scope494.readBoolean("intro"))
+}
+fun normalizeRoomEditMessage(scope: Scope) {
+    val scope495 = scope
+    scope495.set("betaMessageEdit" + scope495.formatArguments("file" to scope495.argumentKey("file"),"mentions" to scope495.argumentKey("mentions"),"message" to scope495.argumentKey("message"),"mid" to scope495.argumentKey("messageId"),"replyMessages" to scope495.argumentKey("replyMessages")), scope495.readBoolean("betaMessageEdit"))
+}
+fun normalizeRoomJoin(scope: Scope) {
+    val scope496 = scope
+    scope496.assertObject("join")
+    val scope497 = scope496.child("join", "betaRoomJoin" + scope496.formatArguments("roomId" to scope496.argumentKey("roomId")))
+    scope497.set("__typename", scope497.readString("__typename"))
+    normalizeRoomFull(scope497)
+}
+fun normalizeRoomJoinInviteLink(scope: Scope) {
+    val scope498 = scope
+    scope498.assertObject("join")
+    val scope499 = scope498.child("join", "betaRoomInviteLinkJoin" + scope498.formatArguments("invite" to scope498.argumentKey("invite")))
+    scope499.set("__typename", scope499.readString("__typename"))
+    normalizeRoomFull(scope499)
+}
+fun normalizeRoomKick(scope: Scope) {
+    val scope500 = scope
+    scope500.assertObject("betaRoomKick")
+    val scope501 = scope500.child("betaRoomKick", "betaRoomKick" + scope500.formatArguments("roomId" to scope500.argumentKey("roomId"),"userId" to scope500.argumentKey("userId")))
+    scope501.set("__typename", scope501.readString("__typename"))
+    normalizeRoomFull(scope501)
+}
+fun normalizeRoomLeave(scope: Scope) {
+    val scope502 = scope
+    scope502.assertObject("betaRoomLeave")
+    val scope503 = scope502.child("betaRoomLeave", "betaRoomLeave" + scope502.formatArguments("roomId" to scope502.argumentKey("roomId")))
+    scope503.set("__typename", scope503.readString("__typename"))
+    normalizeRoomFull(scope503)
+}
+fun normalizeRoomRead(scope: Scope) {
+    val scope504 = scope
+    scope504.set("roomRead" + scope504.formatArguments("id" to scope504.argumentKey("id"),"mid" to scope504.argumentKey("mid")), scope504.readBoolean("roomRead"))
+}
+fun normalizeRoomRenewInviteLink(scope: Scope) {
+    val scope505 = scope
+    scope505.set("betaRoomInviteLinkRenew" + scope505.formatArguments("roomId" to scope505.argumentKey("roomId")), scope505.readString("link"))
+}
+fun normalizeRoomSendEmailInvite(scope: Scope) {
+    val scope506 = scope
+    scope506.set("betaRoomInviteLinkSendEmail" + scope506.formatArguments("inviteRequests" to scope506.argumentKey("inviteRequests"),"roomId" to scope506.argumentKey("roomId")), scope506.readString("betaRoomInviteLinkSendEmail"))
+}
+fun normalizeRoomSettingsUpdate(scope: Scope) {
+    val scope507 = scope
+    scope507.assertObject("betaRoomUpdateUserNotificationSettings")
+    val scope508 = scope507.child("betaRoomUpdateUserNotificationSettings", "betaRoomUpdateUserNotificationSettings" + scope507.formatArguments("roomId" to scope507.argumentKey("roomId"),"settings" to scope507.argumentKey("settings")))
+    scope508.set("__typename", scope508.readString("__typename"))
+    scope508.set("id", scope508.readString("id"))
+    scope508.set("mute", scope508.readBooleanOptional("mute"))
+}
+fun normalizeRoomUpdate(scope: Scope) {
+    val scope509 = scope
+    scope509.assertObject("betaRoomUpdate")
+    val scope510 = scope509.child("betaRoomUpdate", "betaRoomUpdate" + scope509.formatArguments("input" to scope509.argumentKey("input"),"roomId" to scope509.argumentKey("roomId")))
+    scope510.set("__typename", scope510.readString("__typename"))
+    if (scope510.isType("PrivateRoom")) {
+        scope510.set("id", scope510.readString("id"))
+    }
+    if (scope510.isType("SharedRoom")) {
+        scope510.set("description", scope510.readStringOptional("description"))
+        scope510.set("id", scope510.readString("id"))
+        scope510.set("photo", scope510.readString("photo"))
+        scope510.set("socialImage", scope510.readStringOptional("socialImage"))
+        scope510.set("title", scope510.readString("title"))
+    }
+}
+fun normalizeSaveDraftMessage(scope: Scope) {
+    val scope511 = scope
+    scope511.set("conversationDraftUpdate" + scope511.formatArguments("conversationId" to scope511.argumentKey("conversationId"),"message" to scope511.argumentKey("message")), scope511.readString("conversationDraftUpdate"))
+}
+fun normalizeSendMessage(scope: Scope) {
+    val scope512 = scope
+    scope512.set("betaMessageSend" + scope512.formatArguments("file" to scope512.argumentKey("file"),"mentions" to scope512.argumentKey("mentions"),"message" to scope512.argumentKey("message"),"repeatKey" to scope512.argumentKey("repeatKey"),"replyMessages" to scope512.argumentKey("replyMessages"),"room" to scope512.argumentKey("room")), scope512.readBoolean("sentMessage"))
+}
+fun normalizeSendPostMessage(scope: Scope) {
+    val scope513 = scope
+    scope513.assertObject("sendPostMessage")
+    val scope514 = scope513.child("sendPostMessage", "alphaSendPostMessage" + scope513.formatArguments("attachments" to scope513.argumentKey("attachments"),"conversationId" to scope513.argumentKey("conversationId"),"postType" to scope513.argumentKey("postType"),"text" to scope513.argumentKey("text"),"title" to scope513.argumentKey("title")))
+    scope514.set("__typename", scope514.readString("__typename"))
+    scope514.set("seq", scope514.readInt("seq"))
+}
+fun normalizeSetOrgShortname(scope: Scope) {
+    val scope515 = scope
+    scope515.set("alphaSetOrgShortName" + scope515.formatArguments("id" to scope515.argumentKey("organizationId"),"shortname" to scope515.argumentKey("shortname")), scope515.readStringOptional("alphaSetOrgShortName"))
+}
+fun normalizeSetTyping(scope: Scope) {
+    val scope516 = scope
+    scope516.set("typingSend" + scope516.formatArguments("conversationId" to scope516.argumentKey("conversationId"),"type" to "TEXT"), scope516.readString("typingSend"))
+}
+fun normalizeSetUserShortname(scope: Scope) {
+    val scope517 = scope
+    scope517.set("alphaSetUserShortName" + scope517.formatArguments("shortname" to scope517.argumentKey("shortname")), scope517.readStringOptional("alphaSetUserShortName"))
+}
+fun normalizeSettingsUpdate(scope: Scope) {
+    val scope518 = scope
+    scope518.assertObject("updateSettings")
+    val scope519 = scope518.child("updateSettings", "updateSettings" + scope518.formatArguments("settings" to scope518.argumentKey("input")))
+    scope519.set("__typename", scope519.readString("__typename"))
+    normalizeSettingsFull(scope519)
+}
+fun normalizeSuperAccountActivate(scope: Scope) {
+    val scope520 = scope
+    scope520.assertObject("superAccountActivate")
+    val scope521 = scope520.child("superAccountActivate", "superAccountActivate" + scope520.formatArguments("id" to scope520.argumentKey("accountId")))
+    scope521.set("__typename", scope521.readString("__typename"))
+    scope521.set("id", scope521.readString("id"))
+    scope521.set("state", scope521.readString("state"))
+}
+fun normalizeSuperAccountAdd(scope: Scope) {
+    val scope522 = scope
+    scope522.assertObject("superAccountAdd")
+    val scope523 = scope522.child("superAccountAdd", "superAccountAdd" + scope522.formatArguments("title" to scope522.argumentKey("title")))
+    scope523.set("__typename", scope523.readString("__typename"))
+    scope523.set("id", scope523.readString("id"))
+}
+fun normalizeSuperAccountMemberAdd(scope: Scope) {
+    val scope524 = scope
+    scope524.assertObject("superAccountMemberAdd")
+    val scope525 = scope524.child("superAccountMemberAdd", "superAccountMemberAdd" + scope524.formatArguments("id" to scope524.argumentKey("accountId"),"userId" to scope524.argumentKey("userId")))
+    scope525.set("__typename", scope525.readString("__typename"))
+    scope525.set("id", scope525.readString("id"))
+    if (scope525.assertList("members")) {
+        val scope526 = scope525.childList("members", "members")
+        for (i in 0 until scope526.size) {
+            scope526.assertObject(i)
+            val scope527 = scope526.child(i)
+            scope527.set("__typename", scope527.readString("__typename"))
+            normalizeUserShort(scope527)
+        }
+        scope525.set("members", scope526.completed())
+    }
+}
+fun normalizeSuperAccountMemberRemove(scope: Scope) {
+    val scope528 = scope
+    scope528.assertObject("superAccountMemberRemove")
+    val scope529 = scope528.child("superAccountMemberRemove", "superAccountMemberRemove" + scope528.formatArguments("id" to scope528.argumentKey("accountId"),"userId" to scope528.argumentKey("userId")))
+    scope529.set("__typename", scope529.readString("__typename"))
+    scope529.set("id", scope529.readString("id"))
+    if (scope529.assertList("members")) {
+        val scope530 = scope529.childList("members", "members")
+        for (i in 0 until scope530.size) {
+            scope530.assertObject(i)
+            val scope531 = scope530.child(i)
+            scope531.set("__typename", scope531.readString("__typename"))
+            normalizeUserShort(scope531)
+        }
+        scope529.set("members", scope530.completed())
+    }
+}
+fun normalizeSuperAccountPend(scope: Scope) {
+    val scope532 = scope
+    scope532.assertObject("superAccountPend")
+    val scope533 = scope532.child("superAccountPend", "superAccountPend" + scope532.formatArguments("id" to scope532.argumentKey("accountId")))
+    scope533.set("__typename", scope533.readString("__typename"))
+    scope533.set("id", scope533.readString("id"))
+    scope533.set("state", scope533.readString("state"))
+}
+fun normalizeSuperAccountRename(scope: Scope) {
+    val scope534 = scope
+    scope534.assertObject("superAccountRename")
+    val scope535 = scope534.child("superAccountRename", "superAccountRename" + scope534.formatArguments("id" to scope534.argumentKey("accountId"),"title" to scope534.argumentKey("title")))
+    scope535.set("__typename", scope535.readString("__typename"))
+    scope535.set("id", scope535.readString("id"))
+    scope535.set("title", scope535.readString("title"))
+}
+fun normalizeSuperAccountSuspend(scope: Scope) {
+    val scope536 = scope
+    scope536.assertObject("superAccountSuspend")
+    val scope537 = scope536.child("superAccountSuspend", "superAccountSuspend" + scope536.formatArguments("id" to scope536.argumentKey("accountId")))
+    scope537.set("__typename", scope537.readString("__typename"))
+    scope537.set("id", scope537.readString("id"))
+    scope537.set("state", scope537.readString("state"))
+}
+fun normalizeSuperAdminAdd(scope: Scope) {
+    val scope538 = scope
+    scope538.set("superAdminAdd" + scope538.formatArguments("role" to scope538.argumentKey("role"),"userId" to scope538.argumentKey("userId")), scope538.readString("superAdminAdd"))
+}
+fun normalizeSuperAdminRemove(scope: Scope) {
+    val scope539 = scope
+    scope539.set("superAdminRemove" + scope539.formatArguments("userId" to scope539.argumentKey("userId")), scope539.readString("superAdminRemove"))
+}
+fun normalizeSwitchReaction(scope: Scope) {
+    val scope540 = scope
+    scope540.set("betaReactionRemove" + scope540.formatArguments("mid" to scope540.argumentKey("messageId"),"reaction" to scope540.argumentKey("from")), scope540.readBoolean("betaReactionRemove"))
+    scope540.set("betaReactionSet" + scope540.formatArguments("mid" to scope540.argumentKey("messageId"),"reaction" to scope540.argumentKey("to")), scope540.readBoolean("betaReactionSet"))
+}
+fun normalizeUnpinMessage(scope: Scope) {
+    val scope541 = scope
+    scope541.assertObject("unpinMessage")
+    val scope542 = scope541.child("unpinMessage", "betaUnpinMessage" + scope541.formatArguments("chatId" to scope541.argumentKey("chatId")))
+    scope542.set("__typename", scope542.readString("__typename"))
+    normalizeRoomShort(scope542)
+}
+fun normalizeUpdateApp(scope: Scope) {
+    val scope543 = scope
+    scope543.assertObject("updateAppProfile")
+    val scope544 = scope543.child("updateAppProfile", "updateAppProfile" + scope543.formatArguments("appId" to scope543.argumentKey("appId"),"input" to scope543.argumentKey("input")))
+    scope544.set("__typename", scope544.readString("__typename"))
+    normalizeAppFull(scope544)
+}
+fun normalizeUpdateOrganization(scope: Scope) {
+    val scope545 = scope
+    scope545.assertObject("updateOrganizationProfile")
+    val scope546 = scope545.child("updateOrganizationProfile", "updateOrganizationProfile" + scope545.formatArguments("id" to scope545.argumentKey("organizationId"),"input" to scope545.argumentKey("input")))
+    scope546.set("__typename", scope546.readString("__typename"))
+    normalizeOrganizationProfileFull(scope546)
+}
+fun normalizeUpdateWelcomeMessage(scope: Scope) {
+    val scope547 = scope
+    scope547.set("updateWelcomeMessage" + scope547.formatArguments("roomId" to scope547.argumentKey("roomId"),"welcomeMessageIsOn" to scope547.argumentKey("welcomeMessageIsOn"),"welcomeMessageSender" to scope547.argumentKey("welcomeMessageSender"),"welcomeMessageText" to scope547.argumentKey("welcomeMessageText")), scope547.readBoolean("updateWelcomeMessage"))
+}
+fun normalizeUserStorageSet(scope: Scope) {
+    val scope548 = scope
+    if (scope548.assertList("userStorageSet")) {
+        val scope549 = scope548.childList("userStorageSet", "userStorageSet" + scope548.formatArguments("data" to scope548.argumentKey("data"),"namespace" to scope548.argumentKey("namespace")))
+        for (i in 0 until scope549.size) {
+            scope549.assertObject(i)
+            val scope550 = scope549.child(i)
+            scope550.set("__typename", scope550.readString("__typename"))
+            scope550.set("id", scope550.readString("id"))
+            scope550.set("key", scope550.readString("key"))
+            scope550.set("value", scope550.readStringOptional("value"))
+        }
+        scope548.set("userStorageSet" + scope548.formatArguments("data" to scope548.argumentKey("data"),"namespace" to scope548.argumentKey("namespace")), scope549.completed())
+    }
+}
+fun normalizeChatWatch(scope: Scope) {
+    val scope551 = scope
+    scope551.assertObject("event")
+    val scope552 = scope551.child("event", "chatUpdates" + scope551.formatArguments("chatId" to scope551.argumentKey("chatId"),"fromState" to scope551.argumentKey("state")))
+    scope552.set("__typename", scope552.readString("__typename"))
+    if (scope552.isType("ChatUpdateSingle")) {
+        scope552.set("seq", scope552.readInt("seq"))
+        scope552.set("state", scope552.readString("state"))
+        scope552.assertObject("update")
+        val scope553 = scope552.child("update", "update")
+        scope553.set("__typename", scope553.readString("__typename"))
+        normalizeChatUpdateFragment(scope553)
+    }
+    if (scope552.isType("ChatUpdateBatch")) {
+        scope552.set("fromSeq", scope552.readInt("fromSeq"))
+        scope552.set("seq", scope552.readInt("seq"))
+        scope552.set("state", scope552.readString("state"))
+        if (scope552.assertList("updates")) {
+            val scope554 = scope552.childList("updates", "updates")
+            for (i in 0 until scope554.size) {
+                scope554.assertObject(i)
+                val scope555 = scope554.child(i)
+                scope555.set("__typename", scope555.readString("__typename"))
+                normalizeChatUpdateFragment(scope555)
+            }
+            scope552.set("updates", scope554.completed())
+        }
+    }
+}
+fun normalizeCommentWatch(scope: Scope) {
+    val scope556 = scope
+    if (scope556.hasKey("event")) {
+        val scope557 = scope556.child("event", "commentUpdates" + scope556.formatArguments("fromState" to scope556.argumentKey("fromState"),"peerId" to scope556.argumentKey("peerId")))
+        scope557.set("__typename", scope557.readString("__typename"))
+        if (scope557.isType("CommentUpdateSingle")) {
+            scope557.set("seq", scope557.readInt("seq"))
+            scope557.set("state", scope557.readString("state"))
+            scope557.assertObject("update")
+            val scope558 = scope557.child("update", "update")
+            scope558.set("__typename", scope558.readString("__typename"))
+            normalizeCommentUpdateFragment(scope558)
+        }
+        if (scope557.isType("CommentUpdateBatch")) {
+            scope557.set("fromSeq", scope557.readInt("fromSeq"))
+            scope557.set("seq", scope557.readInt("seq"))
+            scope557.set("state", scope557.readString("state"))
+            if (scope557.assertList("updates")) {
+                val scope559 = scope557.childList("updates", "updates")
+                for (i in 0 until scope559.size) {
+                    scope559.assertObject(i)
+                    val scope560 = scope559.child(i)
+                    scope560.set("__typename", scope560.readString("__typename"))
+                    normalizeCommentUpdateFragment(scope560)
+                }
+                scope557.set("updates", scope559.completed())
+            }
+        }
+    } else {
+        scope556.setNull("commentUpdates" + scope556.formatArguments("fromState" to scope556.argumentKey("fromState"),"peerId" to scope556.argumentKey("peerId")))
+    }
+}
+fun normalizeConferenceMediaWatch(scope: Scope) {
+    val scope561 = scope
+    scope561.assertObject("media")
+    val scope562 = scope561.child("media", "alphaConferenceMediaWatch" + scope561.formatArguments("id" to scope561.argumentKey("id"),"peerId" to scope561.argumentKey("peerId")))
+    scope562.set("__typename", scope562.readString("__typename"))
+    scope562.set("id", scope562.readString("id"))
+    if (scope562.assertList("streams")) {
+        val scope563 = scope562.childList("streams", "streams")
+        for (i in 0 until scope563.size) {
+            scope563.assertObject(i)
+            val scope564 = scope563.child(i)
+            scope564.set("__typename", scope564.readString("__typename"))
+            if (scope564.assertList("ice")) {
+                val scope565 = scope564.childList("ice", "ice")
+                for (i in 0 until scope565.size) {
+                    scope565.next(scope565.readString(i))
+                }
+                scope564.set("ice", scope565.completed())
+            }
+            scope564.set("id", scope564.readString("id"))
+            scope564.set("sdp", scope564.readStringOptional("sdp"))
+            scope564.set("state", scope564.readString("state"))
+        }
+        scope562.set("streams", scope563.completed())
+    }
+}
+fun normalizeConferenceWatch(scope: Scope) {
+    val scope566 = scope
+    scope566.assertObject("alphaConferenceWatch")
+    val scope567 = scope566.child("alphaConferenceWatch", "alphaConferenceWatch" + scope566.formatArguments("id" to scope566.argumentKey("id")))
+    scope567.set("__typename", scope567.readString("__typename"))
+    normalizeConferenceFull(scope567)
+}
+fun normalizeDialogsWatch(scope: Scope) {
+    val scope568 = scope
+    scope568.assertObject("event")
+    val scope569 = scope568.child("event", "dialogsUpdates" + scope568.formatArguments("fromState" to scope568.argumentKey("state")))
+    scope569.set("__typename", scope569.readString("__typename"))
+    if (scope569.isType("DialogUpdateSingle")) {
+        scope569.set("seq", scope569.readInt("seq"))
+        scope569.set("state", scope569.readString("state"))
+        scope569.assertObject("update")
+        val scope570 = scope569.child("update", "update")
+        scope570.set("__typename", scope570.readString("__typename"))
+        normalizeDialogUpdateFragment(scope570)
+    }
+    if (scope569.isType("DialogUpdateBatch")) {
+        scope569.set("fromSeq", scope569.readInt("fromSeq"))
+        scope569.set("seq", scope569.readInt("seq"))
+        scope569.set("state", scope569.readString("state"))
+        if (scope569.assertList("updates")) {
+            val scope571 = scope569.childList("updates", "updates")
+            for (i in 0 until scope571.size) {
+                scope571.assertObject(i)
+                val scope572 = scope571.child(i)
+                scope572.set("__typename", scope572.readString("__typename"))
+                normalizeDialogUpdateFragment(scope572)
+            }
+            scope569.set("updates", scope571.completed())
+        }
+    }
+}
+fun normalizeOnlineWatch(scope: Scope) {
+    val scope573 = scope
+    scope573.assertObject("alphaSubscribeChatOnline")
+    val scope574 = scope573.child("alphaSubscribeChatOnline", "alphaSubscribeChatOnline" + scope573.formatArguments("conversations" to scope573.argumentKey("conversations")))
+    scope574.set("__typename", scope574.readString("__typename"))
+    scope574.set("timeout", scope574.readInt("timeout"))
+    scope574.set("type", scope574.readString("type"))
+    scope574.assertObject("user")
+    val scope575 = scope574.child("user", "user")
+    scope575.set("__typename", scope575.readString("__typename"))
+    scope575.set("id", scope575.readString("id"))
+    scope575.set("lastSeen", scope575.readStringOptional("lastSeen"))
+    scope575.set("online", scope575.readBoolean("online"))
+}
+fun normalizeSettingsWatch(scope: Scope) {
+    val scope576 = scope
+    scope576.assertObject("watchSettings")
+    val scope577 = scope576.child("watchSettings", "watchSettings")
+    scope577.set("__typename", scope577.readString("__typename"))
+    normalizeSettingsFull(scope577)
+}
+fun normalizeTypingsWatch(scope: Scope) {
+    val scope578 = scope
+    scope578.assertObject("typings")
+    val scope579 = scope578.child("typings", "typings")
+    scope579.set("__typename", scope579.readString("__typename"))
+    scope579.set("cancel", scope579.readBoolean("cancel"))
+    scope579.assertObject("conversation")
+    val scope580 = scope579.child("conversation", "conversation")
+    scope580.set("__typename", scope580.readString("__typename"))
+    scope580.set("id", scope580.readString("id"))
+    scope579.assertObject("user")
+    val scope581 = scope579.child("user", "user")
+    scope581.set("__typename", scope581.readString("__typename"))
+    scope581.set("id", scope581.readString("id"))
+    scope581.set("name", scope581.readString("name"))
+    scope581.set("photo", scope581.readStringOptional("photo"))
+}
+
+object Operations {
+    val Account = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Account{me:me{__typename ...UserShort }myPermissions{__typename roles }sessionState:sessionState{__typename ...SessionStateFull }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment SessionStateFull on SessionState{__typename isAccountActivated isAccountExists isAccountPicked isBlocked isCompleted isLoggedIn isProfileCreated }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAccount(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AccountAppInvite = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query AccountAppInvite{invite:appInvite }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAccountAppInvite(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AccountAppInviteInfo = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query AccountAppInviteInfo(\$inviteKey:String!){invite:alphaInviteInfo(key:\$inviteKey){__typename creator{__typename ...UserShort }}appInvite:appInviteInfo(key:\$inviteKey){__typename inviter{__typename ...UserShort }}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAccountAppInviteInfo(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AccountInviteInfo = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query AccountInviteInfo(\$inviteKey:String!){invite:alphaInviteInfo(key:\$inviteKey){__typename creator{__typename ...UserShort }forEmail forName id joined key membersCount orgId organization{__typename about isCommunity:alphaIsCommunity }photo title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAccountInviteInfo(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AccountInvites = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query AccountInvites{invites:alphaInvites{__typename id key }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAccountInvites(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AccountInvitesHistory = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query AccountInvitesHistory{invites:alphaInvitesHistory{__typename acceptedBy{__typename id name picture }forEmail isGlobal }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAccountInvitesHistory(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AccountSettings = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query AccountSettings{me:me{__typename ...UserShort }organizations:myOrganizations{__typename ...OrganizationShort }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAccountSettings(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AvailableRooms = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query AvailableRooms{rooms:betaAvailableRooms{__typename ... on SharedRoom{id kind membersCount membership organization{__typename id name photo }photo title }}}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAvailableRooms(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ChatHistory = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query ChatHistory(\$before:ID,\$chatId:ID!,\$first:Int!){state:conversationState(id:\$chatId){__typename state }messages(before:\$before,chatId:\$chatId,first:\$first){__typename ...FullMessage }}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeChatHistory(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ChatInit = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query ChatInit(\$before:ID,\$chatId:ID!,\$first:Int!){state:conversationState(id:\$chatId){__typename state }messages(before:\$before,chatId:\$chatId,first:\$first){__typename ...FullMessage }room(id:\$chatId){__typename ...RoomShort }}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeChatInit(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ChatSearchGroup = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query ChatSearchGroup(\$members:[ID!]!){group:alphaChatSearch(members:\$members){__typename flexibleId id }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeChatSearchGroup(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val Conference = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Conference(\$id:ID!){conference(id:\$id){__typename ...ConferenceFull }}fragment ConferenceFull on Conference{__typename iceServers{__typename credential urls username }id peers{__typename connection{__typename ice sdp state }id user{__typename ...UserShort }}startTime }fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeConference(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ConferenceMedia = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query ConferenceMedia(\$id:ID!,\$peerId:ID!){conferenceMedia(id:\$id,peerId:\$peerId){__typename iceServers{__typename credential urls username }id streams{__typename ice id sdp state }}}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeConferenceMedia(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val Dialogs = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Dialogs(\$after:String){counter:alphaNotificationCounter{__typename id unreadCount }dialogs(after:\$after,first:20){__typename cursor items{__typename topMessage:alphaTopMessage{__typename ...TinyMessage }cid fid haveMention isChannel isMuted kind photo title unreadCount }}state:dialogsState{__typename state }}fragment TinyMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserTiny }... on GeneralMessage{attachments{__typename fallback id ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat isImage }filePreview }}commentsCount quotedMessages{__typename id }}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeDialogs(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ExploreCommunity = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query ExploreCommunity(\$page:Int,\$query:String,\$sort:String){items:alphaComunityPrefixSearch(first:25,page:\$page,query:\$query,sort:\$sort){__typename edges{__typename cursor node{__typename ...CommunitySearch }}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount }}}fragment CommunitySearch on Organization{__typename about featured:alphaFeatured id isMine membersCount name photo status superAccountId }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeExploreCommunity(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ExploreOrganizations = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query ExploreOrganizations(\$after:String,\$all:Boolean,\$page:Int,\$prefix:String,\$query:String,\$sort:String){items:alphaOrganizations(after:\$after,all:\$all,first:25,page:\$page,prefix:\$prefix,query:\$query,sort:\$sort){__typename edges{__typename cursor node{__typename ...OrganizationSearch }}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount }}}fragment OrganizationSearch on Organization{__typename about featured:alphaFeatured members:alphaOrganizationMembers{__typename user{__typename id name photo }}id isMine membersCount name photo status superAccountId }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeExploreOrganizations(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ExplorePeople = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query ExplorePeople(\$after:String,\$page:Int,\$query:String,\$sort:String){items:userSearch(after:\$after,first:25,page:\$page,query:\$query,sort:\$sort){__typename edges{__typename cursor node{__typename isYou ...UserShort }}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount }}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeExplorePeople(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val FeatureFlags = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query FeatureFlags{featureFlags{__typename id key title }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeFeatureFlags(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val FeedHome = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query FeedHome{homeFeed:alphaHomeFeed{__typename by:alphaBy{__typename ...UserShort }date id text }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeFeedHome(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val FetchPushSettings = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query FetchPushSettings{pushSettings{__typename webPushKey }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeFetchPushSettings(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val GetDraftMessage = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query GetDraftMessage(\$conversationId:ID!){message:conversationDraft(conversationId:\$conversationId)}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeGetDraftMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val GlobalCounter = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query GlobalCounter{alphaNotificationCounter{__typename id unreadCount }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeGlobalCounter(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val GlobalSearch = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query GlobalSearch(\$query:String!){items:alphaGlobalSearch(query:\$query){__typename ... on Organization{...OrganizationShort }... on User{...UserShort }... on SharedRoom{id kind membersCount membership organization{__typename id name photo }roomPhoto:photo title }}}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeGlobalSearch(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val Message = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Message(\$messageId:ID!){message(messageId:\$messageId){__typename ...FullMessage }}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val MessageComments = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query MessageComments(\$messageId:ID!){messageComments(messageId:\$messageId){__typename comments{__typename ...CommentEntryFragment }count id state{__typename state }}}fragment CommentEntryFragment on CommentEntry{__typename childComments{__typename id }comment{__typename id ...FullMessage }deleted id parentComment{__typename id }}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeMessageComments(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val MyApps = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query MyApps{apps:myApps{__typename ...AppFull }}fragment AppFull on AppProfile{__typename about id name photoRef{__typename crop{__typename h w x y }uuid }shortname token{__typename salt }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeMyApps(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val MyOrganizations = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query MyOrganizations{myOrganizations{__typename isPrimary:betaIsPrimary ...OrganizationShort }}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeMyOrganizations(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val Online = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Online(\$userId:ID!){user:user(id:\$userId){__typename id lastSeen online }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOnline(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val Organization = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Organization(\$organizationId:ID!){organization(id:\$organizationId){__typename ...OrganizationFull }}fragment OrganizationFull on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull }}members:alphaOrganizationMembers{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort }facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website }fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganization(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationByPrefix = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query OrganizationByPrefix(\$query:String!){organizationByPrefix:alphaOrganizationByPrefix(query:\$query){__typename ...OrganizationSearch }}fragment OrganizationSearch on Organization{__typename about featured:alphaFeatured members:alphaOrganizationMembers{__typename user{__typename id name photo }}id isMine membersCount name photo status superAccountId }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationByPrefix(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationMembersShort = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query OrganizationMembersShort(\$organizationId:ID!){organization(id:\$organizationId){__typename members:alphaOrganizationMembers{__typename user{__typename id }}...OrganizationWithoutMembersFragment }}fragment OrganizationWithoutMembersFragment on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort }facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website }fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationMembersShort(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationMembersShortPaginated = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query OrganizationMembersShortPaginated(\$after:ID,\$first:Int,\$organizationId:ID!){organization(id:\$organizationId){__typename members:alphaOrganizationMembers(after:\$after,first:\$first){__typename role user{__typename ...UserFull }}...OrganizationWithoutMembersFragment }}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment OrganizationWithoutMembersFragment on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort }facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationMembersShortPaginated(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationProfile = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query OrganizationProfile(\$organizationId:ID!){organizationProfile(id:\$organizationId){__typename ...OrganizationProfileFull }}fragment OrganizationProfileFull on OrganizationProfile{__typename about featured:alphaFeatured facebook id linkedin name photoRef{__typename crop{__typename h w x y }uuid }shortname twitter website websiteTitle }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationProfile(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationPublicInvite = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query OrganizationPublicInvite(\$organizationId:ID){publicInvite:alphaOrganizationInviteLink(organizationId:\$organizationId){__typename id key ttl }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationPublicInvite(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationWithoutMembers = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query OrganizationWithoutMembers(\$organizationId:ID!){organization(id:\$organizationId){__typename ...OrganizationWithoutMembersFragment }}fragment OrganizationWithoutMembersFragment on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort }facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website }fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationWithoutMembers(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val Permissions = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Permissions{myPermissions{__typename roles }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizePermissions(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val Profile = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Profile{user:me{__typename id shortname }profile:myProfile{__typename about invitedBy:alphaInvitedBy{__typename name }joinedAt:alphaJoinedAt linkedin:alphaLinkedin role:alphaRole email firstName id lastName location phone photoRef{__typename crop{__typename h w x y }uuid }primaryOrganization{__typename id name }website }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeProfile(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ProfilePrefill = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query ProfilePrefill{prefill:myProfilePrefill{__typename firstName lastName picture }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeProfilePrefill(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ResolveShortName = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query ResolveShortName(\$shortname:String!){item:alphaResolveShortName(shortname:\$shortname){__typename ... on User{...UserFull }... on Organization{...OrganizationFull }}}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment OrganizationFull on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull }}members:alphaOrganizationMembers{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort }facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeResolveShortName(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ResolvedInvite = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query ResolvedInvite(\$key:String!){invite:alphaResolveInvite(key:\$key){__typename ... on InviteInfo{creator{__typename ...UserShort }orgId title }... on AppInvite{inviter{__typename ...UserShort }}... on RoomInvite{invitedByUser{__typename ...UserShort }room{__typename ... on SharedRoom{description id isChannel kind membersCount membership photo socialImage title }}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeResolvedInvite(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val Room = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Room(\$id:ID!){room(id:\$id){__typename ...RoomFull }}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort }}membersCount membership organization{__typename ...OrganizationMedium }photo pinnedMessage{__typename ...FullMessage }requests{__typename user{__typename ...UserShort }}role settings{__typename id mute }socialImage title welcomeMessage{__typename isOn message sender{__typename id name }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo }fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoom(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomChat = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomChat(\$id:ID!){room(id:\$id){__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{canEdit id isChannel kind membership pinnedMessage{__typename ...FullMessage }title }}}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomChat(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomHeader = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomHeader(\$id:ID!){room(id:\$id){__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename id name photo primaryOrganization{__typename id name }}}... on SharedRoom{canEdit description id isChannel kind membersCount organization{__typename isAdmin:betaIsAdmin isOwner:betaIsOwner id name }photo role settings{__typename id mute }socialImage title welcomeMessage{__typename isOn message sender{__typename id name }}}}}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomHeader(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomInviteInfo = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomInviteInfo(\$invite:String!){invite:betaRoomInviteInfo(invite:\$invite){__typename id invitedByUser{__typename ...UserShort }room{__typename ... on SharedRoom{description id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo socialImage title }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomInviteInfo(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomInviteLink = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomInviteLink(\$roomId:ID!){link:betaRoomInviteLink(roomId:\$roomId)}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomInviteLink(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomMemberShort = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomMemberShort(\$memberId:ID!,\$roomId:ID!){member:roomMember(memberId:\$memberId,roomId:\$roomId){__typename user{__typename firstName id name }}}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomMemberShort(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomMembers = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomMembers(\$roomId:ID!){members:roomMembers(roomId:\$roomId){__typename canKick membership role user{__typename ...UserShort }}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomMembers(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomMembersPaginated = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomMembersPaginated(\$after:ID,\$first:Int,\$roomId:ID!){members:roomMembers(after:\$after,first:\$first,roomId:\$roomId){__typename canKick membership role user{__typename ...UserShort }}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomMembersPaginated(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomMembersShort = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomMembersShort(\$roomId:ID!){members:roomMembers(roomId:\$roomId){__typename user{__typename id }}}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomMembersShort(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomSearch = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomSearch{items:betaRoomSearch(first:150){__typename edges{__typename cursor node{__typename id isChannel kind membersCount membership organization{__typename name photo }photo title }}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount }}}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomSearch(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomSearchText = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomSearchText(\$query:String!){items:betaDialogTextSearch(query:\$query){__typename id:cid flexibleId:fid kind photo title }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomSearchText(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomSuper = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomSuper(\$id:ID!){roomSuper(id:\$id){__typename featured id listed }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomSuper(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomTiny = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomTiny(\$id:ID!){room(id:\$id){__typename ...RoomShort }}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomTiny(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomWithoutMembers = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query RoomWithoutMembers(\$id:ID!){room(id:\$id){__typename ...RoomFullWithoutMembers }}fragment RoomFullWithoutMembers on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage description id isChannel kind membersCount membership organization{__typename ...OrganizationMedium }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }socialImage title welcomeMessage{__typename isOn message sender{__typename id name }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo }fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomWithoutMembers(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val Settings = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Settings{settings{__typename ...SettingsFull }}fragment SettingsFull on Settings{__typename desktopNotifications emailFrequency id mobileAlert mobileIncludeText mobileNotifications primaryEmail }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSettings(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAccount = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query SuperAccount(\$accountId:ID!,\$viaOrgId:Boolean){superAccount(id:\$accountId,viaOrgId:\$viaOrgId){__typename published:alphaPublished createdAt createdBy{__typename name }features{__typename id key title }id members{__typename ...UserShort }orgId state title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAccount(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAccounts = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query SuperAccounts{superAccounts{__typename id orgId state title }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAccounts(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAdmins = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query SuperAdmins{superAdmins{__typename email role user{__typename ...UserShort }}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAdmins(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val User = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query User(\$userId:ID!){conversation:room(id:\$userId){__typename ... on PrivateRoom{id settings{__typename id mute }}}user:user(id:\$userId){__typename ...UserFull }}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeUser(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val UserStorage = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query UserStorage(\$keys:[String!]!,\$namespace:String!){userStorage(keys:\$keys,namespace:\$namespace){__typename id key value }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeUserStorage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val Users = object: OperationDefinition {
+        override val kind = OperationKind.QUERY
+        override val body = "query Users(\$query:String!){items:users(query:\$query){__typename subtitle:email id title:name }}"
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeUsers(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+}

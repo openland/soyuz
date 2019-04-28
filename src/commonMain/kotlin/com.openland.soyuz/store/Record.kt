@@ -7,11 +7,19 @@ sealed class RecordValue {
         override fun equals(other: Any?): kotlin.Boolean {
             return other != null && other is RecordValue.String && other.value == value
         }
+
+        override fun toString(): kotlin.String {
+            return value
+        }
     }
 
     class Number(val value: kotlin.Float) : RecordValue() {
         override fun equals(other: Any?): kotlin.Boolean {
             return other != null && other is RecordValue.Number && other.value == value
+        }
+
+        override fun toString(): kotlin.String {
+            return value.toString()
         }
     }
 
@@ -19,18 +27,35 @@ sealed class RecordValue {
         override fun equals(other: Any?): kotlin.Boolean {
             return other != null && other is RecordValue.Boolean && other.value == value
         }
+
+        override fun toString(): kotlin.String {
+            return value.toString()
+        }
     }
 
-    object Null : RecordValue()
+    object Null : RecordValue() {
+        override fun toString(): kotlin.String {
+            return "<NULL>"
+        }
+    }
+
     class Reference(val key: kotlin.String) : RecordValue() {
         override fun equals(other: Any?): kotlin.Boolean {
             return other != null && other is RecordValue.Reference && other.key == key
+        }
+
+        override fun toString(): kotlin.String {
+            return "<Ref: $key>"
         }
     }
 
     class List(val items: kotlin.collections.List<RecordValue>) : RecordValue() {
         override fun equals(other: Any?): kotlin.Boolean {
             return other != null && other is RecordValue.List && other.items == items
+        }
+
+        override fun toString(): kotlin.String {
+            return "<List>"
         }
     }
 }
