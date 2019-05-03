@@ -12,6 +12,8 @@ enum class OperationKind {
 
 interface OperationDefinition {
     val kind: OperationKind
+    val selector: OutputType.Object?
+    val name: String
     val body: String
     fun normalizeResponse(response: JsonObject): RecordSet
 }

@@ -3,9 +3,7 @@ package com.openland.soyuz.gen
 import com.openland.soyuz.store.RecordSet
 import kotlinx.serialization.json.JsonObject
 
-fun normalizeAppChat(scope: Scope) {
-    val scope1 = scope
-    scope1.assertType("AppChat")
+fun normalizeAppChat(scope1: Scope) {
     scope1.set("__typename", scope1.readString("__typename"))
     scope1.assertObject("chat")
     val scope2 = scope1.child("chat", "chat")
@@ -18,9 +16,7 @@ fun normalizeAppChat(scope: Scope) {
     }
     scope1.set("webhook", scope1.readString("webhook"))
 }
-fun normalizeAppFull(scope: Scope) {
-    val scope3 = scope
-    scope3.assertType("AppProfile")
+fun normalizeAppFull(scope3: Scope) {
     scope3.set("__typename", scope3.readString("__typename"))
     scope3.set("about", scope3.readStringOptional("about"))
     scope3.set("id", scope3.readString("id"))
@@ -48,18 +44,14 @@ fun normalizeAppFull(scope: Scope) {
     scope6.set("__typename", scope6.readString("__typename"))
     scope6.set("salt", scope6.readString("salt"))
 }
-fun normalizeOrganizationShort(scope: Scope) {
-    val scope7 = scope
-    scope7.assertType("Organization")
+fun normalizeOrganizationShort(scope7: Scope) {
     scope7.set("__typename", scope7.readString("__typename"))
     scope7.set("alphaIsCommunity", scope7.readBoolean("isCommunity"))
     scope7.set("id", scope7.readString("id"))
     scope7.set("name", scope7.readString("name"))
     scope7.set("photo", scope7.readStringOptional("photo"))
 }
-fun normalizeUserShort(scope: Scope) {
-    val scope8 = scope
-    scope8.assertType("User")
+fun normalizeUserShort(scope8: Scope) {
     scope8.set("__typename", scope8.readString("__typename"))
     scope8.set("email", scope8.readStringOptional("email"))
     scope8.set("firstName", scope8.readString("firstName"))
@@ -80,9 +72,7 @@ fun normalizeUserShort(scope: Scope) {
     }
     scope8.set("shortname", scope8.readStringOptional("shortname"))
 }
-fun normalizeUserTiny(scope: Scope) {
-    val scope10 = scope
-    scope10.assertType("User")
+fun normalizeUserTiny(scope10: Scope) {
     scope10.set("__typename", scope10.readString("__typename"))
     scope10.set("firstName", scope10.readString("firstName"))
     scope10.set("id", scope10.readString("id"))
@@ -99,9 +89,7 @@ fun normalizeUserTiny(scope: Scope) {
     }
     scope10.set("shortname", scope10.readStringOptional("shortname"))
 }
-fun normalizeFullMessage(scope: Scope) {
-    val scope12 = scope
-    scope12.assertType("ModernMessage")
+fun normalizeFullMessage(scope12: Scope) {
     scope12.set("__typename", scope12.readString("__typename"))
     scope12.set("date", scope12.readString("date"))
     scope12.set("fallback", scope12.readString("fallback"))
@@ -466,9 +454,7 @@ fun normalizeFullMessage(scope: Scope) {
         }
     }
 }
-fun normalizeRoomShort(scope: Scope) {
-    val scope58 = scope
-    scope58.assertType("Room")
+fun normalizeRoomShort(scope58: Scope) {
     scope58.set("__typename", scope58.readString("__typename"))
     if (scope58.isType("PrivateRoom")) {
         scope58.set("id", scope58.readString("id"))
@@ -514,9 +500,7 @@ fun normalizeRoomShort(scope: Scope) {
         scope58.set("title", scope58.readString("title"))
     }
 }
-fun normalizeChatUpdateFragment(scope: Scope) {
-    val scope64 = scope
-    scope64.assertType("ChatUpdate")
+fun normalizeChatUpdateFragment(scope64: Scope) {
     scope64.set("__typename", scope64.readString("__typename"))
     if (scope64.isType("ChatMessageReceived")) {
         scope64.assertObject("message")
@@ -547,9 +531,7 @@ fun normalizeChatUpdateFragment(scope: Scope) {
         scope64.set("lostAccess", scope64.readBoolean("lostAccess"))
     }
 }
-fun normalizeCommentEntryFragment(scope: Scope) {
-    val scope69 = scope
-    scope69.assertType("CommentEntry")
+fun normalizeCommentEntryFragment(scope69: Scope) {
     scope69.set("__typename", scope69.readString("__typename"))
     if (scope69.assertList("childComments")) {
         val scope70 = scope69.childList("childComments", "childComments")
@@ -576,9 +558,7 @@ fun normalizeCommentEntryFragment(scope: Scope) {
         scope69.setNull("parentComment")
     }
 }
-fun normalizeCommentUpdateFragment(scope: Scope) {
-    val scope74 = scope
-    scope74.assertType("CommentUpdate")
+fun normalizeCommentUpdateFragment(scope74: Scope) {
     scope74.set("__typename", scope74.readString("__typename"))
     if (scope74.isType("CommentReceived")) {
         scope74.assertObject("comment")
@@ -593,9 +573,7 @@ fun normalizeCommentUpdateFragment(scope: Scope) {
         normalizeCommentEntryFragment(scope76)
     }
 }
-fun normalizeCommunitySearch(scope: Scope) {
-    val scope77 = scope
-    scope77.assertType("Organization")
+fun normalizeCommunitySearch(scope77: Scope) {
     scope77.set("__typename", scope77.readString("__typename"))
     scope77.set("about", scope77.readStringOptional("about"))
     scope77.set("alphaFeatured", scope77.readBoolean("featured"))
@@ -607,9 +585,7 @@ fun normalizeCommunitySearch(scope: Scope) {
     scope77.set("status", scope77.readString("status"))
     scope77.set("superAccountId", scope77.readString("superAccountId"))
 }
-fun normalizeConferenceFull(scope: Scope) {
-    val scope78 = scope
-    scope78.assertType("Conference")
+fun normalizeConferenceFull(scope78: Scope) {
     scope78.set("__typename", scope78.readString("__typename"))
     if (scope78.assertList("iceServers")) {
         val scope79 = scope78.childList("iceServers", "iceServers")
@@ -661,9 +637,7 @@ fun normalizeConferenceFull(scope: Scope) {
     }
     scope78.set("startTime", scope78.readStringOptional("startTime"))
 }
-fun normalizeTinyMessage(scope: Scope) {
-    val scope87 = scope
-    scope87.assertType("ModernMessage")
+fun normalizeTinyMessage(scope87: Scope) {
     scope87.set("__typename", scope87.readString("__typename"))
     scope87.set("date", scope87.readString("date"))
     scope87.set("fallback", scope87.readString("fallback"))
@@ -707,9 +681,7 @@ fun normalizeTinyMessage(scope: Scope) {
         }
     }
 }
-fun normalizeDialogUpdateFragment(scope: Scope) {
-    val scope94 = scope
-    scope94.assertType("DialogUpdate")
+fun normalizeDialogUpdateFragment(scope94: Scope) {
     scope94.set("__typename", scope94.readString("__typename"))
     if (scope94.isType("DialogMessageReceived")) {
         scope94.assertObject("message")
@@ -786,9 +758,7 @@ fun normalizeDialogUpdateFragment(scope: Scope) {
         scope94.set("unread", scope94.readInt("unread"))
     }
 }
-fun normalizeUserFull(scope: Scope) {
-    val scope100 = scope
-    scope100.assertType("User")
+fun normalizeUserFull(scope100: Scope) {
     scope100.set("__typename", scope100.readString("__typename"))
     scope100.set("about", scope100.readStringOptional("about"))
     scope100.set("email", scope100.readStringOptional("email"))
@@ -815,9 +785,7 @@ fun normalizeUserFull(scope: Scope) {
     scope100.set("twitter", scope100.readStringOptional("twitter"))
     scope100.set("website", scope100.readStringOptional("website"))
 }
-fun normalizeOrganizationFull(scope: Scope) {
-    val scope102 = scope
-    scope102.assertType("Organization")
+fun normalizeOrganizationFull(scope102: Scope) {
     scope102.set("__typename", scope102.readString("__typename"))
     scope102.set("about", scope102.readStringOptional("about"))
     scope102.set("alphaFeatured", scope102.readBoolean("featured"))
@@ -874,9 +842,7 @@ fun normalizeOrganizationFull(scope: Scope) {
     scope102.set("twitter", scope102.readStringOptional("twitter"))
     scope102.set("website", scope102.readStringOptional("website"))
 }
-fun normalizeOrganizationMedium(scope: Scope) {
-    val scope111 = scope
-    scope111.assertType("Organization")
+fun normalizeOrganizationMedium(scope111: Scope) {
     scope111.set("__typename", scope111.readString("__typename"))
     scope111.set("alphaIsCommunity", scope111.readBoolean("isCommunity"))
     if (scope111.assertList("adminMembers")) {
@@ -901,9 +867,7 @@ fun normalizeOrganizationMedium(scope: Scope) {
     scope111.set("name", scope111.readString("name"))
     scope111.set("photo", scope111.readStringOptional("photo"))
 }
-fun normalizeOrganizationProfileFull(scope: Scope) {
-    val scope115 = scope
-    scope115.assertType("OrganizationProfile")
+fun normalizeOrganizationProfileFull(scope115: Scope) {
     scope115.set("__typename", scope115.readString("__typename"))
     scope115.set("about", scope115.readStringOptional("about"))
     scope115.set("alphaFeatured", scope115.readBoolean("featured"))
@@ -933,9 +897,7 @@ fun normalizeOrganizationProfileFull(scope: Scope) {
     scope115.set("website", scope115.readStringOptional("website"))
     scope115.set("websiteTitle", scope115.readStringOptional("websiteTitle"))
 }
-fun normalizeOrganizationSearch(scope: Scope) {
-    val scope118 = scope
-    scope118.assertType("Organization")
+fun normalizeOrganizationSearch(scope118: Scope) {
     scope118.set("__typename", scope118.readString("__typename"))
     scope118.set("about", scope118.readStringOptional("about"))
     scope118.set("alphaFeatured", scope118.readBoolean("featured"))
@@ -962,9 +924,7 @@ fun normalizeOrganizationSearch(scope: Scope) {
     scope118.set("status", scope118.readString("status"))
     scope118.set("superAccountId", scope118.readString("superAccountId"))
 }
-fun normalizeOrganizationWithoutMembersFragment(scope: Scope) {
-    val scope122 = scope
-    scope122.assertType("Organization")
+fun normalizeOrganizationWithoutMembersFragment(scope122: Scope) {
     scope122.set("__typename", scope122.readString("__typename"))
     scope122.set("about", scope122.readStringOptional("about"))
     scope122.set("alphaFeatured", scope122.readBoolean("featured"))
@@ -1007,9 +967,7 @@ fun normalizeOrganizationWithoutMembersFragment(scope: Scope) {
     scope122.set("twitter", scope122.readStringOptional("twitter"))
     scope122.set("website", scope122.readStringOptional("website"))
 }
-fun normalizeRoomFull(scope: Scope) {
-    val scope128 = scope
-    scope128.assertType("Room")
+fun normalizeRoomFull(scope128: Scope) {
     scope128.set("__typename", scope128.readString("__typename"))
     if (scope128.isType("PrivateRoom")) {
         scope128.set("id", scope128.readString("id"))
@@ -1103,9 +1061,7 @@ fun normalizeRoomFull(scope: Scope) {
         }
     }
 }
-fun normalizeRoomFullWithoutMembers(scope: Scope) {
-    val scope142 = scope
-    scope142.assertType("Room")
+fun normalizeRoomFullWithoutMembers(scope142: Scope) {
     scope142.set("__typename", scope142.readString("__typename"))
     if (scope142.isType("PrivateRoom")) {
         scope142.set("id", scope142.readString("id"))
@@ -1169,9 +1125,7 @@ fun normalizeRoomFullWithoutMembers(scope: Scope) {
         }
     }
 }
-fun normalizeSessionStateFull(scope: Scope) {
-    val scope150 = scope
-    scope150.assertType("SessionState")
+fun normalizeSessionStateFull(scope150: Scope) {
     scope150.set("__typename", scope150.readString("__typename"))
     scope150.set("isAccountActivated", scope150.readBoolean("isAccountActivated"))
     scope150.set("isAccountExists", scope150.readBoolean("isAccountExists"))
@@ -1181,9 +1135,7 @@ fun normalizeSessionStateFull(scope: Scope) {
     scope150.set("isLoggedIn", scope150.readBoolean("isLoggedIn"))
     scope150.set("isProfileCreated", scope150.readBoolean("isProfileCreated"))
 }
-fun normalizeSettingsFull(scope: Scope) {
-    val scope151 = scope
-    scope151.assertType("Settings")
+fun normalizeSettingsFull(scope151: Scope) {
     scope151.set("__typename", scope151.readString("__typename"))
     scope151.set("desktopNotifications", scope151.readString("desktopNotifications"))
     scope151.set("emailFrequency", scope151.readString("emailFrequency"))
@@ -1193,8 +1145,7 @@ fun normalizeSettingsFull(scope: Scope) {
     scope151.set("mobileNotifications", scope151.readString("mobileNotifications"))
     scope151.set("primaryEmail", scope151.readString("primaryEmail"))
 }
-fun normalizeAccount(scope: Scope) {
-    val scope152 = scope
+fun normalizeAccount(scope152: Scope) {
     if (scope152.hasKey("me")) {
         val scope153 = scope152.child("me", "me")
         scope153.set("__typename", scope153.readString("__typename"))
@@ -1217,12 +1168,10 @@ fun normalizeAccount(scope: Scope) {
     scope156.set("__typename", scope156.readString("__typename"))
     normalizeSessionStateFull(scope156)
 }
-fun normalizeAccountAppInvite(scope: Scope) {
-    val scope157 = scope
+fun normalizeAccountAppInvite(scope157: Scope) {
     scope157.set("appInvite", scope157.readString("invite"))
 }
-fun normalizeAccountAppInviteInfo(scope: Scope) {
-    val scope158 = scope
+fun normalizeAccountAppInviteInfo(scope158: Scope) {
     if (scope158.hasKey("invite")) {
         val scope159 = scope158.child("invite", "alphaInviteInfo" + scope158.formatArguments("key" to scope158.argumentKey("inviteKey")))
         scope159.set("__typename", scope159.readString("__typename"))
@@ -1247,8 +1196,7 @@ fun normalizeAccountAppInviteInfo(scope: Scope) {
         scope158.setNull("appInviteInfo" + scope158.formatArguments("key" to scope158.argumentKey("inviteKey")))
     }
 }
-fun normalizeAccountInviteInfo(scope: Scope) {
-    val scope163 = scope
+fun normalizeAccountInviteInfo(scope163: Scope) {
     if (scope163.hasKey("invite")) {
         val scope164 = scope163.child("invite", "alphaInviteInfo" + scope163.formatArguments("key" to scope163.argumentKey("inviteKey")))
         scope164.set("__typename", scope164.readString("__typename"))
@@ -1280,8 +1228,7 @@ fun normalizeAccountInviteInfo(scope: Scope) {
         scope163.setNull("alphaInviteInfo" + scope163.formatArguments("key" to scope163.argumentKey("inviteKey")))
     }
 }
-fun normalizeAccountInvites(scope: Scope) {
-    val scope167 = scope
+fun normalizeAccountInvites(scope167: Scope) {
     if (scope167.hasKey("invites")) {
         val scope168 = scope167.childList("invites", "alphaInvites")
         for (i in 0 until scope168.size) {
@@ -1295,8 +1242,7 @@ fun normalizeAccountInvites(scope: Scope) {
         scope167.setNull("alphaInvites")
     }
 }
-fun normalizeAccountInvitesHistory(scope: Scope) {
-    val scope170 = scope
+fun normalizeAccountInvitesHistory(scope170: Scope) {
     if (scope170.hasKey("invites")) {
         val scope171 = scope170.childList("invites", "alphaInvitesHistory")
         for (i in 0 until scope171.size) {
@@ -1319,8 +1265,7 @@ fun normalizeAccountInvitesHistory(scope: Scope) {
         scope170.setNull("alphaInvitesHistory")
     }
 }
-fun normalizeAccountSettings(scope: Scope) {
-    val scope174 = scope
+fun normalizeAccountSettings(scope174: Scope) {
     if (scope174.hasKey("me")) {
         val scope175 = scope174.child("me", "me")
         scope175.set("__typename", scope175.readString("__typename"))
@@ -1339,8 +1284,7 @@ fun normalizeAccountSettings(scope: Scope) {
         scope174.set("myOrganizations", scope176.completed())
     }
 }
-fun normalizeAvailableRooms(scope: Scope) {
-    val scope178 = scope
+fun normalizeAvailableRooms(scope178: Scope) {
     if (scope178.assertList("rooms")) {
         val scope179 = scope178.childList("rooms", "betaAvailableRooms")
         for (i in 0 until scope179.size) {
@@ -1368,8 +1312,7 @@ fun normalizeAvailableRooms(scope: Scope) {
         scope178.set("betaAvailableRooms", scope179.completed())
     }
 }
-fun normalizeChatHistory(scope: Scope) {
-    val scope182 = scope
+fun normalizeChatHistory(scope182: Scope) {
     scope182.assertObject("state")
     val scope183 = scope182.child("state", "conversationState" + scope182.formatArguments("id" to scope182.argumentKey("chatId")))
     scope183.set("__typename", scope183.readString("__typename"))
@@ -1385,8 +1328,7 @@ fun normalizeChatHistory(scope: Scope) {
         scope182.set("messages" + scope182.formatArguments("before" to scope182.argumentKey("before"),"chatId" to scope182.argumentKey("chatId"),"first" to scope182.argumentKey("first")), scope184.completed())
     }
 }
-fun normalizeChatInit(scope: Scope) {
-    val scope186 = scope
+fun normalizeChatInit(scope186: Scope) {
     scope186.assertObject("state")
     val scope187 = scope186.child("state", "conversationState" + scope186.formatArguments("id" to scope186.argumentKey("chatId")))
     scope187.set("__typename", scope187.readString("__typename"))
@@ -1409,8 +1351,7 @@ fun normalizeChatInit(scope: Scope) {
         scope186.setNull("room" + scope186.formatArguments("id" to scope186.argumentKey("chatId")))
     }
 }
-fun normalizeChatSearchGroup(scope: Scope) {
-    val scope191 = scope
+fun normalizeChatSearchGroup(scope191: Scope) {
     if (scope191.hasKey("group")) {
         val scope192 = scope191.child("group", "alphaChatSearch" + scope191.formatArguments("members" to scope191.argumentKey("members")))
         scope192.set("__typename", scope192.readString("__typename"))
@@ -1420,15 +1361,13 @@ fun normalizeChatSearchGroup(scope: Scope) {
         scope191.setNull("alphaChatSearch" + scope191.formatArguments("members" to scope191.argumentKey("members")))
     }
 }
-fun normalizeConference(scope: Scope) {
-    val scope193 = scope
+fun normalizeConference(scope193: Scope) {
     scope193.assertObject("conference")
     val scope194 = scope193.child("conference", "conference" + scope193.formatArguments("id" to scope193.argumentKey("id")))
     scope194.set("__typename", scope194.readString("__typename"))
     normalizeConferenceFull(scope194)
 }
-fun normalizeConferenceMedia(scope: Scope) {
-    val scope195 = scope
+fun normalizeConferenceMedia(scope195: Scope) {
     scope195.assertObject("conferenceMedia")
     val scope196 = scope195.child("conferenceMedia", "conferenceMedia" + scope195.formatArguments("id" to scope195.argumentKey("id"),"peerId" to scope195.argumentKey("peerId")))
     scope196.set("__typename", scope196.readString("__typename"))
@@ -1471,8 +1410,7 @@ fun normalizeConferenceMedia(scope: Scope) {
         scope196.set("streams", scope200.completed())
     }
 }
-fun normalizeDialogs(scope: Scope) {
-    val scope203 = scope
+fun normalizeDialogs(scope203: Scope) {
     scope203.assertObject("counter")
     val scope204 = scope203.child("counter", "alphaNotificationCounter")
     scope204.set("__typename", scope204.readString("__typename"))
@@ -1512,8 +1450,7 @@ fun normalizeDialogs(scope: Scope) {
     scope209.set("__typename", scope209.readString("__typename"))
     scope209.set("state", scope209.readStringOptional("state"))
 }
-fun normalizeExploreCommunity(scope: Scope) {
-    val scope210 = scope
+fun normalizeExploreCommunity(scope210: Scope) {
     scope210.assertObject("items")
     val scope211 = scope210.child("items", "alphaComunityPrefixSearch" + scope210.formatArguments("first" to "25","page" to scope210.argumentKey("page"),"query" to scope210.argumentKey("query"),"sort" to scope210.argumentKey("sort")))
     scope211.set("__typename", scope211.readString("__typename"))
@@ -1541,8 +1478,7 @@ fun normalizeExploreCommunity(scope: Scope) {
     scope215.set("openEnded", scope215.readBoolean("openEnded"))
     scope215.set("pagesCount", scope215.readInt("pagesCount"))
 }
-fun normalizeExploreOrganizations(scope: Scope) {
-    val scope216 = scope
+fun normalizeExploreOrganizations(scope216: Scope) {
     scope216.assertObject("items")
     val scope217 = scope216.child("items", "alphaOrganizations" + scope216.formatArguments("after" to scope216.argumentKey("after"),"all" to scope216.argumentKey("all"),"first" to "25","page" to scope216.argumentKey("page"),"prefix" to scope216.argumentKey("prefix"),"query" to scope216.argumentKey("query"),"sort" to scope216.argumentKey("sort")))
     scope217.set("__typename", scope217.readString("__typename"))
@@ -1570,8 +1506,7 @@ fun normalizeExploreOrganizations(scope: Scope) {
     scope221.set("openEnded", scope221.readBoolean("openEnded"))
     scope221.set("pagesCount", scope221.readInt("pagesCount"))
 }
-fun normalizeExplorePeople(scope: Scope) {
-    val scope222 = scope
+fun normalizeExplorePeople(scope222: Scope) {
     scope222.assertObject("items")
     val scope223 = scope222.child("items", "userSearch" + scope222.formatArguments("after" to scope222.argumentKey("after"),"first" to "25","page" to scope222.argumentKey("page"),"query" to scope222.argumentKey("query"),"sort" to scope222.argumentKey("sort")))
     scope223.set("__typename", scope223.readString("__typename"))
@@ -1600,8 +1535,7 @@ fun normalizeExplorePeople(scope: Scope) {
     scope227.set("openEnded", scope227.readBoolean("openEnded"))
     scope227.set("pagesCount", scope227.readInt("pagesCount"))
 }
-fun normalizeFeatureFlags(scope: Scope) {
-    val scope228 = scope
+fun normalizeFeatureFlags(scope228: Scope) {
     if (scope228.assertList("featureFlags")) {
         val scope229 = scope228.childList("featureFlags", "featureFlags")
         for (i in 0 until scope229.size) {
@@ -1615,8 +1549,7 @@ fun normalizeFeatureFlags(scope: Scope) {
         scope228.set("featureFlags", scope229.completed())
     }
 }
-fun normalizeFeedHome(scope: Scope) {
-    val scope231 = scope
+fun normalizeFeedHome(scope231: Scope) {
     if (scope231.assertList("homeFeed")) {
         val scope232 = scope231.childList("homeFeed", "alphaHomeFeed")
         for (i in 0 until scope232.size) {
@@ -1634,27 +1567,23 @@ fun normalizeFeedHome(scope: Scope) {
         scope231.set("alphaHomeFeed", scope232.completed())
     }
 }
-fun normalizeFetchPushSettings(scope: Scope) {
-    val scope235 = scope
+fun normalizeFetchPushSettings(scope235: Scope) {
     scope235.assertObject("pushSettings")
     val scope236 = scope235.child("pushSettings", "pushSettings")
     scope236.set("__typename", scope236.readString("__typename"))
     scope236.set("webPushKey", scope236.readStringOptional("webPushKey"))
 }
-fun normalizeGetDraftMessage(scope: Scope) {
-    val scope237 = scope
+fun normalizeGetDraftMessage(scope237: Scope) {
     scope237.set("conversationDraft" + scope237.formatArguments("conversationId" to scope237.argumentKey("conversationId")), scope237.readStringOptional("message"))
 }
-fun normalizeGlobalCounter(scope: Scope) {
-    val scope238 = scope
+fun normalizeGlobalCounter(scope238: Scope) {
     scope238.assertObject("alphaNotificationCounter")
     val scope239 = scope238.child("alphaNotificationCounter", "alphaNotificationCounter")
     scope239.set("__typename", scope239.readString("__typename"))
     scope239.set("id", scope239.readString("id"))
     scope239.set("unreadCount", scope239.readInt("unreadCount"))
 }
-fun normalizeGlobalSearch(scope: Scope) {
-    val scope240 = scope
+fun normalizeGlobalSearch(scope240: Scope) {
     if (scope240.assertList("items")) {
         val scope241 = scope240.childList("items", "alphaGlobalSearch" + scope240.formatArguments("query" to scope240.argumentKey("query")))
         for (i in 0 until scope241.size) {
@@ -1688,8 +1617,7 @@ fun normalizeGlobalSearch(scope: Scope) {
         scope240.set("alphaGlobalSearch" + scope240.formatArguments("query" to scope240.argumentKey("query")), scope241.completed())
     }
 }
-fun normalizeMessage(scope: Scope) {
-    val scope244 = scope
+fun normalizeMessage(scope244: Scope) {
     if (scope244.hasKey("message")) {
         val scope245 = scope244.child("message", "message" + scope244.formatArguments("messageId" to scope244.argumentKey("messageId")))
         scope245.set("__typename", scope245.readString("__typename"))
@@ -1698,8 +1626,7 @@ fun normalizeMessage(scope: Scope) {
         scope244.setNull("message" + scope244.formatArguments("messageId" to scope244.argumentKey("messageId")))
     }
 }
-fun normalizeMessageComments(scope: Scope) {
-    val scope246 = scope
+fun normalizeMessageComments(scope246: Scope) {
     scope246.assertObject("messageComments")
     val scope247 = scope246.child("messageComments", "messageComments" + scope246.formatArguments("messageId" to scope246.argumentKey("messageId")))
     scope247.set("__typename", scope247.readString("__typename"))
@@ -1720,8 +1647,7 @@ fun normalizeMessageComments(scope: Scope) {
     scope250.set("__typename", scope250.readString("__typename"))
     scope250.set("state", scope250.readStringOptional("state"))
 }
-fun normalizeMyApps(scope: Scope) {
-    val scope251 = scope
+fun normalizeMyApps(scope251: Scope) {
     if (scope251.assertList("apps")) {
         val scope252 = scope251.childList("apps", "myApps")
         for (i in 0 until scope252.size) {
@@ -1733,8 +1659,7 @@ fun normalizeMyApps(scope: Scope) {
         scope251.set("myApps", scope252.completed())
     }
 }
-fun normalizeMyOrganizations(scope: Scope) {
-    val scope254 = scope
+fun normalizeMyOrganizations(scope254: Scope) {
     if (scope254.assertList("myOrganizations")) {
         val scope255 = scope254.childList("myOrganizations", "myOrganizations")
         for (i in 0 until scope255.size) {
@@ -1747,8 +1672,7 @@ fun normalizeMyOrganizations(scope: Scope) {
         scope254.set("myOrganizations", scope255.completed())
     }
 }
-fun normalizeOnline(scope: Scope) {
-    val scope257 = scope
+fun normalizeOnline(scope257: Scope) {
     scope257.assertObject("user")
     val scope258 = scope257.child("user", "user" + scope257.formatArguments("id" to scope257.argumentKey("userId")))
     scope258.set("__typename", scope258.readString("__typename"))
@@ -1756,15 +1680,13 @@ fun normalizeOnline(scope: Scope) {
     scope258.set("lastSeen", scope258.readStringOptional("lastSeen"))
     scope258.set("online", scope258.readBoolean("online"))
 }
-fun normalizeOrganization(scope: Scope) {
-    val scope259 = scope
+fun normalizeOrganization(scope259: Scope) {
     scope259.assertObject("organization")
     val scope260 = scope259.child("organization", "organization" + scope259.formatArguments("id" to scope259.argumentKey("organizationId")))
     scope260.set("__typename", scope260.readString("__typename"))
     normalizeOrganizationFull(scope260)
 }
-fun normalizeOrganizationByPrefix(scope: Scope) {
-    val scope261 = scope
+fun normalizeOrganizationByPrefix(scope261: Scope) {
     if (scope261.hasKey("organizationByPrefix")) {
         val scope262 = scope261.child("organizationByPrefix", "alphaOrganizationByPrefix" + scope261.formatArguments("query" to scope261.argumentKey("query")))
         scope262.set("__typename", scope262.readString("__typename"))
@@ -1773,8 +1695,7 @@ fun normalizeOrganizationByPrefix(scope: Scope) {
         scope261.setNull("alphaOrganizationByPrefix" + scope261.formatArguments("query" to scope261.argumentKey("query")))
     }
 }
-fun normalizeOrganizationMembersShort(scope: Scope) {
-    val scope263 = scope
+fun normalizeOrganizationMembersShort(scope263: Scope) {
     scope263.assertObject("organization")
     val scope264 = scope263.child("organization", "organization" + scope263.formatArguments("id" to scope263.argumentKey("organizationId")))
     scope264.set("__typename", scope264.readString("__typename"))
@@ -1793,8 +1714,7 @@ fun normalizeOrganizationMembersShort(scope: Scope) {
     }
     normalizeOrganizationWithoutMembersFragment(scope264)
 }
-fun normalizeOrganizationMembersShortPaginated(scope: Scope) {
-    val scope268 = scope
+fun normalizeOrganizationMembersShortPaginated(scope268: Scope) {
     scope268.assertObject("organization")
     val scope269 = scope268.child("organization", "organization" + scope268.formatArguments("id" to scope268.argumentKey("organizationId")))
     scope269.set("__typename", scope269.readString("__typename"))
@@ -1814,15 +1734,13 @@ fun normalizeOrganizationMembersShortPaginated(scope: Scope) {
     }
     normalizeOrganizationWithoutMembersFragment(scope269)
 }
-fun normalizeOrganizationProfile(scope: Scope) {
-    val scope273 = scope
+fun normalizeOrganizationProfile(scope273: Scope) {
     scope273.assertObject("organizationProfile")
     val scope274 = scope273.child("organizationProfile", "organizationProfile" + scope273.formatArguments("id" to scope273.argumentKey("organizationId")))
     scope274.set("__typename", scope274.readString("__typename"))
     normalizeOrganizationProfileFull(scope274)
 }
-fun normalizeOrganizationPublicInvite(scope: Scope) {
-    val scope275 = scope
+fun normalizeOrganizationPublicInvite(scope275: Scope) {
     if (scope275.hasKey("publicInvite")) {
         val scope276 = scope275.child("publicInvite", "alphaOrganizationInviteLink" + scope275.formatArguments("organizationId" to scope275.argumentKey("organizationId")))
         scope276.set("__typename", scope276.readString("__typename"))
@@ -1833,15 +1751,13 @@ fun normalizeOrganizationPublicInvite(scope: Scope) {
         scope275.setNull("alphaOrganizationInviteLink" + scope275.formatArguments("organizationId" to scope275.argumentKey("organizationId")))
     }
 }
-fun normalizeOrganizationWithoutMembers(scope: Scope) {
-    val scope277 = scope
+fun normalizeOrganizationWithoutMembers(scope277: Scope) {
     scope277.assertObject("organization")
     val scope278 = scope277.child("organization", "organization" + scope277.formatArguments("id" to scope277.argumentKey("organizationId")))
     scope278.set("__typename", scope278.readString("__typename"))
     normalizeOrganizationWithoutMembersFragment(scope278)
 }
-fun normalizePermissions(scope: Scope) {
-    val scope279 = scope
+fun normalizePermissions(scope279: Scope) {
     scope279.assertObject("myPermissions")
     val scope280 = scope279.child("myPermissions", "myPermissions")
     scope280.set("__typename", scope280.readString("__typename"))
@@ -1853,8 +1769,7 @@ fun normalizePermissions(scope: Scope) {
         scope280.set("roles", scope281.completed())
     }
 }
-fun normalizeProfile(scope: Scope) {
-    val scope282 = scope
+fun normalizeProfile(scope282: Scope) {
     if (scope282.hasKey("user")) {
         val scope283 = scope282.child("user", "me")
         scope283.set("__typename", scope283.readString("__typename"))
@@ -1913,8 +1828,7 @@ fun normalizeProfile(scope: Scope) {
         scope282.setNull("myProfile")
     }
 }
-fun normalizeProfilePrefill(scope: Scope) {
-    val scope289 = scope
+fun normalizeProfilePrefill(scope289: Scope) {
     if (scope289.hasKey("prefill")) {
         val scope290 = scope289.child("prefill", "myProfilePrefill")
         scope290.set("__typename", scope290.readString("__typename"))
@@ -1925,8 +1839,7 @@ fun normalizeProfilePrefill(scope: Scope) {
         scope289.setNull("myProfilePrefill")
     }
 }
-fun normalizeResolveShortName(scope: Scope) {
-    val scope291 = scope
+fun normalizeResolveShortName(scope291: Scope) {
     if (scope291.hasKey("item")) {
         val scope292 = scope291.child("item", "alphaResolveShortName" + scope291.formatArguments("shortname" to scope291.argumentKey("shortname")))
         scope292.set("__typename", scope292.readString("__typename"))
@@ -1940,8 +1853,7 @@ fun normalizeResolveShortName(scope: Scope) {
         scope291.setNull("alphaResolveShortName" + scope291.formatArguments("shortname" to scope291.argumentKey("shortname")))
     }
 }
-fun normalizeResolvedInvite(scope: Scope) {
-    val scope293 = scope
+fun normalizeResolvedInvite(scope293: Scope) {
     if (scope293.hasKey("invite")) {
         val scope294 = scope293.child("invite", "alphaResolveInvite" + scope293.formatArguments("key" to scope293.argumentKey("key")))
         scope294.set("__typename", scope294.readString("__typename"))
@@ -1986,8 +1898,7 @@ fun normalizeResolvedInvite(scope: Scope) {
         scope293.setNull("alphaResolveInvite" + scope293.formatArguments("key" to scope293.argumentKey("key")))
     }
 }
-fun normalizeRoom(scope: Scope) {
-    val scope299 = scope
+fun normalizeRoom(scope299: Scope) {
     if (scope299.hasKey("room")) {
         val scope300 = scope299.child("room", "room" + scope299.formatArguments("id" to scope299.argumentKey("id")))
         scope300.set("__typename", scope300.readString("__typename"))
@@ -1996,8 +1907,7 @@ fun normalizeRoom(scope: Scope) {
         scope299.setNull("room" + scope299.formatArguments("id" to scope299.argumentKey("id")))
     }
 }
-fun normalizeRoomChat(scope: Scope) {
-    val scope301 = scope
+fun normalizeRoomChat(scope301: Scope) {
     if (scope301.hasKey("room")) {
         val scope302 = scope301.child("room", "room" + scope301.formatArguments("id" to scope301.argumentKey("id")))
         scope302.set("__typename", scope302.readString("__typename"))
@@ -2028,8 +1938,7 @@ fun normalizeRoomChat(scope: Scope) {
         scope301.setNull("room" + scope301.formatArguments("id" to scope301.argumentKey("id")))
     }
 }
-fun normalizeRoomHeader(scope: Scope) {
-    val scope305 = scope
+fun normalizeRoomHeader(scope305: Scope) {
     if (scope305.hasKey("room")) {
         val scope306 = scope305.child("room", "room" + scope305.formatArguments("id" to scope305.argumentKey("id")))
         scope306.set("__typename", scope306.readString("__typename"))
@@ -2102,8 +2011,7 @@ fun normalizeRoomHeader(scope: Scope) {
         scope305.setNull("room" + scope305.formatArguments("id" to scope305.argumentKey("id")))
     }
 }
-fun normalizeRoomInviteInfo(scope: Scope) {
-    val scope314 = scope
+fun normalizeRoomInviteInfo(scope314: Scope) {
     if (scope314.hasKey("invite")) {
         val scope315 = scope314.child("invite", "betaRoomInviteInfo" + scope314.formatArguments("invite" to scope314.argumentKey("invite")))
         scope315.set("__typename", scope315.readString("__typename"))
@@ -2137,12 +2045,10 @@ fun normalizeRoomInviteInfo(scope: Scope) {
         scope314.setNull("betaRoomInviteInfo" + scope314.formatArguments("invite" to scope314.argumentKey("invite")))
     }
 }
-fun normalizeRoomInviteLink(scope: Scope) {
-    val scope319 = scope
+fun normalizeRoomInviteLink(scope319: Scope) {
     scope319.set("betaRoomInviteLink" + scope319.formatArguments("roomId" to scope319.argumentKey("roomId")), scope319.readString("link"))
 }
-fun normalizeRoomMemberShort(scope: Scope) {
-    val scope320 = scope
+fun normalizeRoomMemberShort(scope320: Scope) {
     if (scope320.hasKey("member")) {
         val scope321 = scope320.child("member", "roomMember" + scope320.formatArguments("memberId" to scope320.argumentKey("memberId"),"roomId" to scope320.argumentKey("roomId")))
         scope321.set("__typename", scope321.readString("__typename"))
@@ -2156,8 +2062,7 @@ fun normalizeRoomMemberShort(scope: Scope) {
         scope320.setNull("roomMember" + scope320.formatArguments("memberId" to scope320.argumentKey("memberId"),"roomId" to scope320.argumentKey("roomId")))
     }
 }
-fun normalizeRoomMembers(scope: Scope) {
-    val scope323 = scope
+fun normalizeRoomMembers(scope323: Scope) {
     if (scope323.assertList("members")) {
         val scope324 = scope323.childList("members", "roomMembers" + scope323.formatArguments("roomId" to scope323.argumentKey("roomId")))
         for (i in 0 until scope324.size) {
@@ -2175,8 +2080,7 @@ fun normalizeRoomMembers(scope: Scope) {
         scope323.set("roomMembers" + scope323.formatArguments("roomId" to scope323.argumentKey("roomId")), scope324.completed())
     }
 }
-fun normalizeRoomMembersPaginated(scope: Scope) {
-    val scope327 = scope
+fun normalizeRoomMembersPaginated(scope327: Scope) {
     if (scope327.assertList("members")) {
         val scope328 = scope327.childList("members", "roomMembers" + scope327.formatArguments("after" to scope327.argumentKey("after"),"first" to scope327.argumentKey("first"),"roomId" to scope327.argumentKey("roomId")))
         for (i in 0 until scope328.size) {
@@ -2194,8 +2098,7 @@ fun normalizeRoomMembersPaginated(scope: Scope) {
         scope327.set("roomMembers" + scope327.formatArguments("after" to scope327.argumentKey("after"),"first" to scope327.argumentKey("first"),"roomId" to scope327.argumentKey("roomId")), scope328.completed())
     }
 }
-fun normalizeRoomMembersShort(scope: Scope) {
-    val scope331 = scope
+fun normalizeRoomMembersShort(scope331: Scope) {
     if (scope331.assertList("members")) {
         val scope332 = scope331.childList("members", "roomMembers" + scope331.formatArguments("roomId" to scope331.argumentKey("roomId")))
         for (i in 0 until scope332.size) {
@@ -2210,8 +2113,7 @@ fun normalizeRoomMembersShort(scope: Scope) {
         scope331.set("roomMembers" + scope331.formatArguments("roomId" to scope331.argumentKey("roomId")), scope332.completed())
     }
 }
-fun normalizeRoomSearch(scope: Scope) {
-    val scope335 = scope
+fun normalizeRoomSearch(scope335: Scope) {
     scope335.assertObject("items")
     val scope336 = scope335.child("items", "betaRoomSearch" + scope335.formatArguments("first" to "150"))
     scope336.set("__typename", scope336.readString("__typename"))
@@ -2253,8 +2155,7 @@ fun normalizeRoomSearch(scope: Scope) {
     scope341.set("openEnded", scope341.readBoolean("openEnded"))
     scope341.set("pagesCount", scope341.readInt("pagesCount"))
 }
-fun normalizeRoomSearchText(scope: Scope) {
-    val scope342 = scope
+fun normalizeRoomSearchText(scope342: Scope) {
     if (scope342.assertList("items")) {
         val scope343 = scope342.childList("items", "betaDialogTextSearch" + scope342.formatArguments("query" to scope342.argumentKey("query")))
         for (i in 0 until scope343.size) {
@@ -2270,8 +2171,7 @@ fun normalizeRoomSearchText(scope: Scope) {
         scope342.set("betaDialogTextSearch" + scope342.formatArguments("query" to scope342.argumentKey("query")), scope343.completed())
     }
 }
-fun normalizeRoomSuper(scope: Scope) {
-    val scope345 = scope
+fun normalizeRoomSuper(scope345: Scope) {
     if (scope345.hasKey("roomSuper")) {
         val scope346 = scope345.child("roomSuper", "roomSuper" + scope345.formatArguments("id" to scope345.argumentKey("id")))
         scope346.set("__typename", scope346.readString("__typename"))
@@ -2282,8 +2182,7 @@ fun normalizeRoomSuper(scope: Scope) {
         scope345.setNull("roomSuper" + scope345.formatArguments("id" to scope345.argumentKey("id")))
     }
 }
-fun normalizeRoomTiny(scope: Scope) {
-    val scope347 = scope
+fun normalizeRoomTiny(scope347: Scope) {
     if (scope347.hasKey("room")) {
         val scope348 = scope347.child("room", "room" + scope347.formatArguments("id" to scope347.argumentKey("id")))
         scope348.set("__typename", scope348.readString("__typename"))
@@ -2292,8 +2191,7 @@ fun normalizeRoomTiny(scope: Scope) {
         scope347.setNull("room" + scope347.formatArguments("id" to scope347.argumentKey("id")))
     }
 }
-fun normalizeRoomWithoutMembers(scope: Scope) {
-    val scope349 = scope
+fun normalizeRoomWithoutMembers(scope349: Scope) {
     if (scope349.hasKey("room")) {
         val scope350 = scope349.child("room", "room" + scope349.formatArguments("id" to scope349.argumentKey("id")))
         scope350.set("__typename", scope350.readString("__typename"))
@@ -2302,15 +2200,13 @@ fun normalizeRoomWithoutMembers(scope: Scope) {
         scope349.setNull("room" + scope349.formatArguments("id" to scope349.argumentKey("id")))
     }
 }
-fun normalizeSettings(scope: Scope) {
-    val scope351 = scope
+fun normalizeSettings(scope351: Scope) {
     scope351.assertObject("settings")
     val scope352 = scope351.child("settings", "settings")
     scope352.set("__typename", scope352.readString("__typename"))
     normalizeSettingsFull(scope352)
 }
-fun normalizeSuperAccount(scope: Scope) {
-    val scope353 = scope
+fun normalizeSuperAccount(scope353: Scope) {
     scope353.assertObject("superAccount")
     val scope354 = scope353.child("superAccount", "superAccount" + scope353.formatArguments("id" to scope353.argumentKey("accountId"),"viaOrgId" to scope353.argumentKey("viaOrgId")))
     scope354.set("__typename", scope354.readString("__typename"))
@@ -2350,8 +2246,7 @@ fun normalizeSuperAccount(scope: Scope) {
     scope354.set("state", scope354.readString("state"))
     scope354.set("title", scope354.readString("title"))
 }
-fun normalizeSuperAccounts(scope: Scope) {
-    val scope360 = scope
+fun normalizeSuperAccounts(scope360: Scope) {
     if (scope360.assertList("superAccounts")) {
         val scope361 = scope360.childList("superAccounts", "superAccounts")
         for (i in 0 until scope361.size) {
@@ -2366,8 +2261,7 @@ fun normalizeSuperAccounts(scope: Scope) {
         scope360.set("superAccounts", scope361.completed())
     }
 }
-fun normalizeSuperAdmins(scope: Scope) {
-    val scope363 = scope
+fun normalizeSuperAdmins(scope363: Scope) {
     if (scope363.assertList("superAdmins")) {
         val scope364 = scope363.childList("superAdmins", "superAdmins")
         for (i in 0 until scope364.size) {
@@ -2384,8 +2278,7 @@ fun normalizeSuperAdmins(scope: Scope) {
         scope363.set("superAdmins", scope364.completed())
     }
 }
-fun normalizeUser(scope: Scope) {
-    val scope367 = scope
+fun normalizeUser(scope367: Scope) {
     if (scope367.hasKey("conversation")) {
         val scope368 = scope367.child("conversation", "room" + scope367.formatArguments("id" to scope367.argumentKey("userId")))
         scope368.set("__typename", scope368.readString("__typename"))
@@ -2405,8 +2298,7 @@ fun normalizeUser(scope: Scope) {
     scope370.set("__typename", scope370.readString("__typename"))
     normalizeUserFull(scope370)
 }
-fun normalizeUserStorage(scope: Scope) {
-    val scope371 = scope
+fun normalizeUserStorage(scope371: Scope) {
     if (scope371.assertList("userStorage")) {
         val scope372 = scope371.childList("userStorage", "userStorage" + scope371.formatArguments("keys" to scope371.argumentKey("keys"),"namespace" to scope371.argumentKey("namespace")))
         for (i in 0 until scope372.size) {
@@ -2420,8 +2312,7 @@ fun normalizeUserStorage(scope: Scope) {
         scope371.set("userStorage" + scope371.formatArguments("keys" to scope371.argumentKey("keys"),"namespace" to scope371.argumentKey("namespace")), scope372.completed())
     }
 }
-fun normalizeUsers(scope: Scope) {
-    val scope374 = scope
+fun normalizeUsers(scope374: Scope) {
     if (scope374.assertList("items")) {
         val scope375 = scope374.childList("items", "users" + scope374.formatArguments("query" to scope374.argumentKey("query")))
         for (i in 0 until scope375.size) {
@@ -2435,61 +2326,50 @@ fun normalizeUsers(scope: Scope) {
         scope374.set("users" + scope374.formatArguments("query" to scope374.argumentKey("query")), scope375.completed())
     }
 }
-fun normalizeAccountCreateInvite(scope: Scope) {
-    val scope377 = scope
+fun normalizeAccountCreateInvite(scope377: Scope) {
     scope377.assertObject("alphaCreateInvite")
     val scope378 = scope377.child("alphaCreateInvite", "alphaCreateInvite")
     scope378.set("__typename", scope378.readString("__typename"))
     scope378.set("id", scope378.readString("id"))
     scope378.set("key", scope378.readString("key"))
 }
-fun normalizeAccountDestroyInvite(scope: Scope) {
-    val scope379 = scope
+fun normalizeAccountDestroyInvite(scope379: Scope) {
     scope379.set("alphaDeleteInvite" + scope379.formatArguments("id" to scope379.argumentKey("id")), scope379.readString("alphaDeleteInvite"))
 }
-fun normalizeAccountInviteJoin(scope: Scope) {
-    val scope380 = scope
+fun normalizeAccountInviteJoin(scope380: Scope) {
     scope380.set("alphaJoinInvite" + scope380.formatArguments("key" to scope380.argumentKey("inviteKey")), scope380.readString("alphaJoinInvite"))
 }
-fun normalizeAddAppToChat(scope: Scope) {
-    val scope381 = scope
+fun normalizeAddAppToChat(scope381: Scope) {
     scope381.assertObject("addAppToChat")
     val scope382 = scope381.child("addAppToChat", "addAppToChat" + scope381.formatArguments("appId" to scope381.argumentKey("appId"),"chatId" to scope381.argumentKey("chatId")))
     scope382.set("__typename", scope382.readString("__typename"))
     normalizeAppChat(scope382)
 }
-fun normalizeAddMessageComment(scope: Scope) {
-    val scope383 = scope
+fun normalizeAddMessageComment(scope383: Scope) {
     scope383.set("addMessageComment" + scope383.formatArguments("fileAttachments" to scope383.argumentKey("fileAttachments"),"mentions" to scope383.argumentKey("mentions"),"message" to scope383.argumentKey("message"),"messageId" to scope383.argumentKey("messageId"),"replyComment" to scope383.argumentKey("replyComment")), scope383.readBoolean("addMessageComment"))
 }
-fun normalizeCancelTyping(scope: Scope) {
-    val scope384 = scope
+fun normalizeCancelTyping(scope384: Scope) {
     scope384.set("typingCancel" + scope384.formatArguments("conversationId" to scope384.argumentKey("conversationId")), scope384.readString("typingCancel"))
 }
-fun normalizeCommentSetReaction(scope: Scope) {
-    val scope385 = scope
+fun normalizeCommentSetReaction(scope385: Scope) {
     scope385.set("commentReactionAdd" + scope385.formatArguments("commentId" to scope385.argumentKey("commentId"),"reaction" to scope385.argumentKey("reaction")), scope385.readBoolean("commentReactionAdd"))
 }
-fun normalizeCommentUnsetReaction(scope: Scope) {
-    val scope386 = scope
+fun normalizeCommentUnsetReaction(scope386: Scope) {
     scope386.set("commentReactionRemove" + scope386.formatArguments("commentId" to scope386.argumentKey("commentId"),"reaction" to scope386.argumentKey("reaction")), scope386.readBoolean("commentReactionRemove"))
 }
-fun normalizeConferenceAnswer(scope: Scope) {
-    val scope387 = scope
+fun normalizeConferenceAnswer(scope387: Scope) {
     scope387.assertObject("peerConnectionAnswer")
     val scope388 = scope387.child("peerConnectionAnswer", "peerConnectionAnswer" + scope387.formatArguments("answer" to scope387.argumentKey("answer"),"id" to scope387.argumentKey("id"),"ownPeerId" to scope387.argumentKey("ownPeerId"),"peerId" to scope387.argumentKey("peerId")))
     scope388.set("__typename", scope388.readString("__typename"))
     normalizeConferenceFull(scope388)
 }
-fun normalizeConferenceCandidate(scope: Scope) {
-    val scope389 = scope
+fun normalizeConferenceCandidate(scope389: Scope) {
     scope389.assertObject("peerConnectionCandidate")
     val scope390 = scope389.child("peerConnectionCandidate", "peerConnectionCandidate" + scope389.formatArguments("candidate" to scope389.argumentKey("candidate"),"id" to scope389.argumentKey("id"),"ownPeerId" to scope389.argumentKey("ownPeerId"),"peerId" to scope389.argumentKey("peerId")))
     scope390.set("__typename", scope390.readString("__typename"))
     normalizeConferenceFull(scope390)
 }
-fun normalizeConferenceJoin(scope: Scope) {
-    val scope391 = scope
+fun normalizeConferenceJoin(scope391: Scope) {
     scope391.assertObject("conferenceJoin")
     val scope392 = scope391.child("conferenceJoin", "conferenceJoin" + scope391.formatArguments("id" to scope391.argumentKey("id")))
     scope392.set("__typename", scope392.readString("__typename"))
@@ -2499,44 +2379,38 @@ fun normalizeConferenceJoin(scope: Scope) {
     normalizeConferenceFull(scope393)
     scope392.set("peerId", scope392.readString("peerId"))
 }
-fun normalizeConferenceKeepAlive(scope: Scope) {
-    val scope394 = scope
+fun normalizeConferenceKeepAlive(scope394: Scope) {
     scope394.assertObject("conferenceKeepAlive")
     val scope395 = scope394.child("conferenceKeepAlive", "conferenceKeepAlive" + scope394.formatArguments("id" to scope394.argumentKey("id"),"peerId" to scope394.argumentKey("peerId")))
     scope395.set("__typename", scope395.readString("__typename"))
     normalizeConferenceFull(scope395)
 }
-fun normalizeConferenceLeave(scope: Scope) {
-    val scope396 = scope
+fun normalizeConferenceLeave(scope396: Scope) {
     scope396.assertObject("conferenceLeave")
     val scope397 = scope396.child("conferenceLeave", "conferenceLeave" + scope396.formatArguments("id" to scope396.argumentKey("id"),"peerId" to scope396.argumentKey("peerId")))
     scope397.set("__typename", scope397.readString("__typename"))
     normalizeConferenceFull(scope397)
 }
-fun normalizeConferenceOffer(scope: Scope) {
-    val scope398 = scope
+fun normalizeConferenceOffer(scope398: Scope) {
     scope398.assertObject("peerConnectionOffer")
     val scope399 = scope398.child("peerConnectionOffer", "peerConnectionOffer" + scope398.formatArguments("id" to scope398.argumentKey("id"),"offer" to scope398.argumentKey("offer"),"ownPeerId" to scope398.argumentKey("ownPeerId"),"peerId" to scope398.argumentKey("peerId")))
     scope399.set("__typename", scope399.readString("__typename"))
     normalizeConferenceFull(scope399)
 }
-fun normalizeCreateApp(scope: Scope) {
-    val scope400 = scope
+fun normalizeCreateApp(scope400: Scope) {
     scope400.assertObject("createApp")
     val scope401 = scope400.child("createApp", "createApp" + scope400.formatArguments("about" to scope400.argumentKey("about"),"name" to scope400.argumentKey("name"),"photoRef" to scope400.argumentKey("photoRef"),"shortname" to scope400.argumentKey("shortname")))
     scope401.set("__typename", scope401.readString("__typename"))
     normalizeAppFull(scope401)
 }
-fun normalizeCreateOrganization(scope: Scope) {
-    val scope402 = scope
+fun normalizeCreateOrganization(scope402: Scope) {
     scope402.assertObject("organization")
     val scope403 = scope402.child("organization", "createOrganization" + scope402.formatArguments("input" to scope402.argumentKey("input")))
     scope403.set("__typename", scope403.readString("__typename"))
     scope403.set("id", scope403.readString("id"))
     scope403.set("name", scope403.readString("name"))
 }
-fun normalizeCreateUserProfileAndOrganization(scope: Scope) {
-    val scope404 = scope
+fun normalizeCreateUserProfileAndOrganization(scope404: Scope) {
     scope404.assertObject("alphaCreateUserProfileAndOrganization")
     val scope405 = scope404.child("alphaCreateUserProfileAndOrganization", "alphaCreateUserProfileAndOrganization" + scope404.formatArguments("organization" to scope404.argumentKey("organization"),"user" to scope404.argumentKey("user")))
     scope405.set("__typename", scope405.readString("__typename"))
@@ -2556,35 +2430,28 @@ fun normalizeCreateUserProfileAndOrganization(scope: Scope) {
         scope405.setNull("user")
     }
 }
-fun normalizeDebugMails(scope: Scope) {
-    val scope408 = scope
+fun normalizeDebugMails(scope408: Scope) {
     scope408.set("debugSendEmail" + scope408.formatArguments("type" to scope408.argumentKey("type")), scope408.readBooleanOptional("debugSendEmail"))
 }
-fun normalizeDeleteComment(scope: Scope) {
-    val scope409 = scope
+fun normalizeDeleteComment(scope409: Scope) {
     scope409.set("deleteComment" + scope409.formatArguments("id" to scope409.argumentKey("id")), scope409.readBoolean("deleteComment"))
 }
-fun normalizeDeleteOrganization(scope: Scope) {
-    val scope410 = scope
+fun normalizeDeleteOrganization(scope410: Scope) {
     scope410.set("deleteOrganization" + scope410.formatArguments("id" to scope410.argumentKey("organizationId")), scope410.readBoolean("deleteOrganization"))
 }
-fun normalizeDeleteUser(scope: Scope) {
-    val scope411 = scope
+fun normalizeDeleteUser(scope411: Scope) {
     scope411.set("superDeleteUser" + scope411.formatArguments("id" to scope411.argumentKey("id")), scope411.readBoolean("superDeleteUser"))
 }
-fun normalizeEditComment(scope: Scope) {
-    val scope412 = scope
+fun normalizeEditComment(scope412: Scope) {
     scope412.set("editComment" + scope412.formatArguments("id" to scope412.argumentKey("id"),"message" to scope412.argumentKey("message")), scope412.readBoolean("editComment"))
 }
-fun normalizeEditPostMessage(scope: Scope) {
-    val scope413 = scope
+fun normalizeEditPostMessage(scope413: Scope) {
     scope413.assertObject("editPostMessage")
     val scope414 = scope413.child("editPostMessage", "alphaEditPostMessage" + scope413.formatArguments("attachments" to scope413.argumentKey("attachments"),"messageId" to scope413.argumentKey("messageId"),"postType" to scope413.argumentKey("postType"),"text" to scope413.argumentKey("text"),"title" to scope413.argumentKey("title")))
     scope414.set("__typename", scope414.readString("__typename"))
     scope414.set("seq", scope414.readInt("seq"))
 }
-fun normalizeFeatureFlagAdd(scope: Scope) {
-    val scope415 = scope
+fun normalizeFeatureFlagAdd(scope415: Scope) {
     scope415.assertObject("featureFlagAdd")
     val scope416 = scope415.child("featureFlagAdd", "featureFlagAdd" + scope415.formatArguments("key" to scope415.argumentKey("key"),"title" to scope415.argumentKey("title")))
     scope416.set("__typename", scope416.readString("__typename"))
@@ -2592,8 +2459,7 @@ fun normalizeFeatureFlagAdd(scope: Scope) {
     scope416.set("key", scope416.readString("key"))
     scope416.set("title", scope416.readString("title"))
 }
-fun normalizeFeatureFlagDisable(scope: Scope) {
-    val scope417 = scope
+fun normalizeFeatureFlagDisable(scope417: Scope) {
     scope417.assertObject("superAccountFeatureRemove")
     val scope418 = scope417.child("superAccountFeatureRemove", "superAccountFeatureRemove" + scope417.formatArguments("featureId" to scope417.argumentKey("featureId"),"id" to scope417.argumentKey("accountId")))
     scope418.set("__typename", scope418.readString("__typename"))
@@ -2611,8 +2477,7 @@ fun normalizeFeatureFlagDisable(scope: Scope) {
     }
     scope418.set("id", scope418.readString("id"))
 }
-fun normalizeFeatureFlagEnable(scope: Scope) {
-    val scope421 = scope
+fun normalizeFeatureFlagEnable(scope421: Scope) {
     scope421.assertObject("superAccountFeatureAdd")
     val scope422 = scope421.child("superAccountFeatureAdd", "superAccountFeatureAdd" + scope421.formatArguments("featureId" to scope421.argumentKey("featureId"),"id" to scope421.argumentKey("accountId")))
     scope422.set("__typename", scope422.readString("__typename"))
@@ -2630,19 +2495,16 @@ fun normalizeFeatureFlagEnable(scope: Scope) {
     }
     scope422.set("id", scope422.readString("id"))
 }
-fun normalizeFeedPost(scope: Scope) {
-    val scope425 = scope
+fun normalizeFeedPost(scope425: Scope) {
     scope425.assertObject("alphaCreateFeedPost")
     val scope426 = scope425.child("alphaCreateFeedPost", "alphaCreateFeedPost" + scope425.formatArguments("message" to scope425.argumentKey("message")))
     scope426.set("__typename", scope426.readString("__typename"))
     scope426.set("id", scope426.readString("id"))
 }
-fun normalizeMarkSequenceRead(scope: Scope) {
-    val scope427 = scope
+fun normalizeMarkSequenceRead(scope427: Scope) {
     scope427.set("alphaGlobalRead" + scope427.formatArguments("toSeq" to scope427.argumentKey("seq")), scope427.readString("alphaGlobalRead"))
 }
-fun normalizeMediaAnswer(scope: Scope) {
-    val scope428 = scope
+fun normalizeMediaAnswer(scope428: Scope) {
     scope428.assertObject("mediaStreamAnswer")
     val scope429 = scope428.child("mediaStreamAnswer", "mediaStreamAnswer" + scope428.formatArguments("answer" to scope428.argumentKey("answer"),"id" to scope428.argumentKey("id"),"peerId" to scope428.argumentKey("peerId")))
     scope429.set("__typename", scope429.readString("__typename"))
@@ -2667,8 +2529,7 @@ fun normalizeMediaAnswer(scope: Scope) {
         scope429.set("streams", scope430.completed())
     }
 }
-fun normalizeMediaCandidate(scope: Scope) {
-    val scope433 = scope
+fun normalizeMediaCandidate(scope433: Scope) {
     scope433.assertObject("mediaStreamCandidate")
     val scope434 = scope433.child("mediaStreamCandidate", "mediaStreamCandidate" + scope433.formatArguments("candidate" to scope433.argumentKey("candidate"),"id" to scope433.argumentKey("id"),"peerId" to scope433.argumentKey("peerId")))
     scope434.set("__typename", scope434.readString("__typename"))
@@ -2693,8 +2554,7 @@ fun normalizeMediaCandidate(scope: Scope) {
         scope434.set("streams", scope435.completed())
     }
 }
-fun normalizeMediaOffer(scope: Scope) {
-    val scope438 = scope
+fun normalizeMediaOffer(scope438: Scope) {
     scope438.assertObject("mediaStreamOffer")
     val scope439 = scope438.child("mediaStreamOffer", "mediaStreamOffer" + scope438.formatArguments("id" to scope438.argumentKey("id"),"offer" to scope438.argumentKey("offer"),"peerId" to scope438.argumentKey("peerId")))
     scope439.set("__typename", scope439.readString("__typename"))
@@ -2719,38 +2579,31 @@ fun normalizeMediaOffer(scope: Scope) {
         scope439.set("streams", scope440.completed())
     }
 }
-fun normalizeMessageSetReaction(scope: Scope) {
-    val scope443 = scope
+fun normalizeMessageSetReaction(scope443: Scope) {
     scope443.set("betaReactionSet" + scope443.formatArguments("mid" to scope443.argumentKey("messageId"),"reaction" to scope443.argumentKey("reaction")), scope443.readBoolean("betaReactionSet"))
 }
-fun normalizeMessageUnsetReaction(scope: Scope) {
-    val scope444 = scope
+fun normalizeMessageUnsetReaction(scope444: Scope) {
     scope444.set("betaReactionRemove" + scope444.formatArguments("mid" to scope444.argumentKey("messageId"),"reaction" to scope444.argumentKey("reaction")), scope444.readBoolean("betaReactionRemove"))
 }
-fun normalizeOrganizationActivateByInvite(scope: Scope) {
-    val scope445 = scope
+fun normalizeOrganizationActivateByInvite(scope445: Scope) {
     scope445.set("joinAppInvite" + scope445.formatArguments("key" to scope445.argumentKey("inviteKey")), scope445.readString("joinAppInvite"))
 }
-fun normalizeOrganizationAddMember(scope: Scope) {
-    val scope446 = scope
+fun normalizeOrganizationAddMember(scope446: Scope) {
     scope446.assertObject("betaOrganizationMemberAdd")
     val scope447 = scope446.child("betaOrganizationMemberAdd", "betaOrganizationMemberAdd" + scope446.formatArguments("organizationId" to scope446.argumentKey("organizationId"),"userIds" to scope446.argumentKey("userIds")))
     scope447.set("__typename", scope447.readString("__typename"))
     normalizeOrganizationFull(scope447)
 }
-fun normalizeOrganizationAlterPublished(scope: Scope) {
-    val scope448 = scope
+fun normalizeOrganizationAlterPublished(scope448: Scope) {
     scope448.assertObject("alphaAlterPublished")
     val scope449 = scope448.child("alphaAlterPublished", "alphaAlterPublished" + scope448.formatArguments("id" to scope448.argumentKey("organizationId"),"published" to scope448.argumentKey("published")))
     scope449.set("__typename", scope449.readString("__typename"))
     normalizeOrganizationSearch(scope449)
 }
-fun normalizeOrganizationChangeMemberRole(scope: Scope) {
-    val scope450 = scope
+fun normalizeOrganizationChangeMemberRole(scope450: Scope) {
     scope450.set("alphaOrganizationChangeMemberRole" + scope450.formatArguments("memberId" to scope450.argumentKey("memberId"),"newRole" to scope450.argumentKey("newRole"),"organizationId" to scope450.argumentKey("organizationId")), scope450.readString("alphaOrganizationChangeMemberRole"))
 }
-fun normalizeOrganizationCreatePublicInvite(scope: Scope) {
-    val scope451 = scope
+fun normalizeOrganizationCreatePublicInvite(scope451: Scope) {
     scope451.assertObject("alphaOrganizationRefreshInviteLink")
     val scope452 = scope451.child("alphaOrganizationRefreshInviteLink", "alphaOrganizationRefreshInviteLink" + scope451.formatArguments("expirationDays" to scope451.argumentKey("expirationDays"),"organizationId" to scope451.argumentKey("organizationId")))
     scope452.set("__typename", scope452.readString("__typename"))
@@ -2758,34 +2611,28 @@ fun normalizeOrganizationCreatePublicInvite(scope: Scope) {
     scope452.set("key", scope452.readString("key"))
     scope452.set("ttl", scope452.readStringOptional("ttl"))
 }
-fun normalizeOrganizationInviteMembers(scope: Scope) {
-    val scope453 = scope
+fun normalizeOrganizationInviteMembers(scope453: Scope) {
     scope453.set("alphaOrganizationInviteMembers" + scope453.formatArguments("inviteRequests" to scope453.argumentKey("inviteRequests"),"organizationId" to scope453.argumentKey("organizationId")), scope453.readString("alphaOrganizationInviteMembers"))
 }
-fun normalizeOrganizationMemberRemove(scope: Scope) {
-    val scope454 = scope
+fun normalizeOrganizationMemberRemove(scope454: Scope) {
     scope454.assertObject("betaOrganizationMemberRemove")
     val scope455 = scope454.child("betaOrganizationMemberRemove", "betaOrganizationMemberRemove" + scope454.formatArguments("organizationId" to scope454.argumentKey("organizationId"),"userId" to scope454.argumentKey("userId")))
     scope455.set("__typename", scope455.readString("__typename"))
     scope455.set("id", scope455.readString("id"))
 }
-fun normalizeOrganizationRemoveMember(scope: Scope) {
-    val scope456 = scope
+fun normalizeOrganizationRemoveMember(scope456: Scope) {
     scope456.set("alphaOrganizationRemoveMember" + scope456.formatArguments("memberId" to scope456.argumentKey("memberId"),"organizationId" to scope456.argumentKey("organizationId")), scope456.readString("alphaOrganizationRemoveMember"))
 }
-fun normalizePersistEvents(scope: Scope) {
-    val scope457 = scope
+fun normalizePersistEvents(scope457: Scope) {
     scope457.set("track" + scope457.formatArguments("did" to scope457.argumentKey("did"),"events" to scope457.argumentKey("events"),"isProd" to scope457.argumentKey("isProd"),"platform" to scope457.argumentKey("platform")), scope457.readString("track"))
 }
-fun normalizePinMessage(scope: Scope) {
-    val scope458 = scope
+fun normalizePinMessage(scope458: Scope) {
     scope458.assertObject("pinMessage")
     val scope459 = scope458.child("pinMessage", "betaPinMessage" + scope458.formatArguments("chatId" to scope458.argumentKey("chatId"),"messageId" to scope458.argumentKey("messageId")))
     scope459.set("__typename", scope459.readString("__typename"))
     normalizeRoomShort(scope459)
 }
-fun normalizeProfileCreate(scope: Scope) {
-    val scope460 = scope
+fun normalizeProfileCreate(scope460: Scope) {
     scope460.assertObject("createProfile")
     val scope461 = scope460.child("createProfile", "createProfile" + scope460.formatArguments("input" to scope460.argumentKey("input")))
     scope461.set("__typename", scope461.readString("__typename"))
@@ -2815,8 +2662,7 @@ fun normalizeProfileCreate(scope: Scope) {
     }
     scope461.set("website", scope461.readStringOptional("website"))
 }
-fun normalizeProfileUpdate(scope: Scope) {
-    val scope464 = scope
+fun normalizeProfileUpdate(scope464: Scope) {
     scope464.assertObject("updateProfile")
     val scope465 = scope464.child("updateProfile", "updateProfile" + scope464.formatArguments("input" to scope464.argumentKey("input"),"uid" to scope464.argumentKey("uid")))
     scope465.set("__typename", scope465.readString("__typename"))
@@ -2857,50 +2703,41 @@ fun normalizeProfileUpdate(scope: Scope) {
     }
     scope465.set("website", scope465.readStringOptional("website"))
 }
-fun normalizeRefreshAppToken(scope: Scope) {
-    val scope469 = scope
+fun normalizeRefreshAppToken(scope469: Scope) {
     scope469.assertObject("refreshAppToken")
     val scope470 = scope469.child("refreshAppToken", "refreshAppToken" + scope469.formatArguments("appId" to scope469.argumentKey("appId")))
     scope470.set("__typename", scope470.readString("__typename"))
     normalizeAppFull(scope470)
 }
-fun normalizeRegisterPush(scope: Scope) {
-    val scope471 = scope
+fun normalizeRegisterPush(scope471: Scope) {
     scope471.set("registerPush" + scope471.formatArguments("endpoint" to scope471.argumentKey("endpoint"),"type" to scope471.argumentKey("type")), scope471.readString("registerPush"))
 }
-fun normalizeRegisterWebPush(scope: Scope) {
-    val scope472 = scope
+fun normalizeRegisterWebPush(scope472: Scope) {
     scope472.set("registerWebPush" + scope472.formatArguments("endpoint" to scope472.argumentKey("endpoint")), scope472.readString("registerWebPush"))
 }
-fun normalizeReplyMessage(scope: Scope) {
-    val scope473 = scope
+fun normalizeReplyMessage(scope473: Scope) {
     scope473.set("betaMessageSend" + scope473.formatArguments("mentions" to scope473.argumentKey("mentions"),"message" to scope473.argumentKey("message"),"replyMessages" to scope473.argumentKey("replyMessages"),"room" to scope473.argumentKey("roomId")), scope473.readBoolean("replyMessage"))
 }
-fun normalizeReportOnline(scope: Scope) {
-    val scope474 = scope
+fun normalizeReportOnline(scope474: Scope) {
     scope474.set("presenceReportOnline" + scope474.formatArguments("active" to scope474.argumentKey("active"),"platform" to scope474.argumentKey("platform"),"timeout" to "5000"), scope474.readString("presenceReportOnline"))
 }
-fun normalizeRespondPostMessage(scope: Scope) {
-    val scope475 = scope
+fun normalizeRespondPostMessage(scope475: Scope) {
     scope475.set("alphaRespondPostMessage" + scope475.formatArguments("buttonId" to scope475.argumentKey("buttonId"),"messageId" to scope475.argumentKey("messageId")), scope475.readBooleanOptional("alphaRespondPostMessage"))
     scope475.set("betaReactionSet" + scope475.formatArguments("mid" to scope475.argumentKey("messageId"),"reaction" to scope475.argumentKey("reaction")), scope475.readBoolean("betaReactionSet"))
 }
-fun normalizeRoomAddMember(scope: Scope) {
-    val scope476 = scope
+fun normalizeRoomAddMember(scope476: Scope) {
     scope476.assertObject("betaRoomInvite")
     val scope477 = scope476.child("betaRoomInvite", "betaRoomInvite" + scope476.formatArguments("invites" to "["+scope476.formatObjectKey("userId" to scope476.argumentKey("userId"),"role" to "MEMBER")+"]","roomId" to scope476.argumentKey("roomId")))
     scope477.set("__typename", scope477.readString("__typename"))
     normalizeRoomFull(scope477)
 }
-fun normalizeRoomAddMembers(scope: Scope) {
-    val scope478 = scope
+fun normalizeRoomAddMembers(scope478: Scope) {
     scope478.assertObject("betaRoomInvite")
     val scope479 = scope478.child("betaRoomInvite", "betaRoomInvite" + scope478.formatArguments("invites" to scope478.argumentKey("invites"),"roomId" to scope478.argumentKey("roomId")))
     scope479.set("__typename", scope479.readString("__typename"))
     normalizeRoomFull(scope479)
 }
-fun normalizeRoomAlterFeatured(scope: Scope) {
-    val scope480 = scope
+fun normalizeRoomAlterFeatured(scope480: Scope) {
     scope480.assertObject("betaRoomAlterFeatured")
     val scope481 = scope480.child("betaRoomAlterFeatured", "betaRoomAlterFeatured" + scope480.formatArguments("featured" to scope480.argumentKey("featured"),"roomId" to scope480.argumentKey("roomId")))
     scope481.set("__typename", scope481.readString("__typename"))
@@ -2908,8 +2745,7 @@ fun normalizeRoomAlterFeatured(scope: Scope) {
     scope481.set("id", scope481.readString("id"))
     scope481.set("listed", scope481.readBoolean("listed"))
 }
-fun normalizeRoomAlterHidden(scope: Scope) {
-    val scope482 = scope
+fun normalizeRoomAlterHidden(scope482: Scope) {
     scope482.assertObject("betaRoomAlterListed")
     val scope483 = scope482.child("betaRoomAlterListed", "betaRoomAlterListed" + scope482.formatArguments("listed" to scope482.argumentKey("listed"),"roomId" to scope482.argumentKey("roomId")))
     scope483.set("__typename", scope483.readString("__typename"))
@@ -2917,101 +2753,83 @@ fun normalizeRoomAlterHidden(scope: Scope) {
     scope483.set("id", scope483.readString("id"))
     scope483.set("listed", scope483.readBoolean("listed"))
 }
-fun normalizeRoomChangeRole(scope: Scope) {
-    val scope484 = scope
+fun normalizeRoomChangeRole(scope484: Scope) {
     scope484.assertObject("betaRoomChangeRole")
     val scope485 = scope484.child("betaRoomChangeRole", "betaRoomChangeRole" + scope484.formatArguments("newRole" to scope484.argumentKey("newRole"),"roomId" to scope484.argumentKey("roomId"),"userId" to scope484.argumentKey("userId")))
     scope485.set("__typename", scope485.readString("__typename"))
     normalizeRoomFull(scope485)
 }
-fun normalizeRoomCreate(scope: Scope) {
-    val scope486 = scope
+fun normalizeRoomCreate(scope486: Scope) {
     scope486.assertObject("room")
     val scope487 = scope486.child("room", "betaRoomCreate" + scope486.formatArguments("channel" to scope486.argumentKey("channel"),"description" to scope486.argumentKey("description"),"kind" to scope486.argumentKey("kind"),"members" to scope486.argumentKey("members"),"message" to scope486.argumentKey("message"),"organizationId" to scope486.argumentKey("organizationId"),"photoRef" to scope486.argumentKey("photoRef"),"title" to scope486.argumentKey("title")))
     scope487.set("__typename", scope487.readString("__typename"))
     scope487.set("id", scope487.readString("id"))
 }
-fun normalizeRoomCreateIntro(scope: Scope) {
-    val scope488 = scope
+fun normalizeRoomCreateIntro(scope488: Scope) {
     scope488.set("betaIntroSend" + scope488.formatArguments("about" to scope488.argumentKey("about"),"file" to scope488.argumentKey("file"),"message" to scope488.argumentKey("about"),"room" to scope488.argumentKey("roomId"),"uid" to scope488.argumentKey("uid")), scope488.readBoolean("intro"))
 }
-fun normalizeRoomDeclineJoinReuest(scope: Scope) {
-    val scope489 = scope
+fun normalizeRoomDeclineJoinReuest(scope489: Scope) {
     scope489.assertObject("betaRoomDeclineJoinRequest")
     val scope490 = scope489.child("betaRoomDeclineJoinRequest", "betaRoomDeclineJoinRequest" + scope489.formatArguments("roomId" to scope489.argumentKey("roomId"),"userId" to scope489.argumentKey("userId")))
     scope490.set("__typename", scope490.readString("__typename"))
     normalizeRoomFull(scope490)
 }
-fun normalizeRoomDeleteMessage(scope: Scope) {
-    val scope491 = scope
+fun normalizeRoomDeleteMessage(scope491: Scope) {
     scope491.set("betaMessageDelete" + scope491.formatArguments("mid" to scope491.argumentKey("messageId")), scope491.readBoolean("betaMessageDelete"))
 }
-fun normalizeRoomDeleteMessages(scope: Scope) {
-    val scope492 = scope
+fun normalizeRoomDeleteMessages(scope492: Scope) {
     scope492.set("betaMessageDelete" + scope492.formatArguments("mids" to scope492.argumentKey("mids")), scope492.readBoolean("betaMessageDelete"))
 }
-fun normalizeRoomDeleteUrlAugmentation(scope: Scope) {
-    val scope493 = scope
+fun normalizeRoomDeleteUrlAugmentation(scope493: Scope) {
     scope493.set("betaMessageDeleteAugmentation" + scope493.formatArguments("mid" to scope493.argumentKey("messageId")), scope493.readBoolean("betaMessageDeleteAugmentation"))
 }
-fun normalizeRoomEditIntro(scope: Scope) {
-    val scope494 = scope
+fun normalizeRoomEditIntro(scope494: Scope) {
     scope494.set("betaIntroEdit" + scope494.formatArguments("about" to scope494.argumentKey("about"),"file" to scope494.argumentKey("file"),"message" to scope494.argumentKey("about"),"mid" to scope494.argumentKey("messageId"),"uid" to scope494.argumentKey("uid")), scope494.readBoolean("intro"))
 }
-fun normalizeRoomEditMessage(scope: Scope) {
-    val scope495 = scope
+fun normalizeRoomEditMessage(scope495: Scope) {
     scope495.set("betaMessageEdit" + scope495.formatArguments("file" to scope495.argumentKey("file"),"mentions" to scope495.argumentKey("mentions"),"message" to scope495.argumentKey("message"),"mid" to scope495.argumentKey("messageId"),"replyMessages" to scope495.argumentKey("replyMessages")), scope495.readBoolean("betaMessageEdit"))
 }
-fun normalizeRoomJoin(scope: Scope) {
-    val scope496 = scope
+fun normalizeRoomJoin(scope496: Scope) {
     scope496.assertObject("join")
     val scope497 = scope496.child("join", "betaRoomJoin" + scope496.formatArguments("roomId" to scope496.argumentKey("roomId")))
     scope497.set("__typename", scope497.readString("__typename"))
     normalizeRoomFull(scope497)
 }
-fun normalizeRoomJoinInviteLink(scope: Scope) {
-    val scope498 = scope
+fun normalizeRoomJoinInviteLink(scope498: Scope) {
     scope498.assertObject("join")
     val scope499 = scope498.child("join", "betaRoomInviteLinkJoin" + scope498.formatArguments("invite" to scope498.argumentKey("invite")))
     scope499.set("__typename", scope499.readString("__typename"))
     normalizeRoomFull(scope499)
 }
-fun normalizeRoomKick(scope: Scope) {
-    val scope500 = scope
+fun normalizeRoomKick(scope500: Scope) {
     scope500.assertObject("betaRoomKick")
     val scope501 = scope500.child("betaRoomKick", "betaRoomKick" + scope500.formatArguments("roomId" to scope500.argumentKey("roomId"),"userId" to scope500.argumentKey("userId")))
     scope501.set("__typename", scope501.readString("__typename"))
     normalizeRoomFull(scope501)
 }
-fun normalizeRoomLeave(scope: Scope) {
-    val scope502 = scope
+fun normalizeRoomLeave(scope502: Scope) {
     scope502.assertObject("betaRoomLeave")
     val scope503 = scope502.child("betaRoomLeave", "betaRoomLeave" + scope502.formatArguments("roomId" to scope502.argumentKey("roomId")))
     scope503.set("__typename", scope503.readString("__typename"))
     normalizeRoomFull(scope503)
 }
-fun normalizeRoomRead(scope: Scope) {
-    val scope504 = scope
+fun normalizeRoomRead(scope504: Scope) {
     scope504.set("roomRead" + scope504.formatArguments("id" to scope504.argumentKey("id"),"mid" to scope504.argumentKey("mid")), scope504.readBoolean("roomRead"))
 }
-fun normalizeRoomRenewInviteLink(scope: Scope) {
-    val scope505 = scope
+fun normalizeRoomRenewInviteLink(scope505: Scope) {
     scope505.set("betaRoomInviteLinkRenew" + scope505.formatArguments("roomId" to scope505.argumentKey("roomId")), scope505.readString("link"))
 }
-fun normalizeRoomSendEmailInvite(scope: Scope) {
-    val scope506 = scope
+fun normalizeRoomSendEmailInvite(scope506: Scope) {
     scope506.set("betaRoomInviteLinkSendEmail" + scope506.formatArguments("inviteRequests" to scope506.argumentKey("inviteRequests"),"roomId" to scope506.argumentKey("roomId")), scope506.readString("betaRoomInviteLinkSendEmail"))
 }
-fun normalizeRoomSettingsUpdate(scope: Scope) {
-    val scope507 = scope
+fun normalizeRoomSettingsUpdate(scope507: Scope) {
     scope507.assertObject("betaRoomUpdateUserNotificationSettings")
     val scope508 = scope507.child("betaRoomUpdateUserNotificationSettings", "betaRoomUpdateUserNotificationSettings" + scope507.formatArguments("roomId" to scope507.argumentKey("roomId"),"settings" to scope507.argumentKey("settings")))
     scope508.set("__typename", scope508.readString("__typename"))
     scope508.set("id", scope508.readString("id"))
     scope508.set("mute", scope508.readBooleanOptional("mute"))
 }
-fun normalizeRoomUpdate(scope: Scope) {
-    val scope509 = scope
+fun normalizeRoomUpdate(scope509: Scope) {
     scope509.assertObject("betaRoomUpdate")
     val scope510 = scope509.child("betaRoomUpdate", "betaRoomUpdate" + scope509.formatArguments("input" to scope509.argumentKey("input"),"roomId" to scope509.argumentKey("roomId")))
     scope510.set("__typename", scope510.readString("__typename"))
@@ -3026,57 +2844,47 @@ fun normalizeRoomUpdate(scope: Scope) {
         scope510.set("title", scope510.readString("title"))
     }
 }
-fun normalizeSaveDraftMessage(scope: Scope) {
-    val scope511 = scope
+fun normalizeSaveDraftMessage(scope511: Scope) {
     scope511.set("conversationDraftUpdate" + scope511.formatArguments("conversationId" to scope511.argumentKey("conversationId"),"message" to scope511.argumentKey("message")), scope511.readString("conversationDraftUpdate"))
 }
-fun normalizeSendMessage(scope: Scope) {
-    val scope512 = scope
+fun normalizeSendMessage(scope512: Scope) {
     scope512.set("betaMessageSend" + scope512.formatArguments("file" to scope512.argumentKey("file"),"mentions" to scope512.argumentKey("mentions"),"message" to scope512.argumentKey("message"),"repeatKey" to scope512.argumentKey("repeatKey"),"replyMessages" to scope512.argumentKey("replyMessages"),"room" to scope512.argumentKey("room")), scope512.readBoolean("sentMessage"))
 }
-fun normalizeSendPostMessage(scope: Scope) {
-    val scope513 = scope
+fun normalizeSendPostMessage(scope513: Scope) {
     scope513.assertObject("sendPostMessage")
     val scope514 = scope513.child("sendPostMessage", "alphaSendPostMessage" + scope513.formatArguments("attachments" to scope513.argumentKey("attachments"),"conversationId" to scope513.argumentKey("conversationId"),"postType" to scope513.argumentKey("postType"),"text" to scope513.argumentKey("text"),"title" to scope513.argumentKey("title")))
     scope514.set("__typename", scope514.readString("__typename"))
     scope514.set("seq", scope514.readInt("seq"))
 }
-fun normalizeSetOrgShortname(scope: Scope) {
-    val scope515 = scope
+fun normalizeSetOrgShortname(scope515: Scope) {
     scope515.set("alphaSetOrgShortName" + scope515.formatArguments("id" to scope515.argumentKey("organizationId"),"shortname" to scope515.argumentKey("shortname")), scope515.readStringOptional("alphaSetOrgShortName"))
 }
-fun normalizeSetTyping(scope: Scope) {
-    val scope516 = scope
+fun normalizeSetTyping(scope516: Scope) {
     scope516.set("typingSend" + scope516.formatArguments("conversationId" to scope516.argumentKey("conversationId"),"type" to "TEXT"), scope516.readString("typingSend"))
 }
-fun normalizeSetUserShortname(scope: Scope) {
-    val scope517 = scope
+fun normalizeSetUserShortname(scope517: Scope) {
     scope517.set("alphaSetUserShortName" + scope517.formatArguments("shortname" to scope517.argumentKey("shortname")), scope517.readStringOptional("alphaSetUserShortName"))
 }
-fun normalizeSettingsUpdate(scope: Scope) {
-    val scope518 = scope
+fun normalizeSettingsUpdate(scope518: Scope) {
     scope518.assertObject("updateSettings")
     val scope519 = scope518.child("updateSettings", "updateSettings" + scope518.formatArguments("settings" to scope518.argumentKey("input")))
     scope519.set("__typename", scope519.readString("__typename"))
     normalizeSettingsFull(scope519)
 }
-fun normalizeSuperAccountActivate(scope: Scope) {
-    val scope520 = scope
+fun normalizeSuperAccountActivate(scope520: Scope) {
     scope520.assertObject("superAccountActivate")
     val scope521 = scope520.child("superAccountActivate", "superAccountActivate" + scope520.formatArguments("id" to scope520.argumentKey("accountId")))
     scope521.set("__typename", scope521.readString("__typename"))
     scope521.set("id", scope521.readString("id"))
     scope521.set("state", scope521.readString("state"))
 }
-fun normalizeSuperAccountAdd(scope: Scope) {
-    val scope522 = scope
+fun normalizeSuperAccountAdd(scope522: Scope) {
     scope522.assertObject("superAccountAdd")
     val scope523 = scope522.child("superAccountAdd", "superAccountAdd" + scope522.formatArguments("title" to scope522.argumentKey("title")))
     scope523.set("__typename", scope523.readString("__typename"))
     scope523.set("id", scope523.readString("id"))
 }
-fun normalizeSuperAccountMemberAdd(scope: Scope) {
-    val scope524 = scope
+fun normalizeSuperAccountMemberAdd(scope524: Scope) {
     scope524.assertObject("superAccountMemberAdd")
     val scope525 = scope524.child("superAccountMemberAdd", "superAccountMemberAdd" + scope524.formatArguments("id" to scope524.argumentKey("accountId"),"userId" to scope524.argumentKey("userId")))
     scope525.set("__typename", scope525.readString("__typename"))
@@ -3092,8 +2900,7 @@ fun normalizeSuperAccountMemberAdd(scope: Scope) {
         scope525.set("members", scope526.completed())
     }
 }
-fun normalizeSuperAccountMemberRemove(scope: Scope) {
-    val scope528 = scope
+fun normalizeSuperAccountMemberRemove(scope528: Scope) {
     scope528.assertObject("superAccountMemberRemove")
     val scope529 = scope528.child("superAccountMemberRemove", "superAccountMemberRemove" + scope528.formatArguments("id" to scope528.argumentKey("accountId"),"userId" to scope528.argumentKey("userId")))
     scope529.set("__typename", scope529.readString("__typename"))
@@ -3109,70 +2916,59 @@ fun normalizeSuperAccountMemberRemove(scope: Scope) {
         scope529.set("members", scope530.completed())
     }
 }
-fun normalizeSuperAccountPend(scope: Scope) {
-    val scope532 = scope
+fun normalizeSuperAccountPend(scope532: Scope) {
     scope532.assertObject("superAccountPend")
     val scope533 = scope532.child("superAccountPend", "superAccountPend" + scope532.formatArguments("id" to scope532.argumentKey("accountId")))
     scope533.set("__typename", scope533.readString("__typename"))
     scope533.set("id", scope533.readString("id"))
     scope533.set("state", scope533.readString("state"))
 }
-fun normalizeSuperAccountRename(scope: Scope) {
-    val scope534 = scope
+fun normalizeSuperAccountRename(scope534: Scope) {
     scope534.assertObject("superAccountRename")
     val scope535 = scope534.child("superAccountRename", "superAccountRename" + scope534.formatArguments("id" to scope534.argumentKey("accountId"),"title" to scope534.argumentKey("title")))
     scope535.set("__typename", scope535.readString("__typename"))
     scope535.set("id", scope535.readString("id"))
     scope535.set("title", scope535.readString("title"))
 }
-fun normalizeSuperAccountSuspend(scope: Scope) {
-    val scope536 = scope
+fun normalizeSuperAccountSuspend(scope536: Scope) {
     scope536.assertObject("superAccountSuspend")
     val scope537 = scope536.child("superAccountSuspend", "superAccountSuspend" + scope536.formatArguments("id" to scope536.argumentKey("accountId")))
     scope537.set("__typename", scope537.readString("__typename"))
     scope537.set("id", scope537.readString("id"))
     scope537.set("state", scope537.readString("state"))
 }
-fun normalizeSuperAdminAdd(scope: Scope) {
-    val scope538 = scope
+fun normalizeSuperAdminAdd(scope538: Scope) {
     scope538.set("superAdminAdd" + scope538.formatArguments("role" to scope538.argumentKey("role"),"userId" to scope538.argumentKey("userId")), scope538.readString("superAdminAdd"))
 }
-fun normalizeSuperAdminRemove(scope: Scope) {
-    val scope539 = scope
+fun normalizeSuperAdminRemove(scope539: Scope) {
     scope539.set("superAdminRemove" + scope539.formatArguments("userId" to scope539.argumentKey("userId")), scope539.readString("superAdminRemove"))
 }
-fun normalizeSwitchReaction(scope: Scope) {
-    val scope540 = scope
+fun normalizeSwitchReaction(scope540: Scope) {
     scope540.set("betaReactionRemove" + scope540.formatArguments("mid" to scope540.argumentKey("messageId"),"reaction" to scope540.argumentKey("from")), scope540.readBoolean("betaReactionRemove"))
     scope540.set("betaReactionSet" + scope540.formatArguments("mid" to scope540.argumentKey("messageId"),"reaction" to scope540.argumentKey("to")), scope540.readBoolean("betaReactionSet"))
 }
-fun normalizeUnpinMessage(scope: Scope) {
-    val scope541 = scope
+fun normalizeUnpinMessage(scope541: Scope) {
     scope541.assertObject("unpinMessage")
     val scope542 = scope541.child("unpinMessage", "betaUnpinMessage" + scope541.formatArguments("chatId" to scope541.argumentKey("chatId")))
     scope542.set("__typename", scope542.readString("__typename"))
     normalizeRoomShort(scope542)
 }
-fun normalizeUpdateApp(scope: Scope) {
-    val scope543 = scope
+fun normalizeUpdateApp(scope543: Scope) {
     scope543.assertObject("updateAppProfile")
     val scope544 = scope543.child("updateAppProfile", "updateAppProfile" + scope543.formatArguments("appId" to scope543.argumentKey("appId"),"input" to scope543.argumentKey("input")))
     scope544.set("__typename", scope544.readString("__typename"))
     normalizeAppFull(scope544)
 }
-fun normalizeUpdateOrganization(scope: Scope) {
-    val scope545 = scope
+fun normalizeUpdateOrganization(scope545: Scope) {
     scope545.assertObject("updateOrganizationProfile")
     val scope546 = scope545.child("updateOrganizationProfile", "updateOrganizationProfile" + scope545.formatArguments("id" to scope545.argumentKey("organizationId"),"input" to scope545.argumentKey("input")))
     scope546.set("__typename", scope546.readString("__typename"))
     normalizeOrganizationProfileFull(scope546)
 }
-fun normalizeUpdateWelcomeMessage(scope: Scope) {
-    val scope547 = scope
+fun normalizeUpdateWelcomeMessage(scope547: Scope) {
     scope547.set("updateWelcomeMessage" + scope547.formatArguments("roomId" to scope547.argumentKey("roomId"),"welcomeMessageIsOn" to scope547.argumentKey("welcomeMessageIsOn"),"welcomeMessageSender" to scope547.argumentKey("welcomeMessageSender"),"welcomeMessageText" to scope547.argumentKey("welcomeMessageText")), scope547.readBoolean("updateWelcomeMessage"))
 }
-fun normalizeUserStorageSet(scope: Scope) {
-    val scope548 = scope
+fun normalizeUserStorageSet(scope548: Scope) {
     if (scope548.assertList("userStorageSet")) {
         val scope549 = scope548.childList("userStorageSet", "userStorageSet" + scope548.formatArguments("data" to scope548.argumentKey("data"),"namespace" to scope548.argumentKey("namespace")))
         for (i in 0 until scope549.size) {
@@ -3186,8 +2982,7 @@ fun normalizeUserStorageSet(scope: Scope) {
         scope548.set("userStorageSet" + scope548.formatArguments("data" to scope548.argumentKey("data"),"namespace" to scope548.argumentKey("namespace")), scope549.completed())
     }
 }
-fun normalizeChatWatch(scope: Scope) {
-    val scope551 = scope
+fun normalizeChatWatch(scope551: Scope) {
     scope551.assertObject("event")
     val scope552 = scope551.child("event", "chatUpdates" + scope551.formatArguments("chatId" to scope551.argumentKey("chatId"),"fromState" to scope551.argumentKey("state")))
     scope552.set("__typename", scope552.readString("__typename"))
@@ -3215,8 +3010,7 @@ fun normalizeChatWatch(scope: Scope) {
         }
     }
 }
-fun normalizeCommentWatch(scope: Scope) {
-    val scope556 = scope
+fun normalizeCommentWatch(scope556: Scope) {
     if (scope556.hasKey("event")) {
         val scope557 = scope556.child("event", "commentUpdates" + scope556.formatArguments("fromState" to scope556.argumentKey("fromState"),"peerId" to scope556.argumentKey("peerId")))
         scope557.set("__typename", scope557.readString("__typename"))
@@ -3247,8 +3041,7 @@ fun normalizeCommentWatch(scope: Scope) {
         scope556.setNull("commentUpdates" + scope556.formatArguments("fromState" to scope556.argumentKey("fromState"),"peerId" to scope556.argumentKey("peerId")))
     }
 }
-fun normalizeConferenceMediaWatch(scope: Scope) {
-    val scope561 = scope
+fun normalizeConferenceMediaWatch(scope561: Scope) {
     scope561.assertObject("media")
     val scope562 = scope561.child("media", "alphaConferenceMediaWatch" + scope561.formatArguments("id" to scope561.argumentKey("id"),"peerId" to scope561.argumentKey("peerId")))
     scope562.set("__typename", scope562.readString("__typename"))
@@ -3273,15 +3066,13 @@ fun normalizeConferenceMediaWatch(scope: Scope) {
         scope562.set("streams", scope563.completed())
     }
 }
-fun normalizeConferenceWatch(scope: Scope) {
-    val scope566 = scope
+fun normalizeConferenceWatch(scope566: Scope) {
     scope566.assertObject("alphaConferenceWatch")
     val scope567 = scope566.child("alphaConferenceWatch", "alphaConferenceWatch" + scope566.formatArguments("id" to scope566.argumentKey("id")))
     scope567.set("__typename", scope567.readString("__typename"))
     normalizeConferenceFull(scope567)
 }
-fun normalizeDialogsWatch(scope: Scope) {
-    val scope568 = scope
+fun normalizeDialogsWatch(scope568: Scope) {
     scope568.assertObject("event")
     val scope569 = scope568.child("event", "dialogsUpdates" + scope568.formatArguments("fromState" to scope568.argumentKey("state")))
     scope569.set("__typename", scope569.readString("__typename"))
@@ -3309,8 +3100,7 @@ fun normalizeDialogsWatch(scope: Scope) {
         }
     }
 }
-fun normalizeOnlineWatch(scope: Scope) {
-    val scope573 = scope
+fun normalizeOnlineWatch(scope573: Scope) {
     scope573.assertObject("alphaSubscribeChatOnline")
     val scope574 = scope573.child("alphaSubscribeChatOnline", "alphaSubscribeChatOnline" + scope573.formatArguments("conversations" to scope573.argumentKey("conversations")))
     scope574.set("__typename", scope574.readString("__typename"))
@@ -3323,15 +3113,13 @@ fun normalizeOnlineWatch(scope: Scope) {
     scope575.set("lastSeen", scope575.readStringOptional("lastSeen"))
     scope575.set("online", scope575.readBoolean("online"))
 }
-fun normalizeSettingsWatch(scope: Scope) {
-    val scope576 = scope
+fun normalizeSettingsWatch(scope576: Scope) {
     scope576.assertObject("watchSettings")
     val scope577 = scope576.child("watchSettings", "watchSettings")
     scope577.set("__typename", scope577.readString("__typename"))
     normalizeSettingsFull(scope577)
 }
-fun normalizeTypingsWatch(scope: Scope) {
-    val scope578 = scope
+fun normalizeTypingsWatch(scope578: Scope) {
     scope578.assertObject("typings")
     val scope579 = scope578.child("typings", "typings")
     scope579.set("__typename", scope579.readString("__typename"))
@@ -3347,11 +3135,1760 @@ fun normalizeTypingsWatch(scope: Scope) {
     scope581.set("name", scope581.readString("name"))
     scope581.set("photo", scope581.readStringOptional("photo"))
 }
+val AppChatSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("chat","chat", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    inline("PrivateRoom", obj(listOf(
+                        field("id","id", notNull(scalar("ID")))
+                    ))),
+                    inline("SharedRoom", obj(listOf(
+                        field("id","id", notNull(scalar("ID")))
+                    )))
+                )))),
+            field("webhook","webhook", notNull(scalar("String")))
+        ))
+
+val AppFullSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("about","about", scalar("String")),
+            field("id","id", notNull(scalar("ID"))),
+            field("name","name", notNull(scalar("String"))),
+            field("photoRef","photoRef", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("crop","crop", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("h","h", notNull(scalar("Int"))),
+                            field("w","w", notNull(scalar("Int"))),
+                            field("x","x", notNull(scalar("Int"))),
+                            field("y","y", notNull(scalar("Int")))
+                        ))),
+                    field("uuid","uuid", notNull(scalar("String")))
+                ))),
+            field("shortname","shortname", scalar("String")),
+            field("token","token", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("salt","salt", notNull(scalar("String")))
+                ))))
+        ))
+
+val OrganizationShortSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("alphaIsCommunity","isCommunity", notNull(scalar("Boolean"))),
+            field("id","id", notNull(scalar("ID"))),
+            field("name","name", notNull(scalar("String"))),
+            field("photo","photo", scalar("String"))
+        ))
+
+val UserShortSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("email","email", scalar("String")),
+            field("firstName","firstName", notNull(scalar("String"))),
+            field("id","id", notNull(scalar("ID"))),
+            field("isBot","isBot", notNull(scalar("Boolean"))),
+            field("isYou","isYou", notNull(scalar("Boolean"))),
+            field("lastName","lastName", scalar("String")),
+            field("lastSeen","lastSeen", scalar("String")),
+            field("name","name", notNull(scalar("String"))),
+            field("online","online", notNull(scalar("Boolean"))),
+            field("photo","photo", scalar("String")),
+            field("primaryOrganization","primaryOrganization", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Organization", OrganizationShortSelector)
+                ))),
+            field("shortname","shortname", scalar("String"))
+        ))
+
+val UserTinySelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("firstName","firstName", notNull(scalar("String"))),
+            field("id","id", notNull(scalar("ID"))),
+            field("isYou","isYou", notNull(scalar("Boolean"))),
+            field("lastName","lastName", scalar("String")),
+            field("name","name", notNull(scalar("String"))),
+            field("photo","photo", scalar("String")),
+            field("primaryOrganization","primaryOrganization", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Organization", OrganizationShortSelector)
+                ))),
+            field("shortname","shortname", scalar("String"))
+        ))
+
+val FullMessageSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("date","date", notNull(scalar("Date"))),
+            field("fallback","fallback", notNull(scalar("String"))),
+            field("id","id", notNull(scalar("ID"))),
+            field("message","message", scalar("String")),
+            field("sender","sender", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("User", UserShortSelector)
+                )))),
+            field("spans","spans", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("length","length", notNull(scalar("Int"))),
+                    field("offset","offset", notNull(scalar("Int"))),
+                    inline("MessageSpanUserMention", obj(listOf(
+                        field("user","user", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                fragment("User", UserTinySelector)
+                            ))))
+                    ))),
+                    inline("MessageSpanMultiUserMention", obj(listOf(
+                        field("users","users", notNull(list(notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                fragment("User", UserTinySelector)
+                            ))))))
+                    ))),
+                    inline("MessageSpanRoomMention", obj(listOf(
+                        field("room","room", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                inline("PrivateRoom", obj(listOf(
+                                    field("id","id", notNull(scalar("ID"))),
+                                    field("user","user", notNull(obj(listOf(
+                                            field("__typename","__typename", notNull(scalar("String"))),
+                                            field("id","id", notNull(scalar("ID"))),
+                                            field("name","name", notNull(scalar("String")))
+                                        ))))
+                                ))),
+                                inline("SharedRoom", obj(listOf(
+                                    field("id","id", notNull(scalar("ID"))),
+                                    field("title","title", notNull(scalar("String")))
+                                )))
+                            ))))
+                    ))),
+                    inline("MessageSpanLink", obj(listOf(
+                        field("url","url", notNull(scalar("String")))
+                    ))),
+                    inline("MessageSpanBold", obj(listOf(
+                        field("length","length", notNull(scalar("Int"))),
+                        field("offset","offset", notNull(scalar("Int")))
+                    )))
+                )))))),
+            inline("GeneralMessage", obj(listOf(
+                field("attachments","attachments", notNull(list(notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("fallback","fallback", notNull(scalar("String"))),
+                        inline("MessageAttachmentFile", obj(listOf(
+                            field("fileId","fileId", notNull(scalar("String"))),
+                            field("fileMetadata","fileMetadata", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    field("imageFormat","imageFormat", scalar("String")),
+                                    field("imageHeight","imageHeight", scalar("Int")),
+                                    field("imageWidth","imageWidth", scalar("Int")),
+                                    field("isImage","isImage", notNull(scalar("Boolean"))),
+                                    field("mimeType","mimeType", scalar("String")),
+                                    field("name","name", notNull(scalar("String"))),
+                                    field("size","size", notNull(scalar("Int")))
+                                )))),
+                            field("filePreview","filePreview", scalar("String")),
+                            field("id","id", notNull(scalar("ID")))
+                        ))),
+                        inline("MessageRichAttachment", obj(listOf(
+                            field("fallback","fallback", notNull(scalar("String"))),
+                            field("icon","icon", obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    field("metadata","metadata", obj(listOf(
+                                            field("__typename","__typename", notNull(scalar("String"))),
+                                            field("imageFormat","imageFormat", scalar("String")),
+                                            field("imageHeight","imageHeight", scalar("Int")),
+                                            field("imageWidth","imageWidth", scalar("Int")),
+                                            field("isImage","isImage", notNull(scalar("Boolean"))),
+                                            field("mimeType","mimeType", scalar("String")),
+                                            field("name","name", notNull(scalar("String"))),
+                                            field("size","size", notNull(scalar("Int")))
+                                        ))),
+                                    field("url","url", notNull(scalar("String")))
+                                ))),
+                            field("image","image", obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    field("metadata","metadata", obj(listOf(
+                                            field("__typename","__typename", notNull(scalar("String"))),
+                                            field("imageFormat","imageFormat", scalar("String")),
+                                            field("imageHeight","imageHeight", scalar("Int")),
+                                            field("imageWidth","imageWidth", scalar("Int")),
+                                            field("isImage","isImage", notNull(scalar("Boolean"))),
+                                            field("mimeType","mimeType", scalar("String")),
+                                            field("name","name", notNull(scalar("String"))),
+                                            field("size","size", notNull(scalar("Int")))
+                                        ))),
+                                    field("url","url", notNull(scalar("String")))
+                                ))),
+                            field("keyboard","keyboard", obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    field("buttons","buttons", notNull(list(list(notNull(obj(listOf(
+                                            field("__typename","__typename", notNull(scalar("String"))),
+                                            field("style","style", notNull(scalar("String"))),
+                                            field("title","title", notNull(scalar("String"))),
+                                            field("url","url", scalar("String"))
+                                        )))))))
+                                ))),
+                            field("subTitle","subTitle", scalar("String")),
+                            field("text","text", scalar("String")),
+                            field("title","title", scalar("String")),
+                            field("titleLink","titleLink", scalar("String")),
+                            field("titleLinkHostname","titleLinkHostname", scalar("String"))
+                        )))
+                    )))))),
+                field("commentsCount","commentsCount", notNull(scalar("Int"))),
+                field("edited","edited", notNull(scalar("Boolean"))),
+                field("quotedMessages","quotedMessages", notNull(list(notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("date","date", notNull(scalar("Date"))),
+                        field("fallback","fallback", notNull(scalar("String"))),
+                        field("id","id", notNull(scalar("ID"))),
+                        field("message","message", scalar("String")),
+                        field("message","message", scalar("String")),
+                        field("sender","sender", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                fragment("User", UserShortSelector)
+                            )))),
+                        field("spans","spans", notNull(list(notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("length","length", notNull(scalar("Int"))),
+                                field("offset","offset", notNull(scalar("Int"))),
+                                inline("MessageSpanUserMention", obj(listOf(
+                                    field("user","user", notNull(obj(listOf(
+                                            field("__typename","__typename", notNull(scalar("String"))),
+                                            fragment("User", UserShortSelector)
+                                        ))))
+                                ))),
+                                inline("MessageSpanMultiUserMention", obj(listOf(
+                                    field("users","users", notNull(list(notNull(obj(listOf(
+                                            field("__typename","__typename", notNull(scalar("String"))),
+                                            fragment("User", UserShortSelector)
+                                        ))))))
+                                ))),
+                                inline("MessageSpanRoomMention", obj(listOf(
+                                    field("room","room", notNull(obj(listOf(
+                                            field("__typename","__typename", notNull(scalar("String"))),
+                                            inline("PrivateRoom", obj(listOf(
+                                                field("id","id", notNull(scalar("ID"))),
+                                                field("user","user", notNull(obj(listOf(
+                                                        field("__typename","__typename", notNull(scalar("String"))),
+                                                        field("id","id", notNull(scalar("ID"))),
+                                                        field("name","name", notNull(scalar("String")))
+                                                    ))))
+                                            ))),
+                                            inline("SharedRoom", obj(listOf(
+                                                field("id","id", notNull(scalar("ID"))),
+                                                field("title","title", notNull(scalar("String")))
+                                            )))
+                                        ))))
+                                ))),
+                                inline("MessageSpanLink", obj(listOf(
+                                    field("url","url", notNull(scalar("String")))
+                                )))
+                            )))))),
+                        inline("GeneralMessage", obj(listOf(
+                            field("attachments","attachments", notNull(list(notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    field("fallback","fallback", notNull(scalar("String"))),
+                                    inline("MessageAttachmentFile", obj(listOf(
+                                        field("fileId","fileId", notNull(scalar("String"))),
+                                        field("fileMetadata","fileMetadata", notNull(obj(listOf(
+                                                field("__typename","__typename", notNull(scalar("String"))),
+                                                field("imageFormat","imageFormat", scalar("String")),
+                                                field("imageHeight","imageHeight", scalar("Int")),
+                                                field("imageWidth","imageWidth", scalar("Int")),
+                                                field("isImage","isImage", notNull(scalar("Boolean"))),
+                                                field("mimeType","mimeType", scalar("String")),
+                                                field("name","name", notNull(scalar("String"))),
+                                                field("size","size", notNull(scalar("Int")))
+                                            )))),
+                                        field("filePreview","filePreview", scalar("String"))
+                                    ))),
+                                    inline("MessageRichAttachment", obj(listOf(
+                                        field("fallback","fallback", notNull(scalar("String"))),
+                                        field("icon","icon", obj(listOf(
+                                                field("__typename","__typename", notNull(scalar("String"))),
+                                                field("metadata","metadata", obj(listOf(
+                                                        field("__typename","__typename", notNull(scalar("String"))),
+                                                        field("imageFormat","imageFormat", scalar("String")),
+                                                        field("imageHeight","imageHeight", scalar("Int")),
+                                                        field("imageWidth","imageWidth", scalar("Int")),
+                                                        field("isImage","isImage", notNull(scalar("Boolean"))),
+                                                        field("mimeType","mimeType", scalar("String")),
+                                                        field("name","name", notNull(scalar("String"))),
+                                                        field("size","size", notNull(scalar("Int")))
+                                                    ))),
+                                                field("url","url", notNull(scalar("String")))
+                                            ))),
+                                        field("image","image", obj(listOf(
+                                                field("__typename","__typename", notNull(scalar("String"))),
+                                                field("metadata","metadata", obj(listOf(
+                                                        field("__typename","__typename", notNull(scalar("String"))),
+                                                        field("imageFormat","imageFormat", scalar("String")),
+                                                        field("imageHeight","imageHeight", scalar("Int")),
+                                                        field("imageWidth","imageWidth", scalar("Int")),
+                                                        field("isImage","isImage", notNull(scalar("Boolean"))),
+                                                        field("mimeType","mimeType", scalar("String")),
+                                                        field("name","name", notNull(scalar("String"))),
+                                                        field("size","size", notNull(scalar("Int")))
+                                                    ))),
+                                                field("url","url", notNull(scalar("String")))
+                                            ))),
+                                        field("subTitle","subTitle", scalar("String")),
+                                        field("text","text", scalar("String")),
+                                        field("title","title", scalar("String")),
+                                        field("titleLink","titleLink", scalar("String")),
+                                        field("titleLinkHostname","titleLinkHostname", scalar("String"))
+                                    )))
+                                )))))),
+                            field("commentsCount","commentsCount", notNull(scalar("Int"))),
+                            field("edited","edited", notNull(scalar("Boolean")))
+                        )))
+                    )))))),
+                field("reactions","reactions", notNull(list(notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("reaction","reaction", notNull(scalar("String"))),
+                        field("user","user", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                fragment("User", UserShortSelector)
+                            ))))
+                    ))))))
+            ))),
+            inline("ServiceMessage", obj(listOf(
+                field("serviceMetadata","serviceMetadata", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        inline("InviteServiceMetadata", obj(listOf(
+                            field("invitedBy","invitedBy", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    fragment("User", UserTinySelector)
+                                )))),
+                            field("users","users", list(notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    fragment("User", UserTinySelector)
+                                )))))
+                        ))),
+                        inline("KickServiceMetadata", obj(listOf(
+                            field("kickedBy","kickedBy", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    fragment("User", UserTinySelector)
+                                )))),
+                            field("user","user", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    fragment("User", UserTinySelector)
+                                ))))
+                        ))),
+                        inline("TitleChangeServiceMetadata", obj(listOf(
+                            field("title","title", notNull(scalar("String")))
+                        ))),
+                        inline("PhotoChangeServiceMetadata", obj(listOf(
+                            field("photo","photo", scalar("String"))
+                        ))),
+                        inline("PostRespondServiceMetadata", obj(listOf(
+                            field("respondType","respondType", notNull(scalar("ID")))
+                        )))
+                    )))
+            )))
+        ))
+
+val RoomShortSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            inline("PrivateRoom", obj(listOf(
+                field("id","id", notNull(scalar("ID"))),
+                field("settings","settings", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("id","id", notNull(scalar("ID"))),
+                        field("mute","mute", scalar("Boolean"))
+                    )))),
+                field("user","user", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("User", UserShortSelector)
+                    ))))
+            ))),
+            inline("SharedRoom", obj(listOf(
+                field("canEdit","canEdit", notNull(scalar("Boolean"))),
+                field("canSendMessage","canSendMessage", notNull(scalar("Boolean"))),
+                field("id","id", notNull(scalar("ID"))),
+                field("isChannel","isChannel", notNull(scalar("Boolean"))),
+                field("kind","kind", notNull(scalar("String"))),
+                field("membersCount","membersCount", scalar("Int")),
+                field("membership","membership", notNull(scalar("String"))),
+                field("organization","organization", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("Organization", OrganizationShortSelector)
+                    ))),
+                field("photo","photo", notNull(scalar("String"))),
+                field("pinnedMessage","pinnedMessage", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("ModernMessage", FullMessageSelector)
+                    ))),
+                field("role","role", notNull(scalar("String"))),
+                field("settings","settings", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("id","id", notNull(scalar("ID"))),
+                        field("mute","mute", scalar("Boolean"))
+                    )))),
+                field("title","title", notNull(scalar("String")))
+            )))
+        ))
+
+val ChatUpdateFragmentSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            inline("ChatMessageReceived", obj(listOf(
+                field("message","message", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("ModernMessage", FullMessageSelector)
+                    )))),
+                field("repeatKey","repeatKey", scalar("String"))
+            ))),
+            inline("ChatMessageUpdated", obj(listOf(
+                field("message","message", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("ModernMessage", FullMessageSelector)
+                    ))))
+            ))),
+            inline("ChatMessageDeleted", obj(listOf(
+                field("message","message", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("id","id", notNull(scalar("ID")))
+                    ))))
+            ))),
+            inline("ChatUpdated", obj(listOf(
+                field("chat","chat", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("Room", RoomShortSelector)
+                    ))))
+            ))),
+            inline("ChatLostAccess", obj(listOf(
+                field("lostAccess","lostAccess", notNull(scalar("Boolean")))
+            )))
+        ))
+
+val CommentEntryFragmentSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("childComments","childComments", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID")))
+                )))))),
+            field("comment","comment", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    fragment("ModernMessage", FullMessageSelector)
+                )))),
+            field("deleted","deleted", notNull(scalar("Boolean"))),
+            field("id","id", notNull(scalar("ID"))),
+            field("parentComment","parentComment", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID")))
+                )))
+        ))
+
+val CommentUpdateFragmentSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            inline("CommentReceived", obj(listOf(
+                field("comment","comment", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("CommentEntry", CommentEntryFragmentSelector)
+                    ))))
+            ))),
+            inline("CommentUpdated", obj(listOf(
+                field("comment","comment", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("CommentEntry", CommentEntryFragmentSelector)
+                    ))))
+            )))
+        ))
+
+val CommunitySearchSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("about","about", scalar("String")),
+            field("alphaFeatured","featured", notNull(scalar("Boolean"))),
+            field("id","id", notNull(scalar("ID"))),
+            field("isMine","isMine", notNull(scalar("Boolean"))),
+            field("membersCount","membersCount", notNull(scalar("Int"))),
+            field("name","name", notNull(scalar("String"))),
+            field("photo","photo", scalar("String")),
+            field("status","status", notNull(scalar("String"))),
+            field("superAccountId","superAccountId", notNull(scalar("ID")))
+        ))
+
+val ConferenceFullSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("iceServers","iceServers", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("credential","credential", scalar("String")),
+                    field("urls","urls", notNull(list(notNull(scalar("String"))))),
+                    field("username","username", scalar("String"))
+                )))))),
+            field("id","id", notNull(scalar("ID"))),
+            field("peers","peers", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("connection","connection", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("ice","ice", notNull(list(notNull(scalar("String"))))),
+                            field("sdp","sdp", scalar("String")),
+                            field("state","state", notNull(scalar("String")))
+                        ))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserShortSelector)
+                        ))))
+                )))))),
+            field("startTime","startTime", scalar("Date"))
+        ))
+
+val TinyMessageSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("date","date", notNull(scalar("Date"))),
+            field("fallback","fallback", notNull(scalar("String"))),
+            field("id","id", notNull(scalar("ID"))),
+            field("message","message", scalar("String")),
+            field("sender","sender", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("User", UserTinySelector)
+                )))),
+            inline("GeneralMessage", obj(listOf(
+                field("attachments","attachments", notNull(list(notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("fallback","fallback", notNull(scalar("String"))),
+                        field("id","id", notNull(scalar("ID"))),
+                        inline("MessageAttachmentFile", obj(listOf(
+                            field("fileId","fileId", notNull(scalar("String"))),
+                            field("fileMetadata","fileMetadata", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    field("imageFormat","imageFormat", scalar("String")),
+                                    field("isImage","isImage", notNull(scalar("Boolean")))
+                                )))),
+                            field("filePreview","filePreview", scalar("String"))
+                        )))
+                    )))))),
+                field("commentsCount","commentsCount", notNull(scalar("Int"))),
+                field("quotedMessages","quotedMessages", notNull(list(notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("id","id", notNull(scalar("ID")))
+                    ))))))
+            )))
+        ))
+
+val DialogUpdateFragmentSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            inline("DialogMessageReceived", obj(listOf(
+                field("alphaMessage","message", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("ModernMessage", TinyMessageSelector)
+                    )))),
+                field("cid","cid", notNull(scalar("ID"))),
+                field("globalUnread","globalUnread", notNull(scalar("Int"))),
+                field("unread","unread", notNull(scalar("Int")))
+            ))),
+            inline("DialogMessageUpdated", obj(listOf(
+                field("alphaMessage","message", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("ModernMessage", TinyMessageSelector)
+                    )))),
+                field("cid","cid", notNull(scalar("ID")))
+            ))),
+            inline("DialogMessageDeleted", obj(listOf(
+                field("alphaMessage","message", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("ModernMessage", TinyMessageSelector)
+                    )))),
+                field("alphaPrevMessage","prevMessage", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("ModernMessage", TinyMessageSelector)
+                    ))),
+                field("cid","cid", notNull(scalar("ID"))),
+                field("globalUnread","globalUnread", notNull(scalar("Int"))),
+                field("unread","unread", notNull(scalar("Int")))
+            ))),
+            inline("DialogMessageRead", obj(listOf(
+                field("cid","cid", notNull(scalar("ID"))),
+                field("globalUnread","globalUnread", notNull(scalar("Int"))),
+                field("unread","unread", notNull(scalar("Int")))
+            ))),
+            inline("DialogMessageRead", obj(listOf(
+                field("cid","cid", notNull(scalar("ID"))),
+                field("globalUnread","globalUnread", notNull(scalar("Int"))),
+                field("unread","unread", notNull(scalar("Int")))
+            ))),
+            inline("DialogTitleUpdated", obj(listOf(
+                field("cid","cid", notNull(scalar("ID"))),
+                field("title","title", notNull(scalar("String")))
+            ))),
+            inline("DialogMuteChanged", obj(listOf(
+                field("cid","cid", notNull(scalar("ID"))),
+                field("mute","mute", notNull(scalar("Boolean")))
+            ))),
+            inline("DialogMentionedChanged", obj(listOf(
+                field("cid","cid", notNull(scalar("ID"))),
+                field("haveMention","haveMention", notNull(scalar("Boolean")))
+            ))),
+            inline("DialogPhotoUpdated", obj(listOf(
+                field("cid","cid", notNull(scalar("ID"))),
+                field("photo","photo", scalar("String"))
+            ))),
+            inline("DialogDeleted", obj(listOf(
+                field("cid","cid", notNull(scalar("ID"))),
+                field("globalUnread","globalUnread", notNull(scalar("Int")))
+            ))),
+            inline("DialogBump", obj(listOf(
+                field("cid","cid", notNull(scalar("ID"))),
+                field("globalUnread","globalUnread", notNull(scalar("Int"))),
+                field("topMessage","topMessage", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("ModernMessage", TinyMessageSelector)
+                    ))),
+                field("unread","unread", notNull(scalar("Int")))
+            )))
+        ))
+
+val UserFullSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("about","about", scalar("String")),
+            field("email","email", scalar("String")),
+            field("firstName","firstName", notNull(scalar("String"))),
+            field("id","id", notNull(scalar("ID"))),
+            field("isBot","isBot", notNull(scalar("Boolean"))),
+            field("isYou","isYou", notNull(scalar("Boolean"))),
+            field("lastName","lastName", scalar("String")),
+            field("lastSeen","lastSeen", scalar("String")),
+            field("linkedin","linkedin", scalar("String")),
+            field("location","location", scalar("String")),
+            field("name","name", notNull(scalar("String"))),
+            field("online","online", notNull(scalar("Boolean"))),
+            field("phone","phone", scalar("String")),
+            field("photo","photo", scalar("String")),
+            field("primaryOrganization","primaryOrganization", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Organization", OrganizationShortSelector)
+                ))),
+            field("shortname","shortname", scalar("String")),
+            field("twitter","twitter", scalar("String")),
+            field("website","website", scalar("String"))
+        ))
+
+val OrganizationFullSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("about","about", scalar("String")),
+            field("alphaFeatured","featured", notNull(scalar("Boolean"))),
+            field("alphaIsCommunity","isCommunity", notNull(scalar("Boolean"))),
+            field("alphaOrganizationMemberRequests","requests", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("role","role", notNull(scalar("String"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserFullSelector)
+                        ))))
+                )))))),
+            field("alphaOrganizationMembers","members", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("role","role", notNull(scalar("String"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserFullSelector)
+                        ))))
+                )))))),
+            field("betaIsAdmin","isAdmin", notNull(scalar("Boolean"))),
+            field("betaIsOwner","isOwner", notNull(scalar("Boolean"))),
+            field("betaPublicRooms","rooms", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Room", RoomShortSelector)
+                )))))),
+            field("facebook","facebook", scalar("String")),
+            field("id","id", notNull(scalar("ID"))),
+            field("isMine","isMine", notNull(scalar("Boolean"))),
+            field("linkedin","linkedin", scalar("String")),
+            field("membersCount","membersCount", notNull(scalar("Int"))),
+            field("name","name", notNull(scalar("String"))),
+            field("photo","photo", scalar("String")),
+            field("shortname","shortname", scalar("String")),
+            field("superAccountId","superAccountId", notNull(scalar("ID"))),
+            field("twitter","twitter", scalar("String")),
+            field("website","website", scalar("String"))
+        ))
+
+val OrganizationMediumSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("alphaIsCommunity","isCommunity", notNull(scalar("Boolean"))),
+            field("alphaOrganizationAdminMembers","adminMembers", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("role","role", notNull(scalar("String"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserFullSelector)
+                        ))))
+                )))))),
+            field("betaIsAdmin","isAdmin", notNull(scalar("Boolean"))),
+            field("betaIsOwner","isOwner", notNull(scalar("Boolean"))),
+            field("id","id", notNull(scalar("ID"))),
+            field("isMine","isMine", notNull(scalar("Boolean"))),
+            field("membersCount","membersCount", notNull(scalar("Int"))),
+            field("name","name", notNull(scalar("String"))),
+            field("photo","photo", scalar("String"))
+        ))
+
+val OrganizationProfileFullSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("about","about", scalar("String")),
+            field("alphaFeatured","featured", notNull(scalar("Boolean"))),
+            field("facebook","facebook", scalar("String")),
+            field("id","id", notNull(scalar("ID"))),
+            field("linkedin","linkedin", scalar("String")),
+            field("name","name", notNull(scalar("String"))),
+            field("photoRef","photoRef", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("crop","crop", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("h","h", notNull(scalar("Int"))),
+                            field("w","w", notNull(scalar("Int"))),
+                            field("x","x", notNull(scalar("Int"))),
+                            field("y","y", notNull(scalar("Int")))
+                        ))),
+                    field("uuid","uuid", notNull(scalar("String")))
+                ))),
+            field("shortname","shortname", scalar("String")),
+            field("twitter","twitter", scalar("String")),
+            field("website","website", scalar("String")),
+            field("websiteTitle","websiteTitle", scalar("String"))
+        ))
+
+val OrganizationSearchSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("about","about", scalar("String")),
+            field("alphaFeatured","featured", notNull(scalar("Boolean"))),
+            field("alphaOrganizationMembers","members", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("id","id", notNull(scalar("ID"))),
+                            field("name","name", notNull(scalar("String"))),
+                            field("photo","photo", scalar("String"))
+                        ))))
+                )))))),
+            field("id","id", notNull(scalar("ID"))),
+            field("isMine","isMine", notNull(scalar("Boolean"))),
+            field("membersCount","membersCount", notNull(scalar("Int"))),
+            field("name","name", notNull(scalar("String"))),
+            field("photo","photo", scalar("String")),
+            field("status","status", notNull(scalar("String"))),
+            field("superAccountId","superAccountId", notNull(scalar("ID")))
+        ))
+
+val OrganizationWithoutMembersFragmentSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("about","about", scalar("String")),
+            field("alphaFeatured","featured", notNull(scalar("Boolean"))),
+            field("alphaIsCommunity","isCommunity", notNull(scalar("Boolean"))),
+            field("alphaOrganizationMemberRequests","requests", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("role","role", notNull(scalar("String"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserFullSelector)
+                        ))))
+                )))))),
+            field("betaIsAdmin","isAdmin", notNull(scalar("Boolean"))),
+            field("betaIsOwner","isOwner", notNull(scalar("Boolean"))),
+            field("betaPublicRooms","rooms", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Room", RoomShortSelector)
+                )))))),
+            field("facebook","facebook", scalar("String")),
+            field("id","id", notNull(scalar("ID"))),
+            field("isMine","isMine", notNull(scalar("Boolean"))),
+            field("linkedin","linkedin", scalar("String")),
+            field("membersCount","membersCount", notNull(scalar("Int"))),
+            field("name","name", notNull(scalar("String"))),
+            field("photo","photo", scalar("String")),
+            field("shortname","shortname", scalar("String")),
+            field("superAccountId","superAccountId", notNull(scalar("ID"))),
+            field("twitter","twitter", scalar("String")),
+            field("website","website", scalar("String"))
+        ))
+
+val RoomFullSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            inline("PrivateRoom", obj(listOf(
+                field("id","id", notNull(scalar("ID"))),
+                field("settings","settings", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("id","id", notNull(scalar("ID"))),
+                        field("mute","mute", scalar("Boolean"))
+                    )))),
+                field("user","user", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("User", UserShortSelector)
+                    ))))
+            ))),
+            inline("SharedRoom", obj(listOf(
+                field("canEdit","canEdit", notNull(scalar("Boolean"))),
+                field("canSendMessage","canSendMessage", notNull(scalar("Boolean"))),
+                field("description","description", scalar("String")),
+                field("id","id", notNull(scalar("ID"))),
+                field("isChannel","isChannel", notNull(scalar("Boolean"))),
+                field("kind","kind", notNull(scalar("String"))),
+                field("members","members", notNull(list(notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("canKick","canKick", notNull(scalar("Boolean"))),
+                        field("membership","membership", notNull(scalar("String"))),
+                        field("role","role", notNull(scalar("String"))),
+                        field("user","user", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                fragment("User", UserShortSelector)
+                            ))))
+                    )))))),
+                field("membersCount","membersCount", scalar("Int")),
+                field("membership","membership", notNull(scalar("String"))),
+                field("organization","organization", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("Organization", OrganizationMediumSelector)
+                    ))),
+                field("photo","photo", notNull(scalar("String"))),
+                field("pinnedMessage","pinnedMessage", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("ModernMessage", FullMessageSelector)
+                    ))),
+                field("requests","requests", list(notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("user","user", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                fragment("User", UserShortSelector)
+                            ))))
+                    ))))),
+                field("role","role", notNull(scalar("String"))),
+                field("settings","settings", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("id","id", notNull(scalar("ID"))),
+                        field("mute","mute", scalar("Boolean"))
+                    )))),
+                field("socialImage","socialImage", scalar("String")),
+                field("title","title", notNull(scalar("String"))),
+                field("welcomeMessage","welcomeMessage", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("isOn","isOn", notNull(scalar("Boolean"))),
+                        field("message","message", scalar("String")),
+                        field("sender","sender", obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("name","name", notNull(scalar("String")))
+                            )))
+                    )))
+            )))
+        ))
+
+val RoomFullWithoutMembersSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            inline("PrivateRoom", obj(listOf(
+                field("id","id", notNull(scalar("ID"))),
+                field("settings","settings", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("id","id", notNull(scalar("ID"))),
+                        field("mute","mute", scalar("Boolean"))
+                    )))),
+                field("user","user", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("User", UserShortSelector)
+                    ))))
+            ))),
+            inline("SharedRoom", obj(listOf(
+                field("canEdit","canEdit", notNull(scalar("Boolean"))),
+                field("canSendMessage","canSendMessage", notNull(scalar("Boolean"))),
+                field("description","description", scalar("String")),
+                field("id","id", notNull(scalar("ID"))),
+                field("isChannel","isChannel", notNull(scalar("Boolean"))),
+                field("kind","kind", notNull(scalar("String"))),
+                field("membersCount","membersCount", scalar("Int")),
+                field("membership","membership", notNull(scalar("String"))),
+                field("organization","organization", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("Organization", OrganizationMediumSelector)
+                    ))),
+                field("photo","photo", notNull(scalar("String"))),
+                field("pinnedMessage","pinnedMessage", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        fragment("ModernMessage", FullMessageSelector)
+                    ))),
+                field("role","role", notNull(scalar("String"))),
+                field("settings","settings", notNull(obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("id","id", notNull(scalar("ID"))),
+                        field("mute","mute", scalar("Boolean"))
+                    )))),
+                field("socialImage","socialImage", scalar("String")),
+                field("title","title", notNull(scalar("String"))),
+                field("welcomeMessage","welcomeMessage", obj(listOf(
+                        field("__typename","__typename", notNull(scalar("String"))),
+                        field("isOn","isOn", notNull(scalar("Boolean"))),
+                        field("message","message", scalar("String")),
+                        field("sender","sender", obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("name","name", notNull(scalar("String")))
+                            )))
+                    )))
+            )))
+        ))
+
+val SessionStateFullSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("isAccountActivated","isAccountActivated", notNull(scalar("Boolean"))),
+            field("isAccountExists","isAccountExists", notNull(scalar("Boolean"))),
+            field("isAccountPicked","isAccountPicked", notNull(scalar("Boolean"))),
+            field("isBlocked","isBlocked", notNull(scalar("Boolean"))),
+            field("isCompleted","isCompleted", notNull(scalar("Boolean"))),
+            field("isLoggedIn","isLoggedIn", notNull(scalar("Boolean"))),
+            field("isProfileCreated","isProfileCreated", notNull(scalar("Boolean")))
+        ))
+
+val SettingsFullSelector = obj(listOf(
+            field("__typename","__typename", notNull(scalar("String"))),
+            field("desktopNotifications","desktopNotifications", notNull(scalar("String"))),
+            field("emailFrequency","emailFrequency", notNull(scalar("String"))),
+            field("id","id", notNull(scalar("ID"))),
+            field("mobileAlert","mobileAlert", notNull(scalar("Boolean"))),
+            field("mobileIncludeText","mobileIncludeText", notNull(scalar("Boolean"))),
+            field("mobileNotifications","mobileNotifications", notNull(scalar("String"))),
+            field("primaryEmail","primaryEmail", notNull(scalar("String")))
+        ))
+
+val AccountSelector = obj(listOf(
+            field("me","me", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("User", UserShortSelector)
+                ))),
+            field("myPermissions","myPermissions", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("roles","roles", notNull(list(notNull(scalar("String")))))
+                )))),
+            field("sessionState","sessionState", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("SessionState", SessionStateFullSelector)
+                ))))
+        ))
+val AccountAppInviteSelector = obj(listOf(
+            field("appInvite","invite", notNull(scalar("String")))
+        ))
+val AccountAppInviteInfoSelector = obj(listOf(
+            field("alphaInviteInfo","invite", mapOf("key" to reference("inviteKey")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("creator","creator", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserShortSelector)
+                        )))
+                ))),
+            field("appInviteInfo","appInvite", mapOf("key" to reference("inviteKey")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("inviter","inviter", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserShortSelector)
+                        ))))
+                )))
+        ))
+val AccountInviteInfoSelector = obj(listOf(
+            field("alphaInviteInfo","invite", mapOf("key" to reference("inviteKey")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("creator","creator", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserShortSelector)
+                        ))),
+                    field("forEmail","forEmail", scalar("String")),
+                    field("forName","forName", scalar("String")),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("joined","joined", notNull(scalar("Boolean"))),
+                    field("key","key", notNull(scalar("String"))),
+                    field("membersCount","membersCount", scalar("Int")),
+                    field("orgId","orgId", notNull(scalar("ID"))),
+                    field("organization","organization", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("about","about", scalar("String")),
+                            field("alphaIsCommunity","isCommunity", notNull(scalar("Boolean")))
+                        ))),
+                    field("photo","photo", scalar("String")),
+                    field("title","title", notNull(scalar("String")))
+                )))
+        ))
+val AccountInvitesSelector = obj(listOf(
+            field("alphaInvites","invites", list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("key","key", notNull(scalar("String")))
+                )))))
+        ))
+val AccountInvitesHistorySelector = obj(listOf(
+            field("alphaInvitesHistory","invites", list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("acceptedBy","acceptedBy", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("id","id", notNull(scalar("ID"))),
+                            field("name","name", notNull(scalar("String"))),
+                            field("picture","picture", scalar("String"))
+                        ))),
+                    field("forEmail","forEmail", notNull(scalar("String"))),
+                    field("isGlobal","isGlobal", notNull(scalar("Boolean")))
+                )))))
+        ))
+val AccountSettingsSelector = obj(listOf(
+            field("me","me", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("User", UserShortSelector)
+                ))),
+            field("myOrganizations","organizations", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Organization", OrganizationShortSelector)
+                ))))))
+        ))
+val AvailableRoomsSelector = obj(listOf(
+            field("betaAvailableRooms","rooms", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    inline("SharedRoom", obj(listOf(
+                        field("id","id", notNull(scalar("ID"))),
+                        field("kind","kind", notNull(scalar("String"))),
+                        field("membersCount","membersCount", scalar("Int")),
+                        field("membership","membership", notNull(scalar("String"))),
+                        field("organization","organization", obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("name","name", notNull(scalar("String"))),
+                                field("photo","photo", scalar("String"))
+                            ))),
+                        field("photo","photo", notNull(scalar("String"))),
+                        field("title","title", notNull(scalar("String")))
+                    )))
+                ))))))
+        ))
+val ChatHistorySelector = obj(listOf(
+            field("conversationState","state", mapOf("id" to reference("chatId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("state","state", scalar("String"))
+                )))),
+            field("messages","messages", mapOf("before" to reference("before"), "chatId" to reference("chatId"), "first" to reference("first")), notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("ModernMessage", FullMessageSelector)
+                ))))))
+        ))
+val ChatInitSelector = obj(listOf(
+            field("conversationState","state", mapOf("id" to reference("chatId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("state","state", scalar("String"))
+                )))),
+            field("messages","messages", mapOf("before" to reference("before"), "chatId" to reference("chatId"), "first" to reference("first")), notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("ModernMessage", FullMessageSelector)
+                )))))),
+            field("room","room", mapOf("id" to reference("chatId")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Room", RoomShortSelector)
+                )))
+        ))
+val ChatSearchGroupSelector = obj(listOf(
+            field("alphaChatSearch","group", mapOf("members" to reference("members")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("flexibleId","flexibleId", notNull(scalar("ID"))),
+                    field("id","id", notNull(scalar("ID")))
+                )))
+        ))
+val ConferenceSelector = obj(listOf(
+            field("conference","conference", mapOf("id" to reference("id")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Conference", ConferenceFullSelector)
+                ))))
+        ))
+val ConferenceMediaSelector = obj(listOf(
+            field("conferenceMedia","conferenceMedia", mapOf("id" to reference("id"), "peerId" to reference("peerId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("iceServers","iceServers", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("credential","credential", scalar("String")),
+                            field("urls","urls", notNull(list(notNull(scalar("String"))))),
+                            field("username","username", scalar("String"))
+                        )))))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("streams","streams", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("ice","ice", notNull(list(notNull(scalar("String"))))),
+                            field("id","id", notNull(scalar("ID"))),
+                            field("sdp","sdp", scalar("String")),
+                            field("state","state", notNull(scalar("String")))
+                        ))))))
+                ))))
+        ))
+val DialogsSelector = obj(listOf(
+            field("alphaNotificationCounter","counter", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("unreadCount","unreadCount", notNull(scalar("Int")))
+                )))),
+            field("dialogs","dialogs", mapOf("after" to reference("after"), "first" to i(20)), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("cursor","cursor", scalar("String")),
+                    field("items","items", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("alphaTopMessage","topMessage", obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    fragment("ModernMessage", TinyMessageSelector)
+                                ))),
+                            field("cid","cid", notNull(scalar("ID"))),
+                            field("fid","fid", notNull(scalar("ID"))),
+                            field("haveMention","haveMention", notNull(scalar("Boolean"))),
+                            field("isChannel","isChannel", notNull(scalar("Boolean"))),
+                            field("isMuted","isMuted", notNull(scalar("Boolean"))),
+                            field("kind","kind", notNull(scalar("String"))),
+                            field("photo","photo", notNull(scalar("String"))),
+                            field("title","title", notNull(scalar("String"))),
+                            field("unreadCount","unreadCount", notNull(scalar("Int")))
+                        ))))))
+                )))),
+            field("dialogsState","state", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("state","state", scalar("String"))
+                ))))
+        ))
+val ExploreCommunitySelector = obj(listOf(
+            field("alphaComunityPrefixSearch","items", mapOf("first" to i(25), "page" to reference("page"), "query" to reference("query"), "sort" to reference("sort")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("edges","edges", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("cursor","cursor", notNull(scalar("String"))),
+                            field("node","node", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    fragment("Organization", CommunitySearchSelector)
+                                ))))
+                        )))))),
+                    field("pageInfo","pageInfo", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("currentPage","currentPage", notNull(scalar("Int"))),
+                            field("hasNextPage","hasNextPage", notNull(scalar("Boolean"))),
+                            field("hasPreviousPage","hasPreviousPage", notNull(scalar("Boolean"))),
+                            field("itemsCount","itemsCount", notNull(scalar("Int"))),
+                            field("openEnded","openEnded", notNull(scalar("Boolean"))),
+                            field("pagesCount","pagesCount", notNull(scalar("Int")))
+                        ))))
+                ))))
+        ))
+val ExploreOrganizationsSelector = obj(listOf(
+            field("alphaOrganizations","items", mapOf("after" to reference("after"), "all" to reference("all"), "first" to i(25), "page" to reference("page"), "prefix" to reference("prefix"), "query" to reference("query"), "sort" to reference("sort")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("edges","edges", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("cursor","cursor", notNull(scalar("String"))),
+                            field("node","node", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    fragment("Organization", OrganizationSearchSelector)
+                                ))))
+                        )))))),
+                    field("pageInfo","pageInfo", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("currentPage","currentPage", notNull(scalar("Int"))),
+                            field("hasNextPage","hasNextPage", notNull(scalar("Boolean"))),
+                            field("hasPreviousPage","hasPreviousPage", notNull(scalar("Boolean"))),
+                            field("itemsCount","itemsCount", notNull(scalar("Int"))),
+                            field("openEnded","openEnded", notNull(scalar("Boolean"))),
+                            field("pagesCount","pagesCount", notNull(scalar("Int")))
+                        ))))
+                ))))
+        ))
+val ExplorePeopleSelector = obj(listOf(
+            field("userSearch","items", mapOf("after" to reference("after"), "first" to i(25), "page" to reference("page"), "query" to reference("query"), "sort" to reference("sort")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("edges","edges", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("cursor","cursor", notNull(scalar("String"))),
+                            field("node","node", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    field("isYou","isYou", notNull(scalar("Boolean"))),
+                                    fragment("User", UserShortSelector)
+                                ))))
+                        )))))),
+                    field("pageInfo","pageInfo", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("currentPage","currentPage", notNull(scalar("Int"))),
+                            field("hasNextPage","hasNextPage", notNull(scalar("Boolean"))),
+                            field("hasPreviousPage","hasPreviousPage", notNull(scalar("Boolean"))),
+                            field("itemsCount","itemsCount", notNull(scalar("Int"))),
+                            field("openEnded","openEnded", notNull(scalar("Boolean"))),
+                            field("pagesCount","pagesCount", notNull(scalar("Int")))
+                        ))))
+                ))))
+        ))
+val FeatureFlagsSelector = obj(listOf(
+            field("featureFlags","featureFlags", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("key","key", notNull(scalar("String"))),
+                    field("title","title", notNull(scalar("String")))
+                ))))))
+        ))
+val FeedHomeSelector = obj(listOf(
+            field("alphaHomeFeed","homeFeed", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("alphaBy","by", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserShortSelector)
+                        )))),
+                    field("date","date", notNull(scalar("Date"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("text","text", notNull(scalar("String")))
+                ))))))
+        ))
+val FetchPushSettingsSelector = obj(listOf(
+            field("pushSettings","pushSettings", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("webPushKey","webPushKey", scalar("String"))
+                ))))
+        ))
+val GetDraftMessageSelector = obj(listOf(
+            field("conversationDraft","message", mapOf("conversationId" to reference("conversationId")), scalar("String"))
+        ))
+val GlobalCounterSelector = obj(listOf(
+            field("alphaNotificationCounter","alphaNotificationCounter", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("unreadCount","unreadCount", notNull(scalar("Int")))
+                ))))
+        ))
+val GlobalSearchSelector = obj(listOf(
+            field("alphaGlobalSearch","items", mapOf("query" to reference("query")), notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    inline("Organization", obj(listOf(
+                        fragment("Organization", OrganizationShortSelector)
+                    ))),
+                    inline("User", obj(listOf(
+                        fragment("User", UserShortSelector)
+                    ))),
+                    inline("SharedRoom", obj(listOf(
+                        field("id","id", notNull(scalar("ID"))),
+                        field("kind","kind", notNull(scalar("String"))),
+                        field("membersCount","membersCount", scalar("Int")),
+                        field("membership","membership", notNull(scalar("String"))),
+                        field("organization","organization", obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("name","name", notNull(scalar("String"))),
+                                field("photo","photo", scalar("String"))
+                            ))),
+                        field("photo","roomPhoto", notNull(scalar("String"))),
+                        field("title","title", notNull(scalar("String")))
+                    )))
+                ))))))
+        ))
+val MessageSelector = obj(listOf(
+            field("message","message", mapOf("messageId" to reference("messageId")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("ModernMessage", FullMessageSelector)
+                )))
+        ))
+val MessageCommentsSelector = obj(listOf(
+            field("messageComments","messageComments", mapOf("messageId" to reference("messageId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("comments","comments", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("CommentEntry", CommentEntryFragmentSelector)
+                        )))))),
+                    field("count","count", notNull(scalar("Int"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("state","state", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("state","state", scalar("String"))
+                        ))))
+                ))))
+        ))
+val MyAppsSelector = obj(listOf(
+            field("myApps","apps", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("AppProfile", AppFullSelector)
+                ))))))
+        ))
+val MyOrganizationsSelector = obj(listOf(
+            field("myOrganizations","myOrganizations", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("betaIsPrimary","isPrimary", notNull(scalar("Boolean"))),
+                    fragment("Organization", OrganizationShortSelector)
+                ))))))
+        ))
+val OnlineSelector = obj(listOf(
+            field("user","user", mapOf("id" to reference("userId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("lastSeen","lastSeen", scalar("String")),
+                    field("online","online", notNull(scalar("Boolean")))
+                ))))
+        ))
+val OrganizationSelector = obj(listOf(
+            field("organization","organization", mapOf("id" to reference("organizationId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Organization", OrganizationFullSelector)
+                ))))
+        ))
+val OrganizationByPrefixSelector = obj(listOf(
+            field("alphaOrganizationByPrefix","organizationByPrefix", mapOf("query" to reference("query")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Organization", OrganizationSearchSelector)
+                )))
+        ))
+val OrganizationMembersShortSelector = obj(listOf(
+            field("organization","organization", mapOf("id" to reference("organizationId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("alphaOrganizationMembers","members", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("user","user", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    field("id","id", notNull(scalar("ID")))
+                                ))))
+                        )))))),
+                    fragment("Organization", OrganizationWithoutMembersFragmentSelector)
+                ))))
+        ))
+val OrganizationMembersShortPaginatedSelector = obj(listOf(
+            field("organization","organization", mapOf("id" to reference("organizationId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("alphaOrganizationMembers","members", mapOf("after" to reference("after"), "first" to reference("first")), notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("role","role", notNull(scalar("String"))),
+                            field("user","user", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    fragment("User", UserFullSelector)
+                                ))))
+                        )))))),
+                    fragment("Organization", OrganizationWithoutMembersFragmentSelector)
+                ))))
+        ))
+val OrganizationProfileSelector = obj(listOf(
+            field("organizationProfile","organizationProfile", mapOf("id" to reference("organizationId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("OrganizationProfile", OrganizationProfileFullSelector)
+                ))))
+        ))
+val OrganizationPublicInviteSelector = obj(listOf(
+            field("alphaOrganizationInviteLink","publicInvite", mapOf("organizationId" to reference("organizationId")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("key","key", notNull(scalar("String"))),
+                    field("ttl","ttl", scalar("String"))
+                )))
+        ))
+val OrganizationWithoutMembersSelector = obj(listOf(
+            field("organization","organization", mapOf("id" to reference("organizationId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Organization", OrganizationWithoutMembersFragmentSelector)
+                ))))
+        ))
+val PermissionsSelector = obj(listOf(
+            field("myPermissions","myPermissions", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("roles","roles", notNull(list(notNull(scalar("String")))))
+                ))))
+        ))
+val ProfileSelector = obj(listOf(
+            field("me","user", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("shortname","shortname", scalar("String"))
+                ))),
+            field("myProfile","profile", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("about","about", scalar("String")),
+                    field("alphaInvitedBy","invitedBy", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("name","name", notNull(scalar("String")))
+                        ))),
+                    field("alphaJoinedAt","joinedAt", scalar("String")),
+                    field("alphaLinkedin","linkedin", scalar("String")),
+                    field("alphaRole","role", scalar("String")),
+                    field("email","email", scalar("String")),
+                    field("firstName","firstName", scalar("String")),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("lastName","lastName", scalar("String")),
+                    field("location","location", scalar("String")),
+                    field("phone","phone", scalar("String")),
+                    field("photoRef","photoRef", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("crop","crop", obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    field("h","h", notNull(scalar("Int"))),
+                                    field("w","w", notNull(scalar("Int"))),
+                                    field("x","x", notNull(scalar("Int"))),
+                                    field("y","y", notNull(scalar("Int")))
+                                ))),
+                            field("uuid","uuid", notNull(scalar("String")))
+                        ))),
+                    field("primaryOrganization","primaryOrganization", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("id","id", notNull(scalar("ID"))),
+                            field("name","name", notNull(scalar("String")))
+                        ))),
+                    field("website","website", scalar("String"))
+                )))
+        ))
+val ProfilePrefillSelector = obj(listOf(
+            field("myProfilePrefill","prefill", obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("firstName","firstName", scalar("String")),
+                    field("lastName","lastName", scalar("String")),
+                    field("picture","picture", scalar("String"))
+                )))
+        ))
+val ResolveShortNameSelector = obj(listOf(
+            field("alphaResolveShortName","item", mapOf("shortname" to reference("shortname")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    inline("User", obj(listOf(
+                        fragment("User", UserFullSelector)
+                    ))),
+                    inline("Organization", obj(listOf(
+                        fragment("Organization", OrganizationFullSelector)
+                    )))
+                )))
+        ))
+val ResolvedInviteSelector = obj(listOf(
+            field("alphaResolveInvite","invite", mapOf("key" to reference("key")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    inline("InviteInfo", obj(listOf(
+                        field("creator","creator", obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                fragment("User", UserShortSelector)
+                            ))),
+                        field("orgId","orgId", notNull(scalar("ID"))),
+                        field("title","title", notNull(scalar("String")))
+                    ))),
+                    inline("AppInvite", obj(listOf(
+                        field("inviter","inviter", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                fragment("User", UserShortSelector)
+                            ))))
+                    ))),
+                    inline("RoomInvite", obj(listOf(
+                        field("invitedByUser","invitedByUser", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                fragment("User", UserShortSelector)
+                            )))),
+                        field("room","room", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                inline("SharedRoom", obj(listOf(
+                                    field("description","description", scalar("String")),
+                                    field("id","id", notNull(scalar("ID"))),
+                                    field("isChannel","isChannel", notNull(scalar("Boolean"))),
+                                    field("kind","kind", notNull(scalar("String"))),
+                                    field("membersCount","membersCount", scalar("Int")),
+                                    field("membership","membership", notNull(scalar("String"))),
+                                    field("photo","photo", notNull(scalar("String"))),
+                                    field("socialImage","socialImage", scalar("String")),
+                                    field("title","title", notNull(scalar("String")))
+                                )))
+                            ))))
+                    )))
+                )))
+        ))
+val RoomSelector = obj(listOf(
+            field("room","room", mapOf("id" to reference("id")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Room", RoomFullSelector)
+                )))
+        ))
+val RoomChatSelector = obj(listOf(
+            field("room","room", mapOf("id" to reference("id")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    inline("PrivateRoom", obj(listOf(
+                        field("id","id", notNull(scalar("ID"))),
+                        field("user","user", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("name","name", notNull(scalar("String")))
+                            ))))
+                    ))),
+                    inline("SharedRoom", obj(listOf(
+                        field("canEdit","canEdit", notNull(scalar("Boolean"))),
+                        field("id","id", notNull(scalar("ID"))),
+                        field("isChannel","isChannel", notNull(scalar("Boolean"))),
+                        field("kind","kind", notNull(scalar("String"))),
+                        field("membership","membership", notNull(scalar("String"))),
+                        field("pinnedMessage","pinnedMessage", obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                fragment("ModernMessage", FullMessageSelector)
+                            ))),
+                        field("title","title", notNull(scalar("String")))
+                    )))
+                )))
+        ))
+val RoomHeaderSelector = obj(listOf(
+            field("room","room", mapOf("id" to reference("id")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    inline("PrivateRoom", obj(listOf(
+                        field("id","id", notNull(scalar("ID"))),
+                        field("settings","settings", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("mute","mute", scalar("Boolean"))
+                            )))),
+                        field("user","user", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("name","name", notNull(scalar("String"))),
+                                field("photo","photo", scalar("String")),
+                                field("primaryOrganization","primaryOrganization", obj(listOf(
+                                        field("__typename","__typename", notNull(scalar("String"))),
+                                        field("id","id", notNull(scalar("ID"))),
+                                        field("name","name", notNull(scalar("String")))
+                                    )))
+                            ))))
+                    ))),
+                    inline("SharedRoom", obj(listOf(
+                        field("canEdit","canEdit", notNull(scalar("Boolean"))),
+                        field("description","description", scalar("String")),
+                        field("id","id", notNull(scalar("ID"))),
+                        field("isChannel","isChannel", notNull(scalar("Boolean"))),
+                        field("kind","kind", notNull(scalar("String"))),
+                        field("membersCount","membersCount", scalar("Int")),
+                        field("organization","organization", obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("betaIsAdmin","isAdmin", notNull(scalar("Boolean"))),
+                                field("betaIsOwner","isOwner", notNull(scalar("Boolean"))),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("name","name", notNull(scalar("String")))
+                            ))),
+                        field("photo","photo", notNull(scalar("String"))),
+                        field("role","role", notNull(scalar("String"))),
+                        field("settings","settings", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("mute","mute", scalar("Boolean"))
+                            )))),
+                        field("socialImage","socialImage", scalar("String")),
+                        field("title","title", notNull(scalar("String"))),
+                        field("welcomeMessage","welcomeMessage", obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("isOn","isOn", notNull(scalar("Boolean"))),
+                                field("message","message", scalar("String")),
+                                field("sender","sender", obj(listOf(
+                                        field("__typename","__typename", notNull(scalar("String"))),
+                                        field("id","id", notNull(scalar("ID"))),
+                                        field("name","name", notNull(scalar("String")))
+                                    )))
+                            )))
+                    )))
+                )))
+        ))
+val RoomInviteInfoSelector = obj(listOf(
+            field("betaRoomInviteInfo","invite", mapOf("invite" to reference("invite")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("invitedByUser","invitedByUser", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserShortSelector)
+                        )))),
+                    field("room","room", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            inline("SharedRoom", obj(listOf(
+                                field("description","description", scalar("String")),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("isChannel","isChannel", notNull(scalar("Boolean"))),
+                                field("kind","kind", notNull(scalar("String"))),
+                                field("membersCount","membersCount", scalar("Int")),
+                                field("membership","membership", notNull(scalar("String"))),
+                                field("organization","organization", obj(listOf(
+                                        field("__typename","__typename", notNull(scalar("String"))),
+                                        fragment("Organization", OrganizationShortSelector)
+                                    ))),
+                                field("photo","photo", notNull(scalar("String"))),
+                                field("socialImage","socialImage", scalar("String")),
+                                field("title","title", notNull(scalar("String")))
+                            )))
+                        ))))
+                )))
+        ))
+val RoomInviteLinkSelector = obj(listOf(
+            field("betaRoomInviteLink","link", mapOf("roomId" to reference("roomId")), notNull(scalar("String")))
+        ))
+val RoomMemberShortSelector = obj(listOf(
+            field("roomMember","member", mapOf("memberId" to reference("memberId"), "roomId" to reference("roomId")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("firstName","firstName", notNull(scalar("String"))),
+                            field("id","id", notNull(scalar("ID"))),
+                            field("name","name", notNull(scalar("String")))
+                        ))))
+                )))
+        ))
+val RoomMembersSelector = obj(listOf(
+            field("roomMembers","members", mapOf("roomId" to reference("roomId")), notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("canKick","canKick", notNull(scalar("Boolean"))),
+                    field("membership","membership", notNull(scalar("String"))),
+                    field("role","role", notNull(scalar("String"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserShortSelector)
+                        ))))
+                ))))))
+        ))
+val RoomMembersPaginatedSelector = obj(listOf(
+            field("roomMembers","members", mapOf("after" to reference("after"), "first" to reference("first"), "roomId" to reference("roomId")), notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("canKick","canKick", notNull(scalar("Boolean"))),
+                    field("membership","membership", notNull(scalar("String"))),
+                    field("role","role", notNull(scalar("String"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserShortSelector)
+                        ))))
+                ))))))
+        ))
+val RoomMembersShortSelector = obj(listOf(
+            field("roomMembers","members", mapOf("roomId" to reference("roomId")), notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("id","id", notNull(scalar("ID")))
+                        ))))
+                ))))))
+        ))
+val RoomSearchSelector = obj(listOf(
+            field("betaRoomSearch","items", mapOf("first" to i(150)), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("edges","edges", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("cursor","cursor", notNull(scalar("String"))),
+                            field("node","node", notNull(obj(listOf(
+                                    field("__typename","__typename", notNull(scalar("String"))),
+                                    field("id","id", notNull(scalar("ID"))),
+                                    field("isChannel","isChannel", notNull(scalar("Boolean"))),
+                                    field("kind","kind", notNull(scalar("String"))),
+                                    field("membersCount","membersCount", scalar("Int")),
+                                    field("membership","membership", notNull(scalar("String"))),
+                                    field("organization","organization", obj(listOf(
+                                            field("__typename","__typename", notNull(scalar("String"))),
+                                            field("name","name", notNull(scalar("String"))),
+                                            field("photo","photo", scalar("String"))
+                                        ))),
+                                    field("photo","photo", notNull(scalar("String"))),
+                                    field("title","title", notNull(scalar("String")))
+                                ))))
+                        )))))),
+                    field("pageInfo","pageInfo", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("currentPage","currentPage", notNull(scalar("Int"))),
+                            field("hasNextPage","hasNextPage", notNull(scalar("Boolean"))),
+                            field("hasPreviousPage","hasPreviousPage", notNull(scalar("Boolean"))),
+                            field("itemsCount","itemsCount", notNull(scalar("Int"))),
+                            field("openEnded","openEnded", notNull(scalar("Boolean"))),
+                            field("pagesCount","pagesCount", notNull(scalar("Int")))
+                        ))))
+                ))))
+        ))
+val RoomSearchTextSelector = obj(listOf(
+            field("betaDialogTextSearch","items", mapOf("query" to reference("query")), notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("cid","id", notNull(scalar("ID"))),
+                    field("fid","flexibleId", notNull(scalar("ID"))),
+                    field("kind","kind", notNull(scalar("String"))),
+                    field("photo","photo", notNull(scalar("String"))),
+                    field("title","title", notNull(scalar("String")))
+                ))))))
+        ))
+val RoomSuperSelector = obj(listOf(
+            field("roomSuper","roomSuper", mapOf("id" to reference("id")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("featured","featured", notNull(scalar("Boolean"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("listed","listed", notNull(scalar("Boolean")))
+                )))
+        ))
+val RoomTinySelector = obj(listOf(
+            field("room","room", mapOf("id" to reference("id")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Room", RoomShortSelector)
+                )))
+        ))
+val RoomWithoutMembersSelector = obj(listOf(
+            field("room","room", mapOf("id" to reference("id")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Room", RoomFullWithoutMembersSelector)
+                )))
+        ))
+val SettingsSelector = obj(listOf(
+            field("settings","settings", notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("Settings", SettingsFullSelector)
+                ))))
+        ))
+val SuperAccountSelector = obj(listOf(
+            field("superAccount","superAccount", mapOf("id" to reference("accountId"), "viaOrgId" to reference("viaOrgId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("alphaPublished","published", notNull(scalar("Boolean"))),
+                    field("createdAt","createdAt", scalar("String")),
+                    field("createdBy","createdBy", obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("name","name", notNull(scalar("String")))
+                        ))),
+                    field("features","features", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            field("id","id", notNull(scalar("ID"))),
+                            field("key","key", notNull(scalar("String"))),
+                            field("title","title", notNull(scalar("String")))
+                        )))))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("members","members", notNull(list(notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserShortSelector)
+                        )))))),
+                    field("orgId","orgId", notNull(scalar("ID"))),
+                    field("state","state", notNull(scalar("String"))),
+                    field("title","title", notNull(scalar("String")))
+                ))))
+        ))
+val SuperAccountsSelector = obj(listOf(
+            field("superAccounts","superAccounts", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("orgId","orgId", notNull(scalar("ID"))),
+                    field("state","state", notNull(scalar("String"))),
+                    field("title","title", notNull(scalar("String")))
+                ))))))
+        ))
+val SuperAdminsSelector = obj(listOf(
+            field("superAdmins","superAdmins", notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("email","email", scalar("String")),
+                    field("role","role", notNull(scalar("String"))),
+                    field("user","user", notNull(obj(listOf(
+                            field("__typename","__typename", notNull(scalar("String"))),
+                            fragment("User", UserShortSelector)
+                        ))))
+                ))))))
+        ))
+val UserSelector = obj(listOf(
+            field("room","conversation", mapOf("id" to reference("userId")), obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    inline("PrivateRoom", obj(listOf(
+                        field("id","id", notNull(scalar("ID"))),
+                        field("settings","settings", notNull(obj(listOf(
+                                field("__typename","__typename", notNull(scalar("String"))),
+                                field("id","id", notNull(scalar("ID"))),
+                                field("mute","mute", scalar("Boolean"))
+                            ))))
+                    )))
+                ))),
+            field("user","user", mapOf("id" to reference("userId")), notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    fragment("User", UserFullSelector)
+                ))))
+        ))
+val UserStorageSelector = obj(listOf(
+            field("userStorage","userStorage", mapOf("keys" to reference("keys"), "namespace" to reference("namespace")), notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("key","key", notNull(scalar("String"))),
+                    field("value","value", scalar("String"))
+                ))))))
+        ))
+val UsersSelector = obj(listOf(
+            field("users","items", mapOf("query" to reference("query")), notNull(list(notNull(obj(listOf(
+                    field("__typename","__typename", notNull(scalar("String"))),
+                    field("email","subtitle", scalar("String")),
+                    field("id","id", notNull(scalar("ID"))),
+                    field("name","title", notNull(scalar("String")))
+                ))))))
+        ))
 
 object Operations {
     val Account = object: OperationDefinition {
+        override val name = "Account"
         override val kind = OperationKind.QUERY
-        override val body = "query Account{me:me{__typename ...UserShort }myPermissions{__typename roles }sessionState:sessionState{__typename ...SessionStateFull }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment SessionStateFull on SessionState{__typename isAccountActivated isAccountExists isAccountPicked isBlocked isCompleted isLoggedIn isProfileCreated }"
+        override val body = "query Account{me:me{__typename ...UserShort}myPermissions{__typename roles}sessionState:sessionState{__typename ...SessionStateFull}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment SessionStateFull on SessionState{__typename isAccountActivated isAccountExists isAccountPicked isBlocked isCompleted isLoggedIn isProfileCreated}"
+        override val selector = AccountSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeAccount(Scope("ROOT_QUERY", collection, response))
@@ -3359,8 +4896,10 @@ object Operations {
         }
     }
     val AccountAppInvite = object: OperationDefinition {
+        override val name = "AccountAppInvite"
         override val kind = OperationKind.QUERY
-        override val body = "query AccountAppInvite{invite:appInvite }"
+        override val body = "query AccountAppInvite{invite:appInvite}"
+        override val selector = AccountAppInviteSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeAccountAppInvite(Scope("ROOT_QUERY", collection, response))
@@ -3368,8 +4907,10 @@ object Operations {
         }
     }
     val AccountAppInviteInfo = object: OperationDefinition {
+        override val name = "AccountAppInviteInfo"
         override val kind = OperationKind.QUERY
-        override val body = "query AccountAppInviteInfo(\$inviteKey:String!){invite:alphaInviteInfo(key:\$inviteKey){__typename creator{__typename ...UserShort }}appInvite:appInviteInfo(key:\$inviteKey){__typename inviter{__typename ...UserShort }}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query AccountAppInviteInfo(\$inviteKey:String!){invite:alphaInviteInfo(key:\$inviteKey){__typename creator{__typename ...UserShort}}appInvite:appInviteInfo(key:\$inviteKey){__typename inviter{__typename ...UserShort}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = AccountAppInviteInfoSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeAccountAppInviteInfo(Scope("ROOT_QUERY", collection, response))
@@ -3377,8 +4918,10 @@ object Operations {
         }
     }
     val AccountInviteInfo = object: OperationDefinition {
+        override val name = "AccountInviteInfo"
         override val kind = OperationKind.QUERY
-        override val body = "query AccountInviteInfo(\$inviteKey:String!){invite:alphaInviteInfo(key:\$inviteKey){__typename creator{__typename ...UserShort }forEmail forName id joined key membersCount orgId organization{__typename about isCommunity:alphaIsCommunity }photo title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query AccountInviteInfo(\$inviteKey:String!){invite:alphaInviteInfo(key:\$inviteKey){__typename creator{__typename ...UserShort}forEmail forName id joined key membersCount orgId organization{__typename about isCommunity:alphaIsCommunity}photo title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = AccountInviteInfoSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeAccountInviteInfo(Scope("ROOT_QUERY", collection, response))
@@ -3386,8 +4929,10 @@ object Operations {
         }
     }
     val AccountInvites = object: OperationDefinition {
+        override val name = "AccountInvites"
         override val kind = OperationKind.QUERY
-        override val body = "query AccountInvites{invites:alphaInvites{__typename id key }}"
+        override val body = "query AccountInvites{invites:alphaInvites{__typename id key}}"
+        override val selector = AccountInvitesSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeAccountInvites(Scope("ROOT_QUERY", collection, response))
@@ -3395,8 +4940,10 @@ object Operations {
         }
     }
     val AccountInvitesHistory = object: OperationDefinition {
+        override val name = "AccountInvitesHistory"
         override val kind = OperationKind.QUERY
-        override val body = "query AccountInvitesHistory{invites:alphaInvitesHistory{__typename acceptedBy{__typename id name picture }forEmail isGlobal }}"
+        override val body = "query AccountInvitesHistory{invites:alphaInvitesHistory{__typename acceptedBy{__typename id name picture}forEmail isGlobal}}"
+        override val selector = AccountInvitesHistorySelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeAccountInvitesHistory(Scope("ROOT_QUERY", collection, response))
@@ -3404,8 +4951,10 @@ object Operations {
         }
     }
     val AccountSettings = object: OperationDefinition {
+        override val name = "AccountSettings"
         override val kind = OperationKind.QUERY
-        override val body = "query AccountSettings{me:me{__typename ...UserShort }organizations:myOrganizations{__typename ...OrganizationShort }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query AccountSettings{me:me{__typename ...UserShort}organizations:myOrganizations{__typename ...OrganizationShort}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = AccountSettingsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeAccountSettings(Scope("ROOT_QUERY", collection, response))
@@ -3413,8 +4962,10 @@ object Operations {
         }
     }
     val AvailableRooms = object: OperationDefinition {
+        override val name = "AvailableRooms"
         override val kind = OperationKind.QUERY
-        override val body = "query AvailableRooms{rooms:betaAvailableRooms{__typename ... on SharedRoom{id kind membersCount membership organization{__typename id name photo }photo title }}}"
+        override val body = "query AvailableRooms{rooms:betaAvailableRooms{__typename ... on SharedRoom{id kind membersCount membership organization{__typename id name photo}photo title}}}"
+        override val selector = AvailableRoomsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeAvailableRooms(Scope("ROOT_QUERY", collection, response))
@@ -3422,8 +4973,10 @@ object Operations {
         }
     }
     val ChatHistory = object: OperationDefinition {
+        override val name = "ChatHistory"
         override val kind = OperationKind.QUERY
-        override val body = "query ChatHistory(\$before:ID,\$chatId:ID!,\$first:Int!){state:conversationState(id:\$chatId){__typename state }messages(before:\$before,chatId:\$chatId,first:\$first){__typename ...FullMessage }}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query ChatHistory(\$before:ID,\$chatId:ID!,\$first:Int!){state:conversationState(id:\$chatId){__typename state}messages(before:\$before,chatId:\$chatId,first:\$first){__typename ...FullMessage}}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = ChatHistorySelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeChatHistory(Scope("ROOT_QUERY", collection, response))
@@ -3431,8 +4984,10 @@ object Operations {
         }
     }
     val ChatInit = object: OperationDefinition {
+        override val name = "ChatInit"
         override val kind = OperationKind.QUERY
-        override val body = "query ChatInit(\$before:ID,\$chatId:ID!,\$first:Int!){state:conversationState(id:\$chatId){__typename state }messages(before:\$before,chatId:\$chatId,first:\$first){__typename ...FullMessage }room(id:\$chatId){__typename ...RoomShort }}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}"
+        override val body = "query ChatInit(\$before:ID,\$chatId:ID!,\$first:Int!){state:conversationState(id:\$chatId){__typename state}messages(before:\$before,chatId:\$chatId,first:\$first){__typename ...FullMessage}room(id:\$chatId){__typename ...RoomShort}}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}"
+        override val selector = ChatInitSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeChatInit(Scope("ROOT_QUERY", collection, response))
@@ -3440,8 +4995,10 @@ object Operations {
         }
     }
     val ChatSearchGroup = object: OperationDefinition {
+        override val name = "ChatSearchGroup"
         override val kind = OperationKind.QUERY
-        override val body = "query ChatSearchGroup(\$members:[ID!]!){group:alphaChatSearch(members:\$members){__typename flexibleId id }}"
+        override val body = "query ChatSearchGroup(\$members:[ID!]!){group:alphaChatSearch(members:\$members){__typename flexibleId id}}"
+        override val selector = ChatSearchGroupSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeChatSearchGroup(Scope("ROOT_QUERY", collection, response))
@@ -3449,8 +5006,10 @@ object Operations {
         }
     }
     val Conference = object: OperationDefinition {
+        override val name = "Conference"
         override val kind = OperationKind.QUERY
-        override val body = "query Conference(\$id:ID!){conference(id:\$id){__typename ...ConferenceFull }}fragment ConferenceFull on Conference{__typename iceServers{__typename credential urls username }id peers{__typename connection{__typename ice sdp state }id user{__typename ...UserShort }}startTime }fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query Conference(\$id:ID!){conference(id:\$id){__typename ...ConferenceFull}}fragment ConferenceFull on Conference{__typename iceServers{__typename credential urls username}id peers{__typename connection{__typename ice sdp state}id user{__typename ...UserShort}}startTime}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = ConferenceSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeConference(Scope("ROOT_QUERY", collection, response))
@@ -3458,8 +5017,10 @@ object Operations {
         }
     }
     val ConferenceMedia = object: OperationDefinition {
+        override val name = "ConferenceMedia"
         override val kind = OperationKind.QUERY
-        override val body = "query ConferenceMedia(\$id:ID!,\$peerId:ID!){conferenceMedia(id:\$id,peerId:\$peerId){__typename iceServers{__typename credential urls username }id streams{__typename ice id sdp state }}}"
+        override val body = "query ConferenceMedia(\$id:ID!,\$peerId:ID!){conferenceMedia(id:\$id,peerId:\$peerId){__typename iceServers{__typename credential urls username}id streams{__typename ice id sdp state}}}"
+        override val selector = ConferenceMediaSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeConferenceMedia(Scope("ROOT_QUERY", collection, response))
@@ -3467,8 +5028,10 @@ object Operations {
         }
     }
     val Dialogs = object: OperationDefinition {
+        override val name = "Dialogs"
         override val kind = OperationKind.QUERY
-        override val body = "query Dialogs(\$after:String){counter:alphaNotificationCounter{__typename id unreadCount }dialogs(after:\$after,first:20){__typename cursor items{__typename topMessage:alphaTopMessage{__typename ...TinyMessage }cid fid haveMention isChannel isMuted kind photo title unreadCount }}state:dialogsState{__typename state }}fragment TinyMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserTiny }... on GeneralMessage{attachments{__typename fallback id ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat isImage }filePreview }}commentsCount quotedMessages{__typename id }}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query Dialogs(\$after:String){counter:alphaNotificationCounter{__typename id unreadCount}dialogs(after:\$after,first:20){__typename cursor items{__typename topMessage:alphaTopMessage{__typename ...TinyMessage}cid fid haveMention isChannel isMuted kind photo title unreadCount}}state:dialogsState{__typename state}}fragment TinyMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserTiny}... on GeneralMessage{attachments{__typename fallback id ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat isImage}filePreview}}commentsCount quotedMessages{__typename id}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = DialogsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeDialogs(Scope("ROOT_QUERY", collection, response))
@@ -3476,8 +5039,10 @@ object Operations {
         }
     }
     val ExploreCommunity = object: OperationDefinition {
+        override val name = "ExploreCommunity"
         override val kind = OperationKind.QUERY
-        override val body = "query ExploreCommunity(\$page:Int,\$query:String,\$sort:String){items:alphaComunityPrefixSearch(first:25,page:\$page,query:\$query,sort:\$sort){__typename edges{__typename cursor node{__typename ...CommunitySearch }}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount }}}fragment CommunitySearch on Organization{__typename about featured:alphaFeatured id isMine membersCount name photo status superAccountId }"
+        override val body = "query ExploreCommunity(\$page:Int,\$query:String,\$sort:String){items:alphaComunityPrefixSearch(first:25,page:\$page,query:\$query,sort:\$sort){__typename edges{__typename cursor node{__typename ...CommunitySearch}}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount}}}fragment CommunitySearch on Organization{__typename about featured:alphaFeatured id isMine membersCount name photo status superAccountId}"
+        override val selector = ExploreCommunitySelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeExploreCommunity(Scope("ROOT_QUERY", collection, response))
@@ -3485,8 +5050,10 @@ object Operations {
         }
     }
     val ExploreOrganizations = object: OperationDefinition {
+        override val name = "ExploreOrganizations"
         override val kind = OperationKind.QUERY
-        override val body = "query ExploreOrganizations(\$after:String,\$all:Boolean,\$page:Int,\$prefix:String,\$query:String,\$sort:String){items:alphaOrganizations(after:\$after,all:\$all,first:25,page:\$page,prefix:\$prefix,query:\$query,sort:\$sort){__typename edges{__typename cursor node{__typename ...OrganizationSearch }}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount }}}fragment OrganizationSearch on Organization{__typename about featured:alphaFeatured members:alphaOrganizationMembers{__typename user{__typename id name photo }}id isMine membersCount name photo status superAccountId }"
+        override val body = "query ExploreOrganizations(\$after:String,\$all:Boolean,\$page:Int,\$prefix:String,\$query:String,\$sort:String){items:alphaOrganizations(after:\$after,all:\$all,first:25,page:\$page,prefix:\$prefix,query:\$query,sort:\$sort){__typename edges{__typename cursor node{__typename ...OrganizationSearch}}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount}}}fragment OrganizationSearch on Organization{__typename about featured:alphaFeatured members:alphaOrganizationMembers{__typename user{__typename id name photo}}id isMine membersCount name photo status superAccountId}"
+        override val selector = ExploreOrganizationsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeExploreOrganizations(Scope("ROOT_QUERY", collection, response))
@@ -3494,8 +5061,10 @@ object Operations {
         }
     }
     val ExplorePeople = object: OperationDefinition {
+        override val name = "ExplorePeople"
         override val kind = OperationKind.QUERY
-        override val body = "query ExplorePeople(\$after:String,\$page:Int,\$query:String,\$sort:String){items:userSearch(after:\$after,first:25,page:\$page,query:\$query,sort:\$sort){__typename edges{__typename cursor node{__typename isYou ...UserShort }}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount }}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query ExplorePeople(\$after:String,\$page:Int,\$query:String,\$sort:String){items:userSearch(after:\$after,first:25,page:\$page,query:\$query,sort:\$sort){__typename edges{__typename cursor node{__typename isYou ...UserShort}}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = ExplorePeopleSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeExplorePeople(Scope("ROOT_QUERY", collection, response))
@@ -3503,8 +5072,10 @@ object Operations {
         }
     }
     val FeatureFlags = object: OperationDefinition {
+        override val name = "FeatureFlags"
         override val kind = OperationKind.QUERY
-        override val body = "query FeatureFlags{featureFlags{__typename id key title }}"
+        override val body = "query FeatureFlags{featureFlags{__typename id key title}}"
+        override val selector = FeatureFlagsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeFeatureFlags(Scope("ROOT_QUERY", collection, response))
@@ -3512,8 +5083,10 @@ object Operations {
         }
     }
     val FeedHome = object: OperationDefinition {
+        override val name = "FeedHome"
         override val kind = OperationKind.QUERY
-        override val body = "query FeedHome{homeFeed:alphaHomeFeed{__typename by:alphaBy{__typename ...UserShort }date id text }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query FeedHome{homeFeed:alphaHomeFeed{__typename by:alphaBy{__typename ...UserShort}date id text}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = FeedHomeSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeFeedHome(Scope("ROOT_QUERY", collection, response))
@@ -3521,8 +5094,10 @@ object Operations {
         }
     }
     val FetchPushSettings = object: OperationDefinition {
+        override val name = "FetchPushSettings"
         override val kind = OperationKind.QUERY
-        override val body = "query FetchPushSettings{pushSettings{__typename webPushKey }}"
+        override val body = "query FetchPushSettings{pushSettings{__typename webPushKey}}"
+        override val selector = FetchPushSettingsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeFetchPushSettings(Scope("ROOT_QUERY", collection, response))
@@ -3530,8 +5105,10 @@ object Operations {
         }
     }
     val GetDraftMessage = object: OperationDefinition {
+        override val name = "GetDraftMessage"
         override val kind = OperationKind.QUERY
         override val body = "query GetDraftMessage(\$conversationId:ID!){message:conversationDraft(conversationId:\$conversationId)}"
+        override val selector = GetDraftMessageSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeGetDraftMessage(Scope("ROOT_QUERY", collection, response))
@@ -3539,8 +5116,10 @@ object Operations {
         }
     }
     val GlobalCounter = object: OperationDefinition {
+        override val name = "GlobalCounter"
         override val kind = OperationKind.QUERY
-        override val body = "query GlobalCounter{alphaNotificationCounter{__typename id unreadCount }}"
+        override val body = "query GlobalCounter{alphaNotificationCounter{__typename id unreadCount}}"
+        override val selector = GlobalCounterSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeGlobalCounter(Scope("ROOT_QUERY", collection, response))
@@ -3548,8 +5127,10 @@ object Operations {
         }
     }
     val GlobalSearch = object: OperationDefinition {
+        override val name = "GlobalSearch"
         override val kind = OperationKind.QUERY
-        override val body = "query GlobalSearch(\$query:String!){items:alphaGlobalSearch(query:\$query){__typename ... on Organization{...OrganizationShort }... on User{...UserShort }... on SharedRoom{id kind membersCount membership organization{__typename id name photo }roomPhoto:photo title }}}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query GlobalSearch(\$query:String!){items:alphaGlobalSearch(query:\$query){__typename ... on Organization{...OrganizationShort}... on User{...UserShort}... on SharedRoom{id kind membersCount membership organization{__typename id name photo}roomPhoto:photo title}}}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = GlobalSearchSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeGlobalSearch(Scope("ROOT_QUERY", collection, response))
@@ -3557,8 +5138,10 @@ object Operations {
         }
     }
     val Message = object: OperationDefinition {
+        override val name = "Message"
         override val kind = OperationKind.QUERY
-        override val body = "query Message(\$messageId:ID!){message(messageId:\$messageId){__typename ...FullMessage }}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query Message(\$messageId:ID!){message(messageId:\$messageId){__typename ...FullMessage}}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = MessageSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeMessage(Scope("ROOT_QUERY", collection, response))
@@ -3566,8 +5149,10 @@ object Operations {
         }
     }
     val MessageComments = object: OperationDefinition {
+        override val name = "MessageComments"
         override val kind = OperationKind.QUERY
-        override val body = "query MessageComments(\$messageId:ID!){messageComments(messageId:\$messageId){__typename comments{__typename ...CommentEntryFragment }count id state{__typename state }}}fragment CommentEntryFragment on CommentEntry{__typename childComments{__typename id }comment{__typename id ...FullMessage }deleted id parentComment{__typename id }}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query MessageComments(\$messageId:ID!){messageComments(messageId:\$messageId){__typename comments{__typename ...CommentEntryFragment}count id state{__typename state}}}fragment CommentEntryFragment on CommentEntry{__typename childComments{__typename id}comment{__typename id ...FullMessage}deleted id parentComment{__typename id}}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = MessageCommentsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeMessageComments(Scope("ROOT_QUERY", collection, response))
@@ -3575,8 +5160,10 @@ object Operations {
         }
     }
     val MyApps = object: OperationDefinition {
+        override val name = "MyApps"
         override val kind = OperationKind.QUERY
-        override val body = "query MyApps{apps:myApps{__typename ...AppFull }}fragment AppFull on AppProfile{__typename about id name photoRef{__typename crop{__typename h w x y }uuid }shortname token{__typename salt }}"
+        override val body = "query MyApps{apps:myApps{__typename ...AppFull}}fragment AppFull on AppProfile{__typename about id name photoRef{__typename crop{__typename h w x y}uuid}shortname token{__typename salt}}"
+        override val selector = MyAppsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeMyApps(Scope("ROOT_QUERY", collection, response))
@@ -3584,8 +5171,10 @@ object Operations {
         }
     }
     val MyOrganizations = object: OperationDefinition {
+        override val name = "MyOrganizations"
         override val kind = OperationKind.QUERY
-        override val body = "query MyOrganizations{myOrganizations{__typename isPrimary:betaIsPrimary ...OrganizationShort }}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query MyOrganizations{myOrganizations{__typename isPrimary:betaIsPrimary ...OrganizationShort}}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = MyOrganizationsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeMyOrganizations(Scope("ROOT_QUERY", collection, response))
@@ -3593,8 +5182,10 @@ object Operations {
         }
     }
     val Online = object: OperationDefinition {
+        override val name = "Online"
         override val kind = OperationKind.QUERY
-        override val body = "query Online(\$userId:ID!){user:user(id:\$userId){__typename id lastSeen online }}"
+        override val body = "query Online(\$userId:ID!){user:user(id:\$userId){__typename id lastSeen online}}"
+        override val selector = OnlineSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeOnline(Scope("ROOT_QUERY", collection, response))
@@ -3602,8 +5193,10 @@ object Operations {
         }
     }
     val Organization = object: OperationDefinition {
+        override val name = "Organization"
         override val kind = OperationKind.QUERY
-        override val body = "query Organization(\$organizationId:ID!){organization(id:\$organizationId){__typename ...OrganizationFull }}fragment OrganizationFull on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull }}members:alphaOrganizationMembers{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort }facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website }fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query Organization(\$organizationId:ID!){organization(id:\$organizationId){__typename ...OrganizationFull}}fragment OrganizationFull on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull}}members:alphaOrganizationMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort}facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = OrganizationSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeOrganization(Scope("ROOT_QUERY", collection, response))
@@ -3611,8 +5204,10 @@ object Operations {
         }
     }
     val OrganizationByPrefix = object: OperationDefinition {
+        override val name = "OrganizationByPrefix"
         override val kind = OperationKind.QUERY
-        override val body = "query OrganizationByPrefix(\$query:String!){organizationByPrefix:alphaOrganizationByPrefix(query:\$query){__typename ...OrganizationSearch }}fragment OrganizationSearch on Organization{__typename about featured:alphaFeatured members:alphaOrganizationMembers{__typename user{__typename id name photo }}id isMine membersCount name photo status superAccountId }"
+        override val body = "query OrganizationByPrefix(\$query:String!){organizationByPrefix:alphaOrganizationByPrefix(query:\$query){__typename ...OrganizationSearch}}fragment OrganizationSearch on Organization{__typename about featured:alphaFeatured members:alphaOrganizationMembers{__typename user{__typename id name photo}}id isMine membersCount name photo status superAccountId}"
+        override val selector = OrganizationByPrefixSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeOrganizationByPrefix(Scope("ROOT_QUERY", collection, response))
@@ -3620,8 +5215,10 @@ object Operations {
         }
     }
     val OrganizationMembersShort = object: OperationDefinition {
+        override val name = "OrganizationMembersShort"
         override val kind = OperationKind.QUERY
-        override val body = "query OrganizationMembersShort(\$organizationId:ID!){organization(id:\$organizationId){__typename members:alphaOrganizationMembers{__typename user{__typename id }}...OrganizationWithoutMembersFragment }}fragment OrganizationWithoutMembersFragment on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort }facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website }fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query OrganizationMembersShort(\$organizationId:ID!){organization(id:\$organizationId){__typename members:alphaOrganizationMembers{__typename user{__typename id}}...OrganizationWithoutMembersFragment}}fragment OrganizationWithoutMembersFragment on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort}facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = OrganizationMembersShortSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeOrganizationMembersShort(Scope("ROOT_QUERY", collection, response))
@@ -3629,8 +5226,10 @@ object Operations {
         }
     }
     val OrganizationMembersShortPaginated = object: OperationDefinition {
+        override val name = "OrganizationMembersShortPaginated"
         override val kind = OperationKind.QUERY
-        override val body = "query OrganizationMembersShortPaginated(\$after:ID,\$first:Int,\$organizationId:ID!){organization(id:\$organizationId){__typename members:alphaOrganizationMembers(after:\$after,first:\$first){__typename role user{__typename ...UserFull }}...OrganizationWithoutMembersFragment }}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment OrganizationWithoutMembersFragment on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort }facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query OrganizationMembersShortPaginated(\$after:ID,\$first:Int,\$organizationId:ID!){organization(id:\$organizationId){__typename members:alphaOrganizationMembers(after:\$after,first:\$first){__typename role user{__typename ...UserFull}}...OrganizationWithoutMembersFragment}}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationWithoutMembersFragment on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort}facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = OrganizationMembersShortPaginatedSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeOrganizationMembersShortPaginated(Scope("ROOT_QUERY", collection, response))
@@ -3638,8 +5237,10 @@ object Operations {
         }
     }
     val OrganizationProfile = object: OperationDefinition {
+        override val name = "OrganizationProfile"
         override val kind = OperationKind.QUERY
-        override val body = "query OrganizationProfile(\$organizationId:ID!){organizationProfile(id:\$organizationId){__typename ...OrganizationProfileFull }}fragment OrganizationProfileFull on OrganizationProfile{__typename about featured:alphaFeatured facebook id linkedin name photoRef{__typename crop{__typename h w x y }uuid }shortname twitter website websiteTitle }"
+        override val body = "query OrganizationProfile(\$organizationId:ID!){organizationProfile(id:\$organizationId){__typename ...OrganizationProfileFull}}fragment OrganizationProfileFull on OrganizationProfile{__typename about featured:alphaFeatured facebook id linkedin name photoRef{__typename crop{__typename h w x y}uuid}shortname twitter website websiteTitle}"
+        override val selector = OrganizationProfileSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeOrganizationProfile(Scope("ROOT_QUERY", collection, response))
@@ -3647,8 +5248,10 @@ object Operations {
         }
     }
     val OrganizationPublicInvite = object: OperationDefinition {
+        override val name = "OrganizationPublicInvite"
         override val kind = OperationKind.QUERY
-        override val body = "query OrganizationPublicInvite(\$organizationId:ID){publicInvite:alphaOrganizationInviteLink(organizationId:\$organizationId){__typename id key ttl }}"
+        override val body = "query OrganizationPublicInvite(\$organizationId:ID){publicInvite:alphaOrganizationInviteLink(organizationId:\$organizationId){__typename id key ttl}}"
+        override val selector = OrganizationPublicInviteSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeOrganizationPublicInvite(Scope("ROOT_QUERY", collection, response))
@@ -3656,8 +5259,10 @@ object Operations {
         }
     }
     val OrganizationWithoutMembers = object: OperationDefinition {
+        override val name = "OrganizationWithoutMembers"
         override val kind = OperationKind.QUERY
-        override val body = "query OrganizationWithoutMembers(\$organizationId:ID!){organization(id:\$organizationId){__typename ...OrganizationWithoutMembersFragment }}fragment OrganizationWithoutMembersFragment on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort }facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website }fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query OrganizationWithoutMembers(\$organizationId:ID!){organization(id:\$organizationId){__typename ...OrganizationWithoutMembersFragment}}fragment OrganizationWithoutMembersFragment on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort}facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = OrganizationWithoutMembersSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeOrganizationWithoutMembers(Scope("ROOT_QUERY", collection, response))
@@ -3665,8 +5270,10 @@ object Operations {
         }
     }
     val Permissions = object: OperationDefinition {
+        override val name = "Permissions"
         override val kind = OperationKind.QUERY
-        override val body = "query Permissions{myPermissions{__typename roles }}"
+        override val body = "query Permissions{myPermissions{__typename roles}}"
+        override val selector = PermissionsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizePermissions(Scope("ROOT_QUERY", collection, response))
@@ -3674,8 +5281,10 @@ object Operations {
         }
     }
     val Profile = object: OperationDefinition {
+        override val name = "Profile"
         override val kind = OperationKind.QUERY
-        override val body = "query Profile{user:me{__typename id shortname }profile:myProfile{__typename about invitedBy:alphaInvitedBy{__typename name }joinedAt:alphaJoinedAt linkedin:alphaLinkedin role:alphaRole email firstName id lastName location phone photoRef{__typename crop{__typename h w x y }uuid }primaryOrganization{__typename id name }website }}"
+        override val body = "query Profile{user:me{__typename id shortname}profile:myProfile{__typename about invitedBy:alphaInvitedBy{__typename name}joinedAt:alphaJoinedAt linkedin:alphaLinkedin role:alphaRole email firstName id lastName location phone photoRef{__typename crop{__typename h w x y}uuid}primaryOrganization{__typename id name}website}}"
+        override val selector = ProfileSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeProfile(Scope("ROOT_QUERY", collection, response))
@@ -3683,8 +5292,10 @@ object Operations {
         }
     }
     val ProfilePrefill = object: OperationDefinition {
+        override val name = "ProfilePrefill"
         override val kind = OperationKind.QUERY
-        override val body = "query ProfilePrefill{prefill:myProfilePrefill{__typename firstName lastName picture }}"
+        override val body = "query ProfilePrefill{prefill:myProfilePrefill{__typename firstName lastName picture}}"
+        override val selector = ProfilePrefillSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeProfilePrefill(Scope("ROOT_QUERY", collection, response))
@@ -3692,8 +5303,10 @@ object Operations {
         }
     }
     val ResolveShortName = object: OperationDefinition {
+        override val name = "ResolveShortName"
         override val kind = OperationKind.QUERY
-        override val body = "query ResolveShortName(\$shortname:String!){item:alphaResolveShortName(shortname:\$shortname){__typename ... on User{...UserFull }... on Organization{...OrganizationFull }}}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment OrganizationFull on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull }}members:alphaOrganizationMembers{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort }facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website }fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query ResolveShortName(\$shortname:String!){item:alphaResolveShortName(shortname:\$shortname){__typename ... on User{...UserFull}... on Organization{...OrganizationFull}}}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationFull on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull}}members:alphaOrganizationMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort}facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = ResolveShortNameSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeResolveShortName(Scope("ROOT_QUERY", collection, response))
@@ -3701,8 +5314,10 @@ object Operations {
         }
     }
     val ResolvedInvite = object: OperationDefinition {
+        override val name = "ResolvedInvite"
         override val kind = OperationKind.QUERY
-        override val body = "query ResolvedInvite(\$key:String!){invite:alphaResolveInvite(key:\$key){__typename ... on InviteInfo{creator{__typename ...UserShort }orgId title }... on AppInvite{inviter{__typename ...UserShort }}... on RoomInvite{invitedByUser{__typename ...UserShort }room{__typename ... on SharedRoom{description id isChannel kind membersCount membership photo socialImage title }}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query ResolvedInvite(\$key:String!){invite:alphaResolveInvite(key:\$key){__typename ... on InviteInfo{creator{__typename ...UserShort}orgId title}... on AppInvite{inviter{__typename ...UserShort}}... on RoomInvite{invitedByUser{__typename ...UserShort}room{__typename ... on SharedRoom{description id isChannel kind membersCount membership photo socialImage title}}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = ResolvedInviteSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeResolvedInvite(Scope("ROOT_QUERY", collection, response))
@@ -3710,8 +5325,10 @@ object Operations {
         }
     }
     val Room = object: OperationDefinition {
+        override val name = "Room"
         override val kind = OperationKind.QUERY
-        override val body = "query Room(\$id:ID!){room(id:\$id){__typename ...RoomFull }}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort }}membersCount membership organization{__typename ...OrganizationMedium }photo pinnedMessage{__typename ...FullMessage }requests{__typename user{__typename ...UserShort }}role settings{__typename id mute }socialImage title welcomeMessage{__typename isOn message sender{__typename id name }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo }fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query Room(\$id:ID!){room(id:\$id){__typename ...RoomFull}}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort}}membersCount membership organization{__typename ...OrganizationMedium}photo pinnedMessage{__typename ...FullMessage}requests{__typename user{__typename ...UserShort}}role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = RoomSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoom(Scope("ROOT_QUERY", collection, response))
@@ -3719,8 +5336,10 @@ object Operations {
         }
     }
     val RoomChat = object: OperationDefinition {
+        override val name = "RoomChat"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomChat(\$id:ID!){room(id:\$id){__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{canEdit id isChannel kind membership pinnedMessage{__typename ...FullMessage }title }}}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query RoomChat(\$id:ID!){room(id:\$id){__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{canEdit id isChannel kind membership pinnedMessage{__typename ...FullMessage}title}}}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = RoomChatSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomChat(Scope("ROOT_QUERY", collection, response))
@@ -3728,8 +5347,10 @@ object Operations {
         }
     }
     val RoomHeader = object: OperationDefinition {
+        override val name = "RoomHeader"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomHeader(\$id:ID!){room(id:\$id){__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename id name photo primaryOrganization{__typename id name }}}... on SharedRoom{canEdit description id isChannel kind membersCount organization{__typename isAdmin:betaIsAdmin isOwner:betaIsOwner id name }photo role settings{__typename id mute }socialImage title welcomeMessage{__typename isOn message sender{__typename id name }}}}}"
+        override val body = "query RoomHeader(\$id:ID!){room(id:\$id){__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename id name photo primaryOrganization{__typename id name}}}... on SharedRoom{canEdit description id isChannel kind membersCount organization{__typename isAdmin:betaIsAdmin isOwner:betaIsOwner id name}photo role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}}"
+        override val selector = RoomHeaderSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomHeader(Scope("ROOT_QUERY", collection, response))
@@ -3737,8 +5358,10 @@ object Operations {
         }
     }
     val RoomInviteInfo = object: OperationDefinition {
+        override val name = "RoomInviteInfo"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomInviteInfo(\$invite:String!){invite:betaRoomInviteInfo(invite:\$invite){__typename id invitedByUser{__typename ...UserShort }room{__typename ... on SharedRoom{description id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo socialImage title }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query RoomInviteInfo(\$invite:String!){invite:betaRoomInviteInfo(invite:\$invite){__typename id invitedByUser{__typename ...UserShort}room{__typename ... on SharedRoom{description id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo socialImage title}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = RoomInviteInfoSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomInviteInfo(Scope("ROOT_QUERY", collection, response))
@@ -3746,8 +5369,10 @@ object Operations {
         }
     }
     val RoomInviteLink = object: OperationDefinition {
+        override val name = "RoomInviteLink"
         override val kind = OperationKind.QUERY
         override val body = "query RoomInviteLink(\$roomId:ID!){link:betaRoomInviteLink(roomId:\$roomId)}"
+        override val selector = RoomInviteLinkSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomInviteLink(Scope("ROOT_QUERY", collection, response))
@@ -3755,8 +5380,10 @@ object Operations {
         }
     }
     val RoomMemberShort = object: OperationDefinition {
+        override val name = "RoomMemberShort"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomMemberShort(\$memberId:ID!,\$roomId:ID!){member:roomMember(memberId:\$memberId,roomId:\$roomId){__typename user{__typename firstName id name }}}"
+        override val body = "query RoomMemberShort(\$memberId:ID!,\$roomId:ID!){member:roomMember(memberId:\$memberId,roomId:\$roomId){__typename user{__typename firstName id name}}}"
+        override val selector = RoomMemberShortSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomMemberShort(Scope("ROOT_QUERY", collection, response))
@@ -3764,8 +5391,10 @@ object Operations {
         }
     }
     val RoomMembers = object: OperationDefinition {
+        override val name = "RoomMembers"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomMembers(\$roomId:ID!){members:roomMembers(roomId:\$roomId){__typename canKick membership role user{__typename ...UserShort }}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query RoomMembers(\$roomId:ID!){members:roomMembers(roomId:\$roomId){__typename canKick membership role user{__typename ...UserShort}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = RoomMembersSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomMembers(Scope("ROOT_QUERY", collection, response))
@@ -3773,8 +5402,10 @@ object Operations {
         }
     }
     val RoomMembersPaginated = object: OperationDefinition {
+        override val name = "RoomMembersPaginated"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomMembersPaginated(\$after:ID,\$first:Int,\$roomId:ID!){members:roomMembers(after:\$after,first:\$first,roomId:\$roomId){__typename canKick membership role user{__typename ...UserShort }}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query RoomMembersPaginated(\$after:ID,\$first:Int,\$roomId:ID!){members:roomMembers(after:\$after,first:\$first,roomId:\$roomId){__typename canKick membership role user{__typename ...UserShort}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = RoomMembersPaginatedSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomMembersPaginated(Scope("ROOT_QUERY", collection, response))
@@ -3782,8 +5413,10 @@ object Operations {
         }
     }
     val RoomMembersShort = object: OperationDefinition {
+        override val name = "RoomMembersShort"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomMembersShort(\$roomId:ID!){members:roomMembers(roomId:\$roomId){__typename user{__typename id }}}"
+        override val body = "query RoomMembersShort(\$roomId:ID!){members:roomMembers(roomId:\$roomId){__typename user{__typename id}}}"
+        override val selector = RoomMembersShortSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomMembersShort(Scope("ROOT_QUERY", collection, response))
@@ -3791,8 +5424,10 @@ object Operations {
         }
     }
     val RoomSearch = object: OperationDefinition {
+        override val name = "RoomSearch"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomSearch{items:betaRoomSearch(first:150){__typename edges{__typename cursor node{__typename id isChannel kind membersCount membership organization{__typename name photo }photo title }}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount }}}"
+        override val body = "query RoomSearch{items:betaRoomSearch(first:150){__typename edges{__typename cursor node{__typename id isChannel kind membersCount membership organization{__typename name photo}photo title}}pageInfo{__typename currentPage hasNextPage hasPreviousPage itemsCount openEnded pagesCount}}}"
+        override val selector = RoomSearchSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomSearch(Scope("ROOT_QUERY", collection, response))
@@ -3800,8 +5435,10 @@ object Operations {
         }
     }
     val RoomSearchText = object: OperationDefinition {
+        override val name = "RoomSearchText"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomSearchText(\$query:String!){items:betaDialogTextSearch(query:\$query){__typename id:cid flexibleId:fid kind photo title }}"
+        override val body = "query RoomSearchText(\$query:String!){items:betaDialogTextSearch(query:\$query){__typename id:cid flexibleId:fid kind photo title}}"
+        override val selector = RoomSearchTextSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomSearchText(Scope("ROOT_QUERY", collection, response))
@@ -3809,8 +5446,10 @@ object Operations {
         }
     }
     val RoomSuper = object: OperationDefinition {
+        override val name = "RoomSuper"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomSuper(\$id:ID!){roomSuper(id:\$id){__typename featured id listed }}"
+        override val body = "query RoomSuper(\$id:ID!){roomSuper(id:\$id){__typename featured id listed}}"
+        override val selector = RoomSuperSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomSuper(Scope("ROOT_QUERY", collection, response))
@@ -3818,8 +5457,10 @@ object Operations {
         }
     }
     val RoomTiny = object: OperationDefinition {
+        override val name = "RoomTiny"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomTiny(\$id:ID!){room(id:\$id){__typename ...RoomShort }}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query RoomTiny(\$id:ID!){room(id:\$id){__typename ...RoomShort}}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = RoomTinySelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomTiny(Scope("ROOT_QUERY", collection, response))
@@ -3827,8 +5468,10 @@ object Operations {
         }
     }
     val RoomWithoutMembers = object: OperationDefinition {
+        override val name = "RoomWithoutMembers"
         override val kind = OperationKind.QUERY
-        override val body = "query RoomWithoutMembers(\$id:ID!){room(id:\$id){__typename ...RoomFullWithoutMembers }}fragment RoomFullWithoutMembers on Room{__typename ... on PrivateRoom{id settings{__typename id mute }user{__typename ...UserShort }}... on SharedRoom{canEdit canSendMessage description id isChannel kind membersCount membership organization{__typename ...OrganizationMedium }photo pinnedMessage{__typename ...FullMessage }role settings{__typename id mute }socialImage title welcomeMessage{__typename isOn message sender{__typename id name }}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull }}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo }fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny }}... on MessageSpanMultiUserMention{users{__typename ...UserTiny }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }... on MessageSpanBold{length offset }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview id }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }keyboard{__typename buttons{__typename style title url }}subTitle text title titleLink titleLinkHostname }}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort }spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort }}... on MessageSpanMultiUserMention{users{__typename ...UserShort }}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name }}... on SharedRoom{id title }}}... on MessageSpanLink{url }}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }filePreview }... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size }url }subTitle text title titleLink titleLinkHostname }}commentsCount edited }}reactions{__typename reaction user{__typename ...UserShort }}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny }users{__typename ...UserTiny }}... on KickServiceMetadata{kickedBy{__typename ...UserTiny }user{__typename ...UserTiny }}... on TitleChangeServiceMetadata{title }... on PhotoChangeServiceMetadata{photo }... on PostRespondServiceMetadata{respondType }}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort }shortname }"
+        override val body = "query RoomWithoutMembers(\$id:ID!){room(id:\$id){__typename ...RoomFullWithoutMembers}}fragment RoomFullWithoutMembers on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage description id isChannel kind membersCount membership organization{__typename ...OrganizationMedium}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = RoomWithoutMembersSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeRoomWithoutMembers(Scope("ROOT_QUERY", collection, response))
@@ -3836,8 +5479,10 @@ object Operations {
         }
     }
     val Settings = object: OperationDefinition {
+        override val name = "Settings"
         override val kind = OperationKind.QUERY
-        override val body = "query Settings{settings{__typename ...SettingsFull }}fragment SettingsFull on Settings{__typename desktopNotifications emailFrequency id mobileAlert mobileIncludeText mobileNotifications primaryEmail }"
+        override val body = "query Settings{settings{__typename ...SettingsFull}}fragment SettingsFull on Settings{__typename desktopNotifications emailFrequency id mobileAlert mobileIncludeText mobileNotifications primaryEmail}"
+        override val selector = SettingsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeSettings(Scope("ROOT_QUERY", collection, response))
@@ -3845,8 +5490,10 @@ object Operations {
         }
     }
     val SuperAccount = object: OperationDefinition {
+        override val name = "SuperAccount"
         override val kind = OperationKind.QUERY
-        override val body = "query SuperAccount(\$accountId:ID!,\$viaOrgId:Boolean){superAccount(id:\$accountId,viaOrgId:\$viaOrgId){__typename published:alphaPublished createdAt createdBy{__typename name }features{__typename id key title }id members{__typename ...UserShort }orgId state title }}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query SuperAccount(\$accountId:ID!,\$viaOrgId:Boolean){superAccount(id:\$accountId,viaOrgId:\$viaOrgId){__typename published:alphaPublished createdAt createdBy{__typename name}features{__typename id key title}id members{__typename ...UserShort}orgId state title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = SuperAccountSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeSuperAccount(Scope("ROOT_QUERY", collection, response))
@@ -3854,8 +5501,10 @@ object Operations {
         }
     }
     val SuperAccounts = object: OperationDefinition {
+        override val name = "SuperAccounts"
         override val kind = OperationKind.QUERY
-        override val body = "query SuperAccounts{superAccounts{__typename id orgId state title }}"
+        override val body = "query SuperAccounts{superAccounts{__typename id orgId state title}}"
+        override val selector = SuperAccountsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeSuperAccounts(Scope("ROOT_QUERY", collection, response))
@@ -3863,8 +5512,10 @@ object Operations {
         }
     }
     val SuperAdmins = object: OperationDefinition {
+        override val name = "SuperAdmins"
         override val kind = OperationKind.QUERY
-        override val body = "query SuperAdmins{superAdmins{__typename email role user{__typename ...UserShort }}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort }shortname }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query SuperAdmins{superAdmins{__typename email role user{__typename ...UserShort}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = SuperAdminsSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeSuperAdmins(Scope("ROOT_QUERY", collection, response))
@@ -3872,8 +5523,10 @@ object Operations {
         }
     }
     val User = object: OperationDefinition {
+        override val name = "User"
         override val kind = OperationKind.QUERY
-        override val body = "query User(\$userId:ID!){conversation:room(id:\$userId){__typename ... on PrivateRoom{id settings{__typename id mute }}}user:user(id:\$userId){__typename ...UserFull }}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort }shortname twitter website }fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo }"
+        override val body = "query User(\$userId:ID!){conversation:room(id:\$userId){__typename ... on PrivateRoom{id settings{__typename id mute}}}user:user(id:\$userId){__typename ...UserFull}}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = UserSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeUser(Scope("ROOT_QUERY", collection, response))
@@ -3881,8 +5534,10 @@ object Operations {
         }
     }
     val UserStorage = object: OperationDefinition {
+        override val name = "UserStorage"
         override val kind = OperationKind.QUERY
-        override val body = "query UserStorage(\$keys:[String!]!,\$namespace:String!){userStorage(keys:\$keys,namespace:\$namespace){__typename id key value }}"
+        override val body = "query UserStorage(\$keys:[String!]!,\$namespace:String!){userStorage(keys:\$keys,namespace:\$namespace){__typename id key value}}"
+        override val selector = UserStorageSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeUserStorage(Scope("ROOT_QUERY", collection, response))
@@ -3890,11 +5545,1146 @@ object Operations {
         }
     }
     val Users = object: OperationDefinition {
+        override val name = "Users"
         override val kind = OperationKind.QUERY
-        override val body = "query Users(\$query:String!){items:users(query:\$query){__typename subtitle:email id title:name }}"
+        override val body = "query Users(\$query:String!){items:users(query:\$query){__typename subtitle:email id title:name}}"
+        override val selector = UsersSelector
         override fun normalizeResponse(response: JsonObject): RecordSet {
             val collection = NormalizedCollection()
             normalizeUsers(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AccountCreateInvite = object: OperationDefinition {
+        override val name = "AccountCreateInvite"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation AccountCreateInvite{alphaCreateInvite{__typename id key}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAccountCreateInvite(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AccountDestroyInvite = object: OperationDefinition {
+        override val name = "AccountDestroyInvite"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation AccountDestroyInvite(\$id:ID!){alphaDeleteInvite(id:\$id)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAccountDestroyInvite(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AccountInviteJoin = object: OperationDefinition {
+        override val name = "AccountInviteJoin"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation AccountInviteJoin(\$inviteKey:String!){alphaJoinInvite(key:\$inviteKey)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAccountInviteJoin(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AddAppToChat = object: OperationDefinition {
+        override val name = "AddAppToChat"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation AddAppToChat(\$appId:ID!,\$chatId:ID!){addAppToChat(appId:\$appId,chatId:\$chatId){__typename ...AppChat}}fragment AppChat on AppChat{__typename chat{__typename ... on PrivateRoom{id}... on SharedRoom{id}}webhook}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAddAppToChat(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val AddMessageComment = object: OperationDefinition {
+        override val name = "AddMessageComment"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation AddMessageComment(\$fileAttachments:[FileAttachmentInput!],\$mentions:[MentionInput!],\$message:String,\$messageId:ID!,\$replyComment:ID){addMessageComment(fileAttachments:\$fileAttachments,mentions:\$mentions,message:\$message,messageId:\$messageId,replyComment:\$replyComment)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeAddMessageComment(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val CancelTyping = object: OperationDefinition {
+        override val name = "CancelTyping"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation CancelTyping(\$conversationId:ID!){typingCancel(conversationId:\$conversationId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeCancelTyping(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val CommentSetReaction = object: OperationDefinition {
+        override val name = "CommentSetReaction"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation CommentSetReaction(\$commentId:ID!,\$reaction:MessageReactionType!){commentReactionAdd(commentId:\$commentId,reaction:\$reaction)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeCommentSetReaction(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val CommentUnsetReaction = object: OperationDefinition {
+        override val name = "CommentUnsetReaction"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation CommentUnsetReaction(\$commentId:ID!,\$reaction:MessageReactionType!){commentReactionRemove(commentId:\$commentId,reaction:\$reaction)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeCommentUnsetReaction(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ConferenceAnswer = object: OperationDefinition {
+        override val name = "ConferenceAnswer"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation ConferenceAnswer(\$answer:String!,\$id:ID!,\$ownPeerId:ID!,\$peerId:ID!){peerConnectionAnswer(answer:\$answer,id:\$id,ownPeerId:\$ownPeerId,peerId:\$peerId){__typename ...ConferenceFull}}fragment ConferenceFull on Conference{__typename iceServers{__typename credential urls username}id peers{__typename connection{__typename ice sdp state}id user{__typename ...UserShort}}startTime}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeConferenceAnswer(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ConferenceCandidate = object: OperationDefinition {
+        override val name = "ConferenceCandidate"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation ConferenceCandidate(\$candidate:String!,\$id:ID!,\$ownPeerId:ID!,\$peerId:ID!){peerConnectionCandidate(candidate:\$candidate,id:\$id,ownPeerId:\$ownPeerId,peerId:\$peerId){__typename ...ConferenceFull}}fragment ConferenceFull on Conference{__typename iceServers{__typename credential urls username}id peers{__typename connection{__typename ice sdp state}id user{__typename ...UserShort}}startTime}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeConferenceCandidate(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ConferenceJoin = object: OperationDefinition {
+        override val name = "ConferenceJoin"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation ConferenceJoin(\$id:ID!){conferenceJoin(id:\$id){__typename conference{__typename ...ConferenceFull}peerId}}fragment ConferenceFull on Conference{__typename iceServers{__typename credential urls username}id peers{__typename connection{__typename ice sdp state}id user{__typename ...UserShort}}startTime}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeConferenceJoin(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ConferenceKeepAlive = object: OperationDefinition {
+        override val name = "ConferenceKeepAlive"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation ConferenceKeepAlive(\$id:ID!,\$peerId:ID!){conferenceKeepAlive(id:\$id,peerId:\$peerId){__typename ...ConferenceFull}}fragment ConferenceFull on Conference{__typename iceServers{__typename credential urls username}id peers{__typename connection{__typename ice sdp state}id user{__typename ...UserShort}}startTime}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeConferenceKeepAlive(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ConferenceLeave = object: OperationDefinition {
+        override val name = "ConferenceLeave"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation ConferenceLeave(\$id:ID!,\$peerId:ID!){conferenceLeave(id:\$id,peerId:\$peerId){__typename ...ConferenceFull}}fragment ConferenceFull on Conference{__typename iceServers{__typename credential urls username}id peers{__typename connection{__typename ice sdp state}id user{__typename ...UserShort}}startTime}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeConferenceLeave(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ConferenceOffer = object: OperationDefinition {
+        override val name = "ConferenceOffer"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation ConferenceOffer(\$id:ID!,\$offer:String!,\$ownPeerId:ID!,\$peerId:ID!){peerConnectionOffer(id:\$id,offer:\$offer,ownPeerId:\$ownPeerId,peerId:\$peerId){__typename ...ConferenceFull}}fragment ConferenceFull on Conference{__typename iceServers{__typename credential urls username}id peers{__typename connection{__typename ice sdp state}id user{__typename ...UserShort}}startTime}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeConferenceOffer(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val CreateApp = object: OperationDefinition {
+        override val name = "CreateApp"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation CreateApp(\$about:String,\$name:String!,\$photoRef:ImageRefInput,\$shortname:String){createApp(about:\$about,name:\$name,photoRef:\$photoRef,shortname:\$shortname){__typename ...AppFull}}fragment AppFull on AppProfile{__typename about id name photoRef{__typename crop{__typename h w x y}uuid}shortname token{__typename salt}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeCreateApp(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val CreateOrganization = object: OperationDefinition {
+        override val name = "CreateOrganization"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation CreateOrganization(\$input:CreateOrganizationInput!){organization:createOrganization(input:\$input){__typename id name}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeCreateOrganization(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val CreateUserProfileAndOrganization = object: OperationDefinition {
+        override val name = "CreateUserProfileAndOrganization"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation CreateUserProfileAndOrganization(\$organization:CreateOrganizationInput!,\$user:ProfileInput!){alphaCreateUserProfileAndOrganization(organization:\$organization,user:\$user){__typename organization{__typename id name}user{__typename ...UserFull}}}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeCreateUserProfileAndOrganization(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val DebugMails = object: OperationDefinition {
+        override val name = "DebugMails"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation DebugMails(\$type:DebugEmailType!){debugSendEmail(type:\$type)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeDebugMails(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val DeleteComment = object: OperationDefinition {
+        override val name = "DeleteComment"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation DeleteComment(\$id:ID!){deleteComment(id:\$id)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeDeleteComment(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val DeleteOrganization = object: OperationDefinition {
+        override val name = "DeleteOrganization"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation DeleteOrganization(\$organizationId:ID!){deleteOrganization(id:\$organizationId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeDeleteOrganization(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val DeleteUser = object: OperationDefinition {
+        override val name = "DeleteUser"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation DeleteUser(\$id:ID!){superDeleteUser(id:\$id)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeDeleteUser(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val EditComment = object: OperationDefinition {
+        override val name = "EditComment"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation EditComment(\$id:ID!,\$message:String){editComment(id:\$id,message:\$message)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeEditComment(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val EditPostMessage = object: OperationDefinition {
+        override val name = "EditPostMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation EditPostMessage(\$attachments:[String!],\$messageId:ID!,\$postType:PostMessageType!,\$text:String!,\$title:String!){editPostMessage:alphaEditPostMessage(attachments:\$attachments,messageId:\$messageId,postType:\$postType,text:\$text,title:\$title){__typename seq}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeEditPostMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val FeatureFlagAdd = object: OperationDefinition {
+        override val name = "FeatureFlagAdd"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation FeatureFlagAdd(\$key:String!,\$title:String!){featureFlagAdd(key:\$key,title:\$title){__typename id key title}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeFeatureFlagAdd(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val FeatureFlagDisable = object: OperationDefinition {
+        override val name = "FeatureFlagDisable"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation FeatureFlagDisable(\$accountId:ID!,\$featureId:ID!){superAccountFeatureRemove(featureId:\$featureId,id:\$accountId){__typename features{__typename id key title}id}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeFeatureFlagDisable(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val FeatureFlagEnable = object: OperationDefinition {
+        override val name = "FeatureFlagEnable"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation FeatureFlagEnable(\$accountId:ID!,\$featureId:ID!){superAccountFeatureAdd(featureId:\$featureId,id:\$accountId){__typename features{__typename id key title}id}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeFeatureFlagEnable(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val FeedPost = object: OperationDefinition {
+        override val name = "FeedPost"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation FeedPost(\$message:String!){alphaCreateFeedPost(message:\$message){__typename id}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeFeedPost(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val MarkSequenceRead = object: OperationDefinition {
+        override val name = "MarkSequenceRead"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation MarkSequenceRead(\$seq:Int!){alphaGlobalRead(toSeq:\$seq)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeMarkSequenceRead(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val MediaAnswer = object: OperationDefinition {
+        override val name = "MediaAnswer"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation MediaAnswer(\$answer:String!,\$id:ID!,\$peerId:ID!){mediaStreamAnswer(answer:\$answer,id:\$id,peerId:\$peerId){__typename id streams{__typename ice id sdp state}}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeMediaAnswer(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val MediaCandidate = object: OperationDefinition {
+        override val name = "MediaCandidate"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation MediaCandidate(\$candidate:String!,\$id:ID!,\$peerId:ID!){mediaStreamCandidate(candidate:\$candidate,id:\$id,peerId:\$peerId){__typename id streams{__typename ice id sdp state}}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeMediaCandidate(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val MediaOffer = object: OperationDefinition {
+        override val name = "MediaOffer"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation MediaOffer(\$id:ID!,\$offer:String!,\$peerId:ID!){mediaStreamOffer(id:\$id,offer:\$offer,peerId:\$peerId){__typename id streams{__typename ice id sdp state}}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeMediaOffer(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val MessageSetReaction = object: OperationDefinition {
+        override val name = "MessageSetReaction"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation MessageSetReaction(\$messageId:ID!,\$reaction:String!){betaReactionSet(mid:\$messageId,reaction:\$reaction)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeMessageSetReaction(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val MessageUnsetReaction = object: OperationDefinition {
+        override val name = "MessageUnsetReaction"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation MessageUnsetReaction(\$messageId:ID!,\$reaction:String!){betaReactionRemove(mid:\$messageId,reaction:\$reaction)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeMessageUnsetReaction(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationActivateByInvite = object: OperationDefinition {
+        override val name = "OrganizationActivateByInvite"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation OrganizationActivateByInvite(\$inviteKey:String!){joinAppInvite(key:\$inviteKey)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationActivateByInvite(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationAddMember = object: OperationDefinition {
+        override val name = "OrganizationAddMember"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation OrganizationAddMember(\$organizationId:ID!,\$userIds:[ID!]){betaOrganizationMemberAdd(organizationId:\$organizationId,userIds:\$userIds){__typename ...OrganizationFull}}fragment OrganizationFull on Organization{__typename about featured:alphaFeatured isCommunity:alphaIsCommunity requests:alphaOrganizationMemberRequests{__typename role user{__typename ...UserFull}}members:alphaOrganizationMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner rooms:betaPublicRooms{__typename ...RoomShort}facebook id isMine linkedin membersCount name photo shortname superAccountId twitter website}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationAddMember(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationAlterPublished = object: OperationDefinition {
+        override val name = "OrganizationAlterPublished"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation OrganizationAlterPublished(\$organizationId:ID!,\$published:Boolean!){alphaAlterPublished(id:\$organizationId,published:\$published){__typename ...OrganizationSearch}}fragment OrganizationSearch on Organization{__typename about featured:alphaFeatured members:alphaOrganizationMembers{__typename user{__typename id name photo}}id isMine membersCount name photo status superAccountId}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationAlterPublished(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationChangeMemberRole = object: OperationDefinition {
+        override val name = "OrganizationChangeMemberRole"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation OrganizationChangeMemberRole(\$memberId:ID!,\$newRole:OrganizationMemberRole!,\$organizationId:ID!){alphaOrganizationChangeMemberRole(memberId:\$memberId,newRole:\$newRole,organizationId:\$organizationId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationChangeMemberRole(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationCreatePublicInvite = object: OperationDefinition {
+        override val name = "OrganizationCreatePublicInvite"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation OrganizationCreatePublicInvite(\$expirationDays:Int,\$organizationId:ID){alphaOrganizationRefreshInviteLink(expirationDays:\$expirationDays,organizationId:\$organizationId){__typename id key ttl}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationCreatePublicInvite(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationInviteMembers = object: OperationDefinition {
+        override val name = "OrganizationInviteMembers"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation OrganizationInviteMembers(\$inviteRequests:[InviteRequest!]!,\$organizationId:ID){alphaOrganizationInviteMembers(inviteRequests:\$inviteRequests,organizationId:\$organizationId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationInviteMembers(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationMemberRemove = object: OperationDefinition {
+        override val name = "OrganizationMemberRemove"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation OrganizationMemberRemove(\$organizationId:ID!,\$userId:ID!){betaOrganizationMemberRemove(organizationId:\$organizationId,userId:\$userId){__typename id}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationMemberRemove(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OrganizationRemoveMember = object: OperationDefinition {
+        override val name = "OrganizationRemoveMember"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation OrganizationRemoveMember(\$memberId:ID!,\$organizationId:ID!){alphaOrganizationRemoveMember(memberId:\$memberId,organizationId:\$organizationId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOrganizationRemoveMember(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val PersistEvents = object: OperationDefinition {
+        override val name = "PersistEvents"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation PersistEvents(\$did:String!,\$events:[Event!]!,\$isProd:Boolean,\$platform:EventPlatform){track(did:\$did,events:\$events,isProd:\$isProd,platform:\$platform)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizePersistEvents(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val PinMessage = object: OperationDefinition {
+        override val name = "PinMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation PinMessage(\$chatId:ID!,\$messageId:ID!){pinMessage:betaPinMessage(chatId:\$chatId,messageId:\$messageId){__typename ...RoomShort}}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizePinMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ProfileCreate = object: OperationDefinition {
+        override val name = "ProfileCreate"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation ProfileCreate(\$input:CreateProfileInput!){createProfile(input:\$input){__typename about email firstName id lastName location phone photoRef{__typename crop{__typename h w x y}uuid}website}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeProfileCreate(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ProfileUpdate = object: OperationDefinition {
+        override val name = "ProfileUpdate"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation ProfileUpdate(\$input:UpdateProfileInput!,\$uid:ID){updateProfile(input:\$input,uid:\$uid){__typename about invitedBy:alphaInvitedBy{__typename name}joinedAt:alphaJoinedAt linkedin:alphaLinkedin primaryOrganizationId:alphaPrimaryOrganizationId role:alphaRole email firstName id lastName location phone photoRef{__typename crop{__typename h w x y}uuid}website}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeProfileUpdate(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RefreshAppToken = object: OperationDefinition {
+        override val name = "RefreshAppToken"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RefreshAppToken(\$appId:ID!){refreshAppToken(appId:\$appId){__typename ...AppFull}}fragment AppFull on AppProfile{__typename about id name photoRef{__typename crop{__typename h w x y}uuid}shortname token{__typename salt}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRefreshAppToken(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RegisterPush = object: OperationDefinition {
+        override val name = "RegisterPush"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RegisterPush(\$endpoint:String!,\$type:PushType!){registerPush(endpoint:\$endpoint,type:\$type)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRegisterPush(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RegisterWebPush = object: OperationDefinition {
+        override val name = "RegisterWebPush"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RegisterWebPush(\$endpoint:String!){registerWebPush(endpoint:\$endpoint)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRegisterWebPush(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ReplyMessage = object: OperationDefinition {
+        override val name = "ReplyMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation ReplyMessage(\$mentions:[ID!],\$message:String,\$replyMessages:[ID!],\$roomId:ID!){replyMessage:betaMessageSend(mentions:\$mentions,message:\$message,replyMessages:\$replyMessages,room:\$roomId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeReplyMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ReportOnline = object: OperationDefinition {
+        override val name = "ReportOnline"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation ReportOnline(\$active:Boolean,\$platform:String){presenceReportOnline(active:\$active,platform:\$platform,timeout:5000)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeReportOnline(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RespondPostMessage = object: OperationDefinition {
+        override val name = "RespondPostMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RespondPostMessage(\$buttonId:ID!,\$messageId:ID!,\$reaction:String!){alphaRespondPostMessage(buttonId:\$buttonId,messageId:\$messageId)betaReactionSet(mid:\$messageId,reaction:\$reaction)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRespondPostMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomAddMember = object: OperationDefinition {
+        override val name = "RoomAddMember"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomAddMember(\$roomId:ID!,\$userId:ID!){betaRoomInvite(invites:[{userId:\$userId,role:MEMBER}],roomId:\$roomId){__typename ...RoomFull}}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort}}membersCount membership organization{__typename ...OrganizationMedium}photo pinnedMessage{__typename ...FullMessage}requests{__typename user{__typename ...UserShort}}role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomAddMember(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomAddMembers = object: OperationDefinition {
+        override val name = "RoomAddMembers"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomAddMembers(\$invites:[RoomInviteInput!]!,\$roomId:ID!){betaRoomInvite(invites:\$invites,roomId:\$roomId){__typename ...RoomFull}}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort}}membersCount membership organization{__typename ...OrganizationMedium}photo pinnedMessage{__typename ...FullMessage}requests{__typename user{__typename ...UserShort}}role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomAddMembers(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomAlterFeatured = object: OperationDefinition {
+        override val name = "RoomAlterFeatured"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomAlterFeatured(\$featured:Boolean!,\$roomId:ID!){betaRoomAlterFeatured(featured:\$featured,roomId:\$roomId){__typename featured id listed}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomAlterFeatured(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomAlterHidden = object: OperationDefinition {
+        override val name = "RoomAlterHidden"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomAlterHidden(\$listed:Boolean!,\$roomId:ID!){betaRoomAlterListed(listed:\$listed,roomId:\$roomId){__typename featured id listed}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomAlterHidden(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomChangeRole = object: OperationDefinition {
+        override val name = "RoomChangeRole"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomChangeRole(\$newRole:RoomMemberRole!,\$roomId:ID!,\$userId:ID!){betaRoomChangeRole(newRole:\$newRole,roomId:\$roomId,userId:\$userId){__typename ...RoomFull}}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort}}membersCount membership organization{__typename ...OrganizationMedium}photo pinnedMessage{__typename ...FullMessage}requests{__typename user{__typename ...UserShort}}role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomChangeRole(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomCreate = object: OperationDefinition {
+        override val name = "RoomCreate"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomCreate(\$channel:Boolean!,\$description:String,\$kind:SharedRoomKind!,\$members:[ID!]!,\$message:String,\$organizationId:ID,\$photoRef:ImageRefInput,\$title:String){room:betaRoomCreate(channel:\$channel,description:\$description,kind:\$kind,members:\$members,message:\$message,organizationId:\$organizationId,photoRef:\$photoRef,title:\$title){__typename id}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomCreate(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomCreateIntro = object: OperationDefinition {
+        override val name = "RoomCreateIntro"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomCreateIntro(\$about:String,\$file:String,\$roomId:ID!,\$uid:ID!){intro:betaIntroSend(about:\$about,file:\$file,message:\$about,room:\$roomId,uid:\$uid)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomCreateIntro(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomDeclineJoinReuest = object: OperationDefinition {
+        override val name = "RoomDeclineJoinReuest"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomDeclineJoinReuest(\$roomId:ID!,\$userId:ID!){betaRoomDeclineJoinRequest(roomId:\$roomId,userId:\$userId){__typename ...RoomFull}}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort}}membersCount membership organization{__typename ...OrganizationMedium}photo pinnedMessage{__typename ...FullMessage}requests{__typename user{__typename ...UserShort}}role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomDeclineJoinReuest(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomDeleteMessage = object: OperationDefinition {
+        override val name = "RoomDeleteMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomDeleteMessage(\$messageId:ID!){betaMessageDelete(mid:\$messageId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomDeleteMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomDeleteMessages = object: OperationDefinition {
+        override val name = "RoomDeleteMessages"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomDeleteMessages(\$mids:[ID!]!){betaMessageDelete(mids:\$mids)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomDeleteMessages(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomDeleteUrlAugmentation = object: OperationDefinition {
+        override val name = "RoomDeleteUrlAugmentation"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomDeleteUrlAugmentation(\$messageId:ID!){betaMessageDeleteAugmentation(mid:\$messageId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomDeleteUrlAugmentation(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomEditIntro = object: OperationDefinition {
+        override val name = "RoomEditIntro"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomEditIntro(\$about:String,\$file:String,\$messageId:ID!,\$uid:ID!){intro:betaIntroEdit(about:\$about,file:\$file,message:\$about,mid:\$messageId,uid:\$uid)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomEditIntro(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomEditMessage = object: OperationDefinition {
+        override val name = "RoomEditMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomEditMessage(\$file:String,\$mentions:[ID!],\$message:String,\$messageId:ID!,\$replyMessages:[ID!]){betaMessageEdit(file:\$file,mentions:\$mentions,message:\$message,mid:\$messageId,replyMessages:\$replyMessages)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomEditMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomJoin = object: OperationDefinition {
+        override val name = "RoomJoin"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomJoin(\$roomId:ID!){join:betaRoomJoin(roomId:\$roomId){__typename ...RoomFull}}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort}}membersCount membership organization{__typename ...OrganizationMedium}photo pinnedMessage{__typename ...FullMessage}requests{__typename user{__typename ...UserShort}}role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomJoin(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomJoinInviteLink = object: OperationDefinition {
+        override val name = "RoomJoinInviteLink"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomJoinInviteLink(\$invite:String!){join:betaRoomInviteLinkJoin(invite:\$invite){__typename ...RoomFull}}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort}}membersCount membership organization{__typename ...OrganizationMedium}photo pinnedMessage{__typename ...FullMessage}requests{__typename user{__typename ...UserShort}}role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomJoinInviteLink(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomKick = object: OperationDefinition {
+        override val name = "RoomKick"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomKick(\$roomId:ID!,\$userId:ID!){betaRoomKick(roomId:\$roomId,userId:\$userId){__typename ...RoomFull}}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort}}membersCount membership organization{__typename ...OrganizationMedium}photo pinnedMessage{__typename ...FullMessage}requests{__typename user{__typename ...UserShort}}role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomKick(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomLeave = object: OperationDefinition {
+        override val name = "RoomLeave"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomLeave(\$roomId:ID!){betaRoomLeave(roomId:\$roomId){__typename ...RoomFull}}fragment RoomFull on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage description id isChannel kind members{__typename canKick membership role user{__typename ...UserShort}}membersCount membership organization{__typename ...OrganizationMedium}photo pinnedMessage{__typename ...FullMessage}requests{__typename user{__typename ...UserShort}}role settings{__typename id mute}socialImage title welcomeMessage{__typename isOn message sender{__typename id name}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment OrganizationMedium on Organization{__typename isCommunity:alphaIsCommunity adminMembers:alphaOrganizationAdminMembers{__typename role user{__typename ...UserFull}}isAdmin:betaIsAdmin isOwner:betaIsOwner id isMine membersCount name photo}fragment UserFull on User{__typename about email firstName id isBot isYou lastName lastSeen linkedin location name online phone photo primaryOrganization{__typename ...OrganizationShort}shortname twitter website}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomLeave(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomRead = object: OperationDefinition {
+        override val name = "RoomRead"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomRead(\$id:ID!,\$mid:ID!){roomRead(id:\$id,mid:\$mid)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomRead(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomRenewInviteLink = object: OperationDefinition {
+        override val name = "RoomRenewInviteLink"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomRenewInviteLink(\$roomId:ID!){link:betaRoomInviteLinkRenew(roomId:\$roomId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomRenewInviteLink(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomSendEmailInvite = object: OperationDefinition {
+        override val name = "RoomSendEmailInvite"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomSendEmailInvite(\$inviteRequests:[RoomInviteEmailRequest!]!,\$roomId:ID!){betaRoomInviteLinkSendEmail(inviteRequests:\$inviteRequests,roomId:\$roomId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomSendEmailInvite(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomSettingsUpdate = object: OperationDefinition {
+        override val name = "RoomSettingsUpdate"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomSettingsUpdate(\$roomId:ID!,\$settings:RoomUserNotificaionSettingsInput!){betaRoomUpdateUserNotificationSettings(roomId:\$roomId,settings:\$settings){__typename id mute}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomSettingsUpdate(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val RoomUpdate = object: OperationDefinition {
+        override val name = "RoomUpdate"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation RoomUpdate(\$input:RoomUpdateInput!,\$roomId:ID!){betaRoomUpdate(input:\$input,roomId:\$roomId){__typename ... on PrivateRoom{id}... on SharedRoom{description id photo socialImage title}}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeRoomUpdate(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SaveDraftMessage = object: OperationDefinition {
+        override val name = "SaveDraftMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SaveDraftMessage(\$conversationId:ID!,\$message:String!){conversationDraftUpdate(conversationId:\$conversationId,message:\$message)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSaveDraftMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SendMessage = object: OperationDefinition {
+        override val name = "SendMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SendMessage(\$file:String,\$mentions:[ID!],\$message:String,\$repeatKey:String,\$replyMessages:[ID!],\$room:ID!){sentMessage:betaMessageSend(file:\$file,mentions:\$mentions,message:\$message,repeatKey:\$repeatKey,replyMessages:\$replyMessages,room:\$room)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSendMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SendPostMessage = object: OperationDefinition {
+        override val name = "SendPostMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SendPostMessage(\$attachments:[String!],\$conversationId:ID!,\$postType:PostMessageType!,\$text:String!,\$title:String!){sendPostMessage:alphaSendPostMessage(attachments:\$attachments,conversationId:\$conversationId,postType:\$postType,text:\$text,title:\$title){__typename seq}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSendPostMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SetOrgShortname = object: OperationDefinition {
+        override val name = "SetOrgShortname"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SetOrgShortname(\$organizationId:ID!,\$shortname:String!){alphaSetOrgShortName(id:\$organizationId,shortname:\$shortname)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSetOrgShortname(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SetTyping = object: OperationDefinition {
+        override val name = "SetTyping"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SetTyping(\$conversationId:ID!){typingSend(conversationId:\$conversationId,type:TEXT)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSetTyping(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SetUserShortname = object: OperationDefinition {
+        override val name = "SetUserShortname"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SetUserShortname(\$shortname:String!){alphaSetUserShortName(shortname:\$shortname)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSetUserShortname(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SettingsUpdate = object: OperationDefinition {
+        override val name = "SettingsUpdate"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SettingsUpdate(\$input:UpdateSettingsInput){updateSettings(settings:\$input){__typename ...SettingsFull}}fragment SettingsFull on Settings{__typename desktopNotifications emailFrequency id mobileAlert mobileIncludeText mobileNotifications primaryEmail}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSettingsUpdate(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAccountActivate = object: OperationDefinition {
+        override val name = "SuperAccountActivate"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SuperAccountActivate(\$accountId:ID!){superAccountActivate(id:\$accountId){__typename id state}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAccountActivate(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAccountAdd = object: OperationDefinition {
+        override val name = "SuperAccountAdd"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SuperAccountAdd(\$title:String!){superAccountAdd(title:\$title){__typename id}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAccountAdd(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAccountMemberAdd = object: OperationDefinition {
+        override val name = "SuperAccountMemberAdd"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SuperAccountMemberAdd(\$accountId:ID!,\$userId:ID!){superAccountMemberAdd(id:\$accountId,userId:\$userId){__typename id members{__typename ...UserShort}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAccountMemberAdd(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAccountMemberRemove = object: OperationDefinition {
+        override val name = "SuperAccountMemberRemove"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SuperAccountMemberRemove(\$accountId:ID!,\$userId:ID!){superAccountMemberRemove(id:\$accountId,userId:\$userId){__typename id members{__typename ...UserShort}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAccountMemberRemove(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAccountPend = object: OperationDefinition {
+        override val name = "SuperAccountPend"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SuperAccountPend(\$accountId:ID!){superAccountPend(id:\$accountId){__typename id state}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAccountPend(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAccountRename = object: OperationDefinition {
+        override val name = "SuperAccountRename"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SuperAccountRename(\$accountId:ID!,\$title:String!){superAccountRename(id:\$accountId,title:\$title){__typename id title}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAccountRename(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAccountSuspend = object: OperationDefinition {
+        override val name = "SuperAccountSuspend"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SuperAccountSuspend(\$accountId:ID!){superAccountSuspend(id:\$accountId){__typename id state}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAccountSuspend(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAdminAdd = object: OperationDefinition {
+        override val name = "SuperAdminAdd"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SuperAdminAdd(\$role:SuperAdminRole!,\$userId:ID!){superAdminAdd(role:\$role,userId:\$userId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAdminAdd(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SuperAdminRemove = object: OperationDefinition {
+        override val name = "SuperAdminRemove"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SuperAdminRemove(\$userId:ID!){superAdminRemove(userId:\$userId)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSuperAdminRemove(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SwitchReaction = object: OperationDefinition {
+        override val name = "SwitchReaction"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation SwitchReaction(\$from:String!,\$messageId:ID!,\$to:String!){betaReactionRemove(mid:\$messageId,reaction:\$from)betaReactionSet(mid:\$messageId,reaction:\$to)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSwitchReaction(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val UnpinMessage = object: OperationDefinition {
+        override val name = "UnpinMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation UnpinMessage(\$chatId:ID!){unpinMessage:betaUnpinMessage(chatId:\$chatId){__typename ...RoomShort}}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeUnpinMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val UpdateApp = object: OperationDefinition {
+        override val name = "UpdateApp"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation UpdateApp(\$appId:ID!,\$input:AppProfileInput!){updateAppProfile(appId:\$appId,input:\$input){__typename ...AppFull}}fragment AppFull on AppProfile{__typename about id name photoRef{__typename crop{__typename h w x y}uuid}shortname token{__typename salt}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeUpdateApp(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val UpdateOrganization = object: OperationDefinition {
+        override val name = "UpdateOrganization"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation UpdateOrganization(\$input:UpdateOrganizationProfileInput!,\$organizationId:ID){updateOrganizationProfile(id:\$organizationId,input:\$input){__typename ...OrganizationProfileFull}}fragment OrganizationProfileFull on OrganizationProfile{__typename about featured:alphaFeatured facebook id linkedin name photoRef{__typename crop{__typename h w x y}uuid}shortname twitter website websiteTitle}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeUpdateOrganization(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val UpdateWelcomeMessage = object: OperationDefinition {
+        override val name = "UpdateWelcomeMessage"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation UpdateWelcomeMessage(\$roomId:ID!,\$welcomeMessageIsOn:Boolean!,\$welcomeMessageSender:ID,\$welcomeMessageText:String){updateWelcomeMessage(roomId:\$roomId,welcomeMessageIsOn:\$welcomeMessageIsOn,welcomeMessageSender:\$welcomeMessageSender,welcomeMessageText:\$welcomeMessageText)}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeUpdateWelcomeMessage(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val UserStorageSet = object: OperationDefinition {
+        override val name = "UserStorageSet"
+        override val kind = OperationKind.MUTATION
+        override val body = "mutation UserStorageSet(\$data:[AppStorageValueInput!]!,\$namespace:String!){userStorageSet(data:\$data,namespace:\$namespace){__typename id key value}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeUserStorageSet(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ChatWatch = object: OperationDefinition {
+        override val name = "ChatWatch"
+        override val kind = OperationKind.SUBSCRIPTION
+        override val body = "subscription ChatWatch(\$chatId:ID!,\$state:String){event:chatUpdates(chatId:\$chatId,fromState:\$state){__typename ... on ChatUpdateSingle{seq state update{__typename ...ChatUpdateFragment}}... on ChatUpdateBatch{fromSeq seq state updates{__typename ...ChatUpdateFragment}}}}fragment ChatUpdateFragment on ChatUpdate{__typename ... on ChatMessageReceived{message{__typename ...FullMessage}repeatKey}... on ChatMessageUpdated{message{__typename ...FullMessage}}... on ChatMessageDeleted{message{__typename id}}... on ChatUpdated{chat{__typename ...RoomShort}}... on ChatLostAccess{lostAccess}}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment RoomShort on Room{__typename ... on PrivateRoom{id settings{__typename id mute}user{__typename ...UserShort}}... on SharedRoom{canEdit canSendMessage id isChannel kind membersCount membership organization{__typename ...OrganizationShort}photo pinnedMessage{__typename ...FullMessage}role settings{__typename id mute}title}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeChatWatch(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val CommentWatch = object: OperationDefinition {
+        override val name = "CommentWatch"
+        override val kind = OperationKind.SUBSCRIPTION
+        override val body = "subscription CommentWatch(\$fromState:String,\$peerId:ID!){event:commentUpdates(fromState:\$fromState,peerId:\$peerId){__typename ... on CommentUpdateSingle{seq state update{__typename ...CommentUpdateFragment}}... on CommentUpdateBatch{fromSeq seq state updates{__typename ...CommentUpdateFragment}}}}fragment CommentUpdateFragment on CommentUpdate{__typename ... on CommentReceived{comment{__typename ...CommentEntryFragment}}... on CommentUpdated{comment{__typename ...CommentEntryFragment}}}fragment CommentEntryFragment on CommentEntry{__typename childComments{__typename id}comment{__typename id ...FullMessage}deleted id parentComment{__typename id}}fragment FullMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserTiny}}... on MessageSpanMultiUserMention{users{__typename ...UserTiny}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}... on MessageSpanBold{length offset}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview id}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}keyboard{__typename buttons{__typename style title url}}subTitle text title titleLink titleLinkHostname}}commentsCount edited quotedMessages{__typename date fallback id message message sender{__typename ...UserShort}spans{__typename length offset ... on MessageSpanUserMention{user{__typename ...UserShort}}... on MessageSpanMultiUserMention{users{__typename ...UserShort}}... on MessageSpanRoomMention{room{__typename ... on PrivateRoom{id user{__typename id name}}... on SharedRoom{id title}}}... on MessageSpanLink{url}}... on GeneralMessage{attachments{__typename fallback ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}filePreview}... on MessageRichAttachment{fallback icon{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}image{__typename metadata{__typename imageFormat imageHeight imageWidth isImage mimeType name size}url}subTitle text title titleLink titleLinkHostname}}commentsCount edited}}reactions{__typename reaction user{__typename ...UserShort}}}... on ServiceMessage{serviceMetadata{__typename ... on InviteServiceMetadata{invitedBy{__typename ...UserTiny}users{__typename ...UserTiny}}... on KickServiceMetadata{kickedBy{__typename ...UserTiny}user{__typename ...UserTiny}}... on TitleChangeServiceMetadata{title}... on PhotoChangeServiceMetadata{photo}... on PostRespondServiceMetadata{respondType}}}}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeCommentWatch(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ConferenceMediaWatch = object: OperationDefinition {
+        override val name = "ConferenceMediaWatch"
+        override val kind = OperationKind.SUBSCRIPTION
+        override val body = "subscription ConferenceMediaWatch(\$id:ID!,\$peerId:ID!){media:alphaConferenceMediaWatch(id:\$id,peerId:\$peerId){__typename id streams{__typename ice id sdp state}}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeConferenceMediaWatch(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val ConferenceWatch = object: OperationDefinition {
+        override val name = "ConferenceWatch"
+        override val kind = OperationKind.SUBSCRIPTION
+        override val body = "subscription ConferenceWatch(\$id:ID!){alphaConferenceWatch(id:\$id){__typename ...ConferenceFull}}fragment ConferenceFull on Conference{__typename iceServers{__typename credential urls username}id peers{__typename connection{__typename ice sdp state}id user{__typename ...UserShort}}startTime}fragment UserShort on User{__typename email firstName id isBot isYou lastName lastSeen name online photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeConferenceWatch(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val DialogsWatch = object: OperationDefinition {
+        override val name = "DialogsWatch"
+        override val kind = OperationKind.SUBSCRIPTION
+        override val body = "subscription DialogsWatch(\$state:String){event:dialogsUpdates(fromState:\$state){__typename ... on DialogUpdateSingle{seq state update{__typename ...DialogUpdateFragment}}... on DialogUpdateBatch{fromSeq seq state updates{__typename ...DialogUpdateFragment}}}}fragment DialogUpdateFragment on DialogUpdate{__typename ... on DialogMessageReceived{message:alphaMessage{__typename ...TinyMessage}cid globalUnread unread}... on DialogMessageUpdated{message:alphaMessage{__typename ...TinyMessage}cid}... on DialogMessageDeleted{message:alphaMessage{__typename ...TinyMessage}prevMessage:alphaPrevMessage{__typename ...TinyMessage}cid globalUnread unread}... on DialogMessageRead{cid globalUnread unread}... on DialogMessageRead{cid globalUnread unread}... on DialogTitleUpdated{cid title}... on DialogMuteChanged{cid mute}... on DialogMentionedChanged{cid haveMention}... on DialogPhotoUpdated{cid photo}... on DialogDeleted{cid globalUnread}... on DialogBump{cid globalUnread topMessage{__typename ...TinyMessage}unread}}fragment TinyMessage on ModernMessage{__typename date fallback id message sender{__typename ...UserTiny}... on GeneralMessage{attachments{__typename fallback id ... on MessageAttachmentFile{fileId fileMetadata{__typename imageFormat isImage}filePreview}}commentsCount quotedMessages{__typename id}}}fragment UserTiny on User{__typename firstName id isYou lastName name photo primaryOrganization{__typename ...OrganizationShort}shortname}fragment OrganizationShort on Organization{__typename isCommunity:alphaIsCommunity id name photo}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeDialogsWatch(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val OnlineWatch = object: OperationDefinition {
+        override val name = "OnlineWatch"
+        override val kind = OperationKind.SUBSCRIPTION
+        override val body = "subscription OnlineWatch(\$conversations:[ID!]!){alphaSubscribeChatOnline(conversations:\$conversations){__typename timeout type user:user{__typename id lastSeen online}}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeOnlineWatch(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val SettingsWatch = object: OperationDefinition {
+        override val name = "SettingsWatch"
+        override val kind = OperationKind.SUBSCRIPTION
+        override val body = "subscription SettingsWatch{watchSettings{__typename ...SettingsFull}}fragment SettingsFull on Settings{__typename desktopNotifications emailFrequency id mobileAlert mobileIncludeText mobileNotifications primaryEmail}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeSettingsWatch(Scope("ROOT_QUERY", collection, response))
+            return collection.build()
+        }
+    }
+    val TypingsWatch = object: OperationDefinition {
+        override val name = "TypingsWatch"
+        override val kind = OperationKind.SUBSCRIPTION
+        override val body = "subscription TypingsWatch{typings{__typename cancel conversation{__typename id}user{__typename id name photo}}}"
+        override val selector = null
+        override fun normalizeResponse(response: JsonObject): RecordSet {
+            val collection = NormalizedCollection()
+            normalizeTypingsWatch(Scope("ROOT_QUERY", collection, response))
             return collection.build()
         }
     }

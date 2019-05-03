@@ -14,18 +14,18 @@ class WSTest {
 
     @Test
     fun testWebSocketConnection() {
-        val client = SoyuzClient("wss://api.openland.com/api")
-        client.query(Operations.Account, object : OperationCallback {
-            override fun onResult(result: RecordSet) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onError(result: JsonObject) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        })
-        runBlocking {
-            delay(10000)
-        }
+//        val client = SoyuzClient("wss://api.openland.com/api")
+//        client.query(Operations.Account, object : OperationCallback {
+//            override fun onResult(result: RecordSet) {
+//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//            }
+//
+//            override fun onError(result: JsonObject) {
+//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//            }
+//        })
+//        runBlocking {
+//            delay(10000)
+//        }
     }
 }

@@ -2,7 +2,7 @@ package com.openland.soyuz.store
 
 class ChangedRecord(val key: String, val fields: Set<String>)
 
-class RecordStore(val persistence: RecordPersistence = EmptyPeristence) {
+class RecordStore(val persistence: RecordPersistence = EmptyPersistence) {
 
     private val inMemory = mutableMapOf<String, Record>()
 
@@ -20,6 +20,10 @@ class RecordStore(val persistence: RecordPersistence = EmptyPeristence) {
         merge(record, res)
         flushRecords(res)
         return res
+    }
+
+    fun read(key: String): Record {
+        return loadRecord(key)
     }
 
     private fun merge(record: Record, changed: MutableMap<String, ChangedRecord>) {
